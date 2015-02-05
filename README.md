@@ -1,4 +1,4 @@
-# CS147-Inception
+# CS149-Inception
 Repo for SJSU CS149 group
 
 #### Branching / Merging Strategy
