@@ -1,6 +1,9 @@
 # CS149-Inception
 Repo for SJSU CS149 group
 
+#### Teamwork
+Be sure you are a member of the Inception team of the Theta1 organization, here https://github.com/orgs/Theta1/teams/inception
+
 #### Branching / Merging Strategy
 To reduce chance of merging catastrophe, we're going to use some form of branching
 and merging strategy. Here's how we can do it:
