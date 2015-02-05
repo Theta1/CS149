@@ -1,13 +1,46 @@
+
+import java.util.Random;
+
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 
 /**
  *
- * @author Standard
+ * @author David-Eric Thorpe
  */
 public class Process {
+    private float timeArrived;
+    private float runTime;
+    private int priority;
+
     
+    /**
+    *
+    * 
+    */
+    public Process(int n){
+        Random rn = new Random(n);
+        timeArrived = rn.nextFloat();
+        runTime = rn.nextFloat();
+        priority = rn.nextInt();
+    }
+
+    
+    public float getTimeArrival(){
+        return timeArrived;
+    }
+    /**
+    *
+    * 
+    */
+    public float getRunTime(){
+        return runTime;
+    }
+    /**
+    *
+    * 
+    */
+    public int getPriority(){
+        return priority;
+    }
 }
