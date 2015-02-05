@@ -2,7 +2,7 @@
 Repo for SJSU CS149 group
 
 #### Teamwork
-Be sure you are a member of the Inception team of the Theta1 organization, here https://github.com/orgs/Theta1/teams/inception this provides admin controls for merging rebasing so that we can all verify eachother's work and bring it into the master
+Be sure you are a member of the Inception team of the Theta1 organization, here https://github.com/orgs/Theta1/teams/inception this provides admin controls for merging so that we can all verify eachother's work and bring it into the master
 
 #### Branching / Merging Strategy
 To reduce chance of merging catastrophe, we're going to use some form of branching
