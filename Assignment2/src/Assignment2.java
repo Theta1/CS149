@@ -14,11 +14,14 @@ public class Assignment2 {
      */
     public static void main(String[] args) {
 	
-	List <Process>srt = new ArrayList <Process>();
+	List <Process>l1 = new ArrayList <Process>();
 	
 	for(int i=0;i<30;i++){
 	    Process n = new Process(i);
-	    srt.add(n);
+	    l1.add(n);
 	}
+	
+	SJF sjf = new SJF(l1);
+	
     }    
 }

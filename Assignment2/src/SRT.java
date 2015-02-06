@@ -9,5 +9,7 @@
  * @author Standard
  */
 public class SRT {
-    
+    public SRT(){
+	
+    }
 }
