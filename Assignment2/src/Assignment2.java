@@ -16,6 +16,7 @@ public class Assignment2 {
      */
     public static void main(String[] args) {
 	
+<<<<<<< HEAD
 		List<Process> list1 = new ArrayList <Process>();
 		List<Process> list2 = new ArrayList <Process>();
 		List<Process> list3 = new ArrayList <Process>();
@@ -41,5 +42,16 @@ public class Assignment2 {
 		
 		
 		
+=======
+	List <Process>l1 = new ArrayList <Process>();
+	
+	for(int i=0;i<30;i++){
+	    Process n = new Process(i);
+	    l1.add(n);
+	}
+	
+	SJF sjf = new SJF(l1);
+	
+>>>>>>> SJF sorts by arrival time
     }    
 }
