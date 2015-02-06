@@ -9,5 +9,5 @@
  * @author Standard
  */
 public class FCFS {
-    
+    public FCFS(){}
 }
