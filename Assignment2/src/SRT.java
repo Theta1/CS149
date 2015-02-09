@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 /**********************************************
  * Shortest Remaining time
@@ -105,5 +104,5 @@ public class SRT {
 			{	processData.remove(p);	}
 		}
     }
-    
+   
 }
