@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class SRT {
 <<<<<<< HEAD
+<<<<<<< HEAD
     private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
     private ArrayList<Character> srt;
@@ -129,4 +130,9 @@ public class SRT {
 	
     }
 >>>>>>> SJF sorts by arrival time
+=======
+    public SRT(){
+	
+    }
+>>>>>>> 767e3a5db2e59dc3d4e6b249cddf85af144c7bda
 }
