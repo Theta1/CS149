@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 /**********************************************
  * Shortest Remaining time
  * 
@@ -8,9 +7,9 @@ import java.util.ArrayList;
  * the CPU scheduler  that requires smaller amount
  * of time for execution
  * 
- * @author Nate Kong
+ * @author Team: Inception
  * CS149
- * Team: Inception
+ * 
  *********************************************/
 
 public class SRT {
@@ -24,11 +23,12 @@ public class SRT {
     	this.runnableData = new ArrayList<Process>();
     	this.srt = new ArrayList<Character>();
     	this.cnt = 0;
-    //	sort();
+
+    	sort();
     	createList();
     }
     
-    /*
+    /**
      * Gets the Array of processes
      * in their quantum
      */
@@ -36,6 +36,24 @@ public class SRT {
     	return srt;
     }
     
+    /**
+     * Sorts the process data
+     * by arrival time
+     */
+    public void sort() {
+    	for (int i = 0; i < processData.size()-1; i++)
+    	{
+    		for (int j = 1; j < processData.size(); j++ )
+    		{
+    			if (processData.get(j).getArrivalTime() < processData.get(i).getArrivalTime())
+    			{
+    				Process k = processData.get(i);
+    				processData.set(i, processData.get(j));
+    				processData.set(j, k);
+    			}
+    		}
+    	}
+    }
     
     /**
      * Creates the list for the processes
@@ -58,8 +76,8 @@ public class SRT {
     
     /**
      * Adds the Processes
-     * at the Quantum
-     * @return
+     * at their time interval
+     * to the arraylist runnableData
      */
     public void runtimeProcesses() {
     	ArrayList<Integer> remove = new ArrayList<Integer>();
@@ -94,14 +112,14 @@ public class SRT {
     	return shortTime;
     }
     
-    /*
+    /**
      * Removes processes that are completed
      */
     public void removeProcess() {
 		for( Process p: runnableData)
 		{
 			if( p.getRunTime() == 0 )
-			{	processData.remove(p);	}
+			{	runnableData.remove(p);	}
 		}
     }
    
