@@ -15,13 +15,17 @@ import java.util.List;
  *********************************************/
 
 public class SRT {
-    private ArrayList<Process> processData; //the 
-    private ArrayList<Process> srt;
+    private ArrayList<Process> processData;
+    private ArrayList<Process> runnableData;
+    private ArrayList<Character> srt;
+    private float cnt;
     
     public SRT(ArrayList<Process> p) {
     	this.processData = (ArrayList<Process>) p.clone();
-    	this.srt = new ArrayList<Process>();
-    	
+    	this.runnableData = new ArrayList<Process>();
+    	this.srt = new ArrayList<Character>();
+    	this.cnt = 0;
+    //	sort();
     	createList();
     }
     
@@ -29,22 +33,77 @@ public class SRT {
      * Gets the Array of processes
      * in their quantum
      */
-    public List<Process> getSRT() {
+    public ArrayList<Character> getSRT() {
     	return srt;
     }
     
-    /*
+    
+    /**
      * Creates the list for the processes
      * puts them in their quantum 
      */
-    public void createList() {
-    	while( processData != null )
-    	{
+    public void createList() { 	
+    	while( (processData != null && runnableData != null) || cnt < 100 )
+    	{	
+        	runtimeProcesses();
+        	Process addProcess = findShortTime();
     		
+    		srt.add( addProcess.getName() );
+    		addProcess.setRunTime( addProcess.getRunTime() - 1 );
+    		cnt++;
+    		
+    		removeProcess();
     	}
     	
     }
     
+    /**
+     * Adds the Processes
+     * at the Quantum
+     * @return
+     */
+    public void runtimeProcesses() {
+    	ArrayList<Integer> remove = new ArrayList<Integer>();
+    	for(int i = 0; i < processData.size(); i++)
+    	{
+    		if( processData.get(i).getArrivalTime() < cnt ) 
+    		{
+    			runnableData.add(processData.get(i));
+    			remove.add(i);
+    		}
+    	}
+    	
+    	for(int j = remove.size()-1; j >= 0; j--)
+    	{	processData.remove(remove.get(j));	}
+    }
     
+    /**
+     * finds the shortest remaining time in
+     * ArrayList of Processes
+     * @return the process
+     */
+    public Process findShortTime() {
+    	Process shortTime = runnableData.get(0);  	
+    	
+    	for( Process p : runnableData)
+		{
+    		if( p.getRunTime() < shortTime.getRunTime() )
+			{	
+    			shortTime = p;
+			}
+		}
+    	return shortTime;
+    }
+    
+    /*
+     * Removes processes that are completed
+     */
+    public void removeProcess() {
+		for( Process p: runnableData)
+		{
+			if( p.getRunTime() == 0 )
+			{	processData.remove(p);	}
+		}
+    }
     
 }
