@@ -1,10 +1,12 @@
 import java.util.Random;
 
-/**
+/***********************************************
  * A simulated process with random characteristics
  * @author David-Eric Thorpe
- */
-public class Process {
+ * CS149
+ * Team: Inception
+ ***********************************************/
+public class Process  {
     private float arrivalTime;
     private float runTime;
     private int priority;
@@ -97,6 +99,5 @@ public class Process {
 	public void setName(char name) {
 		this.name = name;
 	}
-    
     
 }
