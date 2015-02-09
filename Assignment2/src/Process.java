@@ -1,23 +1,29 @@
 import java.util.Random;
 
-/**
+/***********************************************
  * A simulated process with random characteristics
  * @author David-Eric Thorpe
- */
-public class Process {
+ * CS149
+ * Team: Inception
+ ***********************************************/
+public class Process  {
     private float arrivalTime;
     private float runTime;
     private int priority;
     public char name;
     
     /**
-     * A unique character to distinguish the process. 
-     * @return a character that represents a unique identifier of the process.
+     * Default Constructor
+     * Creates a constructor that should never
+     * be first for any of the scheduling algorithms
      */
-    public char getName() {
-        return name;
+    public Process() {
+    	this.name = '0';
+    	this.arrivalTime = 200;
+    	this.runTime = 1000;
+    	this.priority = -1;
     }
-
+    
     /**
     * Constructor for the process. Takes a unique integer for use in random seeding and naming.
     * @param n- is the seed to be used. Also a unique identifier for the process ID.
@@ -30,6 +36,14 @@ public class Process {
         priority = rn.nextInt();
     }
 
+    /**
+     * A unique character to distinguish the process. 
+     * @return a character that represents a unique identifier of the process.
+     */
+    public char getName() {
+        return name;
+    }
+    
     /**
      * Returns the arrival time of the float. 
      * @return a float representing the arrival time for the process.
@@ -53,4 +67,37 @@ public class Process {
     public int getPriority(){
         return priority;
     }
+
+	/**
+	 * Sets the arrival time of the process
+	 * @param arrivalTime the arrivalTime as a float
+	 */
+	public void setArrivalTime(float arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	/**
+	 * Sets the run time of the process
+	 * @param runTime the runTime as a float
+	 */
+	public void setRunTime(float runTime) {
+		this.runTime = runTime;
+	}
+
+	/**
+	 * Sets the priority of the process
+	 * @param priority the priority as an int
+	 */
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	/**
+	 * sets the name of the process
+	 * @param name the name as a char
+	 */
+	public void setName(char name) {
+		this.name = name;
+	}
+    
 }
