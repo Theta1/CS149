@@ -21,7 +21,7 @@ public class Process  {
     	this.name = '0';
     	this.arrivalTime = 200;
     	this.runTime = 1000;
-    	this.priority = 1000;
+    	this.priority = -1;
     }
     
     /**
