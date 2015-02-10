@@ -61,7 +61,7 @@ public class RR {
     public void createList() { 	
     	int dataCnt = 0;
     	
-    	while( (processData != null && runnableData != null) || cnt < 100 )
+    	while( runnableData != null && cnt < 100 )
     	{	
         	if (dataCnt >= runnableData.size())
         	{	dataCnt = 0;	}

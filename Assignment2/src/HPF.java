@@ -59,7 +59,7 @@ public class HPF {
      * puts them in their quantum 
      */
     public void createList() { 	    	
-    	while( (processData != null && runnableData != null) || cnt < 100 )
+    	while( runnableData != null && cnt < 100 )
     	{	   		
     		runtimeProcesses();
         	
