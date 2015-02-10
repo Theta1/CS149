@@ -10,7 +10,11 @@ import java.util.List;
 
 /** 
  * Shortest Job First runs the schedule by running the shortest job first when a new queue item is available
+<<<<<<< HEAD
  * @author Thorpe, David-Eric 
+=======
+ * @author Standard
+>>>>>>> commit to rebase
  */
 public class SJF {
     private List <Process>l;
