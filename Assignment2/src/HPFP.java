@@ -29,7 +29,6 @@ public class HPFP {
     	this.hpfp = new ArrayList<Character>();
     	this.cnt = 0;
 
-    	sort();
     	createList();
     }
     
@@ -40,33 +39,14 @@ public class HPFP {
     public ArrayList<Character> gethpfp() {
     	return hpfp;
     }
-    
-    /**
-     * Sorts the process data
-     * by arrival time
-     */
-    public void sort() {
-    	for (int i = 0; i < processData.size()-1; i++)
-    	{
-    		for (int j = 1; j < processData.size(); j++ )
-    		{
-    			if (processData.get(j).getArrivalTime() < processData.get(i).getArrivalTime())
-    			{
-    				Process k = processData.get(i);
-    				processData.set(i, processData.get(j));
-    				processData.set(j, k);
-    			}
-    		}
-    	}
-    }
-    
+       
     
     /**
      * Creates the list for the processes
      * puts them in their quantum 
      */
     public void createList() { 	    	
-    	while( (processData != null && runnableData != null) || cnt < 100 )
+    	while( runnableData != null && cnt < 100 )
     	{	   		
     		runtimeProcesses();
         	
