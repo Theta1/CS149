@@ -15,4 +15,4 @@ and merging strategy. Here's how we can do it:
 - Each project member needs to rebase frequently from master to their own branch to make sure their branch 
 is up-to-date.
 
-Thest please ignore...
+Thest please ignore... further text
