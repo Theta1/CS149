@@ -1,5 +1,5 @@
+import java.awt.List;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -16,11 +16,11 @@ public class Assignment2 {
      */
     public static void main(String[] args) {
 	
-		List<Process> list1 = new ArrayList <Process>();
-		List<Process> list2 = new ArrayList <Process>();
-		List<Process> list3 = new ArrayList <Process>();
-		List<Process> list4 = new ArrayList <Process>();
-		List<Process> list5 = new ArrayList <Process>();
+		ArrayList<Process> list1 = new ArrayList <Process>();
+		ArrayList<Process> list2 = new ArrayList <Process>();
+		ArrayList<Process> list3 = new ArrayList <Process>();
+		ArrayList<Process> list4 = new ArrayList <Process>();
+		ArrayList<Process> list5 = new ArrayList <Process>();
 		
 		
 		for(int i=0; i<150; i++)
