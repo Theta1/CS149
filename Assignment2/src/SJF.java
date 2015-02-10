@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Standard
- */
+/**********************************************
+ * Round Robin (preemptive)
+ * 
+ * Each process is assigned a quantum (time interval)
+ * The process runs in its quantum
+ * When the ends the next process is started
+ * 
+ * @author Team: Inception
+ * CS149
+ * 
+ *********************************************/
 public class SJF {
     
 }
