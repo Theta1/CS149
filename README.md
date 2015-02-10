@@ -14,3 +14,6 @@ and merging strategy. Here's how we can do it:
 - 2nd Someone will then review the pull request and merge them if satisfactory. 
 - Each project member needs to rebase frequently from master to their own branch to make sure their branch 
 is up-to-date.
+
+
+Makes
