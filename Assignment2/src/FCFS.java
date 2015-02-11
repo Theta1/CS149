@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**********************************************
  * First Come First Serve
  * 
@@ -8,7 +10,51 @@
  * CS149
  * 
  *********************************************/
-
 public class FCFS {
-    public FCFS(){}
+    private static final int QUANTUM_MAX = 100;
+    private ArrayList<Process> processList;
+    private ArrayList<String> stringList;
+
+    /**
+     * Creates a First Come First Serve schedule.
+     * @param processList the process list
+     */
+    public FCFS(ArrayList<Process> processList){
+        this.processList = (ArrayList<Process>) processList.clone();
+        this.stringList = new ArrayList<>();
+
+        run();
+    }
+
+    /**
+     * Runs the FCFS algorithm.
+     */
+    private void run() {
+        int quantum = 0;
+
+        while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
+            Process process = processList.remove(0);
+
+            // idle time
+            while(process.getArrivalTime() > quantum) {
+                stringList.add("");
+                quantum++;
+            }
+
+            // process time
+            while(process.getRunTime() > 0) {
+                stringList.add(process.getName());
+                process.setRunTime(process.getRunTime() - 1);
+                quantum++;
+            }
+        }
+    }
+
+    /**
+     * Gets the string list.
+     * @return the string list
+     */
+    public ArrayList<String> getStringList() {
+        return stringList;
+    }
 }

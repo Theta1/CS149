@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.List;
 
 /**
  * Runs the different scheduling algorithms
@@ -44,17 +44,37 @@ public class Assignment2 {
 		list4 = sort(list4);
 		list5 = sort(list5);
 		
-		SRT srt1 = new SRT(list1);
+		/*SRT srt1 = new SRT(list1);
 		SRT srt2 = new SRT(list2);
 		SRT srt3 = new SRT(list3);
 		SRT srt4 = new SRT(list4);
-		SRT srt5 = new SRT(list5);
+		SRT srt5 = new SRT(list5);*/
+
+        // print out lists and FCFS results
+        printProcessList(list1);
+        FCFS fcfs1 = new FCFS(list1);
+        printStringList(fcfs1.getStringList());
+
+        printProcessList(list2);
+        FCFS fcfs2 = new FCFS(list2);
+        printStringList(fcfs2.getStringList());
+
+        printProcessList(list3);
+        FCFS fcfs3 = new FCFS(list3);
+        printStringList(fcfs3.getStringList());
+
+        printProcessList(list4);
+        FCFS fcfs4 = new FCFS(list4);
+        printStringList(fcfs4.getStringList());
+
+        printProcessList(list5);
+        FCFS fcfs5 = new FCFS(list5);
+        printStringList(fcfs5.getStringList());
 		
     }  
     
     /**
-     * Sorts the process data
-     * by arrival time
+     * Sorts the process data by arrival time
      */
     public static ArrayList<Process> sort(ArrayList<Process> processData) {
     	for (int i = 0; i < processData.size()-1; i++)
@@ -69,6 +89,42 @@ public class Assignment2 {
     			}
     		}
     	}
+
     	return processData;
+    }
+
+    /**
+     * Prints out info about a process list.
+     * @param processList
+     */
+    public static void printProcessList(List<Process> processList) {
+        for(Process process : processList) {
+            System.out.println("[Name: " + process.getName() + " --> Arrival Time: " + process.getArrivalTime() + ", Run Time: " + process.getRunTime() + ", Priority: " + process.getPriority() + "]   ");
+        }
+    }
+
+    /**
+     * Prints out info about a string list separating different strings with []s.
+     * @param stringList the string list
+     */
+    public static void printStringList(List<String> stringList) {
+        String previousString = stringList.get(0);
+
+        String output = "[";
+        for(String string : stringList) {
+            if(string.equals(previousString)) {
+                output += string + "|";
+            }
+            else {
+                output = output.substring(0, output.length() - 1); // remove last |
+                output += "][" + string + "|";
+                previousString = string;
+            }
+        }
+        output = output.substring(0, output.length() - 1); // remove last |
+        output += "]";
+
+        System.out.println(output);
+        System.out.println();
     }
 }
