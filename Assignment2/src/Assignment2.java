@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -37,12 +39,19 @@ public class Assignment2 {
 		    else
 		    {	list5.add(n);	}
 		}
-		
-		list1 = sort(list1);
-		list2 = sort(list2);
-		list3 = sort(list3);
-		list4 = sort(list4);
-		list5 = sort(list5);
+
+        // sorts the Process by arrival time
+        Comparator<Process> comparator = new Comparator<Process>() {
+            public int compare(Process process1, Process process2) {
+                return (int) (process1.getArrivalTime() - process2.getArrivalTime());
+            }
+        };
+
+        Collections.sort(list1, comparator);
+        Collections.sort(list2, comparator);
+        Collections.sort(list3, comparator);
+        Collections.sort(list4, comparator);
+        Collections.sort(list5, comparator);
 		
 		/*SRT srt1 = new SRT(list1);
 		SRT srt2 = new SRT(list2);
@@ -71,26 +80,6 @@ public class Assignment2 {
         FCFS fcfs5 = new FCFS(list5);
         printStringList(fcfs5.getStringList());
 		
-    }  
-    
-    /**
-     * Sorts the process data by arrival time
-     */
-    public static ArrayList<Process> sort(ArrayList<Process> processData) {
-    	for (int i = 0; i < processData.size()-1; i++)
-    	{
-    		for (int j = 1; j < processData.size(); j++ )
-    		{
-    			if (processData.get(j).getArrivalTime() < processData.get(i).getArrivalTime())
-    			{
-    				Process k = processData.get(i);
-    				processData.set(i, processData.get(j));
-    				processData.set(j, k);
-    			}
-    		}
-    	}
-
-    	return processData;
     }
 
     /**
