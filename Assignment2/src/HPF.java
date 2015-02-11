@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class HPF {
 	private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
-    private ArrayList<Character> hpf;
+    private ArrayList<String> hpf;
     private float cnt;
     
     public HPF(ArrayList<Process> p) {
     	this.processData = (ArrayList<Process>) p.clone();
     	this.runnableData = new ArrayList<Process>();
-    	this.hpf = new ArrayList<Character>();
+    	this.hpf = new ArrayList<String>();
     	this.cnt = 0;
 
     	createList();
@@ -29,10 +29,9 @@ public class HPF {
      * Gets the Array of processes
      * in their quantum
      */
-    public ArrayList<Character> gethpf() {
+    public ArrayList<String> gethpf() {
     	return hpf;
     }
-        
     
     /**
      * Creates the list for the processes
@@ -84,7 +83,7 @@ public class HPF {
      */
     public Process highPriority() {
     	Process highP = new Process();
-    	
+
     	for(Process P: runnableData)
     	{
     		if(P.getPriority() > highP.getPriority())

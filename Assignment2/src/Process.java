@@ -10,37 +10,38 @@ public class Process  {
     private float arrivalTime;
     private float runTime;
     private int priority;
-    public char name;
-    
+    private String name;
+
     /**
      * Default Constructor
      * Creates a constructor that should never
      * be first for any of the scheduling algorithms
      */
     public Process() {
-    	this.name = '0';
-    	this.arrivalTime = 200;
-    	this.runTime = 1000;
-    	this.priority = -1;
-    }
-    
-    /**
-    * Constructor for the process. Takes a unique integer for use in random seeding and naming.
-    * @param n- is the seed to be used. Also a unique identifier for the process ID.
-    */
-    public Process(int n){
-    	name = (char)n;
-        Random rn = new Random(n);
-        arrivalTime = rn.nextFloat()*99;
-        runTime = rn.nextFloat()*10;
-        priority = rn.nextInt();
+        this.name = "N/A";
+        this.arrivalTime = 200;
+        this.runTime = 1000;
+        this.priority = -1;
     }
 
     /**
-     * A unique character to distinguish the process. 
-     * @return a character that represents a unique identifier of the process.
+    * Constructor for the process. Takes a unique integer for use in random seeding and naming.
+    * @param n is the seed to be used. Also a unique identifier for the process ID.
+    */
+    public Process(int n) {
+        name = n + "";
+
+        Random rn = new Random();
+        arrivalTime = rn.nextFloat() * 99.0f;
+        runTime = rn.nextFloat() * 10.0f;
+        priority = rn.nextInt(4) + 1; // gets a random number from 1 to 4
+    }
+
+    /**
+     * A unique string to distinguish the process.
+     * @return a string that represents a unique identifier of the process.
      */
-    public char getName() {
+    public String getName() {
         return name;
     }
     
@@ -93,11 +94,10 @@ public class Process  {
 	}
 
 	/**
-	 * sets the name of the process
-	 * @param name the name as a char
+	 * Sets the name of the process
+	 * @param name the name
 	 */
-	public void setName(char name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-    
 }

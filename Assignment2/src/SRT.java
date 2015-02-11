@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class SRT {
     private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
-    private ArrayList<Character> srt;
+    private ArrayList<String> srt;
     private float cnt;
     
     public SRT(ArrayList<Process> p) {
     	this.processData = (ArrayList<Process>) p.clone();
     	this.runnableData = new ArrayList<Process>();
-    	this.srt = new ArrayList<Character>();
+    	this.srt = new ArrayList<String>();
     	this.cnt = 0;
 
     	createList();
@@ -31,7 +31,7 @@ public class SRT {
      * Gets the Array of processes
      * in their quantum
      */
-    public ArrayList<Character> getSRT() {
+    public ArrayList<String> getSRT() {
     	return srt;
     }
     
