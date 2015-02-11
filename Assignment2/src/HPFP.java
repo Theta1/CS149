@@ -20,13 +20,13 @@ import java.util.ArrayList;
 public class HPFP {
 	private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
-    private ArrayList<Character> hpfp;
+    private ArrayList<String> hpfp;
     private float cnt;
     
     public HPFP(ArrayList<Process> p) {
     	this.processData = (ArrayList<Process>) p.clone();
     	this.runnableData = new ArrayList<Process>();
-    	this.hpfp = new ArrayList<Character>();
+    	this.hpfp = new ArrayList<String>();
     	this.cnt = 0;
 
     	createList();
@@ -36,7 +36,7 @@ public class HPFP {
      * Gets the Array of processes
      * in their quantum
      */
-    public ArrayList<Character> gethpfp() {
+    public ArrayList<String> gethpfp() {
     	return hpfp;
     }
        

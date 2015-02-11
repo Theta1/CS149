@@ -14,13 +14,13 @@ import java.util.ArrayList;
 public class RR {
 	private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
-    private ArrayList<Character> rr;
+    private ArrayList<String> rr;
     private float cnt;
     
     public RR(ArrayList<Process> p) {
     	this.processData = (ArrayList<Process>) p.clone();
     	this.runnableData = new ArrayList<Process>();
-    	this.rr = new ArrayList<Character>();
+    	this.rr = new ArrayList<String>();
     	this.cnt = 0;
 
     	createList();
@@ -30,7 +30,7 @@ public class RR {
      * Gets the Array of processes
      * in their quantum
      */
-    public ArrayList<Character> getrr() {
+    public ArrayList<String> getrr() {
     	return rr;
     }
         
