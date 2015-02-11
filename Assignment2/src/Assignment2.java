@@ -43,7 +43,7 @@ public class Assignment2 {
         // sorts the Process by arrival time
         Comparator<Process> comparator = new Comparator<Process>() {
             public int compare(Process process1, Process process2) {
-                return (int) (process1.getArrivalTime() - process2.getArrivalTime());
+                return new Float(process1.getArrivalTime()).compareTo(new Float( process2.getArrivalTime()));
             }
         };
 
