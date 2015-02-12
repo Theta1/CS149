@@ -46,6 +46,7 @@ public class FCFS {
             while(process.getRunTime() > 0) {
                 stringList.add(process.getName());
 
+                // update process stats
                 process.decrementRunTime();
                 process.setActualStartTime(quantum);
                 process.setTurnAroundTime(quantum);
