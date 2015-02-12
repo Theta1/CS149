@@ -4,17 +4,19 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Runs the different scheduling algorithms
- * for processes. Calculates statistics for
- * the scheduling
- * @author Team Inception: David Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
- * CS 149
+ * Runs the different scheduling algorithms for processes. Calculates statistics
+ * for the scheduling
+ * 
+ * @author Team Inception: David Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu CS
+ *         149
  */
 public class Assignment2 {
 
     /**
-     * Creates 
-     * @param args the command line arguments
+     * Creates
+     * 
+     * @param args
+     *            the command line arguments
      */
     public static void main(String[] args) {
 	
@@ -106,6 +108,7 @@ public class Assignment2 {
         System.out.println(printQuantaTimeline());
         System.out.println(output);
         System.out.println();
+
     }
     /**
      * Builds a timetime for each Quanta
