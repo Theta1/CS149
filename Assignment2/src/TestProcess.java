@@ -21,7 +21,7 @@ public class TestProcess {
 	for(int i=0; i<30; i++)
 	{
 	    Process n = new Process(i);
-	    System.out.println(n.getArrivalTime());
+	    System.out.println((n.getArrivalTime()));
 	}
     }
 
