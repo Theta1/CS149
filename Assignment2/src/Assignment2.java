@@ -103,8 +103,17 @@ public class Assignment2 {
         }
         output = output.substring(0, output.length() - 1); // remove last |
         output += "]";
-
+        System.out.println(printQuantaTimeline());
         System.out.println(output);
         System.out.println();
+    }
+    public static String printQuantaTimeline(){
+	String s="[";
+	for(int i = 1; i<101; i++){
+	    s+=String.format("%1$3d", i)+"|";
+	}
+        s = s.substring(0, s.length() - 1); // remove last |
+        s += "]";
+	return s;
     }
 }
