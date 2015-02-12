@@ -88,7 +88,7 @@ public class Assignment2 {
      */
     public static void printProcessList(List<Process> processList) {
         for(Process process : processList) {
-            System.out.println("[Name: " + process.getName() + " --> Arrival Time: " + process.getArrivalTime() + ", Run Time: " + process.getRunTime() + ", Priority: " + process.getPriority() + "]   ");
+            System.out.println(process.toString());
         }
     }
 
