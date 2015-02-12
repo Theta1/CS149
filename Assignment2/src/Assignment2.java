@@ -106,7 +106,7 @@ public class Assignment2 {
             }
             else {
                 output = output.substring(0, output.length() - 1); // remove last |
-                output += "][" + string + "|";
+                output += "|" + string + "|";
                 previousString = string;
             }
         }
