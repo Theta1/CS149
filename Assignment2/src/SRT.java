@@ -23,9 +23,9 @@ public class SRT {
     	this.runnableData = new ArrayList<Process>();
     	this.srt = new ArrayList<String>();
     	this.cnt = 0;
-
+    	System.out.println("hello");
     	createList();
-    }
+        }
     
     /**
      * Gets the Array of processes
@@ -43,6 +43,7 @@ public class SRT {
     public void createList() { 	
     	while( runnableData != null && cnt < 100 )
     	{	
+    		System.out.println("hello");
         	runtimeProcesses();
         	Process addProcess = findShortTime();
     		

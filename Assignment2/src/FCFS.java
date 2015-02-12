@@ -21,7 +21,7 @@ public class FCFS {
      */
     public FCFS(ArrayList<Process> processList){
         this.processList = (ArrayList<Process>) processList.clone();
-        this.stringList = new ArrayList<>();
+        this.stringList = new ArrayList<String>();
 
         run();
     }
