@@ -37,7 +37,7 @@ public class FCFS {
 
             // idle time
             while(process.getArrivalTime() > quantum) {
-                stringList.add("");
+                stringList.add("   ");
                 quantum++;
             }
 
