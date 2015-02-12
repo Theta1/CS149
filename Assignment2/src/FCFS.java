@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**********************************************
+ * First Come First Serve
+ * 
+ * Each process is ran as in the
+ * order it comes in at
+ * 
+ * @author Team: Inception
+ * CS149
+ * 
+ *********************************************/
 
-/**
- *
- * @author Standard
- */
 public class FCFS {
     public FCFS(){}
 }
