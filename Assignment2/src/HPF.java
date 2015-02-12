@@ -47,7 +47,7 @@ public class HPF {
         	{
         		hpf.add( run.getName() );
         		cnt++;
-        		run.setRunTime( run.getRunTime() - 1 );
+        		run.decrementRunTime();
         	}
     		
     		runnableData.remove(run);

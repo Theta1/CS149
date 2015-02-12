@@ -44,7 +44,7 @@ public class FCFS {
             // process time
             while(process.getRunTime() > 0) {
                 stringList.add(process.getName());
-                process.setRunTime(process.getRunTime() - 1);
+                process.decrementRunTime();
                 quantum++;
             }
         }

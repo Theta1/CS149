@@ -53,7 +53,7 @@ public class RR {
     		rr.add( run.getName() );
     		dataCnt++;
     		cnt++;
-    		run.setRunTime( run.getRunTime() - 1 );
+    		run.decrementRunTime();
     		
     		removeProcess();
     	}

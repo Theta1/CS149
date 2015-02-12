@@ -53,7 +53,7 @@ public class HPFP {
         	Process run = highPriority();
     		hpfp.add( run.getName() );
     		cnt++;
-        	run.setRunTime( run.getRunTime() - 1 );
+        	run.decrementRunTime();
         	    		
     		removeProcess();
     	}

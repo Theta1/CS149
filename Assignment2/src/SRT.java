@@ -48,7 +48,7 @@ public class SRT {
         	Process addProcess = findShortTime();
     		
     		srt.add( addProcess.getName() );
-    		addProcess.setRunTime( addProcess.getRunTime() - 1 );
+    		addProcess.decrementRunTime();
     		cnt++;
     		
     		removeProcess();
