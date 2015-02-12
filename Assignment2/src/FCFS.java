@@ -21,7 +21,7 @@ public class FCFS {
      */
     public FCFS(ArrayList<Process> processList){
         this.processList = (ArrayList<Process>) processList.clone();
-        this.stringList = new ArrayList<String>();
+        stringList = new ArrayList<>();
 
         run();
     }
@@ -38,13 +38,19 @@ public class FCFS {
             // idle time
             while(process.getArrivalTime() > quantum) {
                 stringList.add("");
+
                 quantum++;
             }
 
             // process time
             while(process.getRunTime() > 0) {
                 stringList.add(process.getName());
+
+                // update process stats
                 process.decrementRunTime();
+                process.setActualStartTime(quantum);
+                process.setTurnAroundTime(quantum);
+
                 quantum++;
             }
         }
