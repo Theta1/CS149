@@ -107,6 +107,10 @@ public class Assignment2 {
         System.out.println(output);
         System.out.println();
     }
+    /**
+     * Builds a timetime for each Quanta
+     * @return a String representing the timeline
+     */
     public static String printQuantaTimeline(){
 	String s="[";
 	for(int i = 1; i<101; i++){
