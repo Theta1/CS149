@@ -40,11 +40,14 @@ public class SJF {
 		this.sjf = new ArrayList<Character>();		
 	}
 	
-	public void runSJF()
+	public String[] runSJF()
 	{
 		double arrivalTime;
+		String[] output = new String[100];
 		
 		arrivalTime = processData.get(0).getArrivalTime();
+		
+		return output;
 	}
 	/*
 	 * 
