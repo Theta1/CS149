@@ -53,7 +53,8 @@ public class Assignment2 {
         Collections.sort(list4, comparator);
         Collections.sort(list5, comparator);
 		
-		/*SRT srt1 = new SRT(list1);
+		//SRT srt1 = new SRT(list1);
+		 /*
 		SRT srt2 = new SRT(list2);
 		SRT srt3 = new SRT(list3);
 		SRT srt4 = new SRT(list4);
@@ -88,7 +89,7 @@ public class Assignment2 {
      */
     public static void printProcessList(List<Process> processList) {
         for(Process process : processList) {
-            System.out.println("[Name: " + process.getName() + " --> Arrival Time: " + process.getArrivalTime() + ", Run Time: " + process.getRunTime() + ", Priority: " + process.getPriority() + "]   ");
+            System.out.println("[Name: " + String.format("%3s", process.getName()) + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + ", Run Time: " + String.format("%9f", process.getRunTime()) + ", Priority: " + process.getPriority() + "]   ");
         }
     }
 
@@ -102,11 +103,11 @@ public class Assignment2 {
         String output = "[";
         for(String string : stringList) {
             if(string.equals(previousString)) {
-                output += string + "|";
+                output += String.format("%3s", string) + "|";
             }
             else {
                 output = output.substring(0, output.length() - 1); // remove last |
-                output += "][" + string + "|";
+                output += "][" + String.format("%3s", string) + "|";
                 previousString = string;
             }
         }
