@@ -84,16 +84,6 @@ public class Assignment2 {
     }
 
     /**
-     * Prints out info about a process list.
-     * @param processList
-     */
-    public static void printProcessList(List<Process> processList) {
-        for(Process process : processList) {
-            System.out.println("[Name: " + String.format("%3s", process.getName()) + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + ", Run Time: " + String.format("%9f", process.getRunTime()) + ", Priority: " + process.getPriority() + "]   ");
-        }
-    }
-
-    /**
      * Prints out info about a string list separating different strings with []s.
      * @param stringList the string list
      */
