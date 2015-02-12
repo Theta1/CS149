@@ -45,6 +45,10 @@ public class SJF {
 		double arrivalTime;
 		String[] output = new String[100];
 		
+		//comment
+		
+		int i;
+		
 		arrivalTime = processData.get(0).getArrivalTime();
 		
 		return output;
