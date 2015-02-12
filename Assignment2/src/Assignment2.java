@@ -74,8 +74,8 @@ public class Assignment2 {
         FCFS fcfs5 = new FCFS(list5);
         printStringList(fcfs5.getStringList());
         
-		SRT srt1 = new SRT(list1);
-		printStringList();
+		//SRT srt1 = new SRT(list1);
+		//printStringList();
 		 /*
 		SRT srt2 = new SRT(list2);
 		SRT srt3 = new SRT(list3);

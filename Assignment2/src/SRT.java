@@ -44,7 +44,14 @@ public class SRT {
     	while( runnableData.size() != 0 && cnt < 100 )
     	{	
     		runtimeProcesses();
-        	Process addProcess = findShortTime();
+            
+    		// idle time
+            while(process.getArrivalTime() > quantum) {
+                stringList.add("");
+                quantum++;
+            }
+        	
+            Process addProcess = findShortTime();
     		
     		srt.add( addProcess.getName() );
     		addProcess.setRunTime( addProcess.getRunTime() - 1 );
