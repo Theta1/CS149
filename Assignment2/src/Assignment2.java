@@ -100,6 +100,7 @@ public class Assignment2 {
      */
     public static void printStringList(List<String> stringList) {
         String previousString = stringList.get(0);
+        //comment
 
         String output = "[";
         for(String string : stringList) {
