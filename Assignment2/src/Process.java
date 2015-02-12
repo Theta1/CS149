@@ -11,6 +11,7 @@ public class Process  {
     private float runTime;
     private int priority;
     private String name;
+    private int quantumWait;
 
     /**
      * Default Constructor
@@ -45,6 +46,10 @@ public class Process  {
         return name;
     }
     
+    public int getQuantumWait(){
+    	return quantumWait;
+    }
+    
     /**
      * Returns the arrival time of the float. 
      * @return a float representing the arrival time for the process.
@@ -70,6 +75,7 @@ public class Process  {
     }
 
 	/**
+	 * DEPRECATED
 	 * Sets the arrival time of the process
 	 * @param arrivalTime the arrivalTime as a float
 	 */
@@ -78,19 +84,24 @@ public class Process  {
 	}
 
 	/**
-	 * Sets the run time of the process
-	 * @param runTime the runTime as a float
+	 * Increases the variable by one. 
 	 */
-	public void setRunTime(float runTime) {
-		this.runTime = runTime;
+	public void incrementQuantumWait(){
+		quantumWait++;
 	}
 
 	/**
-	 * Sets the priority of the process
-	 * @param priority the priority as an int
+	 * Sets the run time of the process one smaller
 	 */
-	public void setPriority(int priority) {
-		this.priority = priority;
+	public void decrementRunTime() {
+		this.runTime--;
+	}
+
+	/**
+	 * Sets the priority of the process by one higher
+	 */
+	public void incrementPriority() {
+		this.priority++;
 	}
 
 	/**
