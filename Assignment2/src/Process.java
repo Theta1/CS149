@@ -31,8 +31,7 @@ public class Process {
      *            process ID.
      */
     public Process(int n) {
-	name = n + "";
-
+	name = String.format("%1$3d", n);
 	Random rn = new Random();
 	arrivalTime = rn.nextFloat() * 99.0f;
 	runTime = rn.nextFloat() * 10.0f;
@@ -117,14 +116,18 @@ public class Process {
 	this.name = name;
     }
 
-    /* (non-Javadoc)
-     * Returns a formatted string representing important Process Object attributes
+    /*
+     * (non-Javadoc) Returns a formatted string representing important Process
+     * Object attributes
+     * 
      * @see java.lang.Object#toString()
-     * @return a String 
+     * 
+     * @return a String
      */
     public String toString() {
 	return "[Name: " + this.getName() + " --> Arrival Time: "
-		+ this.getArrivalTime() + ", Run Time: " + this.getRunTime()
+		+ String.format("%1$9f", this.getArrivalTime())
+		+ ", Run Time: " + String.format("%1$9f", this.getRunTime())
 		+ ", Priority: " + this.getPriority() + "]   ";
     }
 }
