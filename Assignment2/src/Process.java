@@ -11,6 +11,7 @@ public class Process  {
     private float runTime;
     private int priority;
     private String name;
+    private int aging;
 
     /**
      * Default Constructor
@@ -22,6 +23,7 @@ public class Process  {
         this.arrivalTime = 200;
         this.runTime = 1000;
         this.priority = -1;
+        this.aging = 10000;
     }
 
     /**
@@ -35,9 +37,25 @@ public class Process  {
         arrivalTime = rn.nextFloat() * 99.0f;
         runTime = rn.nextFloat() * 10.0f;
         priority = rn.nextInt(4) + 1; // gets a random number from 1 to 4
+        aging = 0; 
     }
 
     /**
+     * the waiting of the aging
+     * @return the age in quanta
+     */
+    public int getAging() {
+		return aging;
+	}
+
+    /**
+     * increments the age by one
+     */
+	public void addAging() {
+		aging++;
+	}
+
+	/**
      * A unique string to distinguish the process.
      * @return a string that represents a unique identifier of the process.
      */

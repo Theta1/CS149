@@ -53,13 +53,6 @@ public class Assignment2 {
         Collections.sort(list4, comparator);
         Collections.sort(list5, comparator);
 		
-		//SRT srt1 = new SRT(list1);
-		 /*
-		SRT srt2 = new SRT(list2);
-		SRT srt3 = new SRT(list3);
-		SRT srt4 = new SRT(list4);
-		SRT srt5 = new SRT(list5);*/
-
         // print out lists and FCFS results
         printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
@@ -80,6 +73,14 @@ public class Assignment2 {
         printProcessList(list5);
         FCFS fcfs5 = new FCFS(list5);
         printStringList(fcfs5.getStringList());
+        
+		SRT srt1 = new SRT(list1);
+		printStringList();
+		 /*
+		SRT srt2 = new SRT(list2);
+		SRT srt3 = new SRT(list3);
+		SRT srt4 = new SRT(list4);
+		SRT srt5 = new SRT(list5);*/
 		
     }
 

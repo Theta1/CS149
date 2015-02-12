@@ -23,8 +23,8 @@ public class SRT {
     	this.runnableData = new ArrayList<Process>();
     	this.srt = new ArrayList<String>();
     	this.cnt = 0;
-    	System.out.println("hello");
-    	createList();
+
+    	run();
         }
     
     /**
@@ -40,11 +40,10 @@ public class SRT {
      * Creates the list for the processes
      * puts them in their quantum 
      */
-    public void createList() { 	
-    	while( runnableData != null && cnt < 100 )
+    public void run() { 	
+    	while( runnableData.size() != 0 && cnt < 100 )
     	{	
-    		System.out.println("hello");
-        	runtimeProcesses();
+    		runtimeProcesses();
         	Process addProcess = findShortTime();
     		
     		srt.add( addProcess.getName() );
@@ -59,21 +58,18 @@ public class SRT {
     /**
      * Adds the Processes
      * at their time interval
-     * to the arraylist runnableData
+     * to the ArrayList runnableData
      */
     public void runtimeProcesses() {
-    	ArrayList<Integer> remove = new ArrayList<Integer>();
-    	for(int i = 0; i < processData.size(); i++)
+    	for(Process p: processData)
     	{
-    		if( processData.get(i).getArrivalTime() < cnt ) 
+    		if( p.getArrivalTime() <= cnt ) 
     		{
-    			runnableData.add(processData.get(i));
-    			remove.add(i);
+    			runnableData.add( processData.remove(p) );
     		}
+    		
     	}
     	
-    	for(int j = remove.size()-1; j >= 0; j--)
-    	{	processData.remove(remove.get(j));	}
     }
     
     /**
