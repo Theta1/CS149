@@ -24,17 +24,17 @@ public class Assignment2 {
 		ArrayList<Process> list4 = new ArrayList <Process>();
 		ArrayList<Process> list5 = new ArrayList <Process>();
 		
-		
-		for(int i=0; i<150; i++)
+		int processNum = 30;
+		for(int i=0; i<600; i++)
 		{
 		    Process n = new Process(i);
-		    if (i < 30)
+		    if (i < processNum )
 		    {   list1.add(n); }
-		    else if (i>=30 && i<60)
+		    else if (i<processNum )
 		    {	list2.add(n);	}
-		    else if (i>=60 && i<90)
+		    else if (i<processNum )
 		    {	list3.add(n);	}
-		    else if (i>=90 && i<120)
+		    else if (i<processNum )
 		    {	list4.add(n);	}
 		    else
 		    {	list5.add(n);	}
@@ -48,10 +48,10 @@ public class Assignment2 {
         };
 
         Collections.sort(list1, comparator);
-        Collections.sort(list2, comparator);
-        Collections.sort(list3, comparator);
-        Collections.sort(list4, comparator);
-        Collections.sort(list5, comparator);
+//        Collections.sort(list2, comparator);
+//        Collections.sort(list3, comparator);
+//        Collections.sort(list4, comparator);
+//        Collections.sort(list5, comparator);
 		
 		/*SRT srt1 = new SRT(list1);
 		SRT srt2 = new SRT(list2);
@@ -60,23 +60,23 @@ public class Assignment2 {
 		SRT srt5 = new SRT(list5);*/
 
         // print out lists and FCFS results
-        printProcessList(list1);
+//        printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
         printStringList(fcfs1.getStringList());
 
-        printProcessList(list2);
+//        printProcessList(list2);
         FCFS fcfs2 = new FCFS(list2);
         printStringList(fcfs2.getStringList());
 
-        printProcessList(list3);
+//        printProcessList(list3);
         FCFS fcfs3 = new FCFS(list3);
         printStringList(fcfs3.getStringList());
 
-        printProcessList(list4);
+//        printProcessList(list4);
         FCFS fcfs4 = new FCFS(list4);
         printStringList(fcfs4.getStringList());
 
-        printProcessList(list5);
+//        printProcessList(list5);
         FCFS fcfs5 = new FCFS(list5);
         printStringList(fcfs5.getStringList());
 		
