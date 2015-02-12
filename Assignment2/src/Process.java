@@ -33,8 +33,8 @@ public class Process {
     public Process(int n) {
 	name = String.format("%1$3d", n);
 	
-	Random rn = new Random(n);
-	arrivalTime = rn.nextFloat() * 99.0f;
+	Random rn = new Random();
+	arrivalTime = rn.nextFloat()*90.0f;
 	runTime = rn.nextFloat() * 10.0f;
 	priority = rn.nextInt(4) + 1; // gets a random number from 1 to 4
     }
