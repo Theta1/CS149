@@ -11,6 +11,10 @@ public class Process implements Cloneable {
     private float runTime;
     private int priority;
     private String name;
+    private int actualStartTime;
+    private int turnAroundTime;
+    private int quantumWait;
+
     public void setRunTime(float runTime) {
         this.runTime = runTime;
     }
@@ -19,9 +23,18 @@ public class Process implements Cloneable {
         this.priority = priority;
     }
 
-    private int quantumWait;
-    
+    /**
+     * Reduces the priority value. Increase the priority.
+     * 1 = highest priority  4 = lowest priority
+     * @return true if successful and false if already highest priority
+     */
+    public boolean deprecatePriority(){
+        if(priority<4){
+            priority++;
+            return true;
+        } else return false;    
 
+    }
     
     /*
      *  Creates a clone of the process object with unique variables
