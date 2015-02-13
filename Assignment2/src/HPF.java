@@ -51,7 +51,7 @@ public class HPF {
 
         while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
             Process process = priorityProcessList.remove(0);
-            System.out.print(process.getName() + " ");
+            System.out.println("Current: " + process.getName() + "." + process.getPriority() + " ");
 
             // idle time
             while(process.getArrivalTime() > quantum) {
@@ -70,6 +70,17 @@ public class HPF {
                 process.setTurnAroundTime(quantum);
 
                 quantum++;
+
+                // increased quantumWaitAmounts
+                System.out.print("Increased quantumWaitAmount: ");
+                for(Process temp : priorityProcessList) {
+                    // do not increase quantumWaitAmount for currently running process
+                    if(temp != process) {
+                        temp.incrementQuantumWaitAmount();
+                        System.out.print(temp.getName() + "." + temp.getPriority() + " ");
+                    }
+                }
+                System.out.println();
             }
 
             // add new process into a the priorityList as a runTime has passed
