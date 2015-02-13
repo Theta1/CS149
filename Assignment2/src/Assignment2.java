@@ -82,8 +82,8 @@ public class Assignment2 {
         printStringList(fcfs5.getStringList());*/
 
         printProcessList(list1);
-        HPF hpf1 = new HPF(list1);
-        printStringList(hpf1.getStringList());
+        //printStringList(new HPF(list1).getStringList());
+        printStringList(new HPFP(list1).getStringList());
     }
 
     /**

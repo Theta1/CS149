@@ -50,7 +50,7 @@ public class HPFP {
         int quantum = 0;
 
         while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
-            Process process = priorityProcessList.remove(0);
+            Process process = priorityProcessList.get(0);
             System.out.print(process.getName() + " ");
 
             // idle time
@@ -70,7 +70,25 @@ public class HPFP {
                 process.setTurnAroundTime(quantum);
 
                 quantum++;
+
+                // add new process into a the priorityList as a quantum has passed
+                for(Process temp : processList) {
+                    if(temp.getArrivalTime() < quantum) {
+                        priorityProcessList.add(temp);
+                    }
+                }
+
+                // remove all the elements in the priorityList from the processList
+                processList.removeAll(priorityProcessList);
+
+                // sort the priorityProcessList by priority, then arrivalTime
+                Collections.sort(priorityProcessList, comparator);
+
+                // get the new highest priority Process
+                process = priorityProcessList.get(0);
             }
+            // remove the completed highest priority Process
+            priorityProcessList.remove(0);
 
             // add new process into a the priorityList as a runTime has passed
             for(Process temp : processList) {
