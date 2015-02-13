@@ -12,85 +12,51 @@ import java.util.ArrayList;
  * 
  *********************************************/
 public class RR {
-	private ArrayList<Process> processData;
-    private ArrayList<Process> runnableData;
+    private ArrayList<Process> processList;
+    private ArrayList<Process> roundRobbin;
     private ArrayList<String> rr;
-    private float cnt;
+    private float quantaPointer;
     
     public RR(ArrayList<Process> p) {
-    	this.processData = (ArrayList<Process>) p.clone();
-    	this.runnableData = new ArrayList<Process>();
+	this.processList = (ArrayList<Process>)p.clone();
+    	this.roundRobbin = new ArrayList<Process>();
     	this.rr = new ArrayList<String>();
-    	this.cnt = 0;
-
-    	createList();
+    	this.quantaPointer = 0;
+    	runRoundRobbin();
+    }
+    
+    /**
+     * Creates the list for the processes
+     * puts them in their quantum 
+     */
+    public void runRoundRobbin() {
+	//Will run if there is space left in history
+	while(quantaPointer < 100 || !roundRobbin.isEmpty()) {
+	    //idling if the RR is empty and no process has arrived
+	    while(roundRobbin.isEmpty() && processList.get(0).getArrivalTime() > quantaPointer) {
+                rr.add("   ");
+                quantaPointer++;
+            }
+	    //if the processListmoves the newest arrival onto the RR queue
+	    if(!processList.isEmpty()) roundRobbin.add(processList.remove(0));
+	    //appends name to history
+	    rr.add(roundRobbin.get(0).getName());
+	    //reduces remaining runtime
+	    roundRobbin.get(0).decrementRunTime();
+	    //if runtime remains, appends the process to the back of the RR queue
+	    if(roundRobbin.get(0).getRunTime() > 0) roundRobbin.add(roundRobbin.remove(0));
+	    //else removes it completely
+	    else roundRobbin.remove(0);
+	    quantaPointer++;
+	}
     }
     
     /**
      * Gets the Array of processes
      * in their quantum
+     * @param an ArrayListof Strings representing the run order
      */
-    public ArrayList<String> getrr() {
+    public ArrayList<String> getStringList() {
     	return rr;
     }
-        
-    /**
-     * Creates the list for the processes
-     * puts them in their quantum 
-     */
-    public void createList() { 	
-    	int dataCnt = 0;
-    	
-    	while( runnableData != null && cnt < 100 )
-    	{	
-        	if (dataCnt >= runnableData.size())
-        	{	dataCnt = 0;	}
-    		
-    		runtimeProcesses();
-        	
-        	Process run = runnableData.get(dataCnt);
-        	
-    		rr.add( run.getName() );
-    		dataCnt++;
-    		cnt++;
-    		run.decrementRunTime();
-    		
-    		removeProcess();
-    	}
-    	
-    }
-    
-    /**
-     * Adds the Processes
-     * at their interval time
-     * 
-     */
-    public void runtimeProcesses() {
-    	ArrayList<Integer> remove = new ArrayList<Integer>();
-    	for(int i = 0; i < processData.size(); i++)
-    	{
-    		if( processData.get(i).getArrivalTime() < cnt ) 
-    		{
-    			runnableData.add(processData.get(i));
-    			remove.add(i);
-    		}
-    	}
-    	
-    	for(int j = remove.size()-1; j >= 0; j--)
-    	{	processData.remove(remove.get(j));	}
-    }
-    
-
-    
-    /**
-     * Removes processes that are completed
-     */
-    public void removeProcess() {
-		for( Process p: runnableData)
-		{
-			if( p.getRunTime() == 0 )
-			{	runnableData.remove(p);	}
-		}
-    }
-   
 }

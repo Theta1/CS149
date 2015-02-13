@@ -6,14 +6,37 @@ import java.util.Random;
  * CS149
  * Team: Inception
  ***********************************************/
-public class Process  {
-    private String name;
+public class Process implements Cloneable {
     private float arrivalTime;
     private float runTime;
     private int priority;
+    private String name;
+    public void setRunTime(float runTime) {
+        this.runTime = runTime;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
     private int quantumWait;
-    private int actualStartTime;
-    private int turnAroundTime;
+    
+
+    
+    /*
+     *  Creates a clone of the process object with unique variables
+     * (non-Javadoc)
+     * @see java.lang.Object#clone()
+     * @return the cloned object
+     */
+    public Object clone() throws CloneNotSupportedException{
+	Process objClone= new Process();
+	objClone.setArrivalTime(this.arrivalTime);
+	objClone.setRunTime(this.runTime);
+	objClone.setName(this.name);
+	objClone.setPriority(this.priority);
+	return objClone;
+    }
 
     /**
      * Default Constructor
