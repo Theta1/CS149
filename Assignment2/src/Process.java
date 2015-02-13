@@ -55,8 +55,8 @@ public class Process implements Cloneable {
     }
 
     /**
-     * Gets the actual actualStartTime.
-     * @return the actualStartTime
+     * Gets the quanta at which the process first run.
+     * @return an int representing the quanta start time.
      */
     public int getActualStartTime() {
         return actualStartTime;
