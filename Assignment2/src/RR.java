@@ -13,40 +13,40 @@ import java.util.ArrayList;
  *********************************************/
 public class RR {
     private ArrayList<Process> processList;
-    private ArrayList<Process> processesRunning;
+    private ArrayList<Process> roundRobbin;
     private ArrayList<String> rr;
     private float quantaPointer;
     
     public RR(ArrayList<Process> p) {
-	this.processList = (ArrayList<Process>) p.clone();
-    	this.processesRunning = new ArrayList<Process>();
+	this.processList = (ArrayList<Process>)p.clone();
+    	this.roundRobbin = new ArrayList<Process>();
     	this.rr = new ArrayList<String>();
     	this.quantaPointer = 0;
-    	createList();
+    	runRoundRobbin();
     }
     
     /**
      * Creates the list for the processes
      * puts them in their quantum 
      */
-    public void createList() {
-	int processListPointer = 0;
-	while(quantaPointer<100 && !processList.isEmpty()) {
-	    //idling
-	    while(processList.get(0).getArrivalTime() > quantaPointer) {
+    public void runRoundRobbin() {
+	//Will run if there is space left in history
+	while(quantaPointer < 100 || !roundRobbin.isEmpty()) {
+	    //idling if the RR is empty and no process has arrived
+	    while(roundRobbin.isEmpty() && processList.get(0).getArrivalTime() > quantaPointer) {
                 rr.add("   ");
                 quantaPointer++;
             }
-	    //moves the newest arrival onto the RR queue
-	    processesRunning.add(processList.remove(0));
+	    //if the processListmoves the newest arrival onto the RR queue
+	    if(!processList.isEmpty()) roundRobbin.add(processList.remove(0));
 	    //appends name to history
-	    rr.add(processesRunning.get(0).getName());
+	    rr.add(roundRobbin.get(0).getName());
 	    //reduces remaining runtime
-	    processesRunning.get(0).decrementRunTime();
+	    roundRobbin.get(0).decrementRunTime();
 	    //if runtime remains, appends the process to the back of the RR queue
-	    if(processesRunning.get(0).getRunTime()>0)processesRunning.add(processesRunning.remove(0));
+	    if(roundRobbin.get(0).getRunTime() > 0) roundRobbin.add(roundRobbin.remove(0));
 	    //else removes it completely
-	    else processesRunning.remove(0);
+	    else roundRobbin.remove(0);
 	    quantaPointer++;
 	}
     }
@@ -56,26 +56,7 @@ public class RR {
      * in their quantum
      * @param an ArrayListof Strings representing the run order
      */
-    public ArrayList<String> getrr() {
+    public ArrayList<String> getStringList() {
     	return rr;
     }
-
-    
-    /**
-     * Adds the Processes
-     * at their interval time
-     * 
-     */
-    public void runtimeProcesses() {
- 
-    }
-    
-
-    
-    /**
-     * Removes processes that are completed
-     */
-    public void removeProcess() {
-
-    }   
 }
