@@ -75,6 +75,13 @@ public class HPF {
             // add new process into a the priorityList as a runTime has passed
             for(Process temp : processList) {
                 if(temp.getArrivalTime() < quantum) {
+                    // adjust temp's aging
+                    int quatumWaitAmount = Math.round(temp.getArrivalTime() + 0.5f) - quantum;
+                    while(quatumWaitAmount > 0) {
+                        temp.incrementQuantumWait();
+                        quatumWaitAmount--;
+                    }
+
                     priorityProcessList.add(temp);
                 }
             }
