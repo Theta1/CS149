@@ -33,10 +33,10 @@ public class HPF {
             public int compare(Process process1, Process process2) {
                 int priorityDifference = process1.getPriority() - process2.getPriority();
 
-                if(priorityDifference > 0) { // process1 has higher priority than process2
+                if(priorityDifference < 0) { // process1 has higher priority than process2
                     return -1;
                 }
-                else if(priorityDifference < 0) { // process2 has higher priority than process1
+                else if(priorityDifference > 0) { // process2 has higher priority than process1
                     return 1;
                 }
                 else {
@@ -51,7 +51,7 @@ public class HPF {
 
         while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
             Process process = priorityProcessList.remove(0);
-            System.out.print(process.getName() + " ");
+            System.out.println("Current: " + process.getName() + "." + process.getPriority() + " ");
 
             // idle time
             while(process.getArrivalTime() > quantum) {
@@ -70,6 +70,17 @@ public class HPF {
                 process.setTurnAroundTime(quantum);
 
                 quantum++;
+
+                // increased quantumWaitAmounts
+                System.out.print("Increased quantumWaitAmount: ");
+                for(Process temp : priorityProcessList) {
+                    // do not increase quantumWaitAmount for currently running process
+                    if(temp != process) {
+                        temp.incrementQuantumWaitAmount();
+                        System.out.print(temp.getName() + "." + temp.getPriority() + " ");
+                    }
+                }
+                System.out.println();
             }
 
             // add new process into a the priorityList as a runTime has passed
