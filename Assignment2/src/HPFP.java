@@ -1,111 +1,103 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/******************************************
- * Highest Priority First (Preemptive)
- * 
- * The highest priority runs until
- * completion unless a higher priority
- * process enters
+/**********************************************
+ * Highest Priority First (preemptive)
+ *
+ * The highest priority process runs
+ * until it is complete
  *
  * @author Team: Inception
  * CS149
- * 
- *****************************************/
+ *
+ **********************************************/
 public class HPFP {
-	private ArrayList<Process> processData;
-    private ArrayList<Process> runnableData;
-    private ArrayList<String> hpfp;
-    private float cnt;
-    
-    public HPFP(ArrayList<Process> p) {
-    	this.processData = (ArrayList<Process>) p.clone();
-    	this.runnableData = new ArrayList<Process>();
-    	this.hpfp = new ArrayList<String>();
-    	this.cnt = 0;
+    private static final int QUANTUM_MAX = 100;
+    private ArrayList<Process> processList;
+    private ArrayList<String> stringList;
 
-    	createList();
+    public HPFP(ArrayList<Process> processList) {
+        this.processList = (ArrayList<Process>) processList.clone();
+        stringList = new ArrayList<>();
+
+        run();
     }
-    
+
     /**
-     * Gets the Array of processes
-     * in their quantum
+     * Runs the HPFP algorithm.
      */
-    public ArrayList<String> gethpfp() {
-    	return hpfp;
+    private void run() {
+        // sorts Process by priority, then arrival time
+        Comparator<Process> comparator = new Comparator<Process>() {
+            public int compare(Process process1, Process process2) {
+                int priorityDifference = process1.getPriority() - process2.getPriority();
+
+                if(priorityDifference > 0) {
+                    return -1;
+                }
+                else if(priorityDifference < 0) {
+                    return 1;
+                }
+                else {
+                    return new Float(process1.getArrivalTime()).compareTo(new Float( process2.getArrivalTime()));
+                }
+            }
+        };
+
+        ArrayList<Process> priorityProcessList = new ArrayList<>();
+        priorityProcessList.add(processList.remove(0));
+        int quantum = 0;
+
+        while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
+            Process process = priorityProcessList.remove(0);
+            System.out.print(process.getName() + " ");
+
+            // idle time
+            while(process.getArrivalTime() > quantum) {
+                stringList.add("");
+
+                quantum++;
+            }
+
+            // process time
+            while(process.getRunTime() > 0) {
+                stringList.add(process.getName());
+
+                // update process stats
+                process.decrementRunTime();
+                process.setActualStartTime(quantum);
+                process.setTurnAroundTime(quantum);
+
+                quantum++;
+            }
+
+            // add new process into a the priorityList as a runTime has passed
+            for(Process temp : processList) {
+                if(temp.getArrivalTime() < quantum) {
+                    priorityProcessList.add(temp);
+                }
+            }
+
+            // make sure priorityProcessList has something in it
+            if(priorityProcessList.isEmpty()) {
+                priorityProcessList.add(processList.remove(0));
+            }
+
+            // remove all the elements in the priorityList from the processList
+            processList.removeAll(priorityProcessList);
+
+            // sort the priorityProcessList by priority, then arrivalTime
+            Collections.sort(priorityProcessList, comparator);
+        }
+        System.out.println();
     }
-       
-    
+
     /**
-     * Creates the list for the processes
-     * puts them in their quantum 
+     * Gets the string list.
+     * @return the string list
      */
-    public void createList() { 	    	
-    	while( runnableData != null && cnt < 100 )
-    	{	   		
-    		runtimeProcesses();
-        	
-        	Process run = highPriority();
-    		hpfp.add( run.getName() );
-    		cnt++;
-        	run.decrementRunTime();
-        	    		
-    		removeProcess();
-    	}
-    	
-    }
-    
-    /**
-     * Adds the Processes
-     * at their interval time
-     * 
-     */
-    public void runtimeProcesses() {
-    	ArrayList<Integer> remove = new ArrayList<Integer>();
-    	for(int i = 0; i < processData.size(); i++)
-    	{
-    		if( processData.get(i).getArrivalTime() < cnt ) 
-    		{
-    			runnableData.add(processData.get(i));
-    			remove.add(i);
-    		}
-    	}
-    	
-    	for(int j = remove.size()-1; j >= 0; j--)
-    	{	processData.remove(remove.get(j));	}
-    }
-    
-    /**
-     * Finds the highest priority
-     * process in the runnable processes
-     * @return A process with the highest
-     * priority
-     */
-    public Process highPriority() {
-    	Process highP = new Process();
-    	
-    	for(Process P: runnableData)
-    	{
-    		if(P.getPriority() > highP.getPriority())
-    		{	highP = P;	}
-    	}
-    	
-    	return highP;
-    }
-    
-    /**
-     * Removes processes that are completed
-     */
-    public void removeProcess() {
-		for( Process p: runnableData)
-		{
-			if( p.getRunTime() == 0 )
-			{	runnableData.remove(p);	}
-		}
+    public ArrayList<String> getStringList() {
+        return stringList;
     }
 }
