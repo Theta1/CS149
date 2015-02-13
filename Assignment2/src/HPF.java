@@ -33,10 +33,10 @@ public class HPF {
             public int compare(Process process1, Process process2) {
                 int priorityDifference = process1.getPriority() - process2.getPriority();
 
-                if(priorityDifference < 0) { // process1 has higher priority than process2
+                if(priorityDifference > 0) { // process1 has higher priority than process2
                     return -1;
                 }
-                else if(priorityDifference > 0) { // process2 has higher priority than process1
+                else if(priorityDifference < 0) { // process2 has higher priority than process1
                     return 1;
                 }
                 else {
@@ -75,13 +75,6 @@ public class HPF {
             // add new process into a the priorityList as a runTime has passed
             for(Process temp : processList) {
                 if(temp.getArrivalTime() < quantum) {
-                    // adjust temp's aging
-                    int quatumWaitAmount = Math.round(temp.getArrivalTime() + 0.5f) - quantum;
-                    while(quatumWaitAmount > 0) {
-                        temp.incrementQuantumWait();
-                        quatumWaitAmount--;
-                    }
-
                     priorityProcessList.add(temp);
                 }
             }
