@@ -29,8 +29,8 @@ public class Process implements Cloneable {
      * @return true if successful and false if already highest priority
      */
     public boolean deprecatePriority(){
-        if(priority<4){
-            priority++;
+        if(priority>1){
+            priority--;
             return true;
         } else return false;    
 
@@ -49,6 +49,20 @@ public class Process implements Cloneable {
 	objClone.setName(this.name);
 	objClone.setPriority(this.priority);
 	return objClone;
+    }
+
+    /**
+     * @param arrivalTime the arrivalTime to set
+     */
+    public void setArrivalTime(float arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
