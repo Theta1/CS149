@@ -61,7 +61,7 @@ public class Assignment2 {
 		SRT srt5 = new SRT(list5);*/
 
         // print out lists and FCFS results
-        printProcessList(list1);
+        /*printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
         printStringList(fcfs1.getStringList());
 
@@ -79,8 +79,11 @@ public class Assignment2 {
 
         printProcessList(list5);
         FCFS fcfs5 = new FCFS(list5);
-        printStringList(fcfs5.getStringList());
-		
+        printStringList(fcfs5.getStringList());*/
+
+        printProcessList(list1);
+        HPF hpf1 = new HPF(list1);
+        printStringList(hpf1.getStringList());
     }
 
     /**

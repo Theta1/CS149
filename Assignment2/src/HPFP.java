@@ -33,14 +33,14 @@ public class HPFP {
             public int compare(Process process1, Process process2) {
                 int priorityDifference = process1.getPriority() - process2.getPriority();
 
-                if(priorityDifference > 0) {
+                if(priorityDifference > 0) { // process1 has higher priority than process2
                     return -1;
                 }
-                else if(priorityDifference < 0) {
+                else if(priorityDifference < 0) { // process2 has higher priority than process1
                     return 1;
                 }
                 else {
-                    return new Float(process1.getArrivalTime()).compareTo(new Float( process2.getArrivalTime()));
+                    return new Float(process1.getArrivalTime()).compareTo(new Float(process2.getArrivalTime()));
                 }
             }
         };
