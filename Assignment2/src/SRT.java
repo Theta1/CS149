@@ -31,7 +31,7 @@ public class SRT {
      * Gets the Array of processes
      * in their quantum
      */
-    public ArrayList<String> getSRT() {
+    public ArrayList<String> getStringList() {
         return srt;
     }
 
