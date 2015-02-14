@@ -41,7 +41,7 @@ public class SJF {
 	{
 		int shortest;
 		//all processes with arrival time less than 100
-		while (count < 100)
+		while (count < 100 || queue.size() > 0)
 		{
 			//add Processes to a queue for processes that have arrived
 			for (int i=0; i< processData.size(); i++)
@@ -65,23 +65,31 @@ public class SJF {
 						shortest = j;
 					}
 				}
-				
+								
 				//add to time quanta current shortest process
+				float runtime = 0;
 				current = queue.get(shortest);
-				while (current.getRunTime() > 0)
+				runtime = current.getRunTime();
+				
+				while (runtime > 0)
 				{
-					output.add(current.getName());
-					current.setArrivalTime(current.getRunTime() - 1);
+					output.add(current.getName());	
+					
+					runtime --;
 					count++;
+					
 				}
 				queue.remove(current);
+				
+				
 			}
 			else
 			{
-				//queue was empty
-				output.add(null);
+				//queue was empty				
+				output.add("idle");
 				count++;
-			}
+			}			
 		}
+		
 	}
 }
