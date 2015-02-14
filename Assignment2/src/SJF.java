@@ -43,14 +43,11 @@ public class SJF {
 		//all processes with arrival time less than 100
 		while (count < 100 || queue.size() > 0)
 		{
-			//add Processes to a queue for processes that have arrived
-			for (int i=0; i< processData.size(); i++)
-			{
-				if (processData.get(i).getArrivalTime() < count)
-				{
-					queue.add(processData.get(i));
-					processData.remove(i);
-				}
+			//add Processes to a queue for processes that have arrived	
+			while (!processData.isEmpty() && processData.get(0).getArrivalTime() < count)
+			{				
+					queue.add(processData.get(0));
+					processData.remove(0);
 			}
 			
 			//if queue is empty, add null; otherwise add shortest process
