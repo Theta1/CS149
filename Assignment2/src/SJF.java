@@ -31,7 +31,7 @@ public class SJF {
 		this.output = new ArrayList<String>();
 	}
 	
-	public ArrayList<String> getSJFList()
+	public ArrayList<String> getStringList()
 	{
 		return output;
 	}
