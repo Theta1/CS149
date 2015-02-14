@@ -86,7 +86,7 @@ public class SJF {
 			else
 			{
 				//queue was empty				
-				output.add("idle");
+				output.add("");
 				count++;
 			}			
 		}
