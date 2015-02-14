@@ -55,8 +55,8 @@ public class Process implements Cloneable {
     }
 
     /**
-     * Gets the actual actualStartTime.
-     * @return the actualStartTime
+     * Gets the quanta at which the process first run.
+     * @return an int representing the quanta start time.
      */
     public int getActualStartTime() {
         return actualStartTime;
@@ -184,7 +184,16 @@ public class Process implements Cloneable {
     }
 
     /**
+     * Decrements the time waited by one.
+     * Useful for when the process is running but has otherwise had wait incremented.
+     */
+    public void decrementQuantumWaitTimeAmount() {
+	quantumWaitAmount--;
+    }
+    
+    /**
      * Increments the quantumWaitAmount by one..
+     * THIS max maybe problematic for statistic calculations
      */
     public void incrementQuantumWaitAmount() {
         quantumWaitAmount++;

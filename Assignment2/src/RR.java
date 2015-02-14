@@ -37,17 +37,41 @@ public class RR {
                 rr.add("   ");
                 quantaPointer++;
             }
-	    //if the processListmoves the newest arrival onto the RR queue
+	    //if the processList has items, moves the newest arrival onto the RR queue
 	    if(!processList.isEmpty()) roundRobbin.add(processList.remove(0));
-	    //appends name to history
+	    
+	    //appends name of the running process to history
 	    rr.add(roundRobbin.get(0).getName());
+	    
+	    //if it's the first run, marks time in the Process (for response time)
+	    if(roundRobbin.get(0).getActualStartTime()==-1)roundRobbin.get(0).setActualStartTime((int) quantaPointer);
+	    
 	    //reduces remaining runtime
 	    roundRobbin.get(0).decrementRunTime();
+	    
+	    //(for wait time)
+	    waitNonActiveProcesses();
+	    
 	    //if runtime remains, appends the process to the back of the RR queue
 	    if(roundRobbin.get(0).getRunTime() > 0) roundRobbin.add(roundRobbin.remove(0));
+	    
 	    //else removes it completely
-	    else roundRobbin.remove(0);
+	    else{
+		//sets the last time the quanta is run
+		roundRobbin.get(0).setTurnAroundTime((int) quantaPointer);
+		roundRobbin.remove(0);
+	    }
 	    quantaPointer++;
+	    
+	}
+    }
+    
+    /**
+     * Waits all but the active process
+     */
+    public void waitNonActiveProcesses(){
+	for(int i = 1; i<roundRobbin.size(); i++){
+	    roundRobbin.get(i).incrementQuantumWaitAmount();
 	}
     }
     
