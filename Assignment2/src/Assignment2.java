@@ -3,13 +3,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
+/*********************************************
  * Runs the different scheduling algorithms
  * for processes. Calculates statistics for
  * the scheduling
  * @author Team Inception: David Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
  * CS 149
- */
+ **********************************************/
 public class Assignment2 {
 
     /**
@@ -53,35 +53,55 @@ public class Assignment2 {
         Collections.sort(list4, comparator);
         Collections.sort(list5, comparator);
 		
-        // print out lists and FCFS results
+        // print out lists
         printProcessList(list1);
-        FCFS fcfs1 = new FCFS(list1);
-        printStringList(fcfs1.getStringList());
-
         printProcessList(list2);
-        FCFS fcfs2 = new FCFS(list2);
-        printStringList(fcfs2.getStringList());
-
         printProcessList(list3);
-        FCFS fcfs3 = new FCFS(list3);
-        printStringList(fcfs3.getStringList());
-
         printProcessList(list4);
-        FCFS fcfs4 = new FCFS(list4);
-        printStringList(fcfs4.getStringList());
-
         printProcessList(list5);
-        FCFS fcfs5 = new FCFS(list5);
-        printStringList(fcfs5.getStringList());
         
-		//SRT srt1 = new SRT(list1);
-		//printStringList();
-		 /*
-		SRT srt2 = new SRT(list2);
-		SRT srt3 = new SRT(list3);
-		SRT srt4 = new SRT(list4);
-		SRT srt5 = new SRT(list5);*/
-		
+        // FCFS results
+        printStringList(new FCFS(list1).getStringList());
+        printStringList(new FCFS(list2).getStringList());
+        printStringList(new FCFS(list3).getStringList());
+        printStringList(new FCFS(list4).getStringList());
+        printStringList(new FCFS(list5).getStringList());
+
+        // SRT results
+        printStringList(new SRT(list1).getSRT());
+        printStringList(new SRT(list2).getSRT());
+        printStringList(new SRT(list3).getSRT());
+        printStringList(new SRT(list4).getSRT());
+        printStringList(new SRT(list5).getSRT());
+        
+        //SJF results
+        /*printStringList(new SJF(list1).getStringList());
+        printStringList(new SJF(list2).getStringList());
+        printStringList(new SJF(list3).getStringList());
+        printStringList(new SJF(list4).getStringList());
+        printStringList(new SJF(list5).getStringList());
+        */
+                
+        //HPF results
+        printStringList(new HPF(list1).getStringList());
+        printStringList(new HPF(list2).getStringList());
+        printStringList(new HPF(list3).getStringList());
+        printStringList(new HPF(list4).getStringList());
+        printStringList(new HPF(list5).getStringList());
+        
+        //HPFP results
+        printStringList(new HPFP(list1).getStringList());
+        printStringList(new HPFP(list2).getStringList());
+        printStringList(new HPFP(list3).getStringList());
+        printStringList(new HPFP(list4).getStringList());
+        printStringList(new HPFP(list5).getStringList());
+        
+      //RR results
+        printStringList(new RR(list1).getStringList());
+        printStringList(new RR(list2).getStringList());
+        printStringList(new RR(list3).getStringList());
+        printStringList(new RR(list4).getStringList());
+        printStringList(new RR(list5).getStringList());
     }
 
     /**
@@ -100,7 +120,6 @@ public class Assignment2 {
      */
     public static void printStringList(List<String> stringList) {
         String previousString = stringList.get(0);
-        //comment
 
         String output = "[";
         for(String string : stringList) {

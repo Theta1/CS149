@@ -16,13 +16,13 @@ public class SRT {
     private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
     private ArrayList<String> srt;
-    private float cnt;
+    private float quantum;
     
     public SRT(ArrayList<Process> p) {
     	this.processData = (ArrayList<Process>) p.clone();
     	this.runnableData = new ArrayList<Process>();
     	this.srt = new ArrayList<String>();
-    	this.cnt = 0;
+    	this.quantum = 0;
 
     	run();
         }
@@ -41,23 +41,26 @@ public class SRT {
      * puts them in their quantum 
      */
     public void run() { 	
-    	while( runnableData.size() != 0 && cnt < 100 )
+    	while( quantum < 100 || !runnableData.isEmpty() )
     	{	
     		runtimeProcesses();
             
-    		// idle time
-            while(process.getArrivalTime() > quantum) {
-                stringList.add("");
-                quantum++;
-            }
-        	
-            Process addProcess = findShortTime();
-    		
-    		srt.add( addProcess.getName() );
-    		addProcess.setRunTime( addProcess.getRunTime() - 1 );
-    		cnt++;
-    		
-    		removeProcess();
+    		if(runnableData.isEmpty())
+    		{	srt.add("");	}
+    		else
+    		{
+    			Process addProcess = findShortTime();
+    			if (addProcess.getActualStartTime() < 0)
+    			{	/*addProcess.setActualStartTime(quantum);*/	}
+	    		srt.add( addProcess.getName() );
+	    		addProcess.decrementRunTime();
+	    		if(addProcess.getRunTime() < 0)
+	    		{
+	        		//addProcess.setTurnAroundTime(quantum);
+	        		runnableData.remove(addProcess);
+	    		}
+    		}
+    		quantum++;
     	}
     	
     }
@@ -70,13 +73,11 @@ public class SRT {
     public void runtimeProcesses() {
     	for(Process p: processData)
     	{
-    		if( p.getArrivalTime() <= cnt ) 
-    		{
-    			runnableData.add( processData.remove(p) );
-    		}
-    		
+    		if( p.getArrivalTime() <= quantum ) 
+    		{	runnableData.add( processData.get(processData.indexOf(p)) );	}
     	}
-    	
+    	for (Process q: runnableData)
+    	{	processData.remove(q); 	}
     }
     
     /**
@@ -90,22 +91,9 @@ public class SRT {
     	for( Process p : runnableData)
 		{
     		if( p.getRunTime() < shortTime.getRunTime() )
-			{	
-    			shortTime = p;
-			}
+			{	shortTime = p;	}
 		}
     	return shortTime;
-    }
-    
-    /**
-     * Removes processes that are completed
-     */
-    public void removeProcess() {
-		for( Process p: runnableData)
-		{
-			if( p.getRunTime() == 0 )
-			{	runnableData.remove(p);	}
-		}
     }
    
 }
