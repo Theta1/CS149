@@ -65,10 +65,13 @@ public class Assignment2 {
         printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
         System.out.println();
-        System.out.println("Process Order");
+        System.out.println("Process Order:");
         printQuantaList();
         printStringList(fcfs1.getStringList());
+        System.out.println();
         printProcessList(fcfs1.getProcessedProcessList());
+        System.out.println();
+        System.out.println(StatisticsCalculator.RunStatistics(list1));
 /*
         printProcessList(list2);
         FCFS fcfs2 = new FCFS(list2);
@@ -132,7 +135,6 @@ public class Assignment2 {
         output += "]";
 
         System.out.println(output);
-        System.out.println();
     }
     
     /**
@@ -149,6 +151,5 @@ public class Assignment2 {
         output += "]";
 
         System.out.println(output);
-        System.out.println();
     }
 }
