@@ -72,6 +72,7 @@ public class Assignment2 {
         for (ArrayList<Process> list: FCFSclone)
         {
         	FCFS fcfs = new FCFS(list);
+        	printTimeline();
         	printStringList( fcfs.getStringList() );
         	new Stats(fcfs.getStats(), fcfs.getStringList());
         }
@@ -83,6 +84,7 @@ public class Assignment2 {
         for (ArrayList<Process> list: SJFclone)
         {
         	SJF sjf = new SJF(list);
+        	printTimeline();
         	printStringList( sjf.getStringList() );
         	new Stats(sjf.getStats(), sjf.getStringList());
         } 
@@ -94,6 +96,7 @@ public class Assignment2 {
         for (ArrayList<Process> list: SRTclone)
         {
         	SRT srt = new SRT(list);
+        	printTimeline();
         	printStringList( srt.getStringList() );
         	new Stats(srt.getStats(), srt.getStringList());
         }
@@ -105,6 +108,7 @@ public class Assignment2 {
         for (ArrayList<Process> list: RRclone)
         {
         	RR rr = new RR(list);
+        	printTimeline();
         	printStringList( rr.getStringList() );
         	new Stats(rr.getStats(), rr.getStringList());
         }
@@ -116,6 +120,7 @@ public class Assignment2 {
         for (ArrayList<Process> list: HPFclone)
         {
         	HPF hpf = new HPF(list);
+        	printTimeline();
         	printStringList( hpf.getStringList() );
         	new Stats(hpf.getStats(), hpf.getStringList());
         }
@@ -127,6 +132,7 @@ public class Assignment2 {
         for (ArrayList<Process> list: HPFPclone)
         {
         	HPFP hpfp = new HPFP(list);
+        	printTimeline();
         	printStringList( hpfp.getStringList() );
         	new Stats(hpfp.getStats(), hpfp.getStringList());
         }     
@@ -161,9 +167,25 @@ public class Assignment2 {
             }
             else {
                 output = output.substring(0, output.length() - 1); // remove last |
-                output += "][" + String.format("%3s", string) + "|";
+                output += "|" + String.format("%3s", string) + "|";
                 previousString = string;
             }
+        }
+        output = output.substring(0, output.length() - 1); // remove last |
+        output += "]";
+
+        System.out.println(output);
+    }
+ 
+    /**
+     * Prints out info about a string list separating different strings with []s.
+     * @param stringList the string list
+     */
+    public static void printTimeline() {
+
+        String output = "[";
+        for(int i = 1; i<=100; i++) {
+                output += String.format("%3d",i) + "|";
         }
         output = output.substring(0, output.length() - 1); // remove last |
         output += "]";
