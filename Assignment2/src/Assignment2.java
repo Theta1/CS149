@@ -72,6 +72,7 @@ public class Assignment2 {
         printProcessList(fcfs1.getProcessedProcessList());
         System.out.println();
         System.out.println(StatisticsCalculator.RunStatistics(list1));
+        System.out.println(StatisticsCalculator.calculateThroughput(list1, list2, list3, list4, list5));
 /*
         printProcessList(list2);
         FCFS fcfs2 = new FCFS(list2);
@@ -112,6 +113,7 @@ public class Assignment2 {
         	    + "]   ");
         }
     }
+   
 
     /**
      * Prints out info about a string list separating different strings with []s.
