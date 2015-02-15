@@ -61,18 +61,17 @@ public class Assignment2 {
 		SRT srt5 = new SRT(list5);*/
 
         // print out lists and FCFS results
-        System.out.println("List of processes:");
-        printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
-        System.out.println();
-        System.out.println("Process Order:");
-        printQuantaList();
-        printStringList(fcfs1.getStringList());
-        System.out.println();
-        printProcessList(fcfs1.getProcessedProcessList());
-        System.out.println();
-        System.out.println(StatisticsCalculator.RunStatistics(list1));
-        System.out.println(StatisticsCalculator.calculateThroughput(list1, list2, list3, list4, list5));
+        FCFS fcfs2 = new FCFS(list2);
+        FCFS fcfs3 = new FCFS(list3);
+        FCFS fcfs4 = new FCFS(list4);
+        FCFS fcfs5 = new FCFS(list5);
+        WorkthroughList(fcfs1, list1);
+        WorkthroughList(fcfs2, list2);
+        WorkthroughList(fcfs3, list3);
+        WorkthroughList(fcfs4, list4);
+        WorkthroughList(fcfs5, list5);
+        System.out.println("\n"+StatisticsCalculator.calculateThroughput(list1, list2, list3, list4, list5));
 /*
         printProcessList(list2);
         FCFS fcfs2 = new FCFS(list2);
@@ -96,6 +95,19 @@ public class Assignment2 {
         */
     }
 
+    private static void WorkthroughList(FCFS fcfs1, ArrayList<Process> list1) {
+        System.out.println("Origonal list of processes:");
+        printProcessList(list1);
+        System.out.println();
+        System.out.println("Process Order:");
+        printQuantaList();
+        printStringList(fcfs1.getStringList());
+        System.out.println("\nProcess details:");
+        printProcessList(fcfs1.getProcessedProcessList());
+        System.out.println();
+        System.out.println(StatisticsCalculator.RunStatistics(fcfs1.getProcessedProcessList())+"\n");
+    }
+
     /**
      * Prints out info about a process list.
      * @param processList
@@ -110,6 +122,7 @@ public class Assignment2 {
         	    + ", Time started: " + String.format("%9d", process.getActualStartTime())
         	    + ", Turn Around time: " + String.format("%9d", process.getTurnAroundTime())
         	    + ", Waiting time: " + String.format("%9d", process.getWaitingTime())
+        	    + ", Responce time: " + String.format("%9d", process.getResponseTime())
         	    + "]   ");
         }
     }
