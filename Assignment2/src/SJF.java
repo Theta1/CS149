@@ -1,6 +1,4 @@
-/**
-* @author Dennis Hsu
-*/
+
 /**********************************************
 * Shortest Job First (SJF) (nonpreemptive)
 *
@@ -17,76 +15,90 @@ import java.util.ArrayList;
 public class SJF {
 	private ArrayList<Process> processData;
 	private ArrayList<Process> queue;
-	private Process current;
+	private Process shortest;
 	private ArrayList<String> output;
-	private int count;
+	private int quantum;
+	private ArrayList<Process> stats;
 
-	//constructor; takes in sorted ArrayList of Processes by arrival time
-	public SJF (ArrayList<Process> p)
+	public SJF (ArrayList<Process> processData)
 	{
-		this.processData = (ArrayList<Process>) p.clone();
-		this.count = 0;
+		this.processData = processData;
+		this.quantum = 0;
 		this.queue = new ArrayList<Process>();
-		this.current = new Process();
+		this.shortest = new Process();
 		this.output = new ArrayList<String>();
+		this.stats = new ArrayList<Process>();
+		
+		run();		
 	}
 	
-	public ArrayList<String> getStringList()
-	{
+	/**
+	 * Returns the name of the processes
+	 * in the order they were ran
+	 * @return output an ArrayList of Strings
+	 */
+	public ArrayList<String> getStringList() {
 		return output;
 	}
 	
-	//create String list
-	public void createList()
+	/**
+	 * Returns a list of processes with
+	 * data to calculate statistics
+	 * @return stats an ArrayList
+	 */
+	public ArrayList<Process> getStats() {
+		return stats;
+	}
+
+
+	/**
+	 * Runs algorithm to execute processes
+	 */
+	public void run()
 	{
-		int shortest;
 		//all processes with arrival time less than 100
-		while (count < 100 || queue.size() > 0)
+		while (quantum < 100)
 		{
-			//add Processes to a queue for processes that have arrived	
-			while (!processData.isEmpty() && processData.get(0).getArrivalTime() < count)
-			{				
-					queue.add(processData.get(0));
-					processData.remove(0);
+			//add Processes to a queue for processes that have arrived
+			for (Process p: processData)
+			{
+				if (p.getArrivalTime() < quantum)
+				{	queue.add(p);	}
 			}
+			processData.removeAll(queue);
 			
 			//if queue is empty, add null; otherwise add shortest process
-			if (queue.size() > 0)
+			if(queue.isEmpty())
 			{
-				//find shortest process out of arrived processes
-				shortest = 0;
-				for (int j=0; j< queue.size(); j++)
-				{
-					if (queue.get(j).getRunTime() < queue.get(shortest).getRunTime())
-					{
-						shortest = j;
-					}
-				}
-								
-				//add to time quanta current shortest process
-				float runtime = 0;
-				current = queue.get(shortest);
-				runtime = current.getRunTime();
-				
-				while (runtime > 0)
-				{
-					output.add(current.getName());	
-					
-					runtime --;
-					count++;
-					
-				}
-				queue.remove(current);
-				
-				
+				output.add("");
+				quantum++;
 			}
 			else
 			{
-				//queue was empty				
-				output.add("");
-				count++;
-			}			
+				//find shortest process out of arrived processes
+				shortest = queue.get(0);
+				for (Process q: queue)
+				{
+					if (q.getRunTime() < shortest.getRunTime())
+					{
+						shortest = q;
+					}
+				}
+				
+				shortest.setActualStartTime(quantum);
+				
+				//add to time quanta current shortest process
+				while (shortest.getRunTime() > 0)
+				{
+					output.add(shortest.getName());
+					shortest.decrementRunTime();
+					shortest.incrementQuantaTime();
+					quantum++;
+				}
+				shortest.setTurnAroundTime(quantum-1);
+				stats.add(shortest);
+				queue.remove(shortest);
+			}
 		}
-		
 	}
 }

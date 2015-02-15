@@ -11,7 +11,7 @@ import java.util.List;
  *         149
  */
 public class ThorpeMain {
-
+/*
     ArrayList<ArrayList> listSet = new ArrayList<ArrayList>();
 
     /**
@@ -20,6 +20,7 @@ public class ThorpeMain {
      * @param args
      *            the command line arguments
      */
+    /*
     public static void main(String[] args) {
 
 	ArrayList<Process> list1 = new ArrayList<Process>();
@@ -44,7 +45,7 @@ public class ThorpeMain {
 	// runProcessScheduler(list1, list2, list3, list4, list5, "HPF");
 
     }
-
+*/
     /**
      * Runs a process scheduler based on the string argument or prints error
      * 
@@ -75,7 +76,7 @@ public class ThorpeMain {
 	    FCFS fcfs5 = new FCFS(list5);
 	    printStringList(fcfs5.getStringList());
 
-	    System.out.println(StatisticsCalculator.Calculator(list1));
+	    //System.out.println(StatisticsCalculator.Calculator(list1));
 	    break;
 	case "SJF":
 	    SJF sjf1 = new SJF(list1);
@@ -93,7 +94,7 @@ public class ThorpeMain {
 	    SJF sjf5 = new SJF(list5);
 	    printStringList(sjf5.getStringList());
 
-	    System.out.println(StatisticsCalculator.Calculator(list1));
+	    //System.out.println(StatisticsCalculator.Calculator(list1));
 	    break;
 	case "SRT":
 	    SRT srt1 = new SRT(list1);
@@ -111,7 +112,7 @@ public class ThorpeMain {
 	    SRT srt5 = new SRT(list5);
 	    printStringList(srt5.getStringList());
 
-	    System.out.println(StatisticsCalculator.Calculator(list1));
+	    //System.out.println(StatisticsCalculator.Calculator(list1));
 	    break;
 	case "RR":
 	    RR rr1 = new RR(list1);
@@ -129,7 +130,7 @@ public class ThorpeMain {
 	    RR rr5 = new RR(list5);
 	    printStringList(rr5.getStringList());
 
-	    System.out.println(StatisticsCalculator.Calculator(rr1.getList()));
+	    //System.out.println(StatisticsCalculator.Calculator(rr1.getList()));
 	    break;
 	case "HPF":
 	    HPF hpf1 = new HPF(list1);
@@ -147,7 +148,7 @@ public class ThorpeMain {
 	    HPF hpf5 = new HPF(list5);
 	    printStringList(hpf5.getStringList());
 
-	    System.out.println(StatisticsCalculator.Calculator(list1));
+	    //System.out.println(StatisticsCalculator.Calculator(list1));
 	    break;
 	case "HPFP":
 	    HPFP hpfp1 = new HPFP(list1);
@@ -165,7 +166,7 @@ public class ThorpeMain {
 	    HPFP hpfp5 = new HPFP(list5);
 	    printStringList(hpfp5.getStringList());
 
-	    System.out.println(StatisticsCalculator.Calculator(list1));
+	    //System.out.println(StatisticsCalculator.Calculator(list1));
 	    break;
 	default:
 	    System.out.println("Error " + string

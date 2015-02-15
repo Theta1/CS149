@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,10 +17,12 @@ public class HPFP {
     private static final int QUANTUM_MAX = 100;
     private ArrayList<Process> processList;
     private ArrayList<String> stringList;
+    private ArrayList<Process> stats;
 
     public HPFP(ArrayList<Process> processList) {
         this.processList = (ArrayList<Process>) processList.clone();
-        stringList = new ArrayList<>();
+        stringList = new ArrayList<String>();
+        stats = new ArrayList<Process>();
 
         run();
     }
@@ -61,14 +64,16 @@ public class HPFP {
 
             // process time
             while(process.getRunTime() > 0) {
-                System.out.print("Current process: " + process.getName() + "." + process.getPriority());
+                //System.out.print("Current process: " + process.getName() + "." + process.getPriority());
                 stringList.add(process.getName());
 
                 // update process stats
                 process.decrementRunTime();
-                process.setActualStartTime(quantum);
+                process.incrementQuantaTime();
                 process.setTurnAroundTime(quantum);
-
+                if(process.getActualStartTime() == -1)
+                {  	process.setActualStartTime(quantum);	}
+                
                 quantum++;
 
                 // add new process into a the priorityList as a quantum has passed
@@ -82,15 +87,15 @@ public class HPFP {
                 processList.removeAll(priorityProcessList);
 
                 // increased quantumWaitAmounts
-                System.out.print(" --> Increased quantumWaitAmount for: ");
+                //System.out.print(" --> Increased quantumWaitAmount for: ");
                 for(Process temp : priorityProcessList) {
                     // do not increase quantumWaitAmount for currently running process
                     if(temp != process) {
                         temp.incrementQuantumWaitAmount();
-                        System.out.print(temp.getName() + "." + temp.getPriority() + " ");
+                        //System.out.print(temp.getName() + "." + temp.getPriority() + " ");
                     }
                 }
-                System.out.println();
+                //System.out.println();
 
                 // sort the priorityProcessList by priority, then arrivalTime
                 Collections.sort(priorityProcessList, comparator);
@@ -100,6 +105,7 @@ public class HPFP {
             }
 
             // remove the completed highest priority process
+            stats.add(priorityProcessList.get(0));
             priorityProcessList.remove(0);
 
             // add new process into a the priorityList as a runTime has passed
@@ -120,7 +126,7 @@ public class HPFP {
             // sort the priorityProcessList by priority, then arrivalTime
             Collections.sort(priorityProcessList, comparator);
         }
-        System.out.println();
+        //System.out.println();
     }
 
     /**
@@ -130,4 +136,13 @@ public class HPFP {
     public ArrayList<String> getStringList() {
         return stringList;
     }
+    
+	/**
+	 * Returns a list of processes with
+	 * data to calculate statistics
+	 * @return stats an ArrayList
+	 */
+	public ArrayList<Process> getStats() {
+		return stats;
+	}
 }

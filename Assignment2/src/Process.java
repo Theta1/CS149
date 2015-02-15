@@ -2,11 +2,12 @@ import java.util.Random;
 
 /***********************************************
  * A simulated process with random characteristics
- * @author David-Eric Thorpe
+ * and runtime information
+ * @author Team: Inception
  * CS149
- * Team: Inception
+ * 
  ***********************************************/
-public class Process implements Cloneable {
+public class Process {
     private static final int QUANTUM_WAIT_AMOUNT_MAX = 5;
     private static final int PRIORITY_HIGHEST = 1;
     private float arrivalTime;
@@ -16,6 +17,7 @@ public class Process implements Cloneable {
     private int actualStartTime;
     private int turnAroundTime;
     private int quantumWaitAmount;
+    private float quantaTime;
 
     /**
      * Default Constructor
@@ -30,9 +32,10 @@ public class Process implements Cloneable {
         priority = -1;
 
         quantumWaitAmount = 0;
-
+        
         actualStartTime = -1;
         turnAroundTime = -1;
+        quantaTime = 0.0f;
     }
 
     /**
@@ -48,10 +51,12 @@ public class Process implements Cloneable {
         runTime = random.nextFloat() * 10.0f; // gets a random float from 0.0 to 10.0
         priority = random.nextInt(4) + 1; // gets a random integer from 1 to 4
 
-        quantumWaitAmount = 0; // how long a process has been waiting in a queue
-
+        quantumWaitAmount = 0;
+        
         actualStartTime = -1; // the first time a process starts running
         turnAroundTime = -1; // the last time a process runs
+        
+        quantaTime = 0.0f; // the run time
     }
 
     /**
@@ -93,7 +98,7 @@ public class Process implements Cloneable {
     public int getQuantumWait(){
         return quantumWaitAmount;
     }
-
+    
     /**
      * Gets the responseTime.
      * @return the responseTime
@@ -127,6 +132,18 @@ public class Process implements Cloneable {
     }
 
     /**
+     * Gets the number of quanta the process filled
+     * @return quantaTime the run time
+     */
+	public float getQuantaTime() {
+		return quantaTime;
+	}
+
+	public void incrementQuantaTime() {
+		this.quantaTime = quantaTime++;
+	}
+
+	/**
      * Sets the runTime.
      * @param runTime the runTime
      */
@@ -204,7 +221,7 @@ public class Process implements Cloneable {
             increasePriority();
         }
     }
-
+    
     /**
      * Increases the priority by one (1 = highest priority).
      */
@@ -220,7 +237,7 @@ public class Process implements Cloneable {
      * @see java.lang.Object#clone()
      * @return the cloned object
      */
-    public Object clone() throws CloneNotSupportedException {
+    public Process clone() {
         Process objClone= new Process();
 
         objClone.setArrivalTime(arrivalTime);

@@ -1,15 +1,16 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
+/*********************************************
  * Runs the different scheduling algorithms
  * for processes. Calculates statistics for
  * the scheduling
  * @author Team Inception: David Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
  * CS 149
- */
+ **********************************************/
 public class Assignment2 {
 
     /**
@@ -24,7 +25,7 @@ public class Assignment2 {
 		ArrayList<Process> list4 = new ArrayList <Process>();
 		ArrayList<Process> list5 = new ArrayList <Process>();
 		
-		
+		//Creates processes and random values to them
 		for(int i=0; i<150; i++)
 		{
 		    Process n = new Process(i);
@@ -53,37 +54,84 @@ public class Assignment2 {
         Collections.sort(list4, comparator);
         Collections.sort(list5, comparator);
 		
-		//SRT srt1 = new SRT(list1);
-		 /*
-		SRT srt2 = new SRT(list2);
-		SRT srt3 = new SRT(list3);
-		SRT srt4 = new SRT(list4);
-		SRT srt5 = new SRT(list5);*/
-
-        // print out lists and FCFS results
-        /*printProcessList(list1);
-        FCFS fcfs1 = new FCFS(list1);
-        printStringList(fcfs1.getStringList());
-
-        printProcessList(list2);
-        FCFS fcfs2 = new FCFS(list2);
-        printStringList(fcfs2.getStringList());
-
-        printProcessList(list3);
-        FCFS fcfs3 = new FCFS(list3);
-        printStringList(fcfs3.getStringList());
-
-        printProcessList(list4);
-        FCFS fcfs4 = new FCFS(list4);
-        printStringList(fcfs4.getStringList());
-
-        printProcessList(list5);
-        FCFS fcfs5 = new FCFS(list5);
-        printStringList(fcfs5.getStringList());*/
-
+        // print out lists
         printProcessList(list1);
-        //printStringList(new HPF(list1).getStringList());
-        printStringList(new HPFP(list1).getStringList());
+        System.out.println("------------------------------------------------------------------------------");
+        printProcessList(list2);
+        System.out.println("------------------------------------------------------------------------------");
+        printProcessList(list3);
+        System.out.println("------------------------------------------------------------------------------");
+        printProcessList(list4);
+        System.out.println("------------------------------------------------------------------------------");
+        printProcessList(list5);
+        System.out.println("------------------------------------------------------------------------------");
+        
+        // FCFS results
+        System.out.println("FCFS");        
+        ArrayList<ArrayList<Process>> FCFSclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: FCFSclone)
+        {
+        	FCFS fcfs = new FCFS(list);
+        	printStringList( fcfs.getStringList() );
+        	new Stats(fcfs.getStats(), fcfs.getStringList());
+        }
+        System.out.println("\n\n");
+        
+        //SJF results
+        System.out.println("SJF");
+        ArrayList<ArrayList<Process>> SJFclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: SJFclone)
+        {
+        	SJF sjf = new SJF(list);
+        	printStringList( sjf.getStringList() );
+        	new Stats(sjf.getStats(), sjf.getStringList());
+        } 
+        System.out.println("\n\n");
+        
+        // SRT results
+        System.out.println("SRT");
+        ArrayList<ArrayList<Process>> SRTclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: SRTclone)
+        {
+        	SRT srt = new SRT(list);
+        	printStringList( srt.getStringList() );
+        	new Stats(srt.getStats(), srt.getStringList());
+        }
+        System.out.println("\n\n");
+        
+        //RR results
+        System.out.println("RR");
+        ArrayList<ArrayList<Process>> RRclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: RRclone)
+        {
+        	RR rr = new RR(list);
+        	printStringList( rr.getStringList() );
+        	new Stats(rr.getStats(), rr.getStringList());
+        }
+        System.out.println("\n\n");
+        
+        //HPF results
+        System.out.println("HPF");
+        ArrayList<ArrayList<Process>> HPFclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: HPFclone)
+        {
+        	HPF hpf = new HPF(list);
+        	printStringList( hpf.getStringList() );
+        	new Stats(hpf.getStats(), hpf.getStringList());
+        }
+        System.out.println("\n\n");
+        
+        //HPFP results
+        System.out.println("HPFP");
+        ArrayList<ArrayList<Process>> HPFPclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: HPFPclone)
+        {
+        	HPFP hpfp = new HPFP(list);
+        	printStringList( hpfp.getStringList() );
+        	new Stats(hpfp.getStats(), hpfp.getStringList());
+        }     
+        System.out.println("\n\n");
+        
     }
 
     /**
@@ -92,7 +140,10 @@ public class Assignment2 {
      */
     public static void printProcessList(List<Process> processList) {
         for(Process process : processList) {
-            System.out.println("[Name: " + String.format("%3s", process.getName()) + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + ", Run Time: " + String.format("%9f", process.getRunTime()) + ", Priority: " + process.getPriority() + "]   ");
+            System.out.println("[Name: " + String.format("%3s", process.getName()) +
+            		" --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + 
+            		", Run Time: " + String.format("%9f", process.getRunTime()) + 
+            		", Priority: " + process.getPriority() + "]   ");
         }
     }
 
@@ -118,6 +169,42 @@ public class Assignment2 {
         output += "]";
 
         System.out.println(output);
-        System.out.println();
+    }
+    
+    /**
+     * Takes 5 lists and makes clones of them
+     * @param list1, list2, list3, list4, list5
+     * @return clone is an arraylist of 5 arraylist of processes
+     */
+    public static ArrayList<ArrayList<Process>> deepCopy( ArrayList<Process> list1, ArrayList<Process> list2,
+    		ArrayList<Process> list3, ArrayList<Process> list4, ArrayList<Process> list5) {
+    	ArrayList<Process> list1clone = new ArrayList<Process>();
+    	ArrayList<Process> list2clone = new ArrayList<Process>();
+    	ArrayList<Process> list3clone = new ArrayList<Process>();
+    	ArrayList<Process> list4clone = new ArrayList<Process>();
+    	ArrayList<Process> list5clone = new ArrayList<Process>();
+    	ArrayList<ArrayList<Process>> clone = new ArrayList<ArrayList<Process>>();
+    	
+    	for(Process p: list1)
+    	{   list1clone.add(p.clone());   }
+    	clone.add(list1clone);
+
+    	for(Process p: list2)
+    	{   list2clone.add(p.clone());   }
+    	clone.add(list2clone);
+    	
+    	for(Process p: list3)
+    	{   list3clone.add(p.clone());   }
+    	clone.add(list3clone);
+    	
+    	for(Process p: list4)
+    	{   list4clone.add(p.clone());   }
+    	clone.add(list4clone);
+    	
+    	for(Process p: list5)
+    	{   list5clone.add(p.clone());   }
+    	clone.add(list5clone);
+    	
+    	return clone;
     }
 }
