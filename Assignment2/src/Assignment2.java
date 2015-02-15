@@ -30,11 +30,11 @@ public class Assignment2 {
 		    Process n = new Process(i);
 		    if (i < numberOfProcesses)
 		    {   list1.add(n); }
-		    else if (i < numberOfProcesses*2)
+		    else if (i < numberOfProcesses * 2)
 		    {	list2.add(n);	}
-		    else if (i < numberOfProcesses*3)
+		    else if (i < numberOfProcesses * 3)
 		    {	list3.add(n);	}
-		    else if (i < numberOfProcesses*4)
+		    else if (i < numberOfProcesses * 4)
 		    {	list4.add(n);	}
 		    else
 		    {	list5.add(n);	}
