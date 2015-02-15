@@ -104,7 +104,7 @@ public class Process {
      * @return the responseTime
      */
     public int getResponseTime() {
-        return Math.round(arrivalTime + 0.5f) - actualStartTime;
+        return actualStartTime;
     }
 
     /**
