@@ -61,8 +61,11 @@ public class Assignment2 {
 		SRT srt5 = new SRT(list5);*/
 
         // print out lists and FCFS results
+        System.out.println("List of processes:");
         printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
+        System.out.println();
+        System.out.println("Process Order");
         printStringList(fcfs1.getStringList());
 /*
         printProcessList(list2);
