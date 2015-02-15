@@ -45,6 +45,26 @@ public class StatisticsCalculator {
 	AverageResponse();
 	return print();
     }
+    
+    /**
+     * Calculates the statistics for the list;
+     * @param list
+     * @return
+     */
+    public static String RunStatistics(ArrayList<Process> list){
+	int averageTurnAroundTime = 0;
+	int averageResponceTime = 0;
+	int averageWaitTime = 0;
+	for (Process process: list){
+	    averageWaitTime += process.getResponseTime();
+	    averageTurnAroundTime += process.getTurnAroundTime();
+	    averageResponceTime += process.getResponseTime(); 
+	}
+	int count = list.size();
+	return "Statistics:\nThe turnaround time was: " + averageTurnAroundTime/count + 
+		"\nThe average waiting time was: " + averageWaitTime/count +
+		"\nThe average responce time was: " + averageResponceTime/count;
+    }
 
     /**
      * Concatenates the results into a String
