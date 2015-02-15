@@ -56,7 +56,20 @@ public class Assignment2 {
         
         // print out lists
         printProcessList(list1);
+<<<<<<< HEAD
         System.out.println("------------------------------------------------------------------------------");
+=======
+        FCFS fcfs1 = new FCFS(list1);
+        System.out.println();
+        System.out.println("Process Order:");
+        printQuantaList();
+        printStringList(fcfs1.getStringList());
+        System.out.println();
+        printProcessList(fcfs1.getProcessedProcessList());
+        System.out.println();
+        System.out.println(StatisticsCalculator.RunStatistics(list1));
+/*
+>>>>>>> Added statistics printing. Improvied sergration of fields
         printProcessList(list2);
         System.out.println("------------------------------------------------------------------------------");
         printProcessList(list3);
