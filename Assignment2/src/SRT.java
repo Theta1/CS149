@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 /**********************************************
  * Shortest Remaining time
@@ -15,12 +16,14 @@ import java.util.ArrayList;
 public class SRT {
     private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
+    private ArrayList<Process> stats;
     private ArrayList<String> srt;
-    private float quantum;
+    private int quantum;
 
-    public SRT(ArrayList<Process> p) {
-        this.processData = (ArrayList<Process>) p.clone();
+    public SRT(ArrayList<Process> processData) {
+        this.processData = processData;
         this.runnableData = new ArrayList<Process>();
+        this.stats = new ArrayList<Process>();
         this.srt = new ArrayList<String>();
         this.quantum = 0;
 
@@ -34,6 +37,15 @@ public class SRT {
     public ArrayList<String> getStringList() {
         return srt;
     }
+    
+    /**
+     * Returns a list of processes
+     * each process maintains it's own info
+     * @return stats a list of processes
+     */
+    public ArrayList<Process> getStats() {
+    	return stats;
+    }
 
 
     /**
@@ -43,20 +55,26 @@ public class SRT {
     public void run() {
         while( quantum < 100 || !runnableData.isEmpty() )
         {
+        	if (quantum < 100)
+            {	runtimeProcesses(); }
 
-            runtimeProcesses();
-
-            if (runnableData.size() != 0)
-            {
-                Process addProcess = findShortTime();
-                srt.add( addProcess.getName());
-                addProcess.decrementRunTime();
-            }
-            else
+            if (runnableData.isEmpty())
             {	srt.add("");	}
-            quantum++;
-
+            else
+            {	
+                Process addProcess = findShortTime();
+                if(addProcess != null)
+                {
+	                srt.add( addProcess.getName());
+	                addProcess.decrementRunTime();
+	                addProcess.incrementQuantaTime();
+	                addProcess.setActualStartTime(quantum);
+                }
+                else
+                {	runnableData.clear();	}
+            }
             removeProcess();
+            quantum++;
         }
 
     }
@@ -69,11 +87,10 @@ public class SRT {
     public void runtimeProcesses() {
         for(Process p: processData)
         {
-            if( p.getArrivalTime() < quantum )
-            {
-                runnableData.add( processData.remove(processData.indexOf(p)) );
-            }
+            if( p.getArrivalTime() <= quantum )
+            {   runnableData.add(p);	}
         }
+        processData.removeAll(runnableData);
     }
 
     /**
@@ -86,23 +103,32 @@ public class SRT {
 
         for( Process p : runnableData)
         {
-            if( p.getRunTime() < shortTime.getRunTime() )
-            {
-                shortTime = p;
-            }
+            if( quantum < 100 && (p.getRunTime() < shortTime.getRunTime()) )
+            {  shortTime = p;   }
+            if( quantum >= 100 && (p.getRunTime() < shortTime.getRunTime()) && (p.getActualStartTime() > -1)  )
+            {	shortTime = p;	}
         }
-        return shortTime;
+        
+        if(quantum < 100)
+        {	return shortTime;	}
+        if(quantum >= 100 && shortTime.getActualStartTime() > -1)
+        {	return shortTime;	}
+        return null;
     }
 
     /**
      * Removes processes that are completed
      */
-    public void removeProcess() {
-        for( Process p: runnableData)
+    public void removeProcess() { 	
+        for( Process r: runnableData)
         {
-            if( p.getRunTime() == 0 )
-            {	runnableData.remove(p);	}
+            if( r.getRunTime() <= 0 )
+            {
+            	r.setTurnAroundTime(quantum);
+            	stats.add(r);
+            }
         }
+        runnableData.removeAll(stats);
     }
 
 }

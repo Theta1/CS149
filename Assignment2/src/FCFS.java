@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 /**********************************************
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 public class FCFS {
     private static final int QUANTUM_MAX = 100;
     private ArrayList<Process> processList;
-    private ArrayList<Process> processedList;
     private ArrayList<String> stringList;
+    private ArrayList<Process> stats;
 
     /**
      * Creates a First Come First Serve schedule.
@@ -22,8 +23,9 @@ public class FCFS {
      */
     public FCFS(ArrayList<Process> processList){
         this.processList = (ArrayList<Process>) processList.clone();
-        stringList = new ArrayList<>();
-        this.processedList = new ArrayList<Process>(); 
+        stringList = new ArrayList<String>();
+        stats = new ArrayList<Process>();
+
         run();
     }
 
@@ -35,8 +37,7 @@ public class FCFS {
 
         while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
             Process process = processList.remove(0);
-            processedList.add(process);
-            
+
             // idle time
             while(process.getArrivalTime() > quantum) {
                 stringList.add("");
@@ -45,25 +46,19 @@ public class FCFS {
             }
 
             // process time
+            process.setActualStartTime(quantum);
             while(process.getRunTime() > 0) {
                 stringList.add(process.getName());
 
                 // update process stats
                 process.decrementRunTime();
-                process.setActualStartTime(quantum);
+                process.incrementQuantaTime();
                 process.setTurnAroundTime(quantum);
 
                 quantum++;
             }
+            stats.add(process);
         }
-    }
-    
-    /**
-     * Returns the list of processed processes.
-     * @return
-     */
-    public ArrayList<Process> getProcessedProcessList(){
-	return this.processedList;
     }
 
     /**
@@ -72,5 +67,14 @@ public class FCFS {
      */
     public ArrayList<String> getStringList() {
         return stringList;
+    }
+    
+    /**
+     * Returns a list of processes
+     * each process maintains it's own info
+     * @return stats a list of processes
+     */
+    public ArrayList<Process> getStats() {
+        return stats;
     }
 }
