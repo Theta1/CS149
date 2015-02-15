@@ -17,33 +17,31 @@ public class StatisticsCalculator {
     private float averageTurnaroundTime;
     private float averageWaitTime;
     private float averageResponseTime;
-
+    
     /**
-     * Constructor for the calculator.
-     * 
-     * @param list1
-     *            a list to be calculated
-     * @param list2
-     *            a list to be calculated
-     * @param list3
-     *            a list to be calculated
-     * @param list4
-     *            a list to be calculated
-     * @param list5
-     *            a list to be calculated
+     * Calculates the average number of process that finnish over 100 across five sets of processes
+     * @return
      */
-    public static String Calculator(ArrayList<Process> list1,
+    public static String calculateThroughput(ArrayList<Process> list1,
 	    ArrayList<Process> list2, ArrayList<Process> list3,
-	    ArrayList<Process> list4, ArrayList<Process> list5) {
-	ArrayList<Process> l1 = list1;
-	ArrayList<Process> l2 = list2;
-	ArrayList<Process> l3 = list3;
-	ArrayList<Process> l4 = list4;
-	ArrayList<Process> l5 = list5;
-	AvgerageTurnaround();
-	AverageWaiting();
-	AverageResponse();
-	return print();
+	    ArrayList<Process> list4, ArrayList<Process> list5){
+	int count = 0;
+	for(Process process: list1){
+	    if(process.getActualStartTime()+process.getTurnAroundTime()<100) count++;
+	}
+	for(Process process1: list2){
+	    if(process1.getActualStartTime()+process1.getTurnAroundTime()<100) count++;	    
+	}
+	for(Process process1: list3){
+	    if(process1.getActualStartTime()+process1.getTurnAroundTime()<100) count++;
+	}
+	for(Process process1: list4){
+	    if(process1.getActualStartTime()+process1.getTurnAroundTime()<100) count++;
+	}
+	for(Process process1: list5){
+	    if(process1.getActualStartTime()+process1.getTurnAroundTime()<100) count++;
+	}
+	return "The average algorythm throughput was: "+count/5;
     }
     
     /**
