@@ -64,7 +64,7 @@ public class Assignment2 {
         printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
         printStringList(fcfs1.getStringList());
-
+/*
         printProcessList(list2);
         FCFS fcfs2 = new FCFS(list2);
         printStringList(fcfs2.getStringList());
@@ -84,6 +84,7 @@ public class Assignment2 {
         printProcessList(list1);
         //printStringList(new HPF(list1).getStringList());
         printStringList(new HPFP(list1).getStringList());
+        */
     }
 
     /**
