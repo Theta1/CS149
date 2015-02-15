@@ -59,7 +59,7 @@ public class StatisticsCalculator {
 	    averageResponceTime += process.getResponseTime(); 
 	}
 	int count = list.size();
-	return "Statistics:\nThe turnaround time was: " + averageTurnAroundTime/count + 
+	return "Statistics:\nThe average turnaround time was: " + averageTurnAroundTime/count + 
 		"\nThe average waiting time was: " + averageWaitTime/count +
 		"\nThe average responce time was: " + averageResponceTime/count;
     }
