@@ -66,6 +66,7 @@ public class Assignment2 {
         FCFS fcfs1 = new FCFS(list1);
         System.out.println();
         System.out.println("Process Order");
+        printQuantaList();
         printStringList(fcfs1.getStringList());
 /*
         printProcessList(list2);
@@ -114,11 +115,28 @@ public class Assignment2 {
             }
             else {
                 output = output.substring(0, output.length() - 1); // remove last |
-                output += "][" + String.format("%3s", string) + "|";
+                output += "|" + String.format("%3s", string) + "|";
                 previousString = string;
             }
         }
         output = output.substring(0, output.length() - 1); // remove last |
+        output += "]";
+
+        System.out.println(output);
+        System.out.println();
+    }
+    
+    /**
+     * Prints out info about a string list separating different strings with []s.
+     */
+    public static void printQuantaList() {
+
+        String output = "[";
+        for(int i = 0; i < 100; i++) {
+            output += String.format("%3s", i) + "|";
+        }
+            output = output.substring(0, output.length() - 1); // remove last |
+
         output += "]";
 
         System.out.println(output);
