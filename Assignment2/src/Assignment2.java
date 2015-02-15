@@ -24,17 +24,17 @@ public class Assignment2 {
 		ArrayList<Process> list4 = new ArrayList <Process>();
 		ArrayList<Process> list5 = new ArrayList <Process>();
 		
-		
-		for(int i=0; i<150; i++)
+		int numberOfProcesses = 30;
+		for(int i=0; i<numberOfProcesses*5; i++)
 		{
 		    Process n = new Process(i);
-		    if (i < 30)
+		    if (i < numberOfProcesses)
 		    {   list1.add(n); }
-		    else if (i>=30 && i<60)
+		    else if (i < numberOfProcesses*2)
 		    {	list2.add(n);	}
-		    else if (i>=60 && i<90)
+		    else if (i < numberOfProcesses*3)
 		    {	list3.add(n);	}
-		    else if (i>=90 && i<120)
+		    else if (i < numberOfProcesses*4)
 		    {	list4.add(n);	}
 		    else
 		    {	list5.add(n);	}
@@ -61,7 +61,7 @@ public class Assignment2 {
 		SRT srt5 = new SRT(list5);*/
 
         // print out lists and FCFS results
-        /*printProcessList(list1);
+        printProcessList(list1);
         FCFS fcfs1 = new FCFS(list1);
         printStringList(fcfs1.getStringList());
 
@@ -79,7 +79,7 @@ public class Assignment2 {
 
         printProcessList(list5);
         FCFS fcfs5 = new FCFS(list5);
-        printStringList(fcfs5.getStringList());*/
+        printStringList(fcfs5.getStringList());
 
         printProcessList(list1);
         //printStringList(new HPF(list1).getStringList());
