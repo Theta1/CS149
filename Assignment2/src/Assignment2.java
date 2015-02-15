@@ -146,10 +146,15 @@ public class Assignment2 {
      */
     public static void printProcessList(List<Process> processList) {
         for(Process process : processList) {
-            System.out.println("[Name: " + String.format("%3s", process.getName()) +
-                    " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + 
-                    ", Run Time: " + String.format("%9f", process.getRunTime()) + 
-                    ", Priority: " + process.getPriority() + "]   ");
+            System.out.println("[Name: " + String.format("%3s", process.getName()) 
+        	    + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) 
+        	    + ", Run Time: " + String.format("%9f", process.getRunTime()) 
+        	    + ", Priority: " + process.getPriority() 
+        	    + ", Final runtime: " + String.format("%9f", process.getRunTime())
+        	    + ", Time started: " + String.format("%9d", process.getActualStartTime())
+        	    + ", Turn Around time: " + String.format("%9d", process.getTurnAroundTime())
+        	    + ", Waiting time: " + String.format("%9d", process.getWaitingTime())
+        	    + "]   ");
         }
     }
 
