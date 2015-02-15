@@ -68,6 +68,7 @@ public class Assignment2 {
         System.out.println("Process Order");
         printQuantaList();
         printStringList(fcfs1.getStringList());
+        printProcessList(fcfs1.getProcessedProcessList());
 /*
         printProcessList(list2);
         FCFS fcfs2 = new FCFS(list2);
@@ -97,7 +98,15 @@ public class Assignment2 {
      */
     public static void printProcessList(List<Process> processList) {
         for(Process process : processList) {
-            System.out.println("[Name: " + String.format("%3s", process.getName()) + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + ", Run Time: " + String.format("%9f", process.getRunTime()) + ", Priority: " + process.getPriority() + "]   ");
+            System.out.println("[Name: " + String.format("%3s", process.getName()) 
+        	    + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) 
+        	    + ", Run Time: " + String.format("%9f", process.getRunTime()) 
+        	    + ", Priority: " + process.getPriority() 
+        	    + ", Final runtime: " + process.getRunTime()
+        	    + ", Time started: " + process.getActualStartTime()
+        	    + ", Turn Around time: " + process.getTurnAroundTime()
+        	    + ", Waiting time: " + process.getWaitingTime()
+        	    + "]   ");
         }
     }
 
