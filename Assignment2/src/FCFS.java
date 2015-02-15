@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class FCFS {
     private static final int QUANTUM_MAX = 100;
     private ArrayList<Process> processList;
+    private ArrayList<Process> processedList;
     private ArrayList<String> stringList;
 
     /**
@@ -34,7 +35,8 @@ public class FCFS {
 
         while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
             Process process = processList.remove(0);
-
+            processedList.add(process);
+            
             // idle time
             while(process.getArrivalTime() > quantum) {
                 stringList.add("");
@@ -61,7 +63,7 @@ public class FCFS {
      * @return
      */
     public ArrayList<Process> getProcessedProcessList(){
-	return this.processList;
+	return this.processedList;
     }
 
     /**
