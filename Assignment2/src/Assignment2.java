@@ -102,10 +102,10 @@ public class Assignment2 {
         	    + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) 
         	    + ", Run Time: " + String.format("%9f", process.getRunTime()) 
         	    + ", Priority: " + process.getPriority() 
-        	    + ", Final runtime: " + process.getRunTime()
-        	    + ", Time started: " + process.getActualStartTime()
-        	    + ", Turn Around time: " + process.getTurnAroundTime()
-        	    + ", Waiting time: " + process.getWaitingTime()
+        	    + ", Final runtime: " + String.format("%9f", process.getRunTime())
+        	    + ", Time started: " + String.format("%9d", process.getActualStartTime())
+        	    + ", Turn Around time: " + String.format("%9d", process.getTurnAroundTime())
+        	    + ", Waiting time: " + String.format("%9d", process.getWaitingTime())
         	    + "]   ");
         }
     }
