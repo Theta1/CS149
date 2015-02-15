@@ -56,21 +56,7 @@ public class Assignment2 {
         
         // print out lists
         printProcessList(list1);
-<<<<<<< HEAD
         System.out.println("------------------------------------------------------------------------------");
-=======
-        FCFS fcfs1 = new FCFS(list1);
-        System.out.println();
-        System.out.println("Process Order:");
-        printQuantaList();
-        printStringList(fcfs1.getStringList());
-        System.out.println();
-        printProcessList(fcfs1.getProcessedProcessList());
-        System.out.println();
-        System.out.println(StatisticsCalculator.RunStatistics(list1));
-        System.out.println(StatisticsCalculator.calculateThroughput(list1, list2, list3, list4, list5));
-/*
->>>>>>> Added statistics printing. Improvied sergration of fields
         printProcessList(list2);
         System.out.println("------------------------------------------------------------------------------");
         printProcessList(list3);
@@ -160,18 +146,12 @@ public class Assignment2 {
      */
     public static void printProcessList(List<Process> processList) {
         for(Process process : processList) {
-            System.out.println("[Name: " + String.format("%3s", process.getName()) 
-        	    + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) 
-        	    + ", Run Time: " + String.format("%9f", process.getRunTime()) 
-        	    + ", Priority: " + process.getPriority() 
-        	    + ", Final runtime: " + String.format("%9f", process.getRunTime())
-        	    + ", Time started: " + String.format("%9d", process.getActualStartTime())
-        	    + ", Turn Around time: " + String.format("%9d", process.getTurnAroundTime())
-        	    + ", Waiting time: " + String.format("%9d", process.getWaitingTime())
-        	    + "]   ");
+            System.out.println("[Name: " + String.format("%3s", process.getName()) +
+                    " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + 
+                    ", Run Time: " + String.format("%9f", process.getRunTime()) + 
+                    ", Priority: " + process.getPriority() + "]   ");
         }
     }
-   
 
     /**
      * Prints out info about a string list separating different strings with []s.
