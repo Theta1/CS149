@@ -55,6 +55,14 @@ public class FCFS {
             }
         }
     }
+    
+    /**
+     * Returns the list of processed processes.
+     * @return
+     */
+    public ArrayList<Process> getProcessedProcessList(){
+	return this.processList;
+    }
 
     /**
      * Gets the string list.
