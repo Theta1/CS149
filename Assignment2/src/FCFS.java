@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 /**********************************************
@@ -11,7 +10,7 @@ import java.util.ArrayList;
  * CS149
  * 
  *********************************************/
-public class FCFS {
+public class FCFS implements SchedulerInterface{
     private static final int QUANTUM_MAX = 100;
     private ArrayList<Process> processList;
     private ArrayList<String> stringList;
@@ -22,7 +21,7 @@ public class FCFS {
      * @param processList the process list
      */
     public FCFS(ArrayList<Process> processList){
-        this.processList = (ArrayList<Process>) processList.clone();
+        this.processList = processList;
         stringList = new ArrayList<String>();
         stats = new ArrayList<Process>();
 
@@ -61,19 +60,10 @@ public class FCFS {
         }
     }
 
-    /**
-     * Gets the string list.
-     * @return the string list
-     */
     public ArrayList<String> getStringList() {
         return stringList;
     }
     
-    /**
-     * Returns a list of processes
-     * each process maintains it's own info
-     * @return stats a list of processes
-     */
     public ArrayList<Process> getStats() {
         return stats;
     }

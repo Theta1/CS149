@@ -11,18 +11,18 @@ import java.util.ArrayList;
  * CS149
  * 
  *********************************************/
-public class RR {
+public class RR  implements SchedulerInterface{
     private ArrayList<Process> processList;
     private ArrayList<Process> roundrobin;
-    private ArrayList<String> rr;
-    private ArrayList<Process> stats;
+    private ArrayList<String> log;
+    private ArrayList<Process> graveYard;
     private int quantum;
     
     public RR(ArrayList<Process> processList) {
     	this.processList = processList;
     	this.roundrobin = new ArrayList<Process>();
-    	this.rr = new ArrayList<String>();
-    	this.stats = new ArrayList<Process>();
+    	this.log = new ArrayList<String>();
+    	this.graveYard = new ArrayList<Process>();
     	this.quantum = 0;
     	
     	run();
@@ -33,42 +33,34 @@ public class RR {
      * puts them in their quantum 
      */
     public void run() {
-    	//Will run if there is space left in history
-    	while(quantum < 100 || !roundrobin.isEmpty()) {
-    		//idling if the RR is empty and no process has arrived
-    		while(roundrobin.isEmpty() && processList.get(0).getArrivalTime() > quantum) {
-    			rr.add("");
-    			quantum++;
-    		}
-    		
-    		//if the processList has items, moves the newest arrival onto the RR queue
-    		if(!processList.isEmpty() && quantum < 100) roundrobin.add(processList.remove(0));
-
-    		//appends name of the running process to history
-    		rr.add(roundrobin.get(0).getName());
-
-    		//if it's the first run, marks time in the Process (for response time)
-    		if(roundrobin.get(0).getActualStartTime()==-1)roundrobin.get(0).setActualStartTime(quantum);
-
-    		//reduces remaining runtime
-    		roundrobin.get(0).decrementRunTime();
-    		roundrobin.get(0).incrementQuantaTime();
-
-    		//(for wait time)
-    		waitNonActiveProcesses();
-
-    		//if runtime remains, appends the process to the back of the RR queue
-    		if(roundrobin.get(0).getRunTime() > 0) roundrobin.add(roundrobin.remove(0));
-
-    		//else removes it completely
-    		else{
-    			//sets the last time the quanta is run
-    			roundrobin.get(0).setTurnAroundTime(quantum);
-    			stats.add(roundrobin.remove(0));
-    		}
-    		quantum++;
-
-    	}
+	//Run while there is quatum left or roundrobin is not empty
+	while(quantum < 100 || !roundrobin.isEmpty()){
+	    //move all new arrivals into roundrobin
+	    while(!processList.isEmpty() && processList.get(0).getArrivalTime() < quantum){
+		roundrobin.add(processList.remove(0));
+	    }
+	    //If processes are in the RR
+	    if(!roundrobin.isEmpty()){
+		//run the first
+		log.add(roundrobin.get(0).getName());
+		roundrobin.get(0).decrementQuantumWaitTimeAmount();
+		roundrobin.get(0).decrementRunTime();
+		//If first run, mark it so.
+		if(roundrobin.get(0).getActualStartTime()==-1){
+		    roundrobin.get(0).setActualStartTime(quantum);
+		}
+		//If last run mark it and move it out.
+		if(roundrobin.get(0).getRunTime()<0){
+		    roundrobin.get(0).setTurnAroundTime(quantum);
+		    graveYard.add(roundrobin.remove(0));
+		}
+		;
+		waitNonActiveProcesses();
+	    }else{
+		log.add("   ");
+	    }
+	    quantum++;
+	}
     }
 
     /**
@@ -80,20 +72,11 @@ public class RR {
     	}
     }
 
-    /**
-     * Gets the Array of processes
-     * in their quantum
-     * @param an ArrayListof Strings representing the run order
-     */
     public ArrayList<String> getStringList() {
-    	return rr;
+    	return log;
     }
     
-    /**
-     * Gets the Process details
-     * @return stats a list of processes
-     */
-	public ArrayList<Process> getStats() {
-		return stats;
-	}
+    public ArrayList<Process> getStats() {
+		return graveYard;
+    }
 }

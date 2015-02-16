@@ -13,7 +13,7 @@ import java.util.Comparator;
  * CS149
  * 
  **********************************************/
-public class HPF {
+public class HPF  implements SchedulerInterface{
     private static final int QUANTUM_MAX = 100;
 	private ArrayList<Process> processList;
     private ArrayList<String> stringList;
@@ -107,20 +107,12 @@ public class HPF {
             }
     }
 
-    /**
-     * Gets the string list.
-     * @return the string list
-     */
     public ArrayList<String> getStringList() {
         return stringList;
     }
 
-    /**
-     * Gets the Process details
-     * @return stats a list of processes
-     */
-	public ArrayList<Process> getStats() {
-		return stats;
-	}
+    public ArrayList<Process> getStats() {
+	return stats;
+    }
     
 }
