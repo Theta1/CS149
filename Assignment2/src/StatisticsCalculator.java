@@ -50,9 +50,11 @@ public class StatisticsCalculator {
      * @return
      */
     public static String RunStatistics(ArrayList<Process> list){
+
 	float averageTurnAroundTime = 0;
 	float averageResponceTime = 0;
 	float averageWaitTime = 0;
+
 	for (Process process: list){
 	    averageWaitTime += process.getResponseTime();
 	    averageTurnAroundTime += process.getTurnAroundTime();

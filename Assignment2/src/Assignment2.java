@@ -168,13 +168,24 @@ public class Assignment2 {
                 return new Float(process1.getArrivalTime()).compareTo(new Float( process2.getArrivalTime()));
             }
         };
-
         Collections.sort(list1, comparator);
         Collections.sort(list2, comparator);
         Collections.sort(list3, comparator);
         Collections.sort(list4, comparator);
         Collections.sort(list5, comparator);
-	
+    }
+
+    private static void WorkthroughList(FCFS fcfs1, ArrayList<Process> list1) {
+        System.out.println("Origonal list of processes:");
+        printProcessList(list1);
+        System.out.println();
+        System.out.println("Process Order:");
+        printQuantaList();
+        printStringList(fcfs1.getStringList());
+        System.out.println("\nProcess details:");
+        printProcessList(fcfs1.getProcessedProcessList());
+        System.out.println();
+        System.out.println(StatisticsCalculator.RunStatistics(fcfs1.getProcessedProcessList())+"\n");
     }
 
     /**
@@ -184,14 +195,21 @@ public class Assignment2 {
      */
     public static String printProcessList(List<Process> processList) {
         String s = "";
-	for(Process process : processList) {
-            s+="[Name: " + String.format("%3s", process.getName()) +
-                    " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + 
-                    ", Run Time: " + String.format("%9f", process.getRunTime()) + 
-                    ", Priority: " + process.getPriority() + "]\n";
+        for(Process process : processList) {
+            s+="[Name: " + String.format("%3s", process.getName()) 
+        	    + " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) 
+        	    + ", Run Time: " + String.format("%9f", process.getRunTime()) 
+        	    + ", Priority: " + process.getPriority() 
+        	    + ", Final runtime: " + String.format("%9f", process.getRunTime())
+        	    + ", Time started: " + String.format("%9d", process.getActualStartTime())
+        	    + ", Turn Around time: " + String.format("%9d", process.getTurnAroundTime())
+        	    + ", Waiting time: " + String.format("%9d", process.getWaitingTime())
+        	    + ", Responce time: " + String.format("%9d", process.getResponseTime())
+        	    + "]\n");
         }
         return s;
     }
+   
 
     /**
      * Prints out info about a string list separating different strings with []s.
@@ -213,7 +231,6 @@ public class Assignment2 {
         }
         output = output.substring(0, output.length() - 1); // remove last |
         output += "]";
-
         return output;
     }
  
@@ -229,7 +246,6 @@ public class Assignment2 {
         }
         output = output.substring(0, output.length() - 1); // remove last |
         output += "]";
-
         return output;
     }
     
