@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -122,7 +121,7 @@ public class Assignment2 {
         count = 1;
         
         //RR results
-        System.out.println("**Round Robbin(RR)**");
+        System.out.println("**Round Robin(RR)**");
         ArrayList<ArrayList<Process>> RRclone = deepCopy(list1, list2, list3, list4, list5);
         for (ArrayList<Process> list: RRclone)
         {
@@ -160,7 +159,7 @@ public class Assignment2 {
         
         count = 1;
         //HPFP results
-        System.out.println("**Highest Priority First Preemptive(HPFP)**Aging?");
+        System.out.println("**Highest Priority First Preemptive(HPFP)**With Aging");
         ArrayList<ArrayList<Process>> HPFPclone = deepCopy(list1, list2, list3, list4, list5);
         for (ArrayList<Process> list: HPFPclone)
         {

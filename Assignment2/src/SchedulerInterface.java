@@ -1,9 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * 
- */
-
 /**********************************************
  * First Come First Serve
  * 
