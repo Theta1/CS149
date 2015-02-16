@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**********************************************
 * Shortest Job First (SJF) (nonpreemptive)
@@ -11,8 +12,8 @@
 * CS149
 *
 *********************************************/
-import java.util.ArrayList;
-public class SJF {
+
+public class SJF implements SchedulerInterface{
 	private ArrayList<Process> processData;
 	private ArrayList<Process> queue;
 	private Process shortest;
@@ -32,20 +33,10 @@ public class SJF {
 		run();		
 	}
 	
-	/**
-	 * Returns the name of the processes
-	 * in the order they were ran
-	 * @return output an ArrayList of Strings
-	 */
 	public ArrayList<String> getStringList() {
 		return output;
 	}
 	
-	/**
-	 * Returns a list of processes with
-	 * data to calculate statistics
-	 * @return stats an ArrayList
-	 */
 	public ArrayList<Process> getStats() {
 		return stats;
 	}

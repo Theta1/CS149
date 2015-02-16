@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * CS149
  * 
  *********************************************/
-public class RR {
+public class RR  implements SchedulerInterface{
     private ArrayList<Process> processList;
     private ArrayList<Process> roundrobin;
     private ArrayList<String> rr;
@@ -80,19 +80,10 @@ public class RR {
     	}
     }
 
-    /**
-     * Gets the Array of processes
-     * in their quantum
-     * @param an ArrayListof Strings representing the run order
-     */
     public ArrayList<String> getStringList() {
     	return rr;
     }
     
-    /**
-     * Gets the Process details
-     * @return stats a list of processes
-     */
 	public ArrayList<Process> getStats() {
 		return stats;
 	}

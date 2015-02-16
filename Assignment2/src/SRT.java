@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 /**********************************************
  * Shortest Remaining time
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  *
  *********************************************/
 
-public class SRT {
+public class SRT implements SchedulerInterface{
     private ArrayList<Process> processData;
     private ArrayList<Process> runnableData;
     private ArrayList<Process> stats;
@@ -30,19 +29,10 @@ public class SRT {
         run();
     }
 
-    /**
-     * Gets the Array of processes
-     * in their quantum
-     */
     public ArrayList<String> getStringList() {
         return srt;
     }
     
-    /**
-     * Returns a list of processes
-     * each process maintains it's own info
-     * @return stats a list of processes
-     */
     public ArrayList<Process> getStats() {
     	return stats;
     }
