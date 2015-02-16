@@ -73,7 +73,7 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(fcfs.getStringList()));;
             System.out.println(Stats.CalculateStats(fcfs.getStats()));
-            System.out.println(printProcessList(fcfs.getStats()));
+//            System.out.println(printProcessList(fcfs.getStats()));
             avgThroughput+=Stats.CalculaleThroughput(fcfs.getStats());
             System.out.println("Throughput: " + Stats.CalculaleThroughput(fcfs.getStats()));
         }
@@ -92,7 +92,7 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(sjf.getStringList()));
             System.out.println(Stats.CalculateStats(sjf.getStats()));
-            System.out.println(printProcessList(sjf.getStats()));
+//            System.out.println(printProcessList(sjf.getStats()));
             avgThroughput+=Stats.CalculaleThroughput(sjf.getStats());
             System.out.println("Throughput: " + Stats.CalculaleThroughput(sjf.getStats()));
         }
@@ -111,7 +111,7 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(srt.getStringList()));
             System.out.println(Stats.CalculateStats(srt.getStats()));
-            System.out.println(printProcessList(srt.getStats()));
+//            System.out.println(printProcessList(srt.getStats()));
             avgThroughput+=Stats.CalculaleThroughput(srt.getStats());
             System.out.println("Throughput: " + Stats.CalculaleThroughput(srt.getStats()));
         }
@@ -130,7 +130,7 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(rr.getStringList()));
             System.out.println(Stats.CalculateStats(rr.getStats()));
-            System.out.println(printProcessList(rr.getStats()));
+//            System.out.println(printProcessList(rr.getStats()));
             avgThroughput+=Stats.CalculaleThroughput(rr.getStats());
             System.out.println("Throughput: " + Stats.CalculaleThroughput(rr.getStats()));
         }
@@ -149,7 +149,7 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(hpf.getStringList()));
             System.out.println(Stats.CalculateStats(hpf.getStats()));
-            System.out.println(printProcessList(hpf.getStats()));
+//            System.out.println(printProcessList(hpf.getStats()));
             avgThroughput+=Stats.CalculaleThroughput(hpf.getStats());
             System.out.println("Throughput: " + Stats.CalculaleThroughput(hpf.getStats()));
         }
@@ -168,7 +168,7 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(hpfp.getStringList()));
             System.out.println(Stats.CalculateStats(hpfp.getStats()));
-            System.out.println(printProcessList(hpfp.getStats()));
+//            System.out.println(printProcessList(hpfp.getStats()));
             avgThroughput+=Stats.CalculaleThroughput(hpfp.getStats());
             System.out.println("Throughput: " + Stats.CalculaleThroughput(hpfp.getStats()));
         }

@@ -44,6 +44,7 @@ public class RR  implements SchedulerInterface{
 		//run the first
 		log.add(roundrobin.get(0).getName());
 		roundrobin.get(0).decrementRunTime();
+		roundrobin.get(0).incrementQuantaTime();
 		//If first run, mark it so.
 		if(roundrobin.get(0).getActualStartTime()==-1){
 		    roundrobin.get(0).setActualStartTime(quantum);

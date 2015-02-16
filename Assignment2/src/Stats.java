@@ -67,7 +67,7 @@ public class Stats {
     public static float CalculaleThroughput(ArrayList<Process> a) {
 	float count = 0;
 	for(Process p: a){
-	    if(p.getActualStartTime()+p.getTurnAroundTime()>100) count++;
+	    if(p.getTurnAroundTime()<100) count++;
 	}
 	return count;
     }
