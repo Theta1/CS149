@@ -26,22 +26,143 @@ public class Assignment2 {
         ArrayList<Process> list5 = new ArrayList <Process>();
         
         //Creates processes and random values to them
+        int numberOfRuns = 30;
         for(int i=0; i<150; i++)
         {
             Process n = new Process(i);
-            if (i < 30)
+            if (i < numberOfRuns )
             {   list1.add(n); }
-            else if (i>=30 && i<60)
+            else if (i < numberOfRuns * 2)
             {   list2.add(n);   }
-            else if (i>=60 && i<90)
+            else if (i < numberOfRuns *3)
             {   list3.add(n);   }
-            else if (i>=90 && i<120)
+            else if (i < numberOfRuns *4)
             {   list4.add(n);   }
             else
             {   list5.add(n);   }
         }
+        
+        SortLists(list1, list2, list3, list4, list5);
+        
+        // print out lists
+        System.out.println("Pre scheduled process lists:");
+        System.out.println("-List1------------------------------------------------------------------------");
+        System.out.println(printProcessList(list1));
+        System.out.println("-List2------------------------------------------------------------------------");
+        System.out.println(printProcessList(list2));;
+        System.out.println("-List3-------------------------------------------------------------------------");
+        System.out.println(printProcessList(list3));;
+        System.out.println("-List4-------------------------------------------------------------------------");
+        System.out.println(printProcessList(list4));;
+        System.out.println("-List5-------------------------------------------------------------------------");
+        System.out.println(printProcessList(list5));;
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+        
+        // FCFS results
+        System.out.println("**First Come First Served**");        
+        ArrayList<ArrayList<Process>> FCFSclone = deepCopy(list1, list2, list3, list4, list5);
+        int count = 1;
+        Stats s;
+        for (ArrayList<Process> list: FCFSclone)
+        {
+            System.out.println("*Processing list"+count+++"*");
+            FCFS fcfs = new FCFS(list);
+            System.out.println(printTimeline());
+            System.out.println(printStringList(fcfs.getStringList()));;
+            s = new Stats(fcfs.getStats(), fcfs.getStringList());
+            System.out.println(s.print());
+            System.out.println(printProcessList(fcfs.getStats()));
+        }
+        System.out.println("\n\n");
+        count = 1;
+        //SJF results
+        System.out.println("**Shortest Job First**");
+        ArrayList<ArrayList<Process>> SJFclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: SJFclone)
+        {
+            System.out.println("*Processing list"+count+++"*");
+            SJF sjf = new SJF(list);
+            System.out.println(printTimeline());
+            System.out.println(printStringList(sjf.getStringList()));
+            s = new Stats(sjf.getStats(), sjf.getStringList());
+            System.out.println(s.print());
+            System.out.println(printProcessList(sjf.getStats()));
+        } 
+        System.out.println("\n\n");
+        count = 1;
+        // SRT results
+        System.out.println("**Shortest Remaining Time**");
+        ArrayList<ArrayList<Process>> SRTclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: SRTclone)
+        {
+            System.out.println("*Processing list"+count+++"*");
+            SRT srt = new SRT(list);
+            System.out.println(printTimeline());
+            System.out.println(printStringList(srt.getStringList()));
+            s = new Stats(srt.getStats(), srt.getStringList());
+            System.out.println(s.print());
+            System.out.println(printProcessList(srt.getStats()));
+        }
+        System.out.println("\n\n");
+        count = 1;
+        //RR results
+        System.out.println("**Round Robbin**");
+        ArrayList<ArrayList<Process>> RRclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: RRclone)
+        {
+            System.out.println("*Processing list"+count+++"*");
+            RR rr = new RR(list);
+            System.out.println(printTimeline());
+            System.out.println(printStringList( rr.getStringList()));
+            s = new Stats(rr.getStats(), rr.getStringList());
+            System.out.println(s.toString());
+            System.out.println(printProcessList(rr.getStats()));
+        }
+        System.out.println("\n\n");
+        count = 1;
+        //HPF results
+        System.out.println("**Highest Priority First**");
+        ArrayList<ArrayList<Process>> HPFclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: HPFclone)
+        {
+            System.out.println("*Processing list"+count+++"*");
+            HPF hpf = new HPF(list);
+            System.out.println(printTimeline());
+            System.out.println(printStringList( hpf.getStringList() ));
+            s = new Stats(hpf.getStats(), hpf.getStringList());
+            System.out.println(s.print());
+            System.out.println(printProcessList(hpf.getStats()));
+        }
+        System.out.println("\n\n");
+        count = 1;
+        //HPFP results
+        System.out.println("**Highest Priority First Preemptive**");
+        ArrayList<ArrayList<Process>> HPFPclone = deepCopy(list1, list2, list3, list4, list5);
+        for (ArrayList<Process> list: HPFPclone)
+        {
+            System.out.println("*Processing list"+count+++"*");
+            HPFP hpfp = new HPFP(list);
+            System.out.println(printTimeline());
+            System.out.println(printStringList( hpfp.getStringList() ));
+            s = new Stats(hpfp.getStats(), hpfp.getStringList());
+            System.out.println(s.print());
+            System.out.println(printProcessList(hpfp.getStats()));
+        }     
+        System.out.println("\n\n");
+    }
 
-        // sorts the Process by arrival time
+    /**
+     * Sorts the lists by arrival time
+     * @param list1
+     * @param list2
+     * @param list3
+     * @param list4
+     * @param list5
+     */
+    private static void SortLists(ArrayList<Process> list1,
+	    ArrayList<Process> list2, ArrayList<Process> list3,
+	    ArrayList<Process> list4, ArrayList<Process> list5) {
         Comparator<Process> comparator = new Comparator<Process>() {
             public int compare(Process process1, Process process2) {
                 return new Float(process1.getArrivalTime()).compareTo(new Float( process2.getArrivalTime()));
@@ -53,111 +174,30 @@ public class Assignment2 {
         Collections.sort(list3, comparator);
         Collections.sort(list4, comparator);
         Collections.sort(list5, comparator);
-        
-        // print out lists
-        printProcessList(list1);
-        System.out.println("------------------------------------------------------------------------------");
-        printProcessList(list2);
-        System.out.println("------------------------------------------------------------------------------");
-        printProcessList(list3);
-        System.out.println("------------------------------------------------------------------------------");
-        printProcessList(list4);
-        System.out.println("------------------------------------------------------------------------------");
-        printProcessList(list5);
-        System.out.println("------------------------------------------------------------------------------");
-        
-        // FCFS results
-        System.out.println("FCFS");        
-        ArrayList<ArrayList<Process>> FCFSclone = deepCopy(list1, list2, list3, list4, list5);
-        for (ArrayList<Process> list: FCFSclone)
-        {
-            FCFS fcfs = new FCFS(list);
-            printTimeline();
-            printStringList( fcfs.getStringList() );
-            new Stats(fcfs.getStats(), fcfs.getStringList());
-        }
-        System.out.println("\n\n");
-        
-        //SJF results
-        System.out.println("SJF");
-        ArrayList<ArrayList<Process>> SJFclone = deepCopy(list1, list2, list3, list4, list5);
-        for (ArrayList<Process> list: SJFclone)
-        {
-            SJF sjf = new SJF(list);
-            printTimeline();
-            printStringList( sjf.getStringList() );
-            new Stats(sjf.getStats(), sjf.getStringList());
-        } 
-        System.out.println("\n\n");
-        
-        // SRT results
-        System.out.println("SRT");
-        ArrayList<ArrayList<Process>> SRTclone = deepCopy(list1, list2, list3, list4, list5);
-        for (ArrayList<Process> list: SRTclone)
-        {
-            SRT srt = new SRT(list);
-            printTimeline();
-            printStringList( srt.getStringList() );
-            new Stats(srt.getStats(), srt.getStringList());
-        }
-        System.out.println("\n\n");
-        
-        //RR results
-        System.out.println("RR");
-        ArrayList<ArrayList<Process>> RRclone = deepCopy(list1, list2, list3, list4, list5);
-        for (ArrayList<Process> list: RRclone)
-        {
-            RR rr = new RR(list);
-            printTimeline();
-            printStringList( rr.getStringList() );
-            new Stats(rr.getStats(), rr.getStringList());
-        }
-        System.out.println("\n\n");
-        
-        //HPF results
-        System.out.println("HPF");
-        ArrayList<ArrayList<Process>> HPFclone = deepCopy(list1, list2, list3, list4, list5);
-        for (ArrayList<Process> list: HPFclone)
-        {
-            HPF hpf = new HPF(list);
-            printTimeline();
-            printStringList( hpf.getStringList() );
-            new Stats(hpf.getStats(), hpf.getStringList());
-        }
-        System.out.println("\n\n");
-        
-        //HPFP results
-        System.out.println("HPFP");
-        ArrayList<ArrayList<Process>> HPFPclone = deepCopy(list1, list2, list3, list4, list5);
-        for (ArrayList<Process> list: HPFPclone)
-        {
-            HPFP hpfp = new HPFP(list);
-            printTimeline();
-            printStringList( hpfp.getStringList() );
-            new Stats(hpfp.getStats(), hpfp.getStringList());
-        }     
-        System.out.println("\n\n");
-        
+	
     }
 
     /**
-     * Prints out info about a process list.
+     * Returns a string of info about a process list.
      * @param processList
+     * @return a formated String
      */
-    public static void printProcessList(List<Process> processList) {
-        for(Process process : processList) {
-            System.out.println("[Name: " + String.format("%3s", process.getName()) +
+    public static String printProcessList(List<Process> processList) {
+        String s = "";
+	for(Process process : processList) {
+            s+="[Name: " + String.format("%3s", process.getName()) +
                     " --> Arrival Time: " + String.format("%10f", process.getArrivalTime()) + 
                     ", Run Time: " + String.format("%9f", process.getRunTime()) + 
-                    ", Priority: " + process.getPriority() + "]   ");
+                    ", Priority: " + process.getPriority() + "]\n";
         }
+        return s;
     }
 
     /**
      * Prints out info about a string list separating different strings with []s.
      * @param stringList the string list
      */
-    public static void printStringList(List<String> stringList) {
+    public static String printStringList(List<String> stringList) {
         String previousString = stringList.get(0);
 
         String output = "[";
@@ -174,23 +214,23 @@ public class Assignment2 {
         output = output.substring(0, output.length() - 1); // remove last |
         output += "]";
 
-        System.out.println(output);
+        return output;
     }
  
     /**
      * Prints out info about a string list separating different strings with []s.
      * @param stringList the string list
      */
-    public static void printTimeline() {
+    public static String printTimeline() {
 
         String output = "[";
         for(int i = 1; i<=100; i++) {
-                output += String.format("%3d",i) + "|";
+            output += String.format("%3d",i) + "|";
         }
         output = output.substring(0, output.length() - 1); // remove last |
         output += "]";
 
-        System.out.println(output);
+        return output;
     }
     
     /**
