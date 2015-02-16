@@ -62,6 +62,8 @@ public class Assignment2 {
         //How do we make standard these six very similar sets of code?
 
         int count = 1;
+        float avgThroughput = 0;
+
         // FCFS results
         System.out.println("**First Come First Served**");        
         ArrayList<ArrayList<Process>> FCFSclone = deepCopy(list1, list2, list3, list4, list5);
@@ -72,10 +74,12 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(fcfs.getStringList()));;
             System.out.println(Stats.CalculateStats(fcfs.getStats()));
-            System.out.println(printProcessList(fcfs.getStats()));
-            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
+//            System.out.println(printProcessList(fcfs.getStats()));
+            avgThroughput+=Stats.CalculaleThroughput(fcfs.getStats());
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(fcfs.getStats()));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(FCFSclone)+"\n");
+        System.out.println("Avgerage Throughput: "+avgThroughput/5+"\n");
+        avgThroughput=0;
         System.out.println("\n\n");
         
         count = 1;
@@ -89,10 +93,12 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(sjf.getStringList()));
             System.out.println(Stats.CalculateStats(sjf.getStats()));
-            System.out.println(printProcessList(sjf.getStats()));
-            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
+//            System.out.println(printProcessList(sjf.getStats()));
+            avgThroughput+=Stats.CalculaleThroughput(sjf.getStats());
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(sjf.getStats()));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(SJFclone)+"\n");
+        System.out.println("Avgerage Throughput: "+avgThroughput/5+"\n");
+        avgThroughput=0;
         System.out.println("\n\n");
         
         count = 1;
@@ -106,12 +112,15 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(srt.getStringList()));
             System.out.println(Stats.CalculateStats(srt.getStats()));
-            System.out.println(printProcessList(srt.getStats()));
-            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
+//            System.out.println(printProcessList(srt.getStats()));
+            avgThroughput+=Stats.CalculaleThroughput(srt.getStats());
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(srt.getStats()));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(SRTclone)+"\n");
+        System.out.println("Avgerage Throughput: "+avgThroughput/5+"\n");
+        avgThroughput=0;
         System.out.println("\n\n");
         count = 1;
+        
         //RR results
         System.out.println("**Round Robbin**");
         ArrayList<ArrayList<Process>> RRclone = deepCopy(list1, list2, list3, list4, list5);
@@ -122,10 +131,12 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(rr.getStringList()));
             System.out.println(Stats.CalculateStats(rr.getStats()));
-            System.out.println(printProcessList(rr.getStats()));
-            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
+//            System.out.println(printProcessList(rr.getStats()));
+            avgThroughput+=Stats.CalculaleThroughput(rr.getStats());
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(rr.getStats()));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(RRclone)+"\n");
+        System.out.println("Avgerage Throughput: "+avgThroughput/5+"\n");
+        avgThroughput=0;
         System.out.println("\n\n");
         
         count = 1;
@@ -139,10 +150,12 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(hpf.getStringList()));
             System.out.println(Stats.CalculateStats(hpf.getStats()));
-            System.out.println(printProcessList(hpf.getStats()));
-            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
+//            System.out.println(printProcessList(hpf.getStats()));
+            avgThroughput+=Stats.CalculaleThroughput(hpf.getStats());
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(hpf.getStats()));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(HPFclone)+"\n");
+        System.out.println("Avgerage Throughput: "+avgThroughput/5+"\n");
+        avgThroughput=0;
         System.out.println("\n\n");
         
         count = 1;
@@ -156,10 +169,11 @@ public class Assignment2 {
             System.out.println(printTimeline());
             System.out.println(printStringList(hpfp.getStringList()));
             System.out.println(Stats.CalculateStats(hpfp.getStats()));
-            System.out.println(printProcessList(hpfp.getStats()));
-            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
+//            System.out.println(printProcessList(hpfp.getStats()));
+            avgThroughput+=Stats.CalculaleThroughput(hpfp.getStats());
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(hpfp.getStats()));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(HPFPclone)+"\n");
+        System.out.println("Avgerage Throughput: "+avgThroughput/5+"\n");
         System.out.println("\n\n");
         
     }
@@ -241,7 +255,7 @@ public class Assignment2 {
     public static String printTimeline() {
 
         String output = "[";
-        for(int i = 1; i<=100; i++) {
+        for(int i = 0; i<100; i++) {
             output += String.format("%3d",i) + "|";
         }
         output = output.substring(0, output.length() - 1); // remove last |
