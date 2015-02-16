@@ -41,7 +41,7 @@ public class Stats {
     private static float AverageWaiting(ArrayList<Process> list) {
     	float waiting = 0.0f;
     	for(Process p: list)
-    	{	waiting += ((float)p.getTurnAroundTime()) - p.getArrivalTime() - p.getQuantaTime();	}
+    	{	waiting += (float)p.getTurnAroundTime() - (float)p.getArrivalTime() - (float)p.getQuantaTime();	}
     	return (waiting / list.size());
     }
 
@@ -53,9 +53,8 @@ public class Stats {
      */
     private static float AverageResponse(ArrayList<Process> list) {
     	float response = 0.0f;
-    	for(Process p: list)
-    	{
-    		response += ((float)p.getActualStartTime()) - p.getArrivalTime();
+    	for(Process p: list){
+    		response += (float)p.getActualStartTime() - (float)p.getArrivalTime();
     	}
     	return (response / list.size());
     }
