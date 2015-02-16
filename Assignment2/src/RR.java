@@ -43,7 +43,6 @@ public class RR  implements SchedulerInterface{
 	    if(!roundrobin.isEmpty()){
 		//run the first
 		log.add(roundrobin.get(0).getName());
-		roundrobin.get(0).decrementQuantumWaitTimeAmount();
 		roundrobin.get(0).decrementRunTime();
 		//If first run, mark it so.
 		if(roundrobin.get(0).getActualStartTime()==-1){
@@ -53,23 +52,15 @@ public class RR  implements SchedulerInterface{
 		if(roundrobin.get(0).getRunTime()<0){
 		    roundrobin.get(0).setTurnAroundTime(quantum);
 		    graveYard.add(roundrobin.remove(0));
+		}else{
+		    roundrobin.add(roundrobin.remove(0));
 		}
-		;
-		waitNonActiveProcesses();
-	    }else{
+	    }//If no processes in the RR
+	    else{
 		log.add("   ");
 	    }
 	    quantum++;
 	}
-    }
-
-    /**
-     * Waits all but the active process
-     */
-    public void waitNonActiveProcesses(){
-    	for(int i = 1; i<roundrobin.size(); i++){
-    		roundrobin.get(i).incrementQuantumWaitAmount();
-    	}
     }
 
     public ArrayList<String> getStringList() {
