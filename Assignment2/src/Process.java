@@ -128,7 +128,7 @@ public class Process {
      * @return the waitingTime.
      */
     public float getWaitingTime() {
-        return endTime - arrivalTime - runTime;
+        return endTime - arrivalTime - quantaTime;
     }
 
     /**
