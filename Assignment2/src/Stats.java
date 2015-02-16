@@ -8,64 +8,73 @@ import java.util.ArrayList;
  *
  */
 public class Stats {
-    private static ArrayList<Process> list;
-    private static int throughput;
-    private static int numOfQuanta;
-
-    public Stats(ArrayList<Process> list, ArrayList<String> stringList) {
-    	this.list = list;
-    	this.throughput = list.size();
-    	this.numOfQuanta = stringList.size();
-	print();
-    }
 
     /**
-     * Prints the statistics of the processes
+     * @param list
+     * @return
      */
-    public String print() {
-    	return "Average Turnaround: " + AverageTurnaround() +
-    	"\nAverage Waiting: " + AverageWaiting() +
-    	"\nAverage Response: " + AverageResponse() +
-    	"\nThroughput: " + throughput + " Processes out of " + numOfQuanta + " time slices";
+    public static String CalculateStats(ArrayList<Process> list) {
+	return "Average Turnaround: " + AverageTurnaround(list) +
+	    	"\nAverage Waiting: " + AverageWaiting(list) +
+	    	"\nAverage Response: " + AverageResponse(list);
     }
 
     /**
      * Calculates the average turn around time of the provided lists.
-     * From submission to completion
+     * From submission to completion.
+     * @param list 
      * @return a float of the average turn around time.
      */
-    private static float AverageTurnaround() {
+    private static float AverageTurnaround(ArrayList<Process> list) {
     	float turnTime = 0.0f;
     	for(Process p: list)
     	{	turnTime += ((float)p.getTurnAroundTime()) - p.getArrivalTime() + 1;	}
-    	return (turnTime / throughput);
+    	return (turnTime / list.size());
     }
 
     /**
      * Calculates the average waiting time of the provided lists.
      * From submission until it becomes active
+     * @param list 
      * 
      * 
      * @return a float of the average waiting time.
      */
-    private static float AverageWaiting() {
+    private static float AverageWaiting(ArrayList<Process> list) {
     	float waiting = 0.0f;
     	for(Process p: list)
     	{	waiting += ((float)p.getTurnAroundTime()) - p.getArrivalTime() - p.getQuantaTime();	}
-    	return (waiting / throughput);
+    	return (waiting / list.size());
     }
 
     /**
      * Calculates the average response time of the provided lists.
      * From first active until finished
+     * @param list 
      * @return a float of the average response time.
      */
-    private static float AverageResponse() {
+    private static float AverageResponse(ArrayList<Process> list) {
     	float response = 0.0f;
     	for(Process p: list)
     	{
     		response += ((float)p.getActualStartTime()) - p.getArrivalTime();
     	}
-    	return (response / throughput);
+    	return (response / list.size());
+    }
+
+    /**
+     * @param fCFSclone
+     * @return
+     */
+    public static float CalculateThroughput(
+	    ArrayList<ArrayList<Process>> fCFSclone) {
+	float count = 0;
+	for(ArrayList<Process> a: fCFSclone)
+    	{
+	    for(Process p: a){
+		if(p.getActualStartTime()+p.getTurnAroundTime()>100) count++;
+	    }
+    	}
+	return count/5;
     }
 }
