@@ -8,14 +8,14 @@ import java.util.List;
  * Runs the different scheduling algorithms
  * for processes. Calculates statistics for
  * the scheduling
- * @author Team Inception: David Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
+ * @author Team Inception: David-Eric Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
  * CS 149
  **********************************************/
 public class Assignment2 {
 
     /**
-     * Creates 
-     * @param args the command line arguments
+     * Main method. Creates the lists. Runs the Scheduler algorithms. Prints the results to STND out. 
+     * @param args the command line arguments. None used.
      */
     public static void main(String[] args) {
     
@@ -50,20 +50,21 @@ public class Assignment2 {
         System.out.println(printProcessList(list1));
         System.out.println("-List2------------------------------------------------------------------------");
         System.out.println(printProcessList(list2));;
-        System.out.println("-List3-------------------------------------------------------------------------");
+        System.out.println("-List3------------------------------------------------------------------------");
         System.out.println(printProcessList(list3));;
-        System.out.println("-List4-------------------------------------------------------------------------");
+        System.out.println("-List4------------------------------------------------------------------------");
         System.out.println(printProcessList(list4));;
-        System.out.println("-List5-------------------------------------------------------------------------");
+        System.out.println("-List5------------------------------------------------------------------------");
         System.out.println(printProcessList(list5));;
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
         
+        //How do we make standard these six very similar sets of code?
+
+        int count = 1;
         // FCFS results
         System.out.println("**First Come First Served**");        
         ArrayList<ArrayList<Process>> FCFSclone = deepCopy(list1, list2, list3, list4, list5);
-        int count = 1;
-        Stats s;
         for (ArrayList<Process> list: FCFSclone)
         {
             System.out.println("*Processing list"+count+++"*");
@@ -164,7 +165,7 @@ public class Assignment2 {
     }
 
     /**
-     * Sorts the lists by arrival time
+     * Sorts the five lists by arrival time.
      * @param list1
      * @param list2
      * @param list3
@@ -185,8 +186,6 @@ public class Assignment2 {
         Collections.sort(list4, comparator);
         Collections.sort(list5, comparator);
     }
-
-
 
     /**
      * Returns a string of info about a process list.
@@ -210,10 +209,10 @@ public class Assignment2 {
         return s;
     }
    
-
     /**
-     * Prints out info about a string list separating different strings with []s.
+     * Concatenates Processes log using list separating different strings with ]s.
      * @param stringList the string list
+     * @return a String of the history
      */
     public static String printStringList(List<String> stringList) {
         String previousString = stringList.get(0);
@@ -235,8 +234,9 @@ public class Assignment2 {
     }
  
     /**
-     * Prints out info about a string list separating different strings with []s.
+     * Prints out a time line that can match the process log printout.
      * @param stringList the string list
+     * @return a String time line of processes
      */
     public static String printTimeline() {
 
