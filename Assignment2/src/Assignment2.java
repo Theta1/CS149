@@ -70,11 +70,12 @@ public class Assignment2 {
             FCFS fcfs = new FCFS(list);
             System.out.println(printTimeline());
             System.out.println(printStringList(fcfs.getStringList()));;
-            s = new Stats(fcfs.getStats(), fcfs.getStringList());
-            System.out.println(s.print());
+            System.out.println(Stats.CalculateStats(fcfs.getStats()));
             System.out.println(printProcessList(fcfs.getStats()));
         }
+        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(FCFSclone));
         System.out.println("\n\n");
+        
         count = 1;
         //SJF results
         System.out.println("**Shortest Job First**");
@@ -85,11 +86,12 @@ public class Assignment2 {
             SJF sjf = new SJF(list);
             System.out.println(printTimeline());
             System.out.println(printStringList(sjf.getStringList()));
-            s = new Stats(sjf.getStats(), sjf.getStringList());
-            System.out.println(s.print());
+            System.out.println(Stats.CalculateStats(sjf.getStats()));
             System.out.println(printProcessList(sjf.getStats()));
-        } 
+        }
+        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(SJFclone));
         System.out.println("\n\n");
+        
         count = 1;
         // SRT results
         System.out.println("**Shortest Remaining Time**");
@@ -100,10 +102,10 @@ public class Assignment2 {
             SRT srt = new SRT(list);
             System.out.println(printTimeline());
             System.out.println(printStringList(srt.getStringList()));
-            s = new Stats(srt.getStats(), srt.getStringList());
-            System.out.println(s.print());
+            System.out.println(Stats.CalculateStats(srt.getStats()));
             System.out.println(printProcessList(srt.getStats()));
         }
+        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(SRTclone));
         System.out.println("\n\n");
         count = 1;
         //RR results
@@ -114,12 +116,13 @@ public class Assignment2 {
             System.out.println("*Processing list"+count+++"*");
             RR rr = new RR(list);
             System.out.println(printTimeline());
-            System.out.println(printStringList( rr.getStringList()));
-            s = new Stats(rr.getStats(), rr.getStringList());
-            System.out.println(s.toString());
+            System.out.println(printStringList(rr.getStringList()));
+            System.out.println(Stats.CalculateStats(rr.getStats()));
             System.out.println(printProcessList(rr.getStats()));
         }
+        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(RRclone));
         System.out.println("\n\n");
+        
         count = 1;
         //HPF results
         System.out.println("**Highest Priority First**");
@@ -129,12 +132,13 @@ public class Assignment2 {
             System.out.println("*Processing list"+count+++"*");
             HPF hpf = new HPF(list);
             System.out.println(printTimeline());
-            System.out.println(printStringList( hpf.getStringList() ));
-            s = new Stats(hpf.getStats(), hpf.getStringList());
-            System.out.println(s.print());
+            System.out.println(printStringList(hpf.getStringList()));
+            System.out.println(Stats.CalculateStats(hpf.getStats()));
             System.out.println(printProcessList(hpf.getStats()));
         }
+        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(HPFclone));
         System.out.println("\n\n");
+        
         count = 1;
         //HPFP results
         System.out.println("**Highest Priority First Preemptive**");
@@ -144,12 +148,13 @@ public class Assignment2 {
             System.out.println("*Processing list"+count+++"*");
             HPFP hpfp = new HPFP(list);
             System.out.println(printTimeline());
-            System.out.println(printStringList( hpfp.getStringList() ));
-            s = new Stats(hpfp.getStats(), hpfp.getStringList());
-            System.out.println(s.print());
+            System.out.println(printStringList(hpfp.getStringList()));
+            System.out.println(Stats.CalculateStats(hpfp.getStats()));
             System.out.println(printProcessList(hpfp.getStats()));
-        }     
+        }
+        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(HPFPclone));
         System.out.println("\n\n");
+        
     }
 
     /**
