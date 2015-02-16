@@ -52,7 +52,7 @@ public class HPF  implements SchedulerInterface{
         priorityProcessList.add(processList.remove(0));
         int quantum = 0;
 
-        while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
+        while(quantum <= QUANTUM_MAX) {
             Process process = priorityProcessList.remove(0);
             //System.out.println("Current: " + process.getName() + "." + process.getPriority() + " ");
 

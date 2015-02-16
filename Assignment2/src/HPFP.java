@@ -52,7 +52,7 @@ public class HPFP  implements SchedulerInterface{
         priorityProcessList.add(processList.remove(0));
         int quantum = 0;
 
-        while(!processList.isEmpty() && quantum <= QUANTUM_MAX) {
+        while(quantum <= QUANTUM_MAX) {
             Process process = priorityProcessList.get(0);
 
             // idle time
