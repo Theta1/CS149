@@ -175,18 +175,7 @@ public class Assignment2 {
         Collections.sort(list5, comparator);
     }
 
-    private static void WorkthroughList(FCFS fcfs1, ArrayList<Process> list1) {
-        System.out.println("Origonal list of processes:");
-        printProcessList(list1);
-        System.out.println();
-        System.out.println("Process Order:");
-        printQuantaList();
-        printStringList(fcfs1.getStringList());
-        System.out.println("\nProcess details:");
-        printProcessList(fcfs1.getProcessedProcessList());
-        System.out.println();
-        System.out.println(StatisticsCalculator.RunStatistics(fcfs1.getProcessedProcessList())+"\n");
-    }
+
 
     /**
      * Returns a string of info about a process list.
@@ -205,7 +194,7 @@ public class Assignment2 {
         	    + ", Turn Around time: " + String.format("%9d", process.getTurnAroundTime())
         	    + ", Waiting time: " + String.format("%9d", process.getWaitingTime())
         	    + ", Responce time: " + String.format("%9d", process.getResponseTime())
-        	    + "]\n");
+        	    + "]\n";
         }
         return s;
     }
