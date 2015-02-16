@@ -72,8 +72,9 @@ public class Assignment2 {
             System.out.println(printStringList(fcfs.getStringList()));;
             System.out.println(Stats.CalculateStats(fcfs.getStats()));
             System.out.println(printProcessList(fcfs.getStats()));
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(FCFSclone));
+        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(FCFSclone)+"\n");
         System.out.println("\n\n");
         
         count = 1;
@@ -88,8 +89,9 @@ public class Assignment2 {
             System.out.println(printStringList(sjf.getStringList()));
             System.out.println(Stats.CalculateStats(sjf.getStats()));
             System.out.println(printProcessList(sjf.getStats()));
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(SJFclone));
+        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(SJFclone)+"\n");
         System.out.println("\n\n");
         
         count = 1;
@@ -104,8 +106,9 @@ public class Assignment2 {
             System.out.println(printStringList(srt.getStringList()));
             System.out.println(Stats.CalculateStats(srt.getStats()));
             System.out.println(printProcessList(srt.getStats()));
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(SRTclone));
+        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(SRTclone)+"\n");
         System.out.println("\n\n");
         count = 1;
         //RR results
@@ -119,8 +122,9 @@ public class Assignment2 {
             System.out.println(printStringList(rr.getStringList()));
             System.out.println(Stats.CalculateStats(rr.getStats()));
             System.out.println(printProcessList(rr.getStats()));
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(RRclone));
+        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(RRclone)+"\n");
         System.out.println("\n\n");
         
         count = 1;
@@ -135,8 +139,9 @@ public class Assignment2 {
             System.out.println(printStringList(hpf.getStringList()));
             System.out.println(Stats.CalculateStats(hpf.getStats()));
             System.out.println(printProcessList(hpf.getStats()));
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(HPFclone));
+        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(HPFclone)+"\n");
         System.out.println("\n\n");
         
         count = 1;
@@ -151,8 +156,9 @@ public class Assignment2 {
             System.out.println(printStringList(hpfp.getStringList()));
             System.out.println(Stats.CalculateStats(hpfp.getStats()));
             System.out.println(printProcessList(hpfp.getStats()));
+            System.out.println("Throughput: " + Stats.CalculaleThroughput(list));
         }
-        System.out.println("Avgerage Throughput: "+Stats.CalculateThroughput(HPFPclone));
+        System.out.println("Avgerage Throughput: "+Stats.CalculateAverageThroughput(HPFPclone)+"\n");
         System.out.println("\n\n");
         
     }
@@ -219,7 +225,7 @@ public class Assignment2 {
             }
             else {
                 output = output.substring(0, output.length() - 1); // remove last |
-                output += "|" + String.format("%3s", string) + "|";
+                output += "]" + String.format("%3s", string) + "|";
                 previousString = string;
             }
         }
