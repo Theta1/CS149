@@ -16,19 +16,17 @@ public class Stats {
     	this.list = list;
     	this.throughput = list.size();
     	this.numOfQuanta = stringList.size();
-
-		print();
+	print();
     }
 
     /**
      * Prints the statistics of the processes
      */
-    private static void print() {
-    	System.out.println("Average Turnaround: " + AverageTurnaround() );
-    	System.out.println("Average Waiting: " + AverageWaiting() );
-		System.out.println("Average Response: " + AverageResponse() );
-		System.out.println("Throughput: " + throughput + " Processes out of " + numOfQuanta + " time slices");
-		System.out.println();
+    public String print() {
+    	return "Average Turnaround: " + AverageTurnaround() +
+    	"\nAverage Waiting: " + AverageWaiting() +
+    	"\nAverage Response: " + AverageResponse() +
+    	"\nThroughput: " + throughput + " Processes out of " + numOfQuanta + " time slices";
     }
 
     /**
