@@ -61,12 +61,24 @@ public class Stats {
     	}
     	return (response / list.size());
     }
+    
+    /**
+     * @param fCFSclone
+     * @return
+     */
+    public static float CalculaleThroughput(ArrayList<Process> a) {
+	float count = 0;
+	for(Process p: a){
+	    if(p.getActualStartTime()+p.getTurnAroundTime()>100) count++;
+	}
+	return count;
+    }
 
     /**
      * @param fCFSclone
      * @return
      */
-    public static float CalculateThroughput(
+    public static float CalculateAverageThroughput(
 	    ArrayList<ArrayList<Process>> fCFSclone) {
 	float count = 0;
 	for(ArrayList<Process> a: fCFSclone)
