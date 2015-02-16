@@ -214,9 +214,9 @@ public class Assignment2 {
         	    + ", Priority: " + process.getPriority() 
         	    + ", Final runtime: " + String.format("%9f", process.getRunTime())
         	    + ", Time started: " + String.format("%9d", process.getActualStartTime())
-        	    + ", Turn Around time: " + String.format("%9d", process.getTurnAroundTime())
-        	    + ", Waiting time: " + String.format("%9d", process.getWaitingTime())
-        	    + ", Responce time: " + String.format("%9d", process.getResponseTime())
+        	    + ", Turn Around time: " + String.format("%9f", process.getTurnAroundTime())
+        	    + ", Waiting time: " + String.format("%9f", process.getWaitingTime())
+        	    + ", Responce time: " + String.format("%9f", process.getResponseTime())
         	    + "]\n";
         }
         return s;

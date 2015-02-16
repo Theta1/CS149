@@ -84,7 +84,7 @@ public class HPF  implements SchedulerInterface{
                     }
                 }
             }
-            process.setTurnAroundTime(quantum-1);
+            process.setEndTime(quantum - 1);
             stats.add(process);
 
             // add new process into a the priorityList as a runTime has passed

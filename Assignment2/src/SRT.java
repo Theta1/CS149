@@ -114,7 +114,7 @@ public class SRT implements SchedulerInterface{
         {
             if( r.getRunTime() <= 0 )
             {
-            	r.setTurnAroundTime(quantum);
+            	r.setEndTime(quantum);
             	stats.add(r);
             }
         }

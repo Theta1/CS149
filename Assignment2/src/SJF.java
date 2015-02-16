@@ -86,7 +86,7 @@ public class SJF implements SchedulerInterface{
 					shortest.incrementQuantaTime();
 					quantum++;
 				}
-				shortest.setTurnAroundTime(quantum-1);
+				shortest.setEndTime(quantum - 1);
 				stats.add(shortest);
 				queue.remove(shortest);
 			}

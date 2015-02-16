@@ -15,7 +15,7 @@ public class Process {
     private int priority;
     private String name;
     private int actualStartTime;
-    private int turnAroundTime;
+    private int endTime;
     private int quantumWaitAmount;
     private float quantaTime;
 
@@ -34,7 +34,7 @@ public class Process {
         quantumWaitAmount = 0;
         
         actualStartTime = -1;
-        turnAroundTime = -1;
+        endTime = -1;
         quantaTime = 0.0f;
     }
 
@@ -54,7 +54,7 @@ public class Process {
         quantumWaitAmount = 0;
         
         actualStartTime = -1; // the first time a process starts running
-        turnAroundTime = -1; // the last time a process runs
+        endTime = -1; // the last time a process runs
         
         quantaTime = 0.0f; // the run time
     }
@@ -103,8 +103,8 @@ public class Process {
      * Gets the responseTime.
      * @return the responseTime
      */
-    public int getResponseTime() {
-        return actualStartTime;
+    public float getResponseTime() {
+        return actualStartTime - arrivalTime;
     }
 
     /**
@@ -119,16 +119,16 @@ public class Process {
      * Gets the turnAroundTime.
      * @return the turnAroundTime
      */
-    public int getTurnAroundTime() {
-        return turnAroundTime;
+    public float getTurnAroundTime() {
+        return endTime - arrivalTime + 1;
     }
 
     /**
      * Gets the waitingTime.
      * @return the waitingTime.
      */
-    public int getWaitingTime() {
-        return turnAroundTime - Math.round(runTime + 0.5f);
+    public float getWaitingTime() {
+        return endTime - arrivalTime - runTime;
     }
 
     /**
@@ -186,11 +186,11 @@ public class Process {
     }
 
     /**
-     * Sets the actual turnAroundTime which is the last time the process ran.
-     * @param turnAroundTime the turnAroundTime
+     * Sets the actual endTime which is the last time the process ran.
+     * @param endTime the endTime
      */
-    public void setTurnAroundTime(int turnAroundTime) {
-        this.turnAroundTime = turnAroundTime;
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
     }
 
     /**

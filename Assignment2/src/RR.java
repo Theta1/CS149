@@ -50,7 +50,7 @@ public class RR  implements SchedulerInterface{
 		}
 		//If last run mark it and move it out.
 		if(roundrobin.get(0).getRunTime()<0){
-		    roundrobin.get(0).setTurnAroundTime(quantum);
+		    roundrobin.get(0).setEndTime(quantum);
 		    graveYard.add(roundrobin.remove(0));
 		}else{
 		    roundrobin.add(roundrobin.remove(0));

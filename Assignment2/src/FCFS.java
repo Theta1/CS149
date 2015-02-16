@@ -52,7 +52,7 @@ public class FCFS implements SchedulerInterface{
                 // update process stats
                 process.decrementRunTime();
                 process.incrementQuantaTime();
-                process.setTurnAroundTime(quantum);
+                process.setEndTime(quantum);
 
                 quantum++;
             }

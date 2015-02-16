@@ -70,7 +70,7 @@ public class HPFP  implements SchedulerInterface{
                 // update process stats
                 process.decrementRunTime();
                 process.incrementQuantaTime();
-                process.setTurnAroundTime(quantum);
+                process.setEndTime(quantum);
                 if(process.getActualStartTime() == -1)
                 {  	process.setActualStartTime(quantum);	}
                 
