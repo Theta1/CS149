@@ -20,10 +20,10 @@ git checkout <branch> (To change branch)
 git checkout <commit> (to look at an older commit)
 git checkout <commit> <file> (to look at an older verion of just that file)
 
-### Revertin
+#### Revertin
 git revert <commit> (undoes back to that commit, as a new commit)
 
-### Housekeeping
+#### Housekeeping
 touch .gitignore
 git clean (removes untracked files from working directory)
 git branch -D <branch> (dangerious, will delete your branch will and all uncomitted changes)
