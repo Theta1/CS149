@@ -7,7 +7,7 @@ import java.util.List;
  * Runs the different scheduling algorithms
  * for processes. Calculates statistics for
  * the scheduling
- * @author Team Inception: David-Eric Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
+ * @author Team Theta 1: David-Eric Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
  * CS 149
  **********************************************/
 public class Assignment2 {

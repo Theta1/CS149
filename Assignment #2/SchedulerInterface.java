@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Each process is ran as in the
  * order it comes in at
  * 
- * @author Team: Inception
+ * @author Team: Theta 1
  * CS149
  * 
  *********************************************/

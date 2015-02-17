@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * the CPU scheduler  that requires smaller amount
  * of time for execution
  *
- * @author Team: Inception
+ * @author Team: Theta 1
  * CS149
  *
  *********************************************/

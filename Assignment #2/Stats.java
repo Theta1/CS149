@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Calculates statistics from the provided lists for analysing process
  * scheduling algorithm schemes
  * 
- * @author Team Inception
+ * @author Team Theta 1
  *
  */
 public class Stats {

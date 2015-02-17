@@ -3,7 +3,7 @@ import java.util.Random;
 /***********************************************
  * A simulated process with random characteristics
  * and runtime information
- * @author Team: Inception
+ * @author Team: Theta 1
  * CS149
  * 
  ***********************************************/

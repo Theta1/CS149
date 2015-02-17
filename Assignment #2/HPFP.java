@@ -9,7 +9,7 @@ import java.util.Comparator;
  * The highest priority process runs
  * until it is complete
  *
- * @author Team: Inception
+ * @author Team: Theta 1
  * CS149
  *
  **********************************************/

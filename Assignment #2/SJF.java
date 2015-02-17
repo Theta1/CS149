@@ -8,7 +8,7 @@ import java.util.ArrayList;
 * When the ends the next process is started
 * Shortest Job has priority
 *
-* @author Team: Inception
+* @author Team: Theta 1
 * CS149
 *
 *********************************************/

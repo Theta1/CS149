@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * The process runs in its quantum
  * When the ends the next process is started
  * 
- * @author Team: Inception
+ * @author Team: Theta 1
  * CS149
  * 
  *********************************************/
