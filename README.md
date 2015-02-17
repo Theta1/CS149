@@ -20,8 +20,8 @@ is up-to-date.
 - git checkout (commit) //to look at an older commit
 - git checkout (commit) (file) //to look at an older verion of just that file
 
-#### Revertin
-- git revert <commit> (undoes back to that commit, as a new commit)
+#### Reverting
+- git revert (commit) //undoes back to that commit, as a new commit
 
 #### Housekeeping
 - touch .gitignore
