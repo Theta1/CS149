@@ -25,7 +25,7 @@ public class Assignment2 {
         ArrayList<Process> list5 = new ArrayList <Process>();
         
         //Creates processes and random values to them
-        int numberOfRuns = 60;
+        int numberOfRuns = 30;
         for(int i=0; i<numberOfRuns*5; i++)
         {
             Process n = new Process(i);
