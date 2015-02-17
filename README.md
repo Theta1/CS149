@@ -16,14 +16,14 @@ and merging strategy. Here's how we can do it:
 is up-to-date.
 
 #### Checkout 
-git checkout <branch> (To change branch)
-git checkout <commit> (to look at an older commit)
-git checkout <commit> <file> (to look at an older verion of just that file)
+- git checkout <branch> (To change branch)
+- git checkout <commit> (to look at an older commit)
+- git checkout <commit> <file> (to look at an older verion of just that file)
 
 #### Revertin
-git revert <commit> (undoes back to that commit, as a new commit)
+- git revert <commit> (undoes back to that commit, as a new commit)
 
 #### Housekeeping
-touch .gitignore
-git clean (removes untracked files from working directory)
-git branch -D <branch> (dangerious, will delete your branch will and all uncomitted changes)
+- touch .gitignore
+- git clean (removes untracked files from working directory)
+- git branch -D <branch> (dangerious, will delete your branch will and all uncomitted changes)
