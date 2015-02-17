@@ -14,6 +14,7 @@ and merging strategy. Here's how we can do it:
 - 2nd Someone will then review the pull request and merge them if satisfactory. 
 - Each project member needs to rebase frequently from master to their own branch to make sure their branch 
 is up-to-date.
+- When a rebase fails, be sure to use $git status and $git diff to view the conflicts then use a text editor to fix resolve.
 
 #### Checkout 
 - git checkout (branch) //to change branch.
