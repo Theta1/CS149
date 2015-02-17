@@ -16,9 +16,9 @@ and merging strategy. Here's how we can do it:
 is up-to-date.
 
 #### Checkout 
-- git checkout <branch> (To change branch)
-- git checkout <commit> (to look at an older commit)
-- git checkout <commit> <file> (to look at an older verion of just that file)
+- git checkout (branch) //to change branch.
+- git checkout (commit) //to look at an older commit
+- git checkout (commit) (file) //to look at an older verion of just that file
 
 #### Revertin
 - git revert <commit> (undoes back to that commit, as a new commit)
