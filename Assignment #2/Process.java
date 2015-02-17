@@ -16,6 +16,15 @@ public class Process {
     private String name;
     private int actualStartTime;
     private int endTime;
+    
+    /**
+     * Gets the quanta time the alg ended
+     * @return the endTime
+     */
+    public int getEndTime() {
+        return endTime;
+    }
+
     private int quantumWaitAmount;
     private float quantaTime;
 

@@ -1,203 +1,203 @@
 Pre scheduled process lists:
 -List1------------------------------------------------------------------------
-[Name:   7 --> Arrival Time:   4.932694, Run Time:  7.759517, Priority: 4, Final runtime:  7.759517, Time started:        -1, Turn Around time: -4.932694, Waiting time: -5.932694, Responce time: -5.932694]
-[Name:   4 --> Arrival Time:   8.142673, Run Time:  4.030512, Priority: 2, Final runtime:  4.030512, Time started:        -1, Turn Around time: -8.142673, Waiting time: -9.142673, Responce time: -9.142673]
-[Name:   2 --> Arrival Time:  10.713235, Run Time:  5.721074, Priority: 1, Final runtime:  5.721074, Time started:        -1, Turn Around time: -10.713235, Waiting time: -11.713235, Responce time: -11.713235]
-[Name:   5 --> Arrival Time:  12.369920, Run Time:  5.463484, Priority: 1, Final runtime:  5.463484, Time started:        -1, Turn Around time: -12.369920, Waiting time: -13.369920, Responce time: -13.369920]
-[Name:  23 --> Arrival Time:  14.911679, Run Time:  8.957907, Priority: 4, Final runtime:  8.957907, Time started:        -1, Turn Around time: -14.911679, Waiting time: -15.911679, Responce time: -15.911679]
-[Name:  17 --> Arrival Time:  16.975405, Run Time:  0.629529, Priority: 3, Final runtime:  0.629529, Time started:        -1, Turn Around time: -16.975405, Waiting time: -17.975405, Responce time: -17.975405]
-[Name:   8 --> Arrival Time:  17.546797, Run Time:  0.323086, Priority: 3, Final runtime:  0.323086, Time started:        -1, Turn Around time: -17.546797, Waiting time: -18.546797, Responce time: -18.546797]
-[Name:  13 --> Arrival Time:  21.712946, Run Time:  4.833332, Priority: 4, Final runtime:  4.833332, Time started:        -1, Turn Around time: -21.712946, Waiting time: -22.712946, Responce time: -22.712946]
-[Name:  27 --> Arrival Time:  33.300121, Run Time:  9.818670, Priority: 2, Final runtime:  9.818670, Time started:        -1, Turn Around time: -33.300121, Waiting time: -34.300121, Responce time: -34.300121]
-[Name:   6 --> Arrival Time:  40.432289, Run Time:  3.147312, Priority: 4, Final runtime:  3.147312, Time started:        -1, Turn Around time: -40.432289, Waiting time: -41.432289, Responce time: -41.432289]
-[Name:  24 --> Arrival Time:  41.249611, Run Time:  7.503747, Priority: 3, Final runtime:  7.503747, Time started:        -1, Turn Around time: -41.249611, Waiting time: -42.249611, Responce time: -42.249611]
-[Name:  22 --> Arrival Time:  45.621063, Run Time:  2.735892, Priority: 1, Final runtime:  2.735892, Time started:        -1, Turn Around time: -45.621063, Waiting time: -46.621063, Responce time: -46.621063]
-[Name:  11 --> Arrival Time:  52.793377, Run Time:  7.999206, Priority: 1, Final runtime:  7.999206, Time started:        -1, Turn Around time: -52.793377, Waiting time: -53.793377, Responce time: -53.793377]
-[Name:  18 --> Arrival Time:  54.072742, Run Time:  7.001610, Priority: 4, Final runtime:  7.001610, Time started:        -1, Turn Around time: -54.072742, Waiting time: -55.072742, Responce time: -55.072742]
-[Name:  14 --> Arrival Time:  55.254208, Run Time:  4.712445, Priority: 3, Final runtime:  4.712445, Time started:        -1, Turn Around time: -55.254208, Waiting time: -56.254208, Responce time: -56.254208]
-[Name:   9 --> Arrival Time:  56.706802, Run Time:  2.198927, Priority: 3, Final runtime:  2.198927, Time started:        -1, Turn Around time: -56.706802, Waiting time: -57.706802, Responce time: -57.706802]
-[Name:   0 --> Arrival Time:  61.276031, Run Time:  2.017065, Priority: 1, Final runtime:  2.017065, Time started:        -1, Turn Around time: -61.276031, Waiting time: -62.276031, Responce time: -62.276031]
-[Name:  12 --> Arrival Time:  62.299744, Run Time:  7.821726, Priority: 4, Final runtime:  7.821726, Time started:        -1, Turn Around time: -62.299744, Waiting time: -63.299744, Responce time: -63.299744]
-[Name:  15 --> Arrival Time:  70.403244, Run Time:  5.403827, Priority: 2, Final runtime:  5.403827, Time started:        -1, Turn Around time: -70.403244, Waiting time: -71.403244, Responce time: -71.403244]
-[Name:  21 --> Arrival Time:  74.302307, Run Time:  6.799329, Priority: 2, Final runtime:  6.799329, Time started:        -1, Turn Around time: -74.302307, Waiting time: -75.302307, Responce time: -75.302307]
-[Name:  28 --> Arrival Time:  76.337219, Run Time:  4.468755, Priority: 4, Final runtime:  4.468755, Time started:        -1, Turn Around time: -76.337219, Waiting time: -77.337219, Responce time: -77.337219]
-[Name:   3 --> Arrival Time:  84.272949, Run Time:  0.337292, Priority: 3, Final runtime:  0.337292, Time started:        -1, Turn Around time: -84.272949, Waiting time: -85.272949, Responce time: -85.272949]
-[Name:  10 --> Arrival Time:  84.509010, Run Time:  7.647250, Priority: 4, Final runtime:  7.647250, Time started:        -1, Turn Around time: -84.509010, Waiting time: -85.509010, Responce time: -85.509010]
-[Name:  19 --> Arrival Time:  90.201691, Run Time:  0.413672, Priority: 2, Final runtime:  0.413672, Time started:        -1, Turn Around time: -90.201691, Waiting time: -91.201691, Responce time: -91.201691]
-[Name:   1 --> Arrival Time:  90.542755, Run Time:  8.594651, Priority: 1, Final runtime:  8.594651, Time started:        -1, Turn Around time: -90.542755, Waiting time: -91.542755, Responce time: -91.542755]
-[Name:  26 --> Arrival Time:  91.046471, Run Time:  3.912647, Priority: 1, Final runtime:  3.912647, Time started:        -1, Turn Around time: -91.046471, Waiting time: -92.046471, Responce time: -92.046471]
-[Name:  29 --> Arrival Time:  93.651680, Run Time:  7.806459, Priority: 1, Final runtime:  7.806459, Time started:        -1, Turn Around time: -93.651680, Waiting time: -94.651680, Responce time: -94.651680]
-[Name:  25 --> Arrival Time:  95.272644, Run Time:  1.032423, Priority: 4, Final runtime:  1.032423, Time started:        -1, Turn Around time: -95.272644, Waiting time: -96.272644, Responce time: -96.272644]
-[Name:  16 --> Arrival Time:  96.899818, Run Time:  4.264030, Priority: 2, Final runtime:  4.264030, Time started:        -1, Turn Around time: -96.899818, Waiting time: -97.899818, Responce time: -97.899818]
-[Name:  20 --> Arrival Time:  97.836601, Run Time:  6.033538, Priority: 3, Final runtime:  6.033538, Time started:        -1, Turn Around time: -97.836601, Waiting time: -98.836601, Responce time: -98.836601]
+[Name:   0 --> Arrival Time:   5.562965, Run Time:  1.330397, Priority: 3, Final runtime:  1.330397, Time started:        -1, Turn Around time: -5.562965, Waiting time: -6.562965, Responce time: -6.562965]
+[Name:   2 --> Arrival Time:   5.721261, Run Time:  2.262819, Priority: 2, Final runtime:  2.262819, Time started:        -1, Turn Around time: -5.721261, Waiting time: -6.721261, Responce time: -6.721261]
+[Name:  18 --> Arrival Time:   6.467348, Run Time:  9.065028, Priority: 4, Final runtime:  9.065028, Time started:        -1, Turn Around time: -6.467348, Waiting time: -7.467348, Responce time: -7.467348]
+[Name:  10 --> Arrival Time:   6.959061, Run Time:  8.303510, Priority: 3, Final runtime:  8.303510, Time started:        -1, Turn Around time: -6.959061, Waiting time: -7.959061, Responce time: -7.959061]
+[Name:  13 --> Arrival Time:   9.204621, Run Time:  2.784450, Priority: 3, Final runtime:  2.784450, Time started:        -1, Turn Around time: -9.204621, Waiting time: -10.204621, Responce time: -10.204621]
+[Name:  16 --> Arrival Time:  11.918693, Run Time:  7.228189, Priority: 4, Final runtime:  7.228189, Time started:        -1, Turn Around time: -11.918693, Waiting time: -12.918693, Responce time: -12.918693]
+[Name:  11 --> Arrival Time:  13.851254, Run Time:  1.411888, Priority: 1, Final runtime:  1.411888, Time started:        -1, Turn Around time: -13.851254, Waiting time: -14.851254, Responce time: -14.851254]
+[Name:   8 --> Arrival Time:  15.115194, Run Time:  0.765832, Priority: 3, Final runtime:  0.765832, Time started:        -1, Turn Around time: -15.115194, Waiting time: -16.115194, Responce time: -16.115194]
+[Name:  12 --> Arrival Time:  15.838580, Run Time:  9.907545, Priority: 3, Final runtime:  9.907545, Time started:        -1, Turn Around time: -15.838581, Waiting time: -16.838581, Responce time: -16.838581]
+[Name:   6 --> Arrival Time:  20.670429, Run Time:  0.627574, Priority: 2, Final runtime:  0.627574, Time started:        -1, Turn Around time: -20.670429, Waiting time: -21.670429, Responce time: -21.670429]
+[Name:  14 --> Arrival Time:  28.228485, Run Time:  9.833783, Priority: 3, Final runtime:  9.833783, Time started:        -1, Turn Around time: -28.228485, Waiting time: -29.228485, Responce time: -29.228485]
+[Name:   9 --> Arrival Time:  31.794565, Run Time:  5.698195, Priority: 1, Final runtime:  5.698195, Time started:        -1, Turn Around time: -31.794563, Waiting time: -32.794563, Responce time: -32.794563]
+[Name:  20 --> Arrival Time:  31.811016, Run Time:  3.681040, Priority: 4, Final runtime:  3.681040, Time started:        -1, Turn Around time: -31.811016, Waiting time: -32.811016, Responce time: -32.811016]
+[Name:  21 --> Arrival Time:  34.885956, Run Time:  4.629135, Priority: 3, Final runtime:  4.629135, Time started:        -1, Turn Around time: -34.885956, Waiting time: -35.885956, Responce time: -35.885956]
+[Name:   3 --> Arrival Time:  35.022530, Run Time:  7.611208, Priority: 3, Final runtime:  7.611208, Time started:        -1, Turn Around time: -35.022530, Waiting time: -36.022530, Responce time: -36.022530]
+[Name:  22 --> Arrival Time:  36.773972, Run Time:  9.588272, Priority: 2, Final runtime:  9.588272, Time started:        -1, Turn Around time: -36.773972, Waiting time: -37.773972, Responce time: -37.773972]
+[Name:  28 --> Arrival Time:  39.963528, Run Time:  8.506741, Priority: 3, Final runtime:  8.506741, Time started:        -1, Turn Around time: -39.963528, Waiting time: -40.963528, Responce time: -40.963528]
+[Name:  25 --> Arrival Time:  39.995090, Run Time:  6.836324, Priority: 3, Final runtime:  6.836324, Time started:        -1, Turn Around time: -39.995090, Waiting time: -40.995090, Responce time: -40.995090]
+[Name:   5 --> Arrival Time:  43.546249, Run Time:  5.329252, Priority: 1, Final runtime:  5.329252, Time started:        -1, Turn Around time: -43.546249, Waiting time: -44.546249, Responce time: -44.546249]
+[Name:  23 --> Arrival Time:  48.815536, Run Time:  3.738291, Priority: 1, Final runtime:  3.738291, Time started:        -1, Turn Around time: -48.815536, Waiting time: -49.815536, Responce time: -49.815536]
+[Name:   7 --> Arrival Time:  56.915104, Run Time:  0.837999, Priority: 3, Final runtime:  0.837999, Time started:        -1, Turn Around time: -56.915104, Waiting time: -57.915104, Responce time: -57.915104]
+[Name:  19 --> Arrival Time:  66.890678, Run Time:  0.183979, Priority: 2, Final runtime:  0.183979, Time started:        -1, Turn Around time: -66.890678, Waiting time: -67.890678, Responce time: -67.890678]
+[Name:  24 --> Arrival Time:  70.776436, Run Time:  5.584898, Priority: 2, Final runtime:  5.584898, Time started:        -1, Turn Around time: -70.776436, Waiting time: -71.776436, Responce time: -71.776436]
+[Name:  27 --> Arrival Time:  76.939125, Run Time:  3.356521, Priority: 1, Final runtime:  3.356521, Time started:        -1, Turn Around time: -76.939125, Waiting time: -77.939125, Responce time: -77.939125]
+[Name:   4 --> Arrival Time:  82.162224, Run Time:  9.904852, Priority: 1, Final runtime:  9.904852, Time started:        -1, Turn Around time: -82.162224, Waiting time: -83.162224, Responce time: -83.162224]
+[Name:  29 --> Arrival Time:  86.813469, Run Time:  6.916210, Priority: 3, Final runtime:  6.916210, Time started:        -1, Turn Around time: -86.813469, Waiting time: -87.813469, Responce time: -87.813469]
+[Name:   1 --> Arrival Time:  89.023254, Run Time:  0.066928, Priority: 3, Final runtime:  0.066928, Time started:        -1, Turn Around time: -89.023254, Waiting time: -90.023254, Responce time: -90.023254]
+[Name:  17 --> Arrival Time:  89.575806, Run Time:  2.139300, Priority: 1, Final runtime:  2.139300, Time started:        -1, Turn Around time: -89.575806, Waiting time: -90.575806, Responce time: -90.575806]
+[Name:  15 --> Arrival Time:  96.362633, Run Time:  8.171431, Priority: 1, Final runtime:  8.171431, Time started:        -1, Turn Around time: -96.362633, Waiting time: -97.362633, Responce time: -97.362633]
+[Name:  26 --> Arrival Time:  98.490936, Run Time:  6.260895, Priority: 1, Final runtime:  6.260895, Time started:        -1, Turn Around time: -98.490936, Waiting time: -99.490936, Responce time: -99.490936]
 
 -List2------------------------------------------------------------------------
-[Name:  51 --> Arrival Time:   9.805387, Run Time:  7.017253, Priority: 1, Final runtime:  7.017253, Time started:        -1, Turn Around time: -9.805387, Waiting time: -10.805387, Responce time: -10.805387]
-[Name:  40 --> Arrival Time:  14.217662, Run Time:  0.089688, Priority: 3, Final runtime:  0.089688, Time started:        -1, Turn Around time: -14.217662, Waiting time: -15.217662, Responce time: -15.217662]
-[Name:  55 --> Arrival Time:  14.861362, Run Time:  7.303571, Priority: 3, Final runtime:  7.303571, Time started:        -1, Turn Around time: -14.861362, Waiting time: -15.861362, Responce time: -15.861362]
-[Name:  54 --> Arrival Time:  18.723139, Run Time:  9.258373, Priority: 1, Final runtime:  9.258373, Time started:        -1, Turn Around time: -18.723139, Waiting time: -19.723139, Responce time: -19.723139]
-[Name:  44 --> Arrival Time:  19.800081, Run Time:  3.097939, Priority: 3, Final runtime:  3.097939, Time started:        -1, Turn Around time: -19.800081, Waiting time: -20.800081, Responce time: -20.800081]
-[Name:  50 --> Arrival Time:  20.319416, Run Time:  6.683434, Priority: 3, Final runtime:  6.683434, Time started:        -1, Turn Around time: -20.319416, Waiting time: -21.319416, Responce time: -21.319416]
-[Name:  38 --> Arrival Time:  24.516468, Run Time:  8.256853, Priority: 1, Final runtime:  8.256853, Time started:        -1, Turn Around time: -24.516468, Waiting time: -25.516468, Responce time: -25.516468]
-[Name:  52 --> Arrival Time:  38.607174, Run Time:  3.940179, Priority: 3, Final runtime:  3.940179, Time started:        -1, Turn Around time: -38.607174, Waiting time: -39.607174, Responce time: -39.607174]
-[Name:  39 --> Arrival Time:  43.119495, Run Time:  8.837662, Priority: 4, Final runtime:  8.837662, Time started:        -1, Turn Around time: -43.119495, Waiting time: -44.119495, Responce time: -44.119495]
-[Name:  33 --> Arrival Time:  44.026459, Run Time:  7.815106, Priority: 2, Final runtime:  7.815106, Time started:        -1, Turn Around time: -44.026459, Waiting time: -45.026459, Responce time: -45.026459]
-[Name:  32 --> Arrival Time:  44.349483, Run Time:  3.971197, Priority: 4, Final runtime:  3.971197, Time started:        -1, Turn Around time: -44.349483, Waiting time: -45.349483, Responce time: -45.349483]
-[Name:  30 --> Arrival Time:  51.453049, Run Time:  3.626319, Priority: 1, Final runtime:  3.626319, Time started:        -1, Turn Around time: -51.453049, Waiting time: -52.453049, Responce time: -52.453049]
-[Name:  41 --> Arrival Time:  56.235435, Run Time:  9.686203, Priority: 3, Final runtime:  9.686203, Time started:        -1, Turn Around time: -56.235435, Waiting time: -57.235435, Responce time: -57.235435]
-[Name:  43 --> Arrival Time:  56.403629, Run Time:  5.033904, Priority: 4, Final runtime:  5.033904, Time started:        -1, Turn Around time: -56.403629, Waiting time: -57.403629, Responce time: -57.403629]
-[Name:  49 --> Arrival Time:  57.664204, Run Time:  7.082427, Priority: 4, Final runtime:  7.082427, Time started:        -1, Turn Around time: -57.664204, Waiting time: -58.664204, Responce time: -58.664204]
-[Name:  59 --> Arrival Time:  67.444695, Run Time:  4.113478, Priority: 1, Final runtime:  4.113478, Time started:        -1, Turn Around time: -67.444695, Waiting time: -68.444695, Responce time: -68.444695]
-[Name:  42 --> Arrival Time:  73.994637, Run Time:  2.104198, Priority: 1, Final runtime:  2.104198, Time started:        -1, Turn Around time: -73.994637, Waiting time: -74.994637, Responce time: -74.994637]
-[Name:  47 --> Arrival Time:  74.371643, Run Time:  8.730923, Priority: 4, Final runtime:  8.730923, Time started:        -1, Turn Around time: -74.371643, Waiting time: -75.371643, Responce time: -75.371643]
-[Name:  48 --> Arrival Time:  76.415901, Run Time:  4.197859, Priority: 4, Final runtime:  4.197859, Time started:        -1, Turn Around time: -76.415901, Waiting time: -77.415901, Responce time: -77.415901]
-[Name:  31 --> Arrival Time:  77.100784, Run Time:  0.727571, Priority: 3, Final runtime:  0.727571, Time started:        -1, Turn Around time: -77.100784, Waiting time: -78.100784, Responce time: -78.100784]
-[Name:  37 --> Arrival Time:  78.037743, Run Time:  9.578995, Priority: 2, Final runtime:  9.578995, Time started:        -1, Turn Around time: -78.037743, Waiting time: -79.037743, Responce time: -79.037743]
-[Name:  45 --> Arrival Time:  83.446999, Run Time:  5.629594, Priority: 2, Final runtime:  5.629594, Time started:        -1, Turn Around time: -83.446999, Waiting time: -84.446999, Responce time: -84.446999]
-[Name:  58 --> Arrival Time:  86.285530, Run Time:  9.939354, Priority: 3, Final runtime:  9.939354, Time started:        -1, Turn Around time: -86.285530, Waiting time: -87.285530, Responce time: -87.285530]
-[Name:  35 --> Arrival Time:  89.263329, Run Time:  9.005193, Priority: 2, Final runtime:  9.005193, Time started:        -1, Turn Around time: -89.263329, Waiting time: -90.263329, Responce time: -90.263329]
-[Name:  36 --> Arrival Time:  89.684685, Run Time:  8.907692, Priority: 4, Final runtime:  8.907692, Time started:        -1, Turn Around time: -89.684685, Waiting time: -90.684685, Responce time: -90.684685]
-[Name:  56 --> Arrival Time:  91.979416, Run Time:  3.631858, Priority: 2, Final runtime:  3.631858, Time started:        -1, Turn Around time: -91.979416, Waiting time: -92.979416, Responce time: -92.979416]
-[Name:  34 --> Arrival Time:  93.675621, Run Time:  3.942900, Priority: 3, Final runtime:  3.942900, Time started:        -1, Turn Around time: -93.675621, Waiting time: -94.675621, Responce time: -94.675621]
-[Name:  57 --> Arrival Time:  95.146217, Run Time:  2.204654, Priority: 4, Final runtime:  2.204654, Time started:        -1, Turn Around time: -95.146217, Waiting time: -96.146217, Responce time: -96.146217]
-[Name:  46 --> Arrival Time:  95.797844, Run Time:  1.608254, Priority: 2, Final runtime:  1.608254, Time started:        -1, Turn Around time: -95.797844, Waiting time: -96.797844, Responce time: -96.797844]
-[Name:  53 --> Arrival Time:  97.578835, Run Time:  5.838183, Priority: 3, Final runtime:  5.838183, Time started:        -1, Turn Around time: -97.578835, Waiting time: -98.578835, Responce time: -98.578835]
+[Name:  30 --> Arrival Time:  11.973228, Run Time:  4.402206, Priority: 4, Final runtime:  4.402206, Time started:        -1, Turn Around time: -11.973228, Waiting time: -12.973228, Responce time: -12.973228]
+[Name:  47 --> Arrival Time:  12.429341, Run Time:  3.620910, Priority: 4, Final runtime:  3.620910, Time started:        -1, Turn Around time: -12.429341, Waiting time: -13.429341, Responce time: -13.429341]
+[Name:  38 --> Arrival Time:  16.558975, Run Time:  7.364029, Priority: 3, Final runtime:  7.364029, Time started:        -1, Turn Around time: -16.558975, Waiting time: -17.558975, Responce time: -17.558975]
+[Name:  46 --> Arrival Time:  17.004620, Run Time:  8.417197, Priority: 3, Final runtime:  8.417197, Time started:        -1, Turn Around time: -17.004620, Waiting time: -18.004620, Responce time: -18.004620]
+[Name:  59 --> Arrival Time:  20.812073, Run Time:  8.948798, Priority: 2, Final runtime:  8.948798, Time started:        -1, Turn Around time: -20.812073, Waiting time: -21.812073, Responce time: -21.812073]
+[Name:  33 --> Arrival Time:  23.183752, Run Time:  4.366000, Priority: 2, Final runtime:  4.366000, Time started:        -1, Turn Around time: -23.183752, Waiting time: -24.183752, Responce time: -24.183752]
+[Name:  55 --> Arrival Time:  24.423624, Run Time:  3.952138, Priority: 2, Final runtime:  3.952138, Time started:        -1, Turn Around time: -24.423624, Waiting time: -25.423624, Responce time: -25.423624]
+[Name:  39 --> Arrival Time:  24.840914, Run Time:  3.296803, Priority: 4, Final runtime:  3.296803, Time started:        -1, Turn Around time: -24.840914, Waiting time: -25.840914, Responce time: -25.840914]
+[Name:  53 --> Arrival Time:  36.243950, Run Time:  1.069846, Priority: 4, Final runtime:  1.069846, Time started:        -1, Turn Around time: -36.243950, Waiting time: -37.243950, Responce time: -37.243950]
+[Name:  50 --> Arrival Time:  41.175793, Run Time:  9.993059, Priority: 1, Final runtime:  9.993059, Time started:        -1, Turn Around time: -41.175793, Waiting time: -42.175793, Responce time: -42.175793]
+[Name:  57 --> Arrival Time:  42.135616, Run Time:  1.436696, Priority: 1, Final runtime:  1.436696, Time started:        -1, Turn Around time: -42.135616, Waiting time: -43.135616, Responce time: -43.135616]
+[Name:  52 --> Arrival Time:  42.421291, Run Time:  7.771027, Priority: 3, Final runtime:  7.771027, Time started:        -1, Turn Around time: -42.421291, Waiting time: -43.421291, Responce time: -43.421291]
+[Name:  34 --> Arrival Time:  51.274654, Run Time:  4.016072, Priority: 3, Final runtime:  4.016072, Time started:        -1, Turn Around time: -51.274654, Waiting time: -52.274654, Responce time: -52.274654]
+[Name:  37 --> Arrival Time:  51.592545, Run Time:  2.006121, Priority: 3, Final runtime:  2.006121, Time started:        -1, Turn Around time: -51.592545, Waiting time: -52.592545, Responce time: -52.592545]
+[Name:  48 --> Arrival Time:  51.638348, Run Time:  9.446258, Priority: 3, Final runtime:  9.446258, Time started:        -1, Turn Around time: -51.638348, Waiting time: -52.638348, Responce time: -52.638348]
+[Name:  56 --> Arrival Time:  52.948895, Run Time:  9.655887, Priority: 4, Final runtime:  9.655887, Time started:        -1, Turn Around time: -52.948895, Waiting time: -53.948895, Responce time: -53.948895]
+[Name:  36 --> Arrival Time:  55.196201, Run Time:  8.268571, Priority: 3, Final runtime:  8.268571, Time started:        -1, Turn Around time: -55.196201, Waiting time: -56.196201, Responce time: -56.196201]
+[Name:  43 --> Arrival Time:  61.614647, Run Time:  7.306286, Priority: 1, Final runtime:  7.306286, Time started:        -1, Turn Around time: -61.614647, Waiting time: -62.614647, Responce time: -62.614647]
+[Name:  31 --> Arrival Time:  71.047966, Run Time:  4.502882, Priority: 4, Final runtime:  4.502882, Time started:        -1, Turn Around time: -71.047966, Waiting time: -72.047966, Responce time: -72.047966]
+[Name:  35 --> Arrival Time:  76.080330, Run Time:  4.368012, Priority: 2, Final runtime:  4.368012, Time started:        -1, Turn Around time: -76.080330, Waiting time: -77.080330, Responce time: -77.080330]
+[Name:  45 --> Arrival Time:  78.046043, Run Time:  1.986484, Priority: 3, Final runtime:  1.986484, Time started:        -1, Turn Around time: -78.046043, Waiting time: -79.046043, Responce time: -79.046043]
+[Name:  54 --> Arrival Time:  78.082611, Run Time:  7.041830, Priority: 3, Final runtime:  7.041830, Time started:        -1, Turn Around time: -78.082611, Waiting time: -79.082611, Responce time: -79.082611]
+[Name:  58 --> Arrival Time:  79.288910, Run Time:  6.518754, Priority: 1, Final runtime:  6.518754, Time started:        -1, Turn Around time: -79.288910, Waiting time: -80.288910, Responce time: -80.288910]
+[Name:  51 --> Arrival Time:  81.609673, Run Time:  4.547715, Priority: 1, Final runtime:  4.547715, Time started:        -1, Turn Around time: -81.609673, Waiting time: -82.609673, Responce time: -82.609673]
+[Name:  40 --> Arrival Time:  85.661148, Run Time:  4.721298, Priority: 1, Final runtime:  4.721298, Time started:        -1, Turn Around time: -85.661148, Waiting time: -86.661148, Responce time: -86.661148]
+[Name:  41 --> Arrival Time:  87.938492, Run Time:  3.430281, Priority: 1, Final runtime:  3.430281, Time started:        -1, Turn Around time: -87.938492, Waiting time: -88.938492, Responce time: -88.938492]
+[Name:  42 --> Arrival Time:  88.504272, Run Time:  6.011057, Priority: 3, Final runtime:  6.011057, Time started:        -1, Turn Around time: -88.504272, Waiting time: -89.504272, Responce time: -89.504272]
+[Name:  44 --> Arrival Time:  94.874451, Run Time:  2.205787, Priority: 1, Final runtime:  2.205787, Time started:        -1, Turn Around time: -94.874451, Waiting time: -95.874451, Responce time: -95.874451]
+[Name:  32 --> Arrival Time:  98.384384, Run Time:  1.174325, Priority: 2, Final runtime:  1.174325, Time started:        -1, Turn Around time: -98.384384, Waiting time: -99.384384, Responce time: -99.384384]
+[Name:  49 --> Arrival Time:  98.765099, Run Time:  8.491578, Priority: 2, Final runtime:  8.491578, Time started:        -1, Turn Around time: -98.765099, Waiting time: -99.765099, Responce time: -99.765099]
 
 -List3------------------------------------------------------------------------
-[Name:  85 --> Arrival Time:   1.425069, Run Time:  8.247155, Priority: 3, Final runtime:  8.247155, Time started:        -1, Turn Around time: -1.425069, Waiting time: -2.425069, Responce time: -2.425069]
-[Name:  79 --> Arrival Time:   2.508007, Run Time:  8.310020, Priority: 4, Final runtime:  8.310020, Time started:        -1, Turn Around time: -2.508007, Waiting time: -3.508007, Responce time: -3.508007]
-[Name:  89 --> Arrival Time:   4.293046, Run Time:  9.867596, Priority: 3, Final runtime:  9.867596, Time started:        -1, Turn Around time: -4.293046, Waiting time: -5.293046, Responce time: -5.293046]
-[Name:  87 --> Arrival Time:   5.587034, Run Time:  7.310405, Priority: 4, Final runtime:  7.310405, Time started:        -1, Turn Around time: -5.587034, Waiting time: -6.587034, Responce time: -6.587034]
-[Name:  60 --> Arrival Time:   6.965959, Run Time:  9.135454, Priority: 3, Final runtime:  9.135454, Time started:        -1, Turn Around time: -6.965959, Waiting time: -7.965959, Responce time: -7.965959]
-[Name:  76 --> Arrival Time:  14.069290, Run Time:  4.452306, Priority: 4, Final runtime:  4.452306, Time started:        -1, Turn Around time: -14.069290, Waiting time: -15.069290, Responce time: -15.069290]
-[Name:  66 --> Arrival Time:  18.899292, Run Time:  0.242822, Priority: 2, Final runtime:  0.242822, Time started:        -1, Turn Around time: -18.899292, Waiting time: -19.899292, Responce time: -19.899292]
-[Name:  67 --> Arrival Time:  29.954983, Run Time:  1.772717, Priority: 4, Final runtime:  1.772717, Time started:        -1, Turn Around time: -29.954983, Waiting time: -30.954983, Responce time: -30.954983]
-[Name:  64 --> Arrival Time:  31.080908, Run Time:  7.851583, Priority: 2, Final runtime:  7.851583, Time started:        -1, Turn Around time: -31.080910, Waiting time: -32.080910, Responce time: -32.080910]
-[Name:  83 --> Arrival Time:  31.394257, Run Time:  3.705692, Priority: 4, Final runtime:  3.705692, Time started:        -1, Turn Around time: -31.394257, Waiting time: -32.394257, Responce time: -32.394257]
-[Name:  65 --> Arrival Time:  33.195370, Run Time:  8.014773, Priority: 4, Final runtime:  8.014773, Time started:        -1, Turn Around time: -33.195370, Waiting time: -34.195370, Responce time: -34.195370]
-[Name:  68 --> Arrival Time:  41.360886, Run Time:  0.227638, Priority: 4, Final runtime:  0.227638, Time started:        -1, Turn Around time: -41.360886, Waiting time: -42.360886, Responce time: -42.360886]
-[Name:  63 --> Arrival Time:  44.945423, Run Time:  5.600538, Priority: 2, Final runtime:  5.600538, Time started:        -1, Turn Around time: -44.945423, Waiting time: -45.945423, Responce time: -45.945423]
-[Name:  77 --> Arrival Time:  58.350357, Run Time:  9.665592, Priority: 2, Final runtime:  9.665592, Time started:        -1, Turn Around time: -58.350357, Waiting time: -59.350357, Responce time: -59.350357]
-[Name:  70 --> Arrival Time:  61.617493, Run Time:  7.071478, Priority: 2, Final runtime:  7.071478, Time started:        -1, Turn Around time: -61.617493, Waiting time: -62.617493, Responce time: -62.617493]
-[Name:  82 --> Arrival Time:  62.423832, Run Time:  0.430990, Priority: 2, Final runtime:  0.430990, Time started:        -1, Turn Around time: -62.423832, Waiting time: -63.423832, Responce time: -63.423832]
-[Name:  62 --> Arrival Time:  63.036987, Run Time:  1.655190, Priority: 4, Final runtime:  1.655190, Time started:        -1, Turn Around time: -63.036987, Waiting time: -64.036987, Responce time: -64.036987]
-[Name:  61 --> Arrival Time:  67.726204, Run Time:  0.675860, Priority: 4, Final runtime:  0.675860, Time started:        -1, Turn Around time: -67.726204, Waiting time: -68.726204, Responce time: -68.726204]
-[Name:  69 --> Arrival Time:  70.527061, Run Time:  1.637912, Priority: 4, Final runtime:  1.637912, Time started:        -1, Turn Around time: -70.527061, Waiting time: -71.527061, Responce time: -71.527061]
-[Name:  73 --> Arrival Time:  71.769569, Run Time:  1.130804, Priority: 2, Final runtime:  1.130804, Time started:        -1, Turn Around time: -71.769569, Waiting time: -72.769569, Responce time: -72.769569]
-[Name:  75 --> Arrival Time:  72.166489, Run Time:  7.288071, Priority: 3, Final runtime:  7.288071, Time started:        -1, Turn Around time: -72.166489, Waiting time: -73.166489, Responce time: -73.166489]
-[Name:  86 --> Arrival Time:  73.572258, Run Time:  2.934625, Priority: 2, Final runtime:  2.934625, Time started:        -1, Turn Around time: -73.572258, Waiting time: -74.572258, Responce time: -74.572258]
-[Name:  80 --> Arrival Time:  78.066422, Run Time:  7.628566, Priority: 1, Final runtime:  7.628566, Time started:        -1, Turn Around time: -78.066422, Waiting time: -79.066422, Responce time: -79.066422]
-[Name:  72 --> Arrival Time:  81.615860, Run Time:  2.017269, Priority: 2, Final runtime:  2.017269, Time started:        -1, Turn Around time: -81.615860, Waiting time: -82.615860, Responce time: -82.615860]
-[Name:  71 --> Arrival Time:  82.201286, Run Time:  2.313517, Priority: 1, Final runtime:  2.313517, Time started:        -1, Turn Around time: -82.201286, Waiting time: -83.201286, Responce time: -83.201286]
-[Name:  81 --> Arrival Time:  85.576767, Run Time:  2.061253, Priority: 3, Final runtime:  2.061253, Time started:        -1, Turn Around time: -85.576767, Waiting time: -86.576767, Responce time: -86.576767]
-[Name:  78 --> Arrival Time:  86.520256, Run Time:  7.387795, Priority: 3, Final runtime:  7.387795, Time started:        -1, Turn Around time: -86.520256, Waiting time: -87.520256, Responce time: -87.520256]
-[Name:  74 --> Arrival Time:  88.487457, Run Time:  4.918209, Priority: 1, Final runtime:  4.918209, Time started:        -1, Turn Around time: -88.487457, Waiting time: -89.487457, Responce time: -89.487457]
-[Name:  84 --> Arrival Time:  91.724426, Run Time:  2.435849, Priority: 1, Final runtime:  2.435849, Time started:        -1, Turn Around time: -91.724426, Waiting time: -92.724426, Responce time: -92.724426]
-[Name:  88 --> Arrival Time:  94.502869, Run Time:  7.296116, Priority: 4, Final runtime:  7.296116, Time started:        -1, Turn Around time: -94.502869, Waiting time: -95.502869, Responce time: -95.502869]
+[Name:  66 --> Arrival Time:   2.906356, Run Time:  2.591612, Priority: 2, Final runtime:  2.591612, Time started:        -1, Turn Around time: -2.906356, Waiting time: -3.906356, Responce time: -3.906356]
+[Name:  73 --> Arrival Time:   5.228132, Run Time:  0.029737, Priority: 3, Final runtime:  0.029737, Time started:        -1, Turn Around time: -5.228132, Waiting time: -6.228132, Responce time: -6.228132]
+[Name:  60 --> Arrival Time:   7.907677, Run Time:  2.031214, Priority: 3, Final runtime:  2.031214, Time started:        -1, Turn Around time: -7.907677, Waiting time: -8.907677, Responce time: -8.907677]
+[Name:  79 --> Arrival Time:  11.486289, Run Time:  6.903310, Priority: 2, Final runtime:  6.903310, Time started:        -1, Turn Around time: -11.486289, Waiting time: -12.486289, Responce time: -12.486289]
+[Name:  87 --> Arrival Time:  15.278925, Run Time:  0.427294, Priority: 4, Final runtime:  0.427294, Time started:        -1, Turn Around time: -15.278925, Waiting time: -16.278925, Responce time: -16.278925]
+[Name:  78 --> Arrival Time:  16.757416, Run Time:  7.443936, Priority: 3, Final runtime:  7.443936, Time started:        -1, Turn Around time: -16.757416, Waiting time: -17.757416, Responce time: -17.757416]
+[Name:  61 --> Arrival Time:  16.771832, Run Time:  9.929152, Priority: 4, Final runtime:  9.929152, Time started:        -1, Turn Around time: -16.771832, Waiting time: -17.771832, Responce time: -17.771832]
+[Name:  86 --> Arrival Time:  17.644468, Run Time:  5.247495, Priority: 3, Final runtime:  5.247495, Time started:        -1, Turn Around time: -17.644468, Waiting time: -18.644468, Responce time: -18.644468]
+[Name:  62 --> Arrival Time:  20.114149, Run Time:  7.800185, Priority: 2, Final runtime:  7.800185, Time started:        -1, Turn Around time: -20.114149, Waiting time: -21.114149, Responce time: -21.114149]
+[Name:  69 --> Arrival Time:  20.302940, Run Time:  7.450400, Priority: 3, Final runtime:  7.450400, Time started:        -1, Turn Around time: -20.302940, Waiting time: -21.302940, Responce time: -21.302940]
+[Name:  75 --> Arrival Time:  22.257259, Run Time:  6.604660, Priority: 4, Final runtime:  6.604660, Time started:        -1, Turn Around time: -22.257259, Waiting time: -23.257259, Responce time: -23.257259]
+[Name:  89 --> Arrival Time:  25.652348, Run Time:  9.858678, Priority: 4, Final runtime:  9.858678, Time started:        -1, Turn Around time: -25.652348, Waiting time: -26.652348, Responce time: -26.652348]
+[Name:  72 --> Arrival Time:  36.883568, Run Time:  4.724416, Priority: 4, Final runtime:  4.724416, Time started:        -1, Turn Around time: -36.883568, Waiting time: -37.883568, Responce time: -37.883568]
+[Name:  64 --> Arrival Time:  44.508045, Run Time:  2.678703, Priority: 4, Final runtime:  2.678703, Time started:        -1, Turn Around time: -44.508045, Waiting time: -45.508045, Responce time: -45.508045]
+[Name:  81 --> Arrival Time:  54.616425, Run Time:  6.645569, Priority: 4, Final runtime:  6.645569, Time started:        -1, Turn Around time: -54.616425, Waiting time: -55.616425, Responce time: -55.616425]
+[Name:  77 --> Arrival Time:  57.107010, Run Time:  3.711125, Priority: 1, Final runtime:  3.711125, Time started:        -1, Turn Around time: -57.107010, Waiting time: -58.107010, Responce time: -58.107010]
+[Name:  71 --> Arrival Time:  58.256317, Run Time:  4.240981, Priority: 1, Final runtime:  4.240981, Time started:        -1, Turn Around time: -58.256317, Waiting time: -59.256317, Responce time: -59.256317]
+[Name:  65 --> Arrival Time:  60.141987, Run Time:  0.699205, Priority: 3, Final runtime:  0.699205, Time started:        -1, Turn Around time: -60.141987, Waiting time: -61.141987, Responce time: -61.141987]
+[Name:  70 --> Arrival Time:  61.815739, Run Time:  4.600088, Priority: 3, Final runtime:  4.600088, Time started:        -1, Turn Around time: -61.815739, Waiting time: -62.815739, Responce time: -62.815739]
+[Name:  63 --> Arrival Time:  63.171677, Run Time:  2.668059, Priority: 3, Final runtime:  2.668059, Time started:        -1, Turn Around time: -63.171677, Waiting time: -64.171677, Responce time: -64.171677]
+[Name:  74 --> Arrival Time:  65.486160, Run Time:  1.853790, Priority: 2, Final runtime:  1.853790, Time started:        -1, Turn Around time: -65.486160, Waiting time: -66.486160, Responce time: -66.486160]
+[Name:  80 --> Arrival Time:  71.861626, Run Time:  9.080974, Priority: 4, Final runtime:  9.080974, Time started:        -1, Turn Around time: -71.861626, Waiting time: -72.861626, Responce time: -72.861626]
+[Name:  84 --> Arrival Time:  72.879181, Run Time:  4.933336, Priority: 1, Final runtime:  4.933336, Time started:        -1, Turn Around time: -72.879181, Waiting time: -73.879181, Responce time: -73.879181]
+[Name:  83 --> Arrival Time:  74.027740, Run Time:  8.511371, Priority: 3, Final runtime:  8.511371, Time started:        -1, Turn Around time: -74.027740, Waiting time: -75.027740, Responce time: -75.027740]
+[Name:  88 --> Arrival Time:  77.343788, Run Time:  3.827837, Priority: 3, Final runtime:  3.827837, Time started:        -1, Turn Around time: -77.343788, Waiting time: -78.343788, Responce time: -78.343788]
+[Name:  67 --> Arrival Time:  85.547791, Run Time:  7.719406, Priority: 4, Final runtime:  7.719406, Time started:        -1, Turn Around time: -85.547791, Waiting time: -86.547791, Responce time: -86.547791]
+[Name:  82 --> Arrival Time:  85.572289, Run Time:  0.931052, Priority: 3, Final runtime:  0.931052, Time started:        -1, Turn Around time: -85.572289, Waiting time: -86.572289, Responce time: -86.572289]
+[Name:  68 --> Arrival Time:  89.805626, Run Time:  7.751849, Priority: 2, Final runtime:  7.751849, Time started:        -1, Turn Around time: -89.805626, Waiting time: -90.805626, Responce time: -90.805626]
+[Name:  85 --> Arrival Time:  95.204224, Run Time:  6.493271, Priority: 1, Final runtime:  6.493271, Time started:        -1, Turn Around time: -95.204224, Waiting time: -96.204224, Responce time: -96.204224]
+[Name:  76 --> Arrival Time:  96.685745, Run Time:  8.188709, Priority: 1, Final runtime:  8.188709, Time started:        -1, Turn Around time: -96.685745, Waiting time: -97.685745, Responce time: -97.685745]
 
 -List4------------------------------------------------------------------------
-[Name: 101 --> Arrival Time:   1.684194, Run Time:  8.094950, Priority: 2, Final runtime:  8.094950, Time started:        -1, Turn Around time: -1.684194, Waiting time: -2.684194, Responce time: -2.684194]
-[Name: 108 --> Arrival Time:   2.074193, Run Time:  6.669939, Priority: 2, Final runtime:  6.669939, Time started:        -1, Turn Around time: -2.074193, Waiting time: -3.074193, Responce time: -3.074193]
-[Name:  95 --> Arrival Time:   4.007586, Run Time:  6.033606, Priority: 1, Final runtime:  6.033606, Time started:        -1, Turn Around time: -4.007586, Waiting time: -5.007586, Responce time: -5.007586]
-[Name:  97 --> Arrival Time:   6.314133, Run Time:  5.416386, Priority: 4, Final runtime:  5.416386, Time started:        -1, Turn Around time: -6.314133, Waiting time: -7.314133, Responce time: -7.314133]
-[Name:  94 --> Arrival Time:  11.950958, Run Time:  0.253096, Priority: 4, Final runtime:  0.253096, Time started:        -1, Turn Around time: -11.950958, Waiting time: -12.950958, Responce time: -12.950958]
-[Name: 119 --> Arrival Time:  12.101336, Run Time:  0.458097, Priority: 3, Final runtime:  0.458097, Time started:        -1, Turn Around time: -12.101336, Waiting time: -13.101336, Responce time: -13.101336]
-[Name: 109 --> Arrival Time:  13.530170, Run Time:  7.487567, Priority: 3, Final runtime:  7.487567, Time started:        -1, Turn Around time: -13.530170, Waiting time: -14.530170, Responce time: -14.530170]
-[Name:  98 --> Arrival Time:  13.917491, Run Time:  3.552684, Priority: 1, Final runtime:  3.552684, Time started:        -1, Turn Around time: -13.917491, Waiting time: -14.917491, Responce time: -14.917491]
-[Name:  96 --> Arrival Time:  24.911678, Run Time:  3.019413, Priority: 1, Final runtime:  3.019413, Time started:        -1, Turn Around time: -24.911678, Waiting time: -25.911678, Responce time: -25.911678]
-[Name:  93 --> Arrival Time:  35.836990, Run Time:  9.908104, Priority: 1, Final runtime:  9.908104, Time started:        -1, Turn Around time: -35.836990, Waiting time: -36.836990, Responce time: -36.836990]
-[Name:  91 --> Arrival Time:  36.644657, Run Time:  6.927922, Priority: 1, Final runtime:  6.927922, Time started:        -1, Turn Around time: -36.644657, Waiting time: -37.644657, Responce time: -37.644657]
-[Name: 105 --> Arrival Time:  43.029560, Run Time:  2.177265, Priority: 4, Final runtime:  2.177265, Time started:        -1, Turn Around time: -43.029560, Waiting time: -44.029560, Responce time: -44.029560]
-[Name: 117 --> Arrival Time:  46.734947, Run Time:  1.511887, Priority: 1, Final runtime:  1.511887, Time started:        -1, Turn Around time: -46.734947, Waiting time: -47.734947, Responce time: -47.734947]
-[Name: 100 --> Arrival Time:  55.247059, Run Time:  3.183534, Priority: 2, Final runtime:  3.183534, Time started:        -1, Turn Around time: -55.247059, Waiting time: -56.247059, Responce time: -56.247059]
-[Name:  90 --> Arrival Time:  55.745930, Run Time:  9.014565, Priority: 2, Final runtime:  9.014565, Time started:        -1, Turn Around time: -55.745930, Waiting time: -56.745930, Responce time: -56.745930]
-[Name: 112 --> Arrival Time:  57.879906, Run Time:  3.602516, Priority: 2, Final runtime:  3.602516, Time started:        -1, Turn Around time: -57.879906, Waiting time: -58.879906, Responce time: -58.879906]
-[Name:  99 --> Arrival Time:  58.732597, Run Time:  7.154915, Priority: 4, Final runtime:  7.154915, Time started:        -1, Turn Around time: -58.732597, Waiting time: -59.732597, Responce time: -59.732597]
-[Name: 115 --> Arrival Time:  58.773544, Run Time:  6.079695, Priority: 2, Final runtime:  6.079695, Time started:        -1, Turn Around time: -58.773544, Waiting time: -59.773544, Responce time: -59.773544]
-[Name: 113 --> Arrival Time:  63.346001, Run Time:  0.424967, Priority: 2, Final runtime:  0.424967, Time started:        -1, Turn Around time: -63.346001, Waiting time: -64.346001, Responce time: -64.346001]
-[Name: 107 --> Arrival Time:  66.315399, Run Time:  3.710366, Priority: 1, Final runtime:  3.710366, Time started:        -1, Turn Around time: -66.315399, Waiting time: -67.315399, Responce time: -67.315399]
-[Name: 103 --> Arrival Time:  71.338722, Run Time:  3.521934, Priority: 3, Final runtime:  3.521934, Time started:        -1, Turn Around time: -71.338722, Waiting time: -72.338722, Responce time: -72.338722]
-[Name: 110 --> Arrival Time:  72.866516, Run Time:  4.598486, Priority: 3, Final runtime:  4.598486, Time started:        -1, Turn Around time: -72.866516, Waiting time: -73.866516, Responce time: -73.866516]
-[Name: 118 --> Arrival Time:  73.184654, Run Time:  5.080359, Priority: 4, Final runtime:  5.080359, Time started:        -1, Turn Around time: -73.184654, Waiting time: -74.184654, Responce time: -74.184654]
-[Name: 104 --> Arrival Time:  74.143517, Run Time:  5.441499, Priority: 3, Final runtime:  5.441499, Time started:        -1, Turn Around time: -74.143517, Waiting time: -75.143517, Responce time: -75.143517]
-[Name: 114 --> Arrival Time:  78.060425, Run Time:  0.170351, Priority: 2, Final runtime:  0.170351, Time started:        -1, Turn Around time: -78.060425, Waiting time: -79.060425, Responce time: -79.060425]
-[Name: 106 --> Arrival Time:  79.304710, Run Time:  5.386260, Priority: 1, Final runtime:  5.386260, Time started:        -1, Turn Around time: -79.304710, Waiting time: -80.304710, Responce time: -80.304710]
-[Name:  92 --> Arrival Time:  83.373566, Run Time:  8.283215, Priority: 2, Final runtime:  8.283215, Time started:        -1, Turn Around time: -83.373566, Waiting time: -84.373566, Responce time: -84.373566]
-[Name: 102 --> Arrival Time:  87.447327, Run Time:  2.868787, Priority: 4, Final runtime:  2.868787, Time started:        -1, Turn Around time: -87.447327, Waiting time: -88.447327, Responce time: -88.447327]
-[Name: 116 --> Arrival Time:  91.961281, Run Time:  2.988871, Priority: 4, Final runtime:  2.988871, Time started:        -1, Turn Around time: -91.961281, Waiting time: -92.961281, Responce time: -92.961281]
-[Name: 111 --> Arrival Time:  97.264023, Run Time:  4.557218, Priority: 4, Final runtime:  4.557218, Time started:        -1, Turn Around time: -97.264023, Waiting time: -98.264023, Responce time: -98.264023]
+[Name:  91 --> Arrival Time:   0.577157, Run Time:  6.050770, Priority: 4, Final runtime:  6.050770, Time started:        -1, Turn Around time: -0.577157, Waiting time: -1.577157, Responce time: -1.577157]
+[Name: 100 --> Arrival Time:   4.660440, Run Time:  1.258054, Priority: 2, Final runtime:  1.258054, Time started:        -1, Turn Around time: -4.660440, Waiting time: -5.660440, Responce time: -5.660440]
+[Name: 102 --> Arrival Time:   5.813427, Run Time:  9.880999, Priority: 1, Final runtime:  9.880999, Time started:        -1, Turn Around time: -5.813427, Waiting time: -6.813427, Responce time: -6.813427]
+[Name: 115 --> Arrival Time:   7.525709, Run Time:  5.811625, Priority: 2, Final runtime:  5.811625, Time started:        -1, Turn Around time: -7.525709, Waiting time: -8.525709, Responce time: -8.525709]
+[Name: 101 --> Arrival Time:  11.891944, Run Time:  3.670135, Priority: 3, Final runtime:  3.670135, Time started:        -1, Turn Around time: -11.891944, Waiting time: -12.891944, Responce time: -12.891944]
+[Name: 117 --> Arrival Time:  18.033524, Run Time:  2.953534, Priority: 2, Final runtime:  2.953534, Time started:        -1, Turn Around time: -18.033524, Waiting time: -19.033524, Responce time: -19.033524]
+[Name: 119 --> Arrival Time:  24.607452, Run Time:  3.076055, Priority: 3, Final runtime:  3.076055, Time started:        -1, Turn Around time: -24.607452, Waiting time: -25.607452, Responce time: -25.607452]
+[Name: 110 --> Arrival Time:  30.779716, Run Time:  5.326765, Priority: 4, Final runtime:  5.326765, Time started:        -1, Turn Around time: -30.779716, Waiting time: -31.779716, Responce time: -31.779716]
+[Name:  94 --> Arrival Time:  31.363424, Run Time:  5.262058, Priority: 2, Final runtime:  5.262058, Time started:        -1, Turn Around time: -31.363426, Waiting time: -32.363426, Responce time: -32.363426]
+[Name: 111 --> Arrival Time:  34.092152, Run Time:  9.439949, Priority: 4, Final runtime:  9.439949, Time started:        -1, Turn Around time: -34.092152, Waiting time: -35.092152, Responce time: -35.092152]
+[Name:  97 --> Arrival Time:  35.838425, Run Time:  6.246834, Priority: 4, Final runtime:  6.246834, Time started:        -1, Turn Around time: -35.838425, Waiting time: -36.838425, Responce time: -36.838425]
+[Name: 112 --> Arrival Time:  36.703560, Run Time:  7.159245, Priority: 4, Final runtime:  7.159245, Time started:        -1, Turn Around time: -36.703560, Waiting time: -37.703560, Responce time: -37.703560]
+[Name: 103 --> Arrival Time:  45.594723, Run Time:  7.954539, Priority: 2, Final runtime:  7.954539, Time started:        -1, Turn Around time: -45.594723, Waiting time: -46.594723, Responce time: -46.594723]
+[Name: 107 --> Arrival Time:  46.990093, Run Time:  7.487669, Priority: 1, Final runtime:  7.487669, Time started:        -1, Turn Around time: -46.990093, Waiting time: -47.990093, Responce time: -47.990093]
+[Name:  93 --> Arrival Time:  47.579128, Run Time:  4.599579, Priority: 1, Final runtime:  4.599579, Time started:        -1, Turn Around time: -47.579128, Waiting time: -48.579128, Responce time: -48.579128]
+[Name: 114 --> Arrival Time:  48.079140, Run Time:  0.825742, Priority: 1, Final runtime:  0.825742, Time started:        -1, Turn Around time: -48.079140, Waiting time: -49.079140, Responce time: -49.079140]
+[Name: 106 --> Arrival Time:  48.270462, Run Time:  9.104771, Priority: 3, Final runtime:  9.104771, Time started:        -1, Turn Around time: -48.270462, Waiting time: -49.270462, Responce time: -49.270462]
+[Name: 116 --> Arrival Time:  48.893639, Run Time:  8.805588, Priority: 2, Final runtime:  8.805588, Time started:        -1, Turn Around time: -48.893639, Waiting time: -49.893639, Responce time: -49.893639]
+[Name:  90 --> Arrival Time:  52.906105, Run Time:  4.009030, Priority: 2, Final runtime:  4.009030, Time started:        -1, Turn Around time: -52.906105, Waiting time: -53.906105, Responce time: -53.906105]
+[Name:  92 --> Arrival Time:  58.623692, Run Time:  9.319634, Priority: 1, Final runtime:  9.319634, Time started:        -1, Turn Around time: -58.623692, Waiting time: -59.623692, Responce time: -59.623692]
+[Name:  96 --> Arrival Time:  68.441536, Run Time:  9.775328, Priority: 4, Final runtime:  9.775328, Time started:        -1, Turn Around time: -68.441536, Waiting time: -69.441536, Responce time: -69.441536]
+[Name: 105 --> Arrival Time:  72.522171, Run Time:  7.531865, Priority: 4, Final runtime:  7.531865, Time started:        -1, Turn Around time: -72.522171, Waiting time: -73.522171, Responce time: -73.522171]
+[Name:  99 --> Arrival Time:  77.568558, Run Time:  6.241282, Priority: 1, Final runtime:  6.241282, Time started:        -1, Turn Around time: -77.568558, Waiting time: -78.568558, Responce time: -78.568558]
+[Name:  95 --> Arrival Time:  79.193832, Run Time:  7.897243, Priority: 1, Final runtime:  7.897243, Time started:        -1, Turn Around time: -79.193832, Waiting time: -80.193832, Responce time: -80.193832]
+[Name: 108 --> Arrival Time:  80.521263, Run Time:  0.684486, Priority: 3, Final runtime:  0.684486, Time started:        -1, Turn Around time: -80.521263, Waiting time: -81.521263, Responce time: -81.521263]
+[Name: 113 --> Arrival Time:  83.184029, Run Time:  7.793031, Priority: 3, Final runtime:  7.793031, Time started:        -1, Turn Around time: -83.184029, Waiting time: -84.184029, Responce time: -84.184029]
+[Name:  98 --> Arrival Time:  88.220100, Run Time:  2.369145, Priority: 2, Final runtime:  2.369145, Time started:        -1, Turn Around time: -88.220100, Waiting time: -89.220100, Responce time: -89.220100]
+[Name: 104 --> Arrival Time:  90.122444, Run Time:  4.766761, Priority: 1, Final runtime:  4.766761, Time started:        -1, Turn Around time: -90.122444, Waiting time: -91.122444, Responce time: -91.122444]
+[Name: 118 --> Arrival Time:  91.331566, Run Time:  0.589146, Priority: 1, Final runtime:  0.589146, Time started:        -1, Turn Around time: -91.331566, Waiting time: -92.331566, Responce time: -92.331566]
+[Name: 109 --> Arrival Time:  95.287979, Run Time:  9.194089, Priority: 3, Final runtime:  9.194089, Time started:        -1, Turn Around time: -95.287979, Waiting time: -96.287979, Responce time: -96.287979]
 
 -List5------------------------------------------------------------------------
-[Name: 147 --> Arrival Time:   1.474442, Run Time:  1.861575, Priority: 4, Final runtime:  1.861575, Time started:        -1, Turn Around time: -1.474442, Waiting time: -2.474442, Responce time: -2.474442]
-[Name: 137 --> Arrival Time:   4.591087, Run Time:  8.865324, Priority: 1, Final runtime:  8.865324, Time started:        -1, Turn Around time: -4.591087, Waiting time: -5.591087, Responce time: -5.591087]
-[Name: 149 --> Arrival Time:   8.559935, Run Time:  3.601594, Priority: 1, Final runtime:  3.601594, Time started:        -1, Turn Around time: -8.559935, Waiting time: -9.559935, Responce time: -9.559935]
-[Name: 148 --> Arrival Time:  13.410330, Run Time:  1.840590, Priority: 1, Final runtime:  1.840590, Time started:        -1, Turn Around time: -13.410330, Waiting time: -14.410330, Responce time: -14.410330]
-[Name: 136 --> Arrival Time:  13.540709, Run Time:  0.922140, Priority: 3, Final runtime:  0.922140, Time started:        -1, Turn Around time: -13.540709, Waiting time: -14.540709, Responce time: -14.540709]
-[Name: 125 --> Arrival Time:  13.796470, Run Time:  9.042471, Priority: 3, Final runtime:  9.042471, Time started:        -1, Turn Around time: -13.796470, Waiting time: -14.796470, Responce time: -14.796470]
-[Name: 141 --> Arrival Time:  16.189581, Run Time:  5.986691, Priority: 4, Final runtime:  5.986691, Time started:        -1, Turn Around time: -16.189581, Waiting time: -17.189581, Responce time: -17.189581]
-[Name: 143 --> Arrival Time:  21.991543, Run Time:  5.008017, Priority: 4, Final runtime:  5.008017, Time started:        -1, Turn Around time: -21.991543, Waiting time: -22.991543, Responce time: -22.991543]
-[Name: 122 --> Arrival Time:  29.266058, Run Time:  9.007051, Priority: 2, Final runtime:  9.007051, Time started:        -1, Turn Around time: -29.266058, Waiting time: -30.266058, Responce time: -30.266058]
-[Name: 124 --> Arrival Time:  30.521944, Run Time:  0.987285, Priority: 2, Final runtime:  0.987285, Time started:        -1, Turn Around time: -30.521944, Waiting time: -31.521944, Responce time: -31.521944]
-[Name: 126 --> Arrival Time:  34.902714, Run Time:  9.566161, Priority: 1, Final runtime:  9.566161, Time started:        -1, Turn Around time: -34.902714, Waiting time: -35.902714, Responce time: -35.902714]
-[Name: 140 --> Arrival Time:  39.542080, Run Time:  7.275602, Priority: 2, Final runtime:  7.275602, Time started:        -1, Turn Around time: -39.542080, Waiting time: -40.542080, Responce time: -40.542080]
-[Name: 135 --> Arrival Time:  39.652290, Run Time:  8.793986, Priority: 1, Final runtime:  8.793986, Time started:        -1, Turn Around time: -39.652290, Waiting time: -40.652290, Responce time: -40.652290]
-[Name: 138 --> Arrival Time:  39.966995, Run Time:  6.222513, Priority: 3, Final runtime:  6.222513, Time started:        -1, Turn Around time: -39.966995, Waiting time: -40.966995, Responce time: -40.966995]
-[Name: 128 --> Arrival Time:  45.079464, Run Time:  8.913197, Priority: 4, Final runtime:  8.913197, Time started:        -1, Turn Around time: -45.079464, Waiting time: -46.079464, Responce time: -46.079464]
-[Name: 132 --> Arrival Time:  48.053917, Run Time:  3.769659, Priority: 4, Final runtime:  3.769659, Time started:        -1, Turn Around time: -48.053917, Waiting time: -49.053917, Responce time: -49.053917]
-[Name: 129 --> Arrival Time:  48.511612, Run Time:  3.917737, Priority: 3, Final runtime:  3.917737, Time started:        -1, Turn Around time: -48.511612, Waiting time: -49.511612, Responce time: -49.511612]
-[Name: 120 --> Arrival Time:  49.535145, Run Time:  0.177362, Priority: 3, Final runtime:  0.177362, Time started:        -1, Turn Around time: -49.535145, Waiting time: -50.535145, Responce time: -50.535145]
-[Name: 139 --> Arrival Time:  50.688332, Run Time:  7.271702, Priority: 1, Final runtime:  7.271702, Time started:        -1, Turn Around time: -50.688332, Waiting time: -51.688332, Responce time: -51.688332]
-[Name: 123 --> Arrival Time:  51.820518, Run Time:  2.860026, Priority: 4, Final runtime:  2.860026, Time started:        -1, Turn Around time: -51.820518, Waiting time: -52.820518, Responce time: -52.820518]
-[Name: 121 --> Arrival Time:  55.513382, Run Time:  3.826257, Priority: 2, Final runtime:  3.826257, Time started:        -1, Turn Around time: -55.513382, Waiting time: -56.513382, Responce time: -56.513382]
-[Name: 134 --> Arrival Time:  65.129074, Run Time:  3.813375, Priority: 1, Final runtime:  3.813375, Time started:        -1, Turn Around time: -65.129074, Waiting time: -66.129074, Responce time: -66.129074]
-[Name: 144 --> Arrival Time:  73.288765, Run Time:  1.372393, Priority: 4, Final runtime:  1.372393, Time started:        -1, Turn Around time: -73.288765, Waiting time: -74.288765, Responce time: -74.288765]
-[Name: 130 --> Arrival Time:  78.354004, Run Time:  7.182559, Priority: 1, Final runtime:  7.182559, Time started:        -1, Turn Around time: -78.354004, Waiting time: -79.354004, Responce time: -79.354004]
-[Name: 127 --> Arrival Time:  81.376724, Run Time:  9.413215, Priority: 2, Final runtime:  9.413215, Time started:        -1, Turn Around time: -81.376724, Waiting time: -82.376724, Responce time: -82.376724]
-[Name: 131 --> Arrival Time:  81.714317, Run Time:  4.119305, Priority: 3, Final runtime:  4.119305, Time started:        -1, Turn Around time: -81.714317, Waiting time: -82.714317, Responce time: -82.714317]
-[Name: 142 --> Arrival Time:  89.611488, Run Time:  8.615760, Priority: 3, Final runtime:  8.615760, Time started:        -1, Turn Around time: -89.611488, Waiting time: -90.611488, Responce time: -90.611488]
-[Name: 145 --> Arrival Time:  91.429031, Run Time:  7.551841, Priority: 3, Final runtime:  7.551841, Time started:        -1, Turn Around time: -91.429031, Waiting time: -92.429031, Responce time: -92.429031]
-[Name: 133 --> Arrival Time:  96.597473, Run Time:  6.781651, Priority: 3, Final runtime:  6.781651, Time started:        -1, Turn Around time: -96.597473, Waiting time: -97.597473, Responce time: -97.597473]
-[Name: 146 --> Arrival Time:  97.601341, Run Time:  4.666039, Priority: 2, Final runtime:  4.666039, Time started:        -1, Turn Around time: -97.601341, Waiting time: -98.601341, Responce time: -98.601341]
+[Name: 135 --> Arrival Time:   1.738110, Run Time:  9.892347, Priority: 2, Final runtime:  9.892347, Time started:        -1, Turn Around time: -1.738110, Waiting time: -2.738110, Responce time: -2.738110]
+[Name: 142 --> Arrival Time:   4.190324, Run Time:  0.795673, Priority: 1, Final runtime:  0.795673, Time started:        -1, Turn Around time: -4.190324, Waiting time: -5.190324, Responce time: -5.190324]
+[Name: 130 --> Arrival Time:   6.722230, Run Time:  7.418668, Priority: 2, Final runtime:  7.418668, Time started:        -1, Turn Around time: -6.722230, Waiting time: -7.722230, Responce time: -7.722230]
+[Name: 123 --> Arrival Time:   8.590973, Run Time:  1.138783, Priority: 2, Final runtime:  1.138783, Time started:        -1, Turn Around time: -8.590973, Waiting time: -9.590973, Responce time: -9.590973]
+[Name: 139 --> Arrival Time:  13.997076, Run Time:  6.905731, Priority: 3, Final runtime:  6.905731, Time started:        -1, Turn Around time: -13.997076, Waiting time: -14.997076, Responce time: -14.997076]
+[Name: 145 --> Arrival Time:  15.077635, Run Time:  2.059411, Priority: 1, Final runtime:  2.059411, Time started:        -1, Turn Around time: -15.077635, Waiting time: -16.077635, Responce time: -16.077635]
+[Name: 125 --> Arrival Time:  23.255943, Run Time:  6.579574, Priority: 1, Final runtime:  6.579574, Time started:        -1, Turn Around time: -23.255943, Waiting time: -24.255943, Responce time: -24.255943]
+[Name: 146 --> Arrival Time:  27.127037, Run Time:  4.505613, Priority: 3, Final runtime:  4.505613, Time started:        -1, Turn Around time: -27.127037, Waiting time: -28.127037, Responce time: -28.127037]
+[Name: 147 --> Arrival Time:  31.850582, Run Time:  9.771002, Priority: 1, Final runtime:  9.771002, Time started:        -1, Turn Around time: -31.850582, Waiting time: -32.850582, Responce time: -32.850582]
+[Name: 128 --> Arrival Time:  33.761227, Run Time:  5.147725, Priority: 3, Final runtime:  5.147725, Time started:        -1, Turn Around time: -33.761227, Waiting time: -34.761227, Responce time: -34.761227]
+[Name: 132 --> Arrival Time:  36.539429, Run Time:  1.452504, Priority: 4, Final runtime:  1.452504, Time started:        -1, Turn Around time: -36.539429, Waiting time: -37.539429, Responce time: -37.539429]
+[Name: 143 --> Arrival Time:  38.878132, Run Time:  8.688566, Priority: 2, Final runtime:  8.688566, Time started:        -1, Turn Around time: -38.878132, Waiting time: -39.878132, Responce time: -39.878132]
+[Name: 121 --> Arrival Time:  46.469048, Run Time:  5.728449, Priority: 4, Final runtime:  5.728449, Time started:        -1, Turn Around time: -46.469048, Waiting time: -47.469048, Responce time: -47.469048]
+[Name: 126 --> Arrival Time:  54.420071, Run Time:  6.378192, Priority: 3, Final runtime:  6.378192, Time started:        -1, Turn Around time: -54.420071, Waiting time: -55.420071, Responce time: -55.420071]
+[Name: 138 --> Arrival Time:  56.545589, Run Time:  1.930367, Priority: 2, Final runtime:  1.930367, Time started:        -1, Turn Around time: -56.545589, Waiting time: -57.545589, Responce time: -57.545589]
+[Name: 141 --> Arrival Time:  56.614792, Run Time:  7.577798, Priority: 2, Final runtime:  7.577798, Time started:        -1, Turn Around time: -56.614792, Waiting time: -57.614792, Responce time: -57.614792]
+[Name: 122 --> Arrival Time:  57.018356, Run Time:  4.099352, Priority: 3, Final runtime:  4.099352, Time started:        -1, Turn Around time: -57.018356, Waiting time: -58.018356, Responce time: -58.018356]
+[Name: 131 --> Arrival Time:  60.548317, Run Time:  5.159180, Priority: 3, Final runtime:  5.159180, Time started:        -1, Turn Around time: -60.548317, Waiting time: -61.548317, Responce time: -61.548317]
+[Name: 120 --> Arrival Time:  67.556404, Run Time:  5.937280, Priority: 1, Final runtime:  5.937280, Time started:        -1, Turn Around time: -67.556404, Waiting time: -68.556404, Responce time: -68.556404]
+[Name: 149 --> Arrival Time:  69.463326, Run Time:  9.819021, Priority: 3, Final runtime:  9.819021, Time started:        -1, Turn Around time: -69.463326, Waiting time: -70.463326, Responce time: -70.463326]
+[Name: 134 --> Arrival Time:  72.820961, Run Time:  5.409214, Priority: 3, Final runtime:  5.409214, Time started:        -1, Turn Around time: -72.820961, Waiting time: -73.820961, Responce time: -73.820961]
+[Name: 136 --> Arrival Time:  73.142570, Run Time:  7.362153, Priority: 1, Final runtime:  7.362153, Time started:        -1, Turn Around time: -73.142570, Waiting time: -74.142570, Responce time: -74.142570]
+[Name: 124 --> Arrival Time:  76.760010, Run Time:  1.088023, Priority: 1, Final runtime:  1.088023, Time started:        -1, Turn Around time: -76.760010, Waiting time: -77.760010, Responce time: -77.760010]
+[Name: 144 --> Arrival Time:  77.853477, Run Time:  9.583112, Priority: 1, Final runtime:  9.583112, Time started:        -1, Turn Around time: -77.853477, Waiting time: -78.853477, Responce time: -78.853477]
+[Name: 140 --> Arrival Time:  83.615501, Run Time:  7.851474, Priority: 2, Final runtime:  7.851474, Time started:        -1, Turn Around time: -83.615501, Waiting time: -84.615501, Responce time: -84.615501]
+[Name: 129 --> Arrival Time:  88.546043, Run Time:  1.099684, Priority: 2, Final runtime:  1.099684, Time started:        -1, Turn Around time: -88.546043, Waiting time: -89.546043, Responce time: -89.546043]
+[Name: 148 --> Arrival Time:  92.020432, Run Time:  3.203340, Priority: 4, Final runtime:  3.203340, Time started:        -1, Turn Around time: -92.020432, Waiting time: -93.020432, Responce time: -93.020432]
+[Name: 133 --> Arrival Time:  94.229012, Run Time:  0.852734, Priority: 2, Final runtime:  0.852734, Time started:        -1, Turn Around time: -94.229012, Waiting time: -95.229012, Responce time: -95.229012]
+[Name: 127 --> Arrival Time:  95.629822, Run Time:  7.040123, Priority: 4, Final runtime:  7.040123, Time started:        -1, Turn Around time: -95.629822, Waiting time: -96.629822, Responce time: -96.629822]
+[Name: 137 --> Arrival Time:  98.823425, Run Time:  1.404392, Priority: 2, Final runtime:  1.404392, Time started:        -1, Turn Around time: -98.823425, Waiting time: -99.823425, Responce time: -99.823425]
 
 ------------------------------------------------------------------------------
 
 **First Come First Served(FCFS)**
 *Processing list1*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   ]  7|  7|  7|  7|  7|  7|  7|  7]  4|  4|  4|  4|  4]  2|  2|  2|  2|  2|  2]  5|  5|  5|  5|  5|  5] 23| 23| 23| 23| 23| 23| 23| 23| 23] 17]  8] 13| 13| 13| 13| 13] 27| 27| 27| 27| 27| 27| 27| 27| 27| 27]  6|  6|  6|  6] 24| 24| 24| 24| 24| 24| 24| 24] 22| 22| 22] 11| 11| 11| 11| 11| 11| 11| 11] 18| 18| 18| 18| 18| 18| 18| 18] 14| 14| 14| 14| 14]  9|  9|  9]  0|  0|  0] 12| 12| 12| 12| 12| 12| 12| 12]
-Average Turnaround: 25.149372
-Average Waiting: 24.149372
-Average Response: 19.538261
-Throughput: 18.0
+[   |   |   |   |   |   ]  0|  0]  2|  2|  2] 18| 18| 18| 18| 18| 18| 18| 18| 18| 18] 10| 10| 10| 10| 10| 10| 10| 10| 10] 13| 13| 13] 16| 16| 16| 16| 16| 16| 16| 16] 11| 11]  8] 12| 12| 12| 12| 12| 12| 12| 12| 12| 12]  6] 14| 14| 14| 14| 14| 14| 14| 14| 14| 14]  9|  9|  9|  9|  9|  9] 20| 20| 20| 20] 21| 21| 21| 21| 21]  3|  3|  3|  3|  3|  3|  3|  3] 22| 22| 22| 22| 22| 22| 22| 22| 22| 22] 28| 28| 28| 28| 28| 28| 28| 28| 28]
+Average Turnaround: 33.777092
+Average Waiting: 32.777092
+Average Response: 27.835915
+Throughput: 16.0
 *Processing list2*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   |   |   |   |   |   ] 51| 51| 51| 51| 51| 51| 51| 51] 40] 55| 55| 55| 55| 55| 55| 55| 55] 54| 54| 54| 54| 54| 54| 54| 54| 54| 54] 44| 44| 44| 44] 50| 50| 50| 50| 50| 50| 50] 38| 38| 38| 38| 38| 38| 38| 38| 38] 52| 52| 52| 52] 39| 39| 39| 39| 39| 39| 39| 39| 39] 33| 33| 33| 33| 33| 33| 33| 33] 32| 32| 32| 32] 30| 30| 30| 30] 41| 41| 41| 41| 41| 41| 41| 41| 41| 41] 43| 43| 43| 43| 43| 43]
-Average Turnaround: 26.111553
-Average Waiting: 25.111553
-Average Response: 19.540127
-Throughput: 14.0
+[   |   |   |   |   |   |   |   |   |   |   |   ] 30| 30| 30| 30| 30] 47| 47| 47| 47] 38| 38| 38| 38| 38| 38| 38| 38] 46| 46| 46| 46| 46| 46| 46| 46| 46] 59| 59| 59| 59| 59| 59| 59| 59| 59] 33| 33| 33| 33| 33] 55| 55| 55| 55] 39| 39| 39| 39] 53| 53] 50| 50| 50| 50| 50| 50| 50| 50| 50| 50] 57| 57] 52| 52| 52| 52| 52| 52| 52| 52] 34| 34| 34| 34| 34] 37| 37| 37] 48| 48| 48| 48| 48| 48| 48| 48| 48| 48] 56| 56| 56| 56| 56| 56| 56| 56| 56| 56]
+Average Turnaround: 29.7714
+Average Waiting: 28.7714
+Average Response: 23.6464
+Throughput: 15.0
 *Processing list3*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ] 85| 85| 85| 85| 85| 85| 85| 85| 85] 79| 79| 79| 79| 79| 79| 79| 79| 79] 89| 89| 89| 89| 89| 89| 89| 89| 89| 89] 87| 87| 87| 87| 87| 87| 87| 87] 60| 60| 60| 60| 60| 60| 60| 60| 60| 60] 76| 76| 76| 76| 76] 66] 67| 67] 64| 64| 64| 64| 64| 64| 64| 64] 83| 83| 83| 83] 65| 65| 65| 65| 65| 65| 65| 65| 65] 68] 63| 63| 63| 63| 63| 63] 77| 77| 77| 77| 77| 77| 77| 77| 77| 77] 70| 70| 70| 70| 70| 70| 70| 70]
-Average Turnaround: 32.75684
-Average Waiting: 31.75684
-Average Response: 26.090178
-Throughput: 15.0
+[   |   |   ] 66| 66| 66] 73]   ] 60| 60| 60]   ] 79| 79| 79| 79| 79| 79| 79] 87] 78| 78| 78| 78| 78| 78| 78| 78] 61| 61| 61| 61| 61| 61| 61| 61| 61| 61] 86| 86| 86| 86| 86| 86] 62| 62| 62| 62| 62| 62| 62| 62] 69| 69| 69| 69| 69| 69| 69| 69] 75| 75| 75| 75| 75| 75| 75] 89| 89| 89| 89| 89| 89| 89| 89| 89| 89] 72| 72| 72| 72| 72] 64| 64| 64] 81| 81| 81| 81| 81| 81| 81] 77| 77| 77| 77] 71| 71| 71| 71| 71]
+Average Turnaround: 26.548285
+Average Waiting: 25.548285
+Average Response: 20.90123
+Throughput: 16.0
 *Processing list4*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]101|101|101|101|101|101|101|101|101]108|108|108|108|108|108|108] 95| 95| 95| 95| 95| 95| 95] 97| 97| 97| 97| 97| 97] 94]119]109|109|109|109|109|109|109|109] 98| 98| 98| 98] 96| 96| 96| 96] 93| 93| 93| 93| 93| 93| 93| 93| 93| 93] 91| 91| 91| 91| 91| 91| 91]105|105|105]117|117]100|100|100|100] 90| 90| 90| 90| 90| 90| 90| 90| 90| 90]112|112|112|112] 99| 99| 99| 99| 99| 99| 99| 99]115|115|115|115|115|115|115]
-Average Turnaround: 25.60461
-Average Waiting: 24.60461
-Average Response: 19.937948
-Throughput: 18.0
+[   ] 91| 91| 91| 91| 91| 91| 91]100|100]102|102|102|102|102|102|102|102|102|102]115|115|115|115|115|115]101|101|101|101]117|117|117]119|119|119|119]110|110|110|110|110|110] 94| 94| 94| 94| 94| 94]111|111|111|111|111|111|111|111|111|111] 97| 97| 97| 97| 97| 97| 97]112|112|112|112|112|112|112|112]103|103|103|103|103|103|103|103]107|107|107|107|107|107|107|107] 93| 93| 93| 93| 93]114]106|106|106|106|106|106|106|106|106|106]
+Average Turnaround: 26.211739
+Average Waiting: 25.211739
+Average Response: 20.035263
+Throughput: 16.0
 *Processing list5*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]147|147]   ]137|137|137|137|137|137|137|137|137]149|149|149|149]148|148]136]125|125|125|125|125|125|125|125|125|125]141|141|141|141|141|141]143|143|143|143|143|143]122|122|122|122|122|122|122|122|122|122]124]126|126|126|126|126|126|126|126|126|126]140|140|140|140|140|140|140|140]135|135|135|135|135|135|135|135|135]138|138|138|138|138|138|138]128|128|128|128|128|128|128|128|128]132|132|132|132]
-Average Turnaround: 24.841276
-Average Waiting: 23.841276
-Average Response: 18.716278
-Throughput: 16.0
-Avgerage Throughput: 16.2
+[   |   ]135|135|135|135|135|135|135|135|135|135]142]130|130|130|130|130|130|130|130]123|123]139|139|139|139|139|139|139]145|145|145]125|125|125|125|125|125|125]146|146|146|146|146]147|147|147|147|147|147|147|147|147|147]128|128|128|128|128|128]132|132]143|143|143|143|143|143|143|143|143]121|121|121|121|121|121]126|126|126|126|126|126|126]138|138]141|141|141|141|141|141|141|141]122|122|122|122|122]131|131|131|131|131|131]
+Average Turnaround: 24.758617
+Average Waiting: 23.758617
+Average Response: 18.98084
+Throughput: 17.0
+Avgerage Throughput: 16.0
 
 
 
@@ -205,40 +205,40 @@ Avgerage Throughput: 16.2
 **Shortest Job First(SJF)**
 *Processing list1*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   ]  7|  7|  7|  7|  7|  7|  7|  7]  4|  4|  4|  4|  4]  8] 17]  5|  5|  5|  5|  5|  5] 13| 13| 13| 13| 13]  2|  2|  2|  2|  2|  2] 23| 23| 23| 23| 23| 23| 23| 23| 23] 22| 22| 22]  6|  6|  6|  6] 24| 24| 24| 24| 24| 24| 24| 24]  9|  9|  9]  0|  0|  0] 14| 14| 14| 14| 14] 15| 15| 15| 15| 15| 15] 28| 28| 28| 28| 28] 21| 21| 21| 21| 21| 21| 21]  3] 19] 26| 26| 26| 26] 25| 25] 16| 16| 16| 16| 16]
-Average Turnaround: 10.019013
-Average Waiting: 9.019013
-Average Response: 5.5644684
+[   |   |   |   |   |   ]  0|  0]  2|  2|  2] 13| 13| 13] 11| 11]  8] 16| 16| 16| 16| 16| 16| 16| 16]  6] 10| 10| 10| 10| 10| 10| 10| 10| 10] 20| 20| 20| 20] 21| 21| 21| 21| 21]  5|  5|  5|  5|  5|  5] 23| 23| 23| 23]  9|  9|  9|  9|  9|  9]  7] 25| 25| 25| 25| 25| 25| 25] 19]  3|  3|  3|  3|  3|  3|  3|  3] 27| 27| 27| 27] 24| 24| 24| 24| 24| 24] 29| 29| 29| 29| 29| 29| 29]  1] 17| 17| 17] 15| 15| 15| 15| 15| 15| 15| 15| 15]
+Average Turnaround: 10.775177
+Average Waiting: 9.775177
+Average Response: 6.3838725
 Throughput: 22.0
 *Processing list2*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   |   |   |   |   |   ] 51| 51| 51| 51| 51| 51| 51| 51] 40] 55| 55| 55| 55| 55| 55| 55| 55] 44| 44| 44| 44] 50| 50| 50| 50| 50| 50| 50] 38| 38| 38| 38| 38| 38| 38| 38| 38] 52| 52| 52| 52] 32| 32| 32| 32] 30| 30| 30| 30] 43| 43| 43| 43| 43| 43] 49| 49| 49| 49| 49| 49| 49| 49] 59| 59| 59| 59| 59] 31] 42| 42| 42] 48| 48| 48| 48| 48] 45| 45| 45| 45| 45| 45] 56| 56| 56| 56] 46| 46] 57| 57| 57]
-Average Turnaround: 9.825033
-Average Waiting: 8.825033
-Average Response: 4.982926
-Throughput: 19.0
+[   |   |   |   |   |   |   |   |   |   |   |   ] 30| 30| 30| 30| 30] 47| 47| 47| 47] 38| 38| 38| 38| 38| 38| 38| 38] 39| 39| 39| 39] 55| 55| 55| 55] 53| 53] 33| 33| 33| 33| 33] 57| 57] 52| 52| 52| 52| 52| 52| 52| 52] 37| 37| 37] 34| 34| 34| 34| 34] 43| 43| 43| 43| 43| 43| 43| 43] 36| 36| 36| 36| 36| 36| 36| 36| 36] 45| 45] 35| 35| 35| 35| 35] 31| 31| 31| 31| 31] 41| 41| 41| 41] 44| 44| 44] 51| 51| 51| 51| 51]
+Average Turnaround: 10.448122
+Average Waiting: 9.448122
+Average Response: 5.6586475
+Throughput: 18.0
 *Processing list3*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ] 85| 85| 85| 85| 85| 85| 85| 85| 85] 87| 87| 87| 87| 87| 87| 87| 87] 66] 76| 76| 76| 76| 76] 79| 79| 79| 79| 79| 79| 79| 79| 79] 67| 67] 83| 83| 83| 83] 64| 64| 64| 64| 64| 64| 64| 64] 68] 63| 63| 63| 63| 63| 63] 65| 65| 65| 65| 65| 65| 65| 65| 65] 82] 62| 62] 70| 70| 70| 70| 70| 70| 70| 70] 61] 73| 73] 69| 69] 86| 86| 86] 72| 72| 72] 81| 81| 81] 71| 71| 71] 84| 84| 84] 74| 74| 74| 74| 74]
-Average Turnaround: 10.100012
-Average Waiting: 9.100012
-Average Response: 5.8391433
-Throughput: 23.0
+[   |   |   ] 66| 66| 66] 73]   ] 60| 60| 60]   ] 79| 79| 79| 79| 79| 79| 79] 87] 86| 86| 86| 86| 86| 86] 75| 75| 75| 75| 75| 75| 75] 78| 78| 78| 78| 78| 78| 78| 78] 72| 72| 72| 72| 72] 64| 64| 64] 69| 69| 69| 69| 69| 69| 69| 69] 81| 81| 81| 81| 81| 81| 81] 65] 63| 63| 63] 74| 74] 77| 77| 77| 77] 71| 71| 71| 71| 71] 88| 88| 88| 88] 70| 70| 70| 70| 70] 82] 84| 84| 84| 84| 84] 67| 67| 67| 67| 67| 67| 67| 67]
+Average Turnaround: 11.268207
+Average Waiting: 10.268207
+Average Response: 6.859117
+Throughput: 21.0
 *Processing list4*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]101|101|101|101|101|101|101|101|101] 97| 97| 97| 97| 97| 97] 94]119] 98| 98| 98| 98] 95| 95| 95| 95| 95| 95| 95] 96| 96| 96| 96]108|108|108|108|108|108|108] 91| 91| 91| 91| 91| 91| 91]117|117]105|105|105]109|109|109|109|109|109|109|109]100|100|100|100]113]112|112|112|112]107|107|107|107]103|103|103|103]110|110|110|110|110]114]118|118|118|118|118|118]102|102|102]116|116|116]106|106|106|106|106|106]
-Average Turnaround: 12.702049
-Average Waiting: 11.702047
-Average Response: 8.354221
-Throughput: 23.0
+[   ] 91| 91| 91| 91| 91| 91| 91]100|100]115|115|115|115|115|115]101|101|101|101]117|117|117]102|102|102|102|102|102|102|102|102|102]119|119|119|119] 94| 94| 94| 94| 94| 94]110|110|110|110|110|110]114] 93| 93| 93| 93| 93] 90| 90| 90| 90| 90] 97| 97| 97| 97| 97| 97| 97]112|112|112|112|112|112|112|112]107|107|107|107|107|107|107|107]108] 99| 99| 99| 99| 99| 99| 99] 98| 98| 98]118]104|104|104|104|104]
+Average Turnaround: 13.094342
+Average Waiting: 12.094342
+Average Response: 8.1443405
+Throughput: 20.0
 *Processing list5*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]147|147]   ]137|137|137|137|137|137|137|137|137]136]148|148]149|149|149|149]141|141|141|141|141|141]143|143|143|143|143|143]124]122|122|122|122|122|122|122|122|122|122]138|138|138|138|138|138|138]120]123|123|123]132|132|132|132]121|121|121|121]129|129|129|129]134|134|134|134]139|139|139|139|139|139|139|139]144|144]130|130|130|130|130|130|130|130]131|131|131|131|131]140|140|140|140|140|140|140|140]
-Average Turnaround: 11.920772
-Average Waiting: 10.920772
-Average Response: 7.206487
+[   |   ]135|135|135|135|135|135|135|135|135|135]142]123|123]139|139|139|139|139|139|139]145|145|145]125|125|125|125|125|125|125]146|146|146|146|146]132|132]128|128|128|128|128|128]130|130|130|130|130|130|130|130]121|121|121|121|121|121]138|138]122|122|122|122|122]131|131|131|131|131|131]120|120|120|120|120|120]124|124]134|134|134|134|134|134]126|126|126|126|126|126|126]129|129]133]148|148|148|148]
+Average Turnaround: 11.479322
+Average Waiting: 10.479322
+Average Response: 6.8126564
 Throughput: 21.0
-Avgerage Throughput: 21.6
+Avgerage Throughput: 20.4
 
 
 
@@ -246,40 +246,40 @@ Avgerage Throughput: 21.6
 **Shortest Remaining Time(SRT)**
 *Processing list1*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   ]  7|  7|  7|  7|  7|  7|  7|  7]  4|  4|  4|  4|  4]  8] 17]  5|  5|  5|  5|  5|  5] 13| 13| 13| 13| 13]  2|  2|  2|  2|  2|  2] 23| 23| 23| 23]  6|  6|  6|  6] 23] 22| 22| 22] 23| 23| 23| 23] 24| 24| 24| 24]  9|  9|  9] 24| 24| 24| 24]  0|  0|  0] 14| 14| 14| 14| 14] 15| 15| 15| 15| 15| 15] 28| 28| 28| 28| 28] 21| 21]  3] 21| 21| 21| 21| 21] 19] 26| 26| 26| 26] 25| 25] 16| 16| 16| 16| 16]
-Average Turnaround: 9.746286
-Average Waiting: 8.746286
-Average Response: 4.791741
+[   |   |   |   |   |   ]  0|  0]  2|  2|  2] 13| 13| 13] 11| 11]  8] 16| 16| 16| 16]  6] 16| 16| 16| 16] 10| 10| 10| 10| 10| 10| 10| 10| 10] 20| 20| 20| 20] 21| 21| 21| 21| 21]  5|  5|  5|  5|  5|  5] 23| 23| 23| 23]  9|  9|  9]  7]  9|  9|  9] 25| 25| 25| 25| 25| 25] 19] 25]  3|  3] 24| 24| 24| 24| 24| 24] 27| 27| 27| 27]  3|  3|  3|  3|  3|  3] 29| 29| 29]  1] 17| 17| 17] 29| 29| 29| 29] 15] 26| 26| 26| 26| 26| 26| 26] 15| 15| 15| 15| 15| 15| 15| 15]
+Average Turnaround: 10.555756
+Average Waiting: 9.555756
+Average Response: 5.055756
 Throughput: 22.0
 *Processing list2*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   |   |   |   |   |   ] 51| 51| 51| 51| 51] 40] 51| 51| 51] 55] 44| 44| 44| 44] 55| 55| 55| 55| 55| 55| 55] 50| 50| 50| 50| 50| 50| 50] 38] 52| 52| 52| 52] 38| 38] 32| 32| 32| 32] 38| 38| 38| 38| 38| 38] 30| 30| 30| 30] 43| 43| 43| 43| 43| 43] 49| 49| 49| 49| 49| 49| 49| 49] 59] 42| 42| 42] 59] 31] 59| 59| 59] 48| 48| 48| 48| 48] 45| 45| 45| 45| 45| 45] 56| 56| 56| 56] 46| 46] 57| 57| 57]
-Average Turnaround: 9.193454
-Average Waiting: 8.193454
-Average Response: 3.45661
-Throughput: 19.0
+[   |   |   |   |   |   |   |   |   |   |   |   ] 30| 30| 30| 30| 30] 47| 47| 47| 47] 38| 38| 38| 38] 39| 39| 39| 39] 38| 38| 38| 38] 55| 55| 55| 55] 53| 53] 33| 33| 33| 33| 33] 57| 57] 52| 52| 52| 52| 52| 52| 52| 52] 37| 37| 37] 34| 34| 34| 34| 34] 43| 43| 43| 43| 43| 43| 43| 43] 36| 36] 31| 31| 31| 31| 31] 35| 35] 45| 45] 35| 35| 35] 51| 51| 51| 51| 51] 41| 41| 41| 41] 40| 40] 44| 44| 44] 40] 32| 32] 40| 40] 36| 36| 36| 36| 36| 36| 36]
+Average Turnaround: 10.355656
+Average Waiting: 9.355657
+Average Response: 3.6889892
+Throughput: 18.0
 *Processing list3*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ] 85| 85| 85| 85| 85| 85| 85| 85| 85] 87| 87| 87| 87| 87| 87| 87| 87] 66] 76| 76| 76| 76| 76] 79| 79| 79| 79| 79] 67| 67] 79| 79| 79| 79] 83| 83| 83| 83] 64| 64] 68] 64| 64| 64| 64| 64| 64] 63| 63| 63| 63| 63| 63] 65| 65| 65| 65| 65| 65| 65| 65| 65] 82] 62| 62] 70] 61] 70| 70] 69| 69] 73| 73] 86| 86| 86] 70| 70| 70| 70| 70] 72| 72| 72] 81| 81| 81] 71| 71| 71] 84| 84| 84] 74| 74| 74| 74| 74]
-Average Turnaround: 9.186968
-Average Waiting: 8.186968
-Average Response: 4.4478383
-Throughput: 23.0
+[   |   |   ] 66| 66| 66] 73]   ] 60| 60| 60]   ] 79| 79| 79| 79] 87] 79| 79| 79] 86| 86| 86| 86| 86| 86] 75| 75| 75| 75| 75| 75| 75] 78| 78| 78| 78| 78| 78| 78| 78] 72| 72| 72| 72| 72] 64| 64| 64] 69| 69| 69| 69| 69| 69| 69| 69] 81] 77| 77| 77] 65] 77] 71] 63| 63| 63] 74| 74] 71| 71| 71| 71] 70| 70| 70| 70| 70] 88| 88| 88| 88] 84| 84| 84| 84] 82] 84] 81| 81| 81| 81| 81| 81] 67| 67| 67| 67| 67| 67| 67| 67]
+Average Turnaround: 10.677298
+Average Waiting: 9.677298
+Average Response: 4.5409346
+Throughput: 21.0
 *Processing list4*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]101]108|108|108|108|108|108|108] 97| 97] 94]119] 97| 97| 97| 97] 98| 98| 98| 98] 95| 95| 95] 96| 96| 96| 96] 95| 95| 95| 95]101|101|101|101|101|101|101|101] 91| 91| 91]105|105|105]117|117] 91| 91| 91| 91]109|109|109]100|100|100|100]112|112|112|112]113]109|109|109|109|109]107|107|107|107]103|103|103|103]110]114]110|110|110|110]118|118|118|118|118|118]102|102|102]116|116|116]106|106|106|106|106|106]
-Average Turnaround: 11.789002
-Average Waiting: 10.789004
-Average Response: 5.223787
-Throughput: 23.0
+[   ] 91| 91| 91| 91]100|100] 91| 91| 91]115|115]101|101|101|101]115|115|115|115]117|117|117]102|102]119|119|119|119]102|102]110|110|110|110|110|110] 94| 94| 94| 94| 94| 94]102|102|102|102|102|102]114] 93| 93| 93| 93| 93] 90| 90| 90| 90| 90] 97| 97| 97| 97| 97| 97| 97]112|112|112|112|112|112|112|112]107|107|107|107|107|107]108]107|107] 99| 99| 99| 99| 99| 99| 99] 98]118] 98| 98]104|104|104|104|104]
+Average Turnaround: 12.744342
+Average Waiting: 11.744342
+Average Response: 6.594342
+Throughput: 20.0
 *Processing list5*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]147|147]   ]137|137|137|137]149|149|149|149]137]136]148|148]137|137|137|137]141|141|141|141|141|141]143|143|143|143]124]143|143]122|122|122|122|122|122|122|122|122|122]138|138|138|138|138|138]120]138]123|123|123]132|132|132|132]121|121|121|121]129|129|129|129]134|134|134|134]139|139|139]144|144]139|139|139|139|139]130]131|131|131|131|131]130|130|130|130|130|130|130]140|140|140|140|140|140|140|140]
-Average Turnaround: 11.5874405
-Average Waiting: 10.5874405
-Average Response: 6.111249
+[   |   ]135|135|135]142]135|135|135]123|123]135|135|135|135]139]145|145|145]139|139|139|139|139|139]125|125|125|125|125|125|125]146|146|146|146|146]132|132]128|128|128|128|128|128]130|130|130|130|130|130|130|130]121|121|121|121|121|121]138|138]122|122|122|122|122]131|131|131|131|131|131]120|120|120|120|120|120]124|124]134|134|134|134|134|134]126|126|126]129|129]126|126|126|126]133]148|148|148|148]
+Average Turnaround: 10.860275
+Average Waiting: 9.860275
+Average Response: 5.812656
 Throughput: 21.0
-Avgerage Throughput: 21.6
+Avgerage Throughput: 20.4
 
 
 
@@ -287,40 +287,40 @@ Avgerage Throughput: 21.6
 **Round Robin(RR)**
 *Processing list1*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   ]  7|  7|  7|  7|  7]  4]  7]  4]  2]  7]  4]  5]  2]  7] 23]  4]  5] 17]  2]  8] 23]  4]  5] 13]  2] 23]  5] 13]  2] 23]  5] 13]  2] 27] 23]  5] 13] 27] 23]  6] 13] 24] 27] 23]  6] 22] 24] 27] 23]  6] 22] 24] 27] 11] 23]  6] 18] 22] 14] 24]  9] 27] 11] 18]  0] 12] 14] 24]  9] 27] 11] 18]  0] 12] 15] 14] 24]  9] 27] 21] 11] 18] 28]  0] 12] 15] 14] 24] 27] 21]  3] 10] 11] 18] 28] 12] 15] 19]  1] 14] 26] 24] 27] 29] 21] 25] 10] 16] 11] 20] 18] 28] 12] 15]  1] 26] 29] 21] 25] 10] 16] 11] 20] 18] 28] 12] 15]  1] 26] 29] 21] 10] 16] 11] 20] 18] 28] 12] 15]  1] 26] 29] 21] 10] 16] 20] 12]  1] 29] 21] 10] 16] 20]  1] 29] 10] 20]  1] 29] 10] 20]  1] 29]  1]
-Average Turnaround: 46.88041
-Average Waiting: 45.88041
-Average Response: 8.013743
-Throughput: 30.0
+[   |   |   |   |   |   ]  0]  2]  0] 18] 10]  2] 18] 13] 10]  2] 16] 18] 13] 11] 10]  8] 12] 16] 18] 13] 11] 10]  6] 12] 16] 18] 10] 14] 12] 16] 18]  9] 20] 10] 14] 12] 21] 16]  3] 18] 22]  9] 20] 10] 28] 25] 14] 12] 21] 16]  5]  3] 18] 22]  9] 20] 23] 10] 28] 25] 14] 12] 21] 16]  5]  7]  3] 18] 22]  9] 20] 23] 10] 28] 25] 14] 19] 12] 21] 16]  5] 24]  3] 18] 22]  9] 27] 23] 28] 25] 14]  4] 12] 21]  5] 29] 24]  3]  1] 17] 22]  9] 27] 23] 28] 25] 14] 15]  4] 12] 26]  5] 29] 24]  3] 17] 22] 27] 28] 25] 14] 15]  4] 12] 26]  5] 29] 24]  3] 17] 22] 27] 28] 25] 14] 15]  4] 26] 29] 24]  3] 22] 28] 14] 15]  4] 26] 29] 24] 22] 28] 15]  4] 26] 29] 22] 15]  4] 26] 29] 15]  4] 26] 15]  4] 15]  4]
+Average Turnaround: 62.330128
+Average Waiting: 61.330128
+Average Response: 9.396801
+Throughput: 13.0
 *Processing list2*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   |   |   |   |   |   ] 51| 51| 51| 51| 51| 51] 40] 55] 51] 55] 51] 54] 55] 44] 50] 54] 55] 44] 50] 38] 54] 55] 44] 50] 38] 54] 55] 44] 50] 38] 54] 55] 50] 52] 38] 54] 55] 50] 52] 39] 38] 33] 32] 54] 50] 52] 39] 38] 33] 30] 32] 54] 52] 39] 41] 43] 38] 49] 33] 30] 32] 54] 39] 41] 43] 38] 49] 59] 33] 30] 32] 54] 39] 41] 42] 43] 47] 38] 49] 48] 59] 31] 33] 37] 30] 39] 41] 45] 42] 43] 47] 58] 49] 48] 35] 36] 59] 56] 33] 37] 34] 39] 57] 46] 41] 45] 53] 42] 43] 47] 58] 49] 48] 35] 36] 59] 56] 33] 37] 34] 39] 57] 46] 41] 45] 53] 43] 47] 58] 49] 48] 35] 36] 59] 56] 33] 37] 34] 39] 57] 41] 45] 53] 47] 58] 49] 48] 35] 36] 56] 37] 34] 41] 45] 53] 47] 58] 49] 35] 36] 37] 41] 45] 53] 47] 58] 35] 36] 37] 41] 53] 47] 58] 35] 36] 37] 47] 58] 35] 36] 37] 58] 35] 36] 37] 58] 35]
-Average Turnaround: 67.38912
-Average Waiting: 66.38912
-Average Response: 9.689121
-Throughput: 21.0
+[   |   |   |   |   |   |   |   |   |   |   |   ] 30| 30] 47] 30] 47] 30] 47] 38] 30] 46] 47] 38] 59] 46] 38] 33] 59] 55] 39] 46] 38] 33] 59] 55] 39] 46] 38] 33] 59] 55] 39] 53] 46] 38] 33] 59] 55] 50] 39] 57] 52] 53] 46] 38] 33] 59] 50] 57] 34] 37] 48] 52] 56] 46] 38] 36] 59] 50] 34] 37] 43] 48] 52] 56] 46] 36] 59] 50] 34] 37] 31] 43] 48] 52] 56] 46] 35] 36] 59] 45] 54] 50] 58] 34] 51] 31] 43] 48] 52] 40] 56] 41] 35] 42] 36] 45] 54] 50] 58] 44] 34] 51] 31] 43] 32] 49] 48] 52] 40] 56] 41] 35] 42] 36] 54] 50] 58] 44] 51] 31] 43] 32] 49] 48] 52] 40] 56] 41] 35] 42] 36] 54] 50] 58] 44] 51] 31] 43] 49] 48] 52] 40] 56] 41] 35] 42] 36] 54] 50] 58] 51] 43] 49] 48] 40] 56] 42] 36] 54] 50] 58] 43] 49] 48] 56] 42] 36] 54] 58] 49] 48] 56] 42] 54] 49| 49| 49]
+Average Turnaround: 68.90828
+Average Waiting: 67.90827
+Average Response: 9.908271
+Throughput: 11.0
 *Processing list3*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ] 85| 85] 79] 85] 79] 89] 85] 87] 79] 60] 89] 85] 87] 79] 60] 89] 85] 87] 76] 79] 60] 89] 85] 66] 87] 76] 79] 60] 89] 85] 87] 76] 79] 60] 67] 89] 85] 64] 83] 87] 76] 65] 79] 60] 67] 89] 64] 83] 87] 68] 76] 65] 79] 63] 60] 89] 64] 83] 87] 65] 63] 60] 89] 64] 77] 83] 65] 70] 63] 82] 60] 62] 89] 64] 77] 61] 65] 70] 63] 69] 73] 60] 75] 62] 86] 64] 77] 65] 80] 70] 63] 69] 72] 73] 71] 75] 81] 86] 78] 64] 77] 74] 65] 80] 70] 84] 63] 72] 88] 71] 75] 81] 86] 78] 64] 77] 74] 65] 80] 70] 84] 72] 88] 71] 75] 81] 78] 77] 74] 65] 80] 70] 84] 88] 75] 78] 77] 74] 80] 70] 88] 75] 78] 77] 74] 80] 70] 88] 75] 78] 77] 80] 88] 75] 78] 77] 80] 88] 78] 88]
-Average Turnaround: 50.281162
-Average Waiting: 49.281162
-Average Response: 9.114496
-Throughput: 30.0
+[   |   |   ] 66| 66| 66] 73]   ] 60| 60| 60]   ] 79| 79| 79| 79| 79] 87] 79] 78] 61] 86] 79] 78] 61] 62] 69] 86] 75] 78] 61] 62] 89] 69] 86] 75] 78] 61] 62] 89] 69] 86] 75] 78] 72] 61] 62] 89] 69] 86] 75] 78] 72] 64] 61] 62] 89] 69] 86] 75] 78] 72] 64] 61] 81] 62] 89] 69] 77] 71] 75] 78] 65] 72] 70] 64] 61] 63] 81] 62] 74] 89] 69] 77] 71] 75] 80] 84] 72] 70] 83] 61] 63] 88] 81] 62] 74] 89] 69] 77] 71] 67] 82] 80] 84] 70] 68] 83] 61] 63] 88] 81] 85] 76] 89] 77] 71] 67] 80] 84] 70] 68] 83] 88] 81] 85] 76] 89] 71] 67] 80] 84] 70] 68] 83] 88] 81] 85] 76] 89] 67] 80] 84] 68] 83] 81] 85] 76] 67] 80] 68] 83] 85] 76] 67] 80] 68] 83] 85] 76] 67] 80] 68] 83] 85] 76] 67] 80] 68] 83] 76] 80] 76]
+Average Turnaround: 55.32591
+Average Waiting: 54.32591
+Average Response: 9.159243
+Throughput: 14.0
 *Processing list4*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]101|101]108]101]108] 95]101]108] 97] 95]101]108] 97] 95] 94]101]119]108]109] 98] 97] 95]101]108]109] 98] 97] 95]101] 96]108]109] 98] 97] 95]101] 96]109] 98] 97] 93] 95] 91] 96]109] 93]105] 91] 96]109]117] 93]105] 91]109]117] 93]105] 91]100] 90]109]112] 93] 99]115] 91]100] 90]113]112] 93] 99]107]115] 91]100] 90]103]112]110] 93]118] 99]104]107]115] 91]100]114] 90]106]103]112]110] 93] 92]118] 99]104]107]102]115]116] 90]106]103]110] 93]111] 92]118] 99]104]107]102]115]116] 90]106]103]110] 93]111] 92]118] 99]104]102]115]116] 90]106]110]111] 92]118] 99]104]115] 90]106]111] 92]118] 99]104] 90]106]111] 92] 90] 92| 92| 92]
-Average Turnaround: 46.509228
-Average Waiting: 45.509228
-Average Response: 7.8758974
-Throughput: 30.0
+[   ] 91| 91| 91| 91| 91]100] 91]102]100] 91]115]102]115]101]102]115]101]102]115]101]102]117]115]101]102]117]115]119]102]117]119]102]110]119] 94]102]110]119]111] 94] 97]102]112]110]111] 94] 97]112]110]111]103] 94]107] 97] 93]112]114]106]116]110]111]103] 94] 90]107] 97] 93]112]106] 92]116]110]111]103] 94] 90]107] 97] 93]112] 96]106] 92]116]105]111]103] 90]107] 99] 97] 93] 95]112]108] 96]106] 92]113]116]105]111]103] 90] 98]107] 99]104] 97]118] 93] 95]112]109] 96]106] 92]113]116]105]111]103] 90] 98]107] 99]104] 95]112]109] 96]106] 92]113]116]105]111]103] 98]107] 99]104] 95]109] 96]106] 92]113]116]105]111]103]107] 99]104] 95]109] 96]106] 92]113]116]105] 99]104] 95]109] 96]106] 92]113]116]105] 99] 95]109] 96]106] 92]113]105] 95]109] 96] 92]113]109] 96]109|109]
+Average Turnaround: 67.392746
+Average Waiting: 66.392746
+Average Response: 8.759419
+Throughput: 11.0
 *Processing list5*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]147|147]   ]137|137|137|137|137]149]137]149]137]149]137]148]136]125]149]137]148]141]125]143]141]125]143]141]125]143]141]125]122]143]124]141]125]122]143]126]141]125]122]143]140]135]138]126]125]122]140]128]135]138]126]132]129]125]120]122]139]140]123]128]135]138]126]121]132]129]125]122]139]140]123]128]135]134]138]126]121]132]129]122]139]144]140]123]128]135]134]130]138]126]121]127]131]132]129]122]139]144]140]128]142]135]134]145]130]138]126]121]127]133]131]146]122]139]140]128]142]135]134]145]130]138]126]127]133]131]146]122]139]140]128]142]135]145]130]126]127]133]131]146]139]128]142]135]145]130]126]127]133]131]146]139]128]142]145]130]127]133]146]142]145]130]127]133]142]145]130]127]133]142]145]127]142]127]
-Average Turnaround: 58.842976
-Average Waiting: 57.842976
-Average Response: 8.542974
-Throughput: 25.0
-Avgerage Throughput: 27.2
+[   |   ]135|135|135|135]142]135]130]135]130]123]135]130]123]135]130]139]135]145]130]139]135]145]130]139]145]125]130]139]125]146]130]139]125]146]147]139]128]125]146]147]132]139]128]143]125]146]147]132]128]143]125]121]146]147]128]143]125]121]126]147]128]138]141]143]122]121]126]131]147]128]138]141]143]122]121]120]126]131]149]147]134]141]136]143]122]121]124]120]144]126]131]149]147]134]141]140]136]143]122]121]124]129]120]144]126]131]148]149]147]133]134]127]141]140]136]137]143]122]129]120]144]126]131]148]149]147]134]127]141]140]136]137]143]120]144]126]131]148]149]134]127]141]140]136]120]144]148]149]134]127]141]140]136]144]149]127]140]136]144]149]127]140]136]144]149]127]140]144]149]127]144]
+Average Turnaround: 52.539803
+Average Waiting: 51.539803
+Average Response: 8.106472
+Throughput: 11.0
+Avgerage Throughput: 12.0
 
 
 
@@ -328,40 +328,40 @@ Avgerage Throughput: 27.2
 **Highest Priority First(HPF)**
 *Processing list1*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   ]  7|  7|  7|  7|  7|  7|  7|  7]  2|  2|  2|  2|  2|  2]  4|  4|  4|  4|  4]  5|  5|  5|  5|  5|  5] 17]  8] 23| 23| 23| 23| 23| 23| 23| 23| 23] 13| 13| 13| 13| 13] 27| 27| 27| 27| 27| 27| 27| 27| 27| 27]  6|  6|  6|  6] 24| 24| 24| 24| 24| 24| 24| 24] 22| 22| 22] 11| 11| 11| 11| 11| 11| 11| 11] 18| 18| 18| 18| 18| 18| 18| 18] 14| 14| 14| 14| 14]  9|  9|  9]  0|  0|  0] 12| 12| 12| 12| 12| 12| 12| 12]
-Average Turnaround: 24.316034
-Average Waiting: 23.316038
-Average Response: 18.704926
-Throughput: 18.0
+[   |   |   |   |   |   ]  0|  0]  2|  2|  2] 10| 10| 10| 10| 10| 10| 10| 10| 10] 11| 11] 13| 13| 13] 18| 18| 18| 18| 18| 18| 18| 18| 18| 18] 16| 16| 16| 16| 16| 16| 16| 16]  8] 12| 12| 12| 12| 12| 12| 12| 12| 12| 12]  6] 14| 14| 14| 14| 14| 14| 14| 14| 14| 14]  9|  9|  9|  9|  9|  9] 20| 20| 20| 20] 21| 21| 21| 21| 21]  3|  3|  3|  3|  3|  3|  3|  3] 22| 22| 22| 22| 22| 22| 22| 22| 22| 22] 28| 28| 28| 28| 28| 28| 28| 28| 28]
+Average Turnaround: 32.424152
+Average Waiting: 31.42415
+Average Response: 26.482973
+Throughput: 16.0
 *Processing list2*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   |   |   |   |   |   ] 51| 51| 51| 51| 51| 51| 51| 51] 40] 54| 54| 54| 54| 54| 54| 54| 54| 54| 54] 55| 55| 55| 55| 55| 55| 55| 55] 38| 38| 38| 38| 38| 38| 38| 38| 38] 44| 44| 44| 44] 50| 50| 50| 50| 50| 50| 50] 52| 52| 52| 52] 39| 39| 39| 39| 39| 39| 39| 39| 39] 33| 33| 33| 33| 33| 33| 33| 33] 32| 32| 32| 32] 30| 30| 30| 30] 41| 41| 41| 41| 41| 41| 41| 41| 41| 41] 43| 43| 43| 43| 43| 43]
-Average Turnaround: 26.75441
-Average Waiting: 25.75441
-Average Response: 20.182983
-Throughput: 14.0
+[   |   |   |   |   |   |   |   |   |   |   |   ] 30| 30| 30| 30| 30] 38| 38| 38| 38| 38| 38| 38| 38] 59| 59| 59| 59| 59| 59| 59| 59| 59] 47| 47| 47| 47] 46| 46| 46| 46| 46| 46| 46| 46| 46] 33| 33| 33| 33| 33] 55| 55| 55| 55] 39| 39| 39| 39] 53| 53] 50| 50| 50| 50| 50| 50| 50| 50| 50| 50] 57| 57] 52| 52| 52| 52| 52| 52| 52| 52] 34| 34| 34| 34| 34] 37| 37| 37] 48| 48| 48| 48| 48| 48| 48| 48| 48| 48] 56| 56| 56| 56| 56| 56| 56| 56| 56| 56]
+Average Turnaround: 30.3339
+Average Waiting: 29.3339
+Average Response: 24.2089
+Throughput: 15.0
 *Processing list3*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ] 85| 85| 85| 85| 85| 85| 85| 85| 85] 89| 89| 89| 89| 89| 89| 89| 89| 89| 89] 60| 60| 60| 60| 60| 60| 60| 60| 60| 60] 79| 79| 79| 79| 79| 79| 79| 79| 79] 87| 87| 87| 87| 87| 87| 87| 87] 76| 76| 76| 76| 76] 66] 67| 67] 64| 64| 64| 64| 64| 64| 64| 64] 83| 83| 83| 83] 65| 65| 65| 65| 65| 65| 65| 65| 65] 68] 63| 63| 63| 63| 63| 63] 77| 77| 77| 77| 77| 77| 77| 77| 77| 77] 70| 70| 70| 70| 70| 70| 70| 70]
-Average Turnaround: 33.023506
-Average Waiting: 32.023506
-Average Response: 26.356844
-Throughput: 15.0
+[   |   |   ] 66| 66| 66] 73]   ] 60| 60| 60]   ] 79| 79| 79| 79| 79| 79| 79] 78| 78| 78| 78| 78| 78| 78| 78] 86| 86| 86| 86| 86| 86] 62| 62| 62| 62| 62| 62| 62| 62] 87] 61| 61| 61| 61| 61| 61| 61| 61| 61| 61] 69| 69| 69| 69| 69| 69| 69| 69] 75| 75| 75| 75| 75| 75| 75] 89| 89| 89| 89| 89| 89| 89| 89| 89| 89] 72| 72| 72| 72| 72] 64| 64| 64] 81| 81| 81| 81| 81| 81| 81] 77| 77| 77| 77] 71| 71| 71| 71| 71]
+Average Turnaround: 27.31299
+Average Waiting: 26.31299
+Average Response: 21.665932
+Throughput: 16.0
 *Processing list4*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]101|101|101|101|101|101|101|101|101] 95| 95| 95| 95| 95| 95| 95]108|108|108|108|108|108|108] 98| 98| 98| 98] 97| 97| 97| 97| 97| 97] 94]119]109|109|109|109|109|109|109|109] 96| 96| 96| 96] 93| 93| 93| 93| 93| 93| 93| 93| 93| 93] 91| 91| 91| 91| 91| 91| 91]105|105|105]117|117]100|100|100|100] 90| 90| 90| 90| 90| 90| 90| 90| 90| 90]112|112|112|112] 99| 99| 99| 99| 99| 99| 99| 99]115|115|115|115|115|115|115]
-Average Turnaround: 25.60461
-Average Waiting: 24.60461
-Average Response: 19.937948
-Throughput: 18.0
+[   ] 91| 91| 91| 91| 91| 91| 91]102|102|102|102|102|102|102|102|102|102]100|100]115|115|115|115|115|115]117|117|117]101|101|101|101]119|119|119|119] 94| 94| 94| 94| 94| 94]110|110|110|110|110|110]107|107|107|107|107|107|107|107]111|111|111|111|111|111|111|111|111|111] 97| 97| 97| 97| 97| 97| 97]112|112|112|112|112|112|112|112]103|103|103|103|103|103|103|103] 93| 93| 93| 93| 93]114]106|106|106|106|106|106|106|106|106|106]
+Average Turnaround: 26.56468
+Average Waiting: 25.56468
+Average Response: 20.388208
+Throughput: 16.0
 *Processing list5*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]147|147]   ]137|137|137|137|137|137|137|137|137]149|149|149|149]148|148]136]125|125|125|125|125|125|125|125|125|125]141|141|141|141|141|141]122|122|122|122|122|122|122|122|122|122]143|143|143|143|143|143]124]126|126|126|126|126|126|126|126|126|126]140|140|140|140|140|140|140|140]135|135|135|135|135|135|135|135|135]138|138|138|138|138|138|138]128|128|128|128|128|128|128|128|128]132|132|132|132]
-Average Turnaround: 25.091276
-Average Waiting: 24.091276
-Average Response: 18.966278
-Throughput: 16.0
-Avgerage Throughput: 16.2
+[   |   ]135|135|135|135|135|135|135|135|135|135]142]130|130|130|130|130|130|130|130]123|123]145|145|145]125|125|125|125|125|125|125]139|139|139|139|139|139|139]147|147|147|147|147|147|147|147|147|147]146|146|146|146|146]128|128|128|128|128|128]132|132]143|143|143|143|143|143|143|143|143]121|121|121|121|121|121]126|126|126|126|126|126|126]138|138]141|141|141|141|141|141|141|141]122|122|122|122|122]131|131|131|131|131|131]
+Average Turnaround: 24.814173
+Average Waiting: 23.814173
+Average Response: 19.036396
+Throughput: 17.0
+Avgerage Throughput: 16.0
 
 
 
@@ -369,37 +369,41 @@ Avgerage Throughput: 16.2
 **Highest Priority First Preemptive(HPFP)**With Aging
 *Processing list1*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   ]  7|  7|  7|  7]  4|  4]  2|  2|  2|  2]  4|  4|  4]  2|  2]  5|  5|  5|  5]  7|  7|  7|  7]  5|  5] 23| 23| 23| 23| 23| 23| 23| 23| 23] 17]  8] 13| 13| 13| 13| 13] 27| 27| 27| 27| 27| 27| 27| 27| 27| 27]  6|  6|  6|  6] 24| 24| 24| 24| 24| 24| 24| 24] 22| 22| 22] 11| 11| 11| 11| 11| 11| 11| 11] 18| 18| 18| 18| 18| 18| 18| 18] 14| 14| 14| 14| 14]  9|  9|  9]  0|  0|  0] 12| 12| 12| 12| 12| 12| 12| 12]
-Average Turnaround: 25.760483
-Average Waiting: 24.760483
-Average Response: 18.704926
-Throughput: 18.0
+[   |   |   |   |   |   ]  0]  2|  2|  2]  0] 10| 10| 10] 11| 11] 18| 18| 18] 10| 10| 10| 10| 10] 18| 18| 18| 18| 18| 18| 18] 10] 13| 13| 13] 16| 16| 16| 16| 16| 16| 16| 16]  8] 12| 12| 12| 12| 12| 12| 12| 12| 12| 12]  6] 14| 14| 14| 14| 14| 14| 14| 14| 14| 14]  9|  9|  9|  9|  9|  9] 20| 20| 20| 20] 21| 21| 21| 21| 21]  3|  3|  3|  3|  3|  3|  3|  3] 22| 22| 22| 22| 22| 22| 22| 22| 22| 22] 28| 28| 28| 28| 28| 28| 28| 28| 28]
+Average Turnaround: 33.24768
+Average Waiting: 32.24768
+Average Response: 26.130032
+Throughput: 16.0
 *Processing list2*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   |   |   |   |   |   |   |   |   ] 51| 51| 51| 51| 51| 51| 51| 51] 40] 54| 54| 54| 54| 54] 55| 55| 55| 55| 55| 55| 55| 55] 54| 54| 54| 54| 54] 44| 44| 44| 44] 50| 50| 50| 50| 50| 50| 50] 38| 38| 38| 38| 38| 38| 38| 38| 38] 52| 52| 52| 52] 39| 39| 39| 39| 39| 39| 39| 39| 39] 33| 33| 33| 33| 33| 33| 33| 33] 32| 32| 32| 32] 30| 30| 30| 30] 41| 41| 41| 41| 41| 41| 41| 41| 41| 41] 43| 43| 43| 43| 43| 43]
-Average Turnaround: 26.468695
-Average Waiting: 25.468695
-Average Response: 19.32584
-Throughput: 14.0
+[   |   |   |   |   |   |   |   |   |   |   |   ] 30| 30| 30| 30| 30] 47| 47| 47| 47] 38| 38| 38| 38] 59| 59] 46| 46| 46] 38| 38| 38| 38] 46| 46| 46| 46| 46| 46] 59| 59| 59| 59| 59| 59| 59] 33| 33| 33| 33| 33] 55| 55| 55| 55] 39| 39| 39| 39] 53| 53] 50| 50| 50| 50| 50| 50| 50| 50| 50| 50] 57| 57] 52| 52| 52| 52| 52| 52| 52| 52] 34| 34| 34| 34| 34] 37| 37| 37] 48| 48| 48| 48| 48| 48| 48| 48| 48| 48] 56| 56| 56| 56| 56| 56| 56| 56| 56| 56]
+Average Turnaround: 30.2089
+Average Waiting: 29.2089
+Average Response: 22.7089
+Throughput: 15.0
 *Processing list3*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ] 85| 85| 85| 85| 85| 85| 85] 89| 89| 89] 79| 79] 85| 85] 60] 89| 89] 79| 79| 79| 79| 79| 79| 79] 89| 89| 89| 89| 89] 87| 87| 87| 87| 87| 87| 87| 87] 60| 60| 60| 60| 60| 60| 60| 60| 60] 76| 76| 76| 76| 76] 66] 67| 67] 64| 64| 64| 64| 64| 64| 64| 64] 83| 83| 83| 83] 65| 65| 65| 65| 65| 65| 65| 65| 65] 68] 63| 63| 63| 63| 63| 63] 77| 77| 77| 77| 77| 77| 77| 77| 77| 77] 70| 70| 70| 70| 70| 70| 70| 70]
-Average Turnaround: 33.62351
-Average Waiting: 32.62351
-Average Response: 24.023506
-Throughput: 15.0
+[   |   |   ] 66| 66| 66] 73]   ] 60| 60| 60]   ] 79| 79| 79| 79| 79| 79| 79] 78] 87] 62] 78| 78| 78| 78] 62] 86| 86| 86| 86] 78| 78| 78] 61| 61| 61| 61| 61| 61| 61| 61| 61| 61] 86| 86] 62| 62| 62| 62| 62| 62] 69| 69| 69| 69| 69| 69| 69| 69] 75| 75| 75| 75| 75| 75| 75] 89| 89| 89| 89| 89| 89| 89| 89| 89| 89] 72| 72| 72| 72| 72] 64| 64| 64] 81| 81| 81| 81| 81| 81| 81] 77| 77| 77| 77] 71| 71| 71| 71| 71]
+Average Turnaround: 27.430637
+Average Waiting: 26.430637
+Average Response: 19.254168
+Throughput: 16.0
 *Processing list4*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]101|101|101] 95| 95]108|108|108]101|101|101|101|101|101]108|108|108|108] 95| 95| 95| 95| 95] 97| 97| 97| 97| 97| 97] 94]119]109|109|109|109|109|109|109|109] 98| 98| 98| 98] 96| 96| 96| 96] 93| 93| 93| 93| 93| 93| 93| 93| 93| 93] 91| 91| 91| 91| 91| 91| 91]105|105|105]117|117]100|100|100|100] 90| 90| 90| 90| 90| 90| 90| 90| 90| 90]112|112|112|112] 99| 99| 99| 99| 99| 99| 99| 99]115|115|115|115|115|115|115]
-Average Turnaround: 25.9935
-Average Waiting: 24.9935
-Average Response: 18.993504
-Throughput: 18.0
+[   ] 91| 91| 91| 91]100]102|102|102|102]100]102|102|102|102|102|102]115|115|115] 91| 91| 91]115|115|115]101|101|101|101]117|117|117]119|119|119] 94]119] 94| 94| 94| 94| 94]110|110|110|110]107|107]110|110]111|111|111|111|111|111|111|111|111|111] 97| 97| 97| 97| 97| 97| 97]112|112|112|112|112|112|112|112]103|103|103|103|103|103|103|103]107|107|107|107|107|107] 93| 93| 93| 93| 93]114]106|106|106|106|106|106|106|106|106|106]
+Average Turnaround: 27.623503
+Average Waiting: 26.623503
+Average Response: 17.79997
+Throughput: 16.0
 *Processing list5*
 [  0|  1|  2|  3|  4|  5|  6|  7|  8|  9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28| 29| 30| 31| 32| 33| 34| 35| 36| 37| 38| 39| 40| 41| 42| 43| 44| 45| 46| 47| 48| 49| 50| 51| 52| 53| 54| 55| 56| 57| 58| 59| 60| 61| 62| 63| 64| 65| 66| 67| 68| 69| 70| 71| 72| 73| 74| 75| 76| 77| 78| 79| 80| 81| 82| 83| 84| 85| 86| 87| 88| 89| 90| 91| 92| 93| 94| 95| 96| 97| 98| 99]
-[   |   ]147|147]   ]137|137|137|137|137|137|137|137|137]149|149|149|149]148|148]136]125|125|125|125|125|125|125|125|125|125]141|141|141|141|141|141]143|143|143|143|143|143]122|122|122|122|122|122|122|122|122|122]124]126|126|126|126|126|126|126|126|126|126]140|140|140|140|140|140|140|140]135|135|135|135|135|135|135|135|135]138|138|138|138|138|138|138]128|128|128|128|128|128|128|128|128]132|132|132|132]
-Average Turnaround: 24.841276
-Average Waiting: 23.841276
-Average Response: 18.716278
-Throughput: 16.0
-Avgerage Throughput: 16.2
+[   |   ]135|135|135]142]135|135|135|135|135]130|130|130|130]135|135]130|130|130|130]123|123]139|139|139|139|139|139|139]145|145|145]125|125|125|125|125|125|125]146|146|146|146|146]147|147|147|147|147|147|147|147|147|147]128|128|128|128|128|128]132|132]143|143|143|143|143|143|143|143|143]121|121|121|121|121|121]126|126|126|126|126|126|126]138|138]141|141|141|141|141|141|141|141]122|122|122|122|122]131|131|131|131|131|131]
+Average Turnaround: 24.647507
+Average Waiting: 23.647507
+Average Response: 18.48084
+Throughput: 17.0
+Avgerage Throughput: 16.0
+
+
+
+
