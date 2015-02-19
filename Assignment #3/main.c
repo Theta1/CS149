@@ -6,13 +6,24 @@
  * CS 149
  **********************************************/
 
-
-#include <stdio.h>
+#include "Student.h"
 
 /**
 * Main method
 */
 int main(void) {
+
+    int indexGS = 0;
+    int indexRS = 0;
+    int indexEE = 0;
+    int indexDrop = 0;
+    int indexImpatient = 0;
+
+    STUDENT GS[20];
+    STUDENT RS[20];
+    STUDENT EE[20];
+
+    printme();
 
 //create 75 students randomly
 //create 3 queues

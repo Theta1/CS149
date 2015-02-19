@@ -1,25 +1,25 @@
 /**************************************
 A structure to create a student
-
+Student functions
+print functions
 *************************************/
-#include <stdio.h>
+#include "Student.h"
 
-typedef struct {
-    int arriveTime;
-    int finishTime;
-    char[3] priority;
-    int section;
-    int id;
-} STUDENT;
 
 /*
 Figures out if a student can enter a section
 */
+/*
 int canTakeSection( STUDENT* student) {
-    if (student->section == )
+    //if (student->section == )
+    return student->section;
 }
-
+*/
 
 /*
 put print functions in here
 */
+
+void printme() {
+    printf("hello world");
+}
