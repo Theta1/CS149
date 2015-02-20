@@ -18,12 +18,20 @@ int main(void) {
     int indexEE = 0;
     int indexDrop = 0;
     int indexImpatient = 0;
+    int cnt = 0;
 
+    STUDENT ALL[75];
     STUDENT GS[20];
     STUDENT RS[20];
     STUDENT EE[20];
 
     printme();
+
+    for( cnt=0; cnt<75; cnt++)
+    {
+        STUDENT x = ;//new student
+        ALL[cnt] = x;
+    }
 
 //create 75 students randomly
 //create 3 queues
