@@ -101,11 +101,6 @@ int main(void) {
     int rs = 0;
     int ee = 0;
 
-    STUDENT ALL_STUDENTS[STUDENT_COUNT];
-    STUDENT GS_STUDENTS[STUDENT_COUNT];
-    STUDENT RS_STUDENTS[STUDENT_COUNT];
-    STUDENT EE_STUDENTS[STUDENT_COUNT];
-
     printme();
     srand(time(NULL));
 
@@ -126,24 +121,24 @@ int main(void) {
 
     printf("\nStud\tpri\tarrive\tfinish\tsec\tid\n");
     for ( cnt = 0; cnt<75; cnt++) {
-        printf("%d\t %s\t%d\t%d\t%d\t%d\n",cnt,ALL[cnt].priority,ALL[cnt].arriveTime, ALL[cnt].finishTime, ALL[cnt].section, ALL[cnt].id);
+        printf("%d\t %s\t%d\t%d\t%d\t%d\n",cnt,ALL_STUDENTS[cnt].priority,ALL_STUDENTS[cnt].arriveTime, ALL_STUDENTS[cnt].finishTime, ALL_STUDENTS[cnt].section, ALL_STUDENTS[cnt].id);
     }
 
     //put students into their perspective queue
     for (cnt = 0; cnt<75; cnt++) {
-        if (ALL[cnt].priority == "GS")
+        if (ALL_STUDENTS[cnt].priority == "GS")
         {
-            GS[gs] = ALL[cnt];
+            GS_QUEUE[gs] = ALL_STUDENTS[cnt];
             gs++;
         }
-        else if (ALL[cnt].priority == "RS")
+        else if (ALL_STUDENTS[cnt].priority == "RS")
         {
-            RS[rs] = ALL[cnt];
+            RS_QUEUE[rs] = ALL_STUDENTS[cnt];
             rs++;
         }
         else
         {
-            EE[ee] = ALL[cnt];
+            EE_QUEUE[ee] = ALL_STUDENTS[cnt];
             ee++;
         }
     }
