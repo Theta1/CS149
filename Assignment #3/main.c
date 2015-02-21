@@ -8,6 +8,7 @@
 
  #include "Student.h"
 
+/**Major variables of this simulation*/
  #define STUDENT_COUNT 75
  #define REGESTRATION_DURATION 160
  #define ID_BASE 101
@@ -18,6 +19,24 @@
  #define RS_PROCESS_TIME_MAX 4
  #define EE_PROCESS_TIME_MIN 3
  #define EE_PROCESS_TIME_MAX 6
+ #define SECTION_CAPACITY 20
+
+/**Circular buffers*/
+ STUDENT ALL_STUDENTS[STUDENT_COUNT];
+ STUDENT GS_QUEUE[STUDENT_COUNT];
+ STUDENT RS_QUEUE[STUDENT_COUNT];
+ STUDENT EE_QUEUE[STUDENT_COUNT];
+ STUDENT SECTION1[SECTION_CAPACITY];
+ STUDENT SECTION2[SECTION_CAPACITY];
+ STUDENT SECTION3[SECTION_CAPACITY];
+
+/**Mutexes protecting queues and sections*/
+ pthread_mutex_t GS_QUEUE_MUTEX;
+ pthread_mutex_t RS_QUEUE_MUTEX;
+ pthread_mutex_t EE_QUEUE_MUTEX;
+ pthread_mutex_t SECTION1_MUTEX;
+ pthread_mutex_t SECTION2_MUTEX;
+ pthread_mutex_t SECTION3_MUTEX;
 
 /**
 * Main method
@@ -31,10 +50,10 @@ int main(void) {
     int indexImpatient = 0;
     int cnt = 0;
 
-    STUDENT ALL[75];
-    STUDENT GS[20];
-    STUDENT RS[20];
-    STUDENT EE[20];
+    STUDENT ALL_STUDENTS[STUDENT_COUNT];
+    STUDENT GS_STUDENTS[STUDENT_COUNT];
+    STUDENT RS_STUDENTS[STUDENT_COUNT];
+    STUDENT EE_STUDENTS[STUDENT_COUNT];
 
     printme();
 
