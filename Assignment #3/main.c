@@ -6,12 +6,18 @@
  * CS 149
  **********************************************/
 
-#include "Student.h"
+ #include "Student.h"
 
-#define STUDENT_COUNT 75
-#define REGESTRATION_DURATION 160
-#define ID_BASE 101
-#define NUMBER_OF_SECTIONS 3
+ #define STUDENT_COUNT 75
+ #define REGESTRATION_DURATION 160
+ #define ID_BASE 101
+ #define NUMBER_OF_SECTIONS 3
+ #define GS_PROCESS_TIME_MIN 1
+ #define GS_PROCESS_TIME_MAX 2
+ #define RS_PROCESS_TIME_MIN 2
+ #define RS_PROCESS_TIME_MAX 4
+ #define EE_PROCESS_TIME_MIN 3
+ #define EE_PROCESS_TIME_MAX 6
 
 /**
 * Main method
