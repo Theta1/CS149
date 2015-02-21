@@ -33,13 +33,16 @@
  STUDENT DROPPED[SECTION_CAPACITY];
  STUDENT GAVE_UP[SECTION_CAPACITY];
 
-/**Mutexes protecting queues and sections*/
+/**Mutexes protecting queues and sections and print*/
  pthread_mutex_t GS_QUEUE_MUTEX;
  pthread_mutex_t RS_QUEUE_MUTEX;
  pthread_mutex_t EE_QUEUE_MUTEX;
  pthread_mutex_t SECTION1_MUTEX;
  pthread_mutex_t SECTION2_MUTEX;
  pthread_mutex_t SECTION3_MUTEX;
+ pthread_mutex_t PRINT_MUTEX;
+
+ int firstPrint = 1;
 
 /**Semaphore for busy section*/
  sem_t FILLINGSECTION;
@@ -51,12 +54,34 @@
 /**
 * Print a line for each event:
 * elapsed time
-* who is regestering for what section from what queue
+* who is regestering from what queue
 * who is waiting in what queue
 * what action they take: Regester/drop/gaveup and where
 //   what event occurred
 */
 void print(char *event){
+    time_t now;
+    time(&now);
+    double elapsed = difftime(now, startTime);
+    int min = 0;
+    int sec = (int) elapsed;
+
+    if (sec >=60){
+        min++;
+        sec -=60;
+    }
+    //locks the mutex for printing
+    pthread_mutex_lock(&PRINT_MUTEX);
+
+    if (firstPrint) {
+        printf("TIME | STUDENT ID | WAITING     | EVENT\n");
+        firstPrint = 0;
+    }
+
+    // Elapsed time.
+    printf("%1d:%02d | ", min, sec);
+
+    //What they are doing
 
 }
 
