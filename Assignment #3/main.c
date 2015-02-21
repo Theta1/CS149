@@ -8,6 +8,11 @@
 
 #include "Student.h"
 
+#define STUDENT_COUNT 75
+#define REGESTRATION_DURATION 160
+#define ID_BASE 101
+#define NUMBER_OF_SECTIONS 3
+
 /**
 * Main method
 */
@@ -27,9 +32,10 @@ int main(void) {
 
     printme();
 
+
     for( cnt=0; cnt<75; cnt++)
     {
-        STUDENT x = ;//new student
+        STUDENT x;//new student
         ALL[cnt] = x;
     }
 
