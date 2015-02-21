@@ -2,6 +2,7 @@
  * Runs the class enrollment algorithms
  * using multithreading.
  * Calculates statistics form runtime
+ * Borrowed heavily from format of Professor Mak offichour program
  * @author Team Theta 1: David-Eric Thorpe, Nathan Kong, Luke Sieben, Dennis Hsu
  * CS 149
  **********************************************/
@@ -29,6 +30,8 @@
  STUDENT SECTION1[SECTION_CAPACITY];
  STUDENT SECTION2[SECTION_CAPACITY];
  STUDENT SECTION3[SECTION_CAPACITY];
+ STUDENT DROPPED[SECTION_CAPACITY];
+ STUDENT GAVE_UP[SECTION_CAPACITY];
 
 /**Mutexes protecting queues and sections*/
  pthread_mutex_t GS_QUEUE_MUTEX;
@@ -37,6 +40,25 @@
  pthread_mutex_t SECTION1_MUTEX;
  pthread_mutex_t SECTION2_MUTEX;
  pthread_mutex_t SECTION3_MUTEX;
+
+/**Semaphore for busy section*/
+ sem_t FILLINGSECTION;
+
+/**Regestration timer*/
+ struct itimerval regestrationTimer;
+ time_t startTime;
+
+/**
+* Print a line for each event:
+* elapsed time
+* who is regestering for what section from what queue
+* who is waiting in what queue
+* what action they take: Regester/drop/gaveup and where
+//   what event occurred
+*/
+void print(char *event){
+
+}
 
 /**
 * Main method
@@ -61,7 +83,7 @@ int main(void) {
     for( cnt=0; cnt<75; cnt++)
     {
         STUDENT x;//new student
-        ALL[cnt] = x;
+        ALL_STUDENTS[cnt] = x;
     }
 
 //create 75 students randomly
