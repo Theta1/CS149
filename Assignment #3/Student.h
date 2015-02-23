@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <unistd.h>
 
+#define IMPATIENT_TIME 10
 
 typedef struct {
     int arriveTime;
@@ -14,4 +15,7 @@ typedef struct {
     int id;
 } STUDENT;
 
-void printme();
+void printStudent(STUDENT student);
+int getTurnAroundTime(STUDENT student);
+int canEnroll(STUDENT student, int section);
+int isImpatient(STUDENT student, int processStartTime);
