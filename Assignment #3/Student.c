@@ -6,11 +6,12 @@ print functions
 #include "Student.h"
 
 
-/*
-put print functions in here
-*/
-void printme() {
-    printf("hello world");
+/**
+  * Prints out the student.
+  * @param student the student
+  */
+void printStudent(STUDENT student) {
+    printf("#%3d\.%s", student.id, student.priority);
 }
 
 /**

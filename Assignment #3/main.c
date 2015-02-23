@@ -101,7 +101,7 @@ int main(void) {
     int rs = 0;
     int ee = 0;
 
-    printme();
+    // set up rand
     srand(time(NULL));
 
     //create 75 students randomly
@@ -142,6 +142,10 @@ int main(void) {
             ee++;
         }
     }
+
+    printStudent(GS_QUEUE[0]);
+    printStudent(RS_QUEUE[0]);
+    printStudent(EE_QUEUE[0]);
 }
 
 //create 5 class arrays, the 3 classes, 1 dropped array, 1 impatient array
