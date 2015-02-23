@@ -91,6 +91,63 @@ void print(char *event){
 
 }
 
+// The graduating senor thread.
+void *gsThread(void *param)
+{
+/*
+  print("Professor opens her door");
+
+  // Set the timer for for office hour duration.
+  profTimer.it_value.tv_sec = OFFICE_HOUR_DURATION;
+  setitimer(ITIMER_REAL, &profTimer, NULL);
+
+  // Meet students until the office hour is over.
+  do {
+    professorMeetsStudent();
+  } while (!timesUp);
+
+  print("Professor closes her door");*/
+  return NULL;
+}
+
+// The regular senor thread.
+void *rsThread(void *param)
+{
+/*
+  print("Professor opens her door");
+
+  // Set the timer for for office hour duration.
+  profTimer.it_value.tv_sec = OFFICE_HOUR_DURATION;
+  setitimer(ITIMER_REAL, &profTimer, NULL);
+
+  // Meet students until the office hour is over.
+  do {
+    professorMeetsStudent();
+  } while (!timesUp);
+
+  print("Professor closes her door");*/
+  return NULL;
+}
+
+// The everybody else thread.
+void *eeThread(void *param)
+{
+/*
+  print("Professor opens her door");
+
+  // Set the timer for for office hour duration.
+  profTimer.it_value.tv_sec = OFFICE_HOUR_DURATION;
+  setitimer(ITIMER_REAL, &profTimer, NULL);
+
+  // Meet students until the office hour is over.
+  do {
+    professorMeetsStudent();
+  } while (!timesUp);
+
+  print("Professor closes her door");*/
+  return NULL;
+}
+
 /**
 * Main method
 */
@@ -124,11 +181,15 @@ int main(void) {
         ALL_STUDENTS[cnt] = x;
     }
 
-    printf("\nStud\tpri\tarrive\tfinish\tsec\tid\n");
+    /*Shows us the list of students
+    printf("\nStudent\tPri\tArrival\tFinish\tSection\tId\n");
     for ( cnt = 0; cnt<75; cnt++) {
-        printf("%d\t %s\t%d\t%d\t%d\t%d\n",cnt,ALL_STUDENTS[cnt].priority,ALL_STUDENTS[cnt].arriveTime, ALL_STUDENTS[cnt].finishTime, ALL_STUDENTS[cnt].section, ALL_STUDENTS[cnt].id);
+        printf("%d\t%s\t%d\t%d\t%d\t%d\n", cnt,
+            ALL_STUDENTS[cnt].priority,ALL_STUDENTS[cnt].arriveTime, 
+            ALL_STUDENTS[cnt].finishTime, ALL_STUDENTS[cnt].section, 
+            ALL_STUDENTS[cnt].id);
     }
-
+*/
     //put students into their perspective queue
     for (cnt = 0; cnt < STUDENT_COUNT; cnt++) {
         if(isPriority(ALL_STUDENTS[cnt], "GS")) {
@@ -145,6 +206,29 @@ int main(void) {
             ee++;
         }
     }
+
+    //Creates the gs queue thread
+    int gsQueueID = 1;
+    pthread_t GSThreadId;
+    pthread_attr_t GSAttr;
+    pthread_attr_init(&GSAttr);
+    //did you get a comp error from two lines bellow?
+    //Make sure to compile with gcc –pthread main.c Student.c Student.h
+    pthread_create(&GSThreadId, &GSAttr, gsThread, &gsQueueID);
+
+    //Creates the rs queue thread
+    int rsQueueID = 2;
+    pthread_t RSThreadId;
+    pthread_attr_t RSAttr;
+    pthread_attr_init(&RSAttr);
+    pthread_create(&RSThreadId, &RSAttr, rsThread, &rsQueueID);
+
+    //Creates the ee queue thread
+    int eeQueueID = 1;
+    pthread_t EEThreadId;
+    pthread_attr_t EEAttr;
+    pthread_attr_init(&EEAttr);
+    pthread_create(&EEThreadId, &EEAttr, eeThread, &eeQueueID);
 
     printStudent(GS_QUEUE[0]);
     printf("\n");
@@ -173,7 +257,6 @@ int main(void) {
     printSection(SECTION_IMPATIENT, "Impatient", indexSectionImpatient);
 }
 
-//create 5 class arrays, the 3 classes, 1 dropped array, 1 impatient array
 //create 3 threads
     //per thread
     //while loop start
