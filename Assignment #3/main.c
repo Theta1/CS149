@@ -144,30 +144,6 @@ int main(void) {
     }
 }
 
-/**
-  * Process students in the GS_QUEUE.
-  */
-void processGS_QUEUE() {
-    // sleep for GS processing time
-    sleep(rand() % GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
-}
-
-/**
-  * Process students in the RS_QUEUE.
-  */
-void processRS_QUEUE() {
-    // sleep for RS processing time
-    sleep(rand() % RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
-}
-
-/**
-  * Process students in the EE_QUEUE.
-  */
-void processEE_QUEUE() {
-    // sleep for EE processing time
-    sleep(rand() % EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
-}
-
 //create 5 class arrays, the 3 classes, 1 dropped array, 1 impatient array
 //create 3 threads
     //per thread
@@ -194,5 +170,28 @@ void processEE_QUEUE() {
     //print who could not enroll/was dropped
     // print any other statistics we find interesting
 
+/**
+  * Process students in the GS_QUEUE.
+  */
+void processGS_QUEUE() {
+    // sleep for GS processing time
+    sleep(rand() % GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
 }
+
+/**
+  * Process students in the RS_QUEUE.
+  */
+void processRS_QUEUE() {
+    // sleep for RS processing time
+    sleep(rand() % RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
+}
+
+/**
+  * Process students in the EE_QUEUE.
+  */
+void processEE_QUEUE() {
+    // sleep for EE processing time
+    sleep(rand() % EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
+}
+
 
