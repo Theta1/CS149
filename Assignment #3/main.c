@@ -53,8 +53,10 @@ void printSection(STUDENT section[], char *sectionType, int indexLast);
 /**Semaphore for busy section*/
  sem_t FILLINGSECTION;
 
-/**Regestration timer*/
- struct itimerval regestrationTimer;
+/**Regestration timers*/
+ struct itimerval gsRegestrationTimer;
+ struct itimerval rsRegestrationTimer;
+ struct itimerval eeRegestrationTimer;
  time_t startTime;
 
 /**
@@ -92,61 +94,54 @@ void print(char *event){
 }
 
 // The graduating senor thread.
-void *gsThread(void *param)
-{
-/*
-  print("Professor opens her door");
+void *gsThread(void *param){
+  print("Graduating Senor's queue begins processing");
 
-  // Set the timer for for office hour duration.
-  profTimer.it_value.tv_sec = OFFICE_HOUR_DURATION;
-  setitimer(ITIMER_REAL, &profTimer, NULL);
+  // Set the timer for regestration queue duration.
+  gsRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
+  setitimer(ITIMER_REAL, &gsRegestrationTimer, NULL);
 
-  // Meet students until the office hour is over.
+  /* Meet students until the office hour is over.
   do {
     professorMeetsStudent();
   } while (!timesUp);
-
-  print("Professor closes her door");*/
+*/
+  print("Gaduating Senor queue is closed");
   return NULL;
 }
 
 // The regular senor thread.
-void *rsThread(void *param)
-{
-/*
-  print("Professor opens her door");
+void *rsThread(void *param){
+  print("Regular Senor's queue begins processing");
 
-  // Set the timer for for office hour duration.
-  profTimer.it_value.tv_sec = OFFICE_HOUR_DURATION;
-  setitimer(ITIMER_REAL, &profTimer, NULL);
+  // Set the timer for regestration queue duration.
+  rsRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
+  setitimer(ITIMER_REAL, &rsRegestrationTimer, NULL);
 
-  // Meet students until the office hour is over.
+  /* Meet students until the office hour is over.
   do {
     professorMeetsStudent();
   } while (!timesUp);
-
-  print("Professor closes her door");*/
+*/
+  print("Regular Senor queue is closed");
   return NULL;
 }
 
 // The everybody else thread.
-void *eeThread(void *param)
-{
-/*
-  print("Professor opens her door");
+void *eeThread(void *param){
+  print("Everyone Else's queue begins processing");
 
-  // Set the timer for for office hour duration.
-  profTimer.it_value.tv_sec = OFFICE_HOUR_DURATION;
-  setitimer(ITIMER_REAL, &profTimer, NULL);
+  // Set the timer for regestration queue duration.
+  eeRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
+  setitimer(ITIMER_REAL, &eeRegestrationTimer, NULL);
 
-  // Meet students until the office hour is over.
+  /* Meet students until the office hour is over.
   do {
     professorMeetsStudent();
   } while (!timesUp);
-
-  print("Professor closes her door");*/
-  return NULL;
-}
+*/
+  print("Everyone Else's queue is closed");
+  return NULL;}
 
 /**
 * Main method
@@ -212,8 +207,8 @@ int main(void) {
     pthread_t GSThreadId;
     pthread_attr_t GSAttr;
     pthread_attr_init(&GSAttr);
-    //did you get a comp error from two lines bellow?
-    //Make sure to compile with gcc –pthread main.c Student.c Student.h
+    //Did you get a comp error from two lines below?
+    //Make sure to compile with "gcc –pthread main.c Student.c Student.h"
     pthread_create(&GSThreadId, &GSAttr, gsThread, &gsQueueID);
 
     //Creates the rs queue thread
