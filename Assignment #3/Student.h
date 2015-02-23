@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <string.h>
+#include <pthread.h>
 
 #define IMPATIENT_TIME 10
 
