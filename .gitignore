@@ -3,6 +3,9 @@
 
 # Code::Blocks
 *.cbp
+*.depend
+*.layout
+
 
 #################
 ## Eclipse
