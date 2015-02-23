@@ -11,7 +11,7 @@ print functions
   * @param student the student
   */
 void printStudent(STUDENT student) {
-    printf("#%3d\.%s", student.id, student.priority);
+    printf("#%3d.%s", student.id, student.priority);
 }
 
 /**
@@ -44,7 +44,18 @@ int canEnroll(STUDENT student, int section) {
   * @param processStartTime the time the student is about to be processed in
   * @return 1 if the student is impatient
   *         0 if the student is not impatient
-*/
+  */
 int isImpatient(STUDENT student, int processStartTime) {
     return processStartTime - student.arriveTime >= IMPATIENT_TIME;
+}
+
+/**
+  * Checks if a student is a certain priority.
+  * @param student the student
+  * @param priority the priority
+  * @return 1 if the student is of this priority
+  *         0 if the student is not of this priority
+  */
+int isPriority(STUDENT student, char *priority) {
+    return strcmp(student.priority, priority) == 0;
 }

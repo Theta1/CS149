@@ -126,13 +126,11 @@ int main(void) {
 
     //put students into their perspective queue
     for (cnt = 0; cnt < STUDENT_COUNT; cnt++) {
-        if (ALL_STUDENTS[cnt].priority == "GS")
-        {
+        if(isPriority(ALL_STUDENTS[cnt], "GS")) {
             GS_QUEUE[gs] = ALL_STUDENTS[cnt];
             gs++;
         }
-        else if (ALL_STUDENTS[cnt].priority == "RS")
-        {
+        else if(isPriority(ALL_STUDENTS[cnt], "RS")) {
             RS_QUEUE[rs] = ALL_STUDENTS[cnt];
             rs++;
         }
@@ -144,7 +142,9 @@ int main(void) {
     }
 
     printStudent(GS_QUEUE[0]);
+    printf("\n");
     printStudent(RS_QUEUE[0]);
+    printf("\n");
     printStudent(EE_QUEUE[0]);
 }
 
