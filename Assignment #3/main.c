@@ -166,7 +166,8 @@ int main(void) {
     //print each section
     //print turnaround for each student
     //print average turnaround per queue
-    //print
+    //print who could not enroll/was dropped
+    // print any other statistics we find interesting
 
 }
 
