@@ -105,7 +105,7 @@ int main(void) {
     srand(time(NULL));
 
     //create 75 students randomly
-    for( cnt=0; cnt<75; cnt++)
+    for( cnt=0; cnt< STUDENT_COUNT; cnt++)
     {
         STUDENT x;//new student
         x.arriveTime = (rand() % 50 ) + 1;
@@ -125,7 +125,7 @@ int main(void) {
     }
 
     //put students into their perspective queue
-    for (cnt = 0; cnt<75; cnt++) {
+    for (cnt = 0; cnt < STUDENT_COUNT; cnt++) {
         if (ALL_STUDENTS[cnt].priority == "GS")
         {
             GS_QUEUE[gs] = ALL_STUDENTS[cnt];
@@ -142,9 +142,31 @@ int main(void) {
             ee++;
         }
     }
+}
 
-    printf("%d --> %d\n", GS_QUEUE[0].arriveTime, isImpatient(GS_QUEUE[0], 0));
-    printf("%d --> %d\n", GS_QUEUE[0].arriveTime, isImpatient(GS_QUEUE[0], 10));
+/**
+  * Process students in the GS_QUEUE.
+  */
+void processGS_QUEUE() {
+    // sleep for GS processing time
+    sleep(rand() % GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
+}
+
+/**
+  * Process students in the RS_QUEUE.
+  */
+void processRS_QUEUE() {
+    // sleep for RS processing time
+    sleep(rand() % RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
+}
+
+/**
+  * Process students in the EE_QUEUE.
+  */
+void processEE_QUEUE() {
+    // sleep for EE processing time
+    sleep(rand() % EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
+}
 
 //create 5 class arrays, the 3 classes, 1 dropped array, 1 impatient array
 //create 3 threads
