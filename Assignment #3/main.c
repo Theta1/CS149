@@ -111,7 +111,7 @@ int main(void) {
         x.arriveTime = (rand() % 50 ) + 1;
         x.finishTime = (rand() % 30 ) + x.arriveTime;
         x.section = rand() % 4;
-        x.id = rand() % 1000;
+        x.id = 101 + cnt; // id must be unique
         temp = (rand()% 3) + 1;
         if (temp > 2) {   strcpy(x.priority, "GS");  }
         else if (temp < 2) {    strcpy(x.priority, "EE");    }
