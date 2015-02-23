@@ -111,7 +111,7 @@ int main(void) {
         x.arriveTime = (rand() % 50 ) + 1;
         x.finishTime = (rand() % 30 ) + x.arriveTime;
         x.section = rand() % 4;
-        x.id = rand() % 1000;
+        x.id = 101 + cnt; // id must be unique
         temp = (rand()% 3) + 1;
         if (temp > 2) {   strcpy(x.priority, "GS");  }
         else if (temp < 2) {    strcpy(x.priority, "EE");    }
@@ -126,13 +126,11 @@ int main(void) {
 
     //put students into their perspective queue
     for (cnt = 0; cnt < STUDENT_COUNT; cnt++) {
-        if (ALL_STUDENTS[cnt].priority == "GS")
-        {
+        if(isPriority(ALL_STUDENTS[cnt], "GS")) {
             GS_QUEUE[gs] = ALL_STUDENTS[cnt];
             gs++;
         }
-        else if (ALL_STUDENTS[cnt].priority == "RS")
-        {
+        else if(isPriority(ALL_STUDENTS[cnt], "RS")) {
             RS_QUEUE[rs] = ALL_STUDENTS[cnt];
             rs++;
         }
@@ -144,7 +142,9 @@ int main(void) {
     }
 
     printStudent(GS_QUEUE[0]);
+    printf("\n");
     printStudent(RS_QUEUE[0]);
+    printf("\n");
     printStudent(EE_QUEUE[0]);
 }
 

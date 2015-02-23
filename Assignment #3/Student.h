@@ -4,6 +4,7 @@
 #include <semaphore.h>
 #include <signal.h>
 #include <unistd.h>
+#include <string.h>
 
 #define IMPATIENT_TIME 10
 
@@ -19,3 +20,4 @@ void printStudent(STUDENT student);
 int getTurnAroundTime(STUDENT student);
 int canEnroll(STUDENT student, int section);
 int isImpatient(STUDENT student, int processStartTime);
+int isPriority(STUDENT student, char *priority);
