@@ -143,6 +143,9 @@ int main(void) {
         }
     }
 
+    printf("%d --> %d\n", GS_QUEUE[0].arriveTime, isImpatient(GS_QUEUE[0], 0));
+    printf("%d --> %d\n", GS_QUEUE[0].arriveTime, isImpatient(GS_QUEUE[0], 10));
+
 //create 5 class arrays, the 3 classes, 1 dropped array, 1 impatient array
 //create 3 threads
     //per thread
