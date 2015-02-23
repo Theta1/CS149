@@ -5,7 +5,6 @@ print functions
 *************************************/
 #include "Student.h"
 
-
 /**
   * Prints out the student.
   * @param student the student

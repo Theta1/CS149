@@ -22,24 +22,30 @@
  #define EE_PROCESS_TIME_MAX 6
  #define SECTION_CAPACITY 20
 
+// function declarations
+void *processGS_QUEUE();
+void *processRS_QUEUE();
+void *processEE_QUEUE();
+void printSection(STUDENT section[], char *sectionType, int indexLast);
+
 /**Circular buffers*/
  STUDENT ALL_STUDENTS[STUDENT_COUNT];
  STUDENT GS_QUEUE[STUDENT_COUNT];
  STUDENT RS_QUEUE[STUDENT_COUNT];
  STUDENT EE_QUEUE[STUDENT_COUNT];
- STUDENT SECTION1[SECTION_CAPACITY];
- STUDENT SECTION2[SECTION_CAPACITY];
- STUDENT SECTION3[SECTION_CAPACITY];
- STUDENT DROPPED[SECTION_CAPACITY];
- STUDENT GAVE_UP[SECTION_CAPACITY];
+ STUDENT SECTION_1[SECTION_CAPACITY];
+ STUDENT SECTION_2[SECTION_CAPACITY];
+ STUDENT SECTION_3[SECTION_CAPACITY];
+ STUDENT SECTION_DROPPED[SECTION_CAPACITY];
+ STUDENT SECTION_IMPATIENT[SECTION_CAPACITY];
 
 /**Mutexes protecting queues and sections and print*/
  pthread_mutex_t GS_QUEUE_MUTEX;
  pthread_mutex_t RS_QUEUE_MUTEX;
  pthread_mutex_t EE_QUEUE_MUTEX;
- pthread_mutex_t SECTION1_MUTEX;
- pthread_mutex_t SECTION2_MUTEX;
- pthread_mutex_t SECTION3_MUTEX;
+ pthread_mutex_t SECTION_1_MUTEX;
+ pthread_mutex_t SECTION_2_MUTEX;
+ pthread_mutex_t SECTION_3_MUTEX;
  pthread_mutex_t PRINT_MUTEX;
 
  int firstPrint = 1;
@@ -89,12 +95,11 @@ void print(char *event){
 * Main method
 */
 int main(void) {
-
-    int indexGS = 0;
-    int indexRS = 0;
-    int indexEE = 0;
-    int indexDrop = 0;
-    int indexImpatient = 0;
+    int indexSection1 = 0;
+    int indexSection2 = 0;
+    int indexSection3 = 0;
+    int indexSectionDropped = 0;
+    int indexSectionImpatient = 0;
     int cnt = 0;
     int temp = 0;
     int gs = 0;
@@ -146,6 +151,26 @@ int main(void) {
     printStudent(RS_QUEUE[0]);
     printf("\n");
     printStudent(EE_QUEUE[0]);
+    printf("\n");
+
+
+
+    // wait for all threads to finish --> requires pthread_t, not pthread_mutex_t struct
+    /*pthread_join(GS_QUEUE_MUTEX, NULL);
+    pthread_join(RS_QUEUE_MUTEX, NULL);
+    pthread_join(EE_QUEUE_MUTEX, NULL);*/
+
+    // print enrolled
+    printSection(SECTION_1, "1", indexSection1);
+    printSection(SECTION_2, "2", indexSection2);
+    printSection(SECTION_3, "3", indexSection3);
+
+
+    // do stats calculations
+
+    // print dropped
+    printSection(SECTION_DROPPED, "Dropped", indexSectionDropped);
+    printSection(SECTION_IMPATIENT, "Impatient", indexSectionImpatient);
 }
 
 //create 5 class arrays, the 3 classes, 1 dropped array, 1 impatient array
@@ -177,7 +202,7 @@ int main(void) {
 /**
   * Process students in the GS_QUEUE.
   */
-void processGS_QUEUE() {
+void *processGS_QUEUE() {
     // sleep for GS processing time
     sleep(rand() % GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
 }
@@ -185,7 +210,7 @@ void processGS_QUEUE() {
 /**
   * Process students in the RS_QUEUE.
   */
-void processRS_QUEUE() {
+void *processRS_QUEUE() {
     // sleep for RS processing time
     sleep(rand() % RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
 }
@@ -193,9 +218,24 @@ void processRS_QUEUE() {
 /**
   * Process students in the EE_QUEUE.
   */
-void processEE_QUEUE() {
+void *processEE_QUEUE() {
     // sleep for EE processing time
     sleep(rand() % EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
 }
 
+/**
+  * Prints out the students in each section.
+  * @param section the section
+  * @param sectionType the section type
+  * @param indexLast the last used index in the section
+  */
+void printSection(STUDENT section[], char *sectionType, int indexLast) {
+    printf("Section: %s\n", sectionType);
 
+    int i = 0;
+    for(; i < indexLast; i++) {
+        printf("%d: ", i);
+        printStudent(section[i]);
+        printf("\n");
+    }
+}
