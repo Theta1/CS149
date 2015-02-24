@@ -39,6 +39,13 @@ void printSection(STUDENT section[], char *sectionType, int indexLast);
  STUDENT SECTION_DROPPED[SECTION_CAPACITY];
  STUDENT SECTION_IMPATIENT[SECTION_CAPACITY];
 
+ /**Circular buffer counters*/
+ int section1Counter = 0;
+ int section2Counter = 0;
+ int section3Counter = 0;
+ int sectionDropperCounter = 0;
+ int sectionImpatientCounter = 0;
+
 /**Mutexes protecting queues and sections and print*/
  pthread_mutex_t GS_QUEUE_MUTEX;
  pthread_mutex_t RS_QUEUE_MUTEX;
@@ -46,6 +53,8 @@ void printSection(STUDENT section[], char *sectionType, int indexLast);
  pthread_mutex_t SECTION_1_MUTEX;
  pthread_mutex_t SECTION_2_MUTEX;
  pthread_mutex_t SECTION_3_MUTEX;
+ pthread_mutex_t SECTION_DROPPED_MUTEX;
+ pthread_mutex_t SECTION_IMPATIENT_MUTEX;
  pthread_mutex_t PRINT_MUTEX;
 
  int firstPrint = 1;
@@ -93,6 +102,53 @@ void print(char *event){
 
 }
 
+int timesUp = 0;
+
+// Timer signal handler.
+void timerHandler(int signal)
+{
+  timesUp = 1;  // Registration is closed
+}
+
+//Shared function for processing student
+//Didn't workout as shared as planned. LOOKS AWFUL! -DT
+void processStudent(processTime, student){
+    if(!timesUp && !student.isImpatient()){
+        pthread_mutex_lock(&SECTION_1_MUTEX);
+        if(section1Counter<SECTION_CAPACITY &&
+            (student.section==1 || student.section==4)){
+            SECTION_1[section1Counter]=student;
+            section1Counter++;
+        }else if (student.section!=4){
+            pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
+            SECTION_DROPPED[sectionDropperCounter];
+            sectionDropperCounter++
+            pthread_mutex_unlock(&SECTION_1_MUTEX);
+        }
+        pthread_mutex_unlock(&SECTION_1_MUTEX);
+        //unlock mutex? Student dropped? Student wait timeout?
+        pthread_mutex_lock(&SECTION_2_MUTEX);
+        if (section2Counter<SECTION_CAPACITY &&
+            (student.section==2 || student.section==4)){
+            SECTION_2[section1Counter]=student;
+            section2Counter++;
+        }
+        pthread_mutex_unlock(&SECTION_2_MUTEX);
+        //unlock mutex? Student dropped? Student wait timeout?
+        pthread_mutex_lock(&SECTION_3_MUTEX);
+        if (section3Counter<SECTION_CAPACITY &&
+            (student.section==3 || student.section==4)){
+            SECTION_3[section3Counter]=student;
+            section3Counter++;
+        }
+        pthread_mutex_unlock(&SECTION_3_MUTEX);
+        //unlock mutex? Student dropped? Student wait timeout?
+            
+        }
+        //Critical region: add a student to the section
+    }
+}
+
 // The graduating senor thread.
 void *gsThread(void *param){
   print("Graduating Senor's queue begins processing");
@@ -101,11 +157,13 @@ void *gsThread(void *param){
   gsRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
   setitimer(ITIMER_REAL, &gsRegestrationTimer, NULL);
 
-  /* Meet students until the office hour is over.
+  // Processes students until the queue is empty or regestration peroid has ended.
+  int processTime;
   do {
-    professorMeetsStudent();
-  } while (!timesUp);
-*/
+    processTime = (rand()%GS_PROCESS_TIME_MAX) + GS_PROCESS_TIME_MIN;
+    processStudent(processTime);
+  } while (!timesUp); //need queue checking
+
   print("Gaduating Senor queue is closed");
   return NULL;
 }
@@ -118,11 +176,13 @@ void *rsThread(void *param){
   rsRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
   setitimer(ITIMER_REAL, &rsRegestrationTimer, NULL);
 
-  /* Meet students until the office hour is over.
+  // Processes students until the queue is empty or regestration peroid has ended.
+  int processTime;
   do {
-    professorMeetsStudent();
+    processTime = (rand()%RS_PROCESS_TIME_MAX) + RS_PROCESS_TIME_MIN;
+    processStudent(processTime);
   } while (!timesUp);
-*/
+
   print("Regular Senor queue is closed");
   return NULL;
 }
@@ -135,11 +195,13 @@ void *eeThread(void *param){
   eeRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
   setitimer(ITIMER_REAL, &eeRegestrationTimer, NULL);
 
-  /* Meet students until the office hour is over.
+  // Processes students until the queue is empty or regestration peroid has ended.
+  int processTime;
   do {
-    professorMeetsStudent();
+  processTime = (rand()%ES_PROCESS_TIME_MAX) + ES_PROCESS_TIME_MIN;
+      processStudent(processTime);
   } while (!timesUp);
-*/
+
   print("Everyone Else's queue is closed");
   return NULL;}
 
@@ -157,6 +219,9 @@ int main(void) {
     int gs = 0;
     int rs = 0;
     int ee = 0;
+
+    // Set the timer signal handler.
+    signal(SIGALRM, timerHandler);
 
     // set up rand
     srand(time(NULL));
