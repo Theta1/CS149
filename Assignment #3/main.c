@@ -39,6 +39,13 @@ void printSection(STUDENT section[], char *sectionType, int indexLast);
  STUDENT SECTION_DROPPED[SECTION_CAPACITY];
  STUDENT SECTION_IMPATIENT[SECTION_CAPACITY];
 
+ /**Circular buffer counters*/
+ int section1Counter = 0;
+ int section2Counter = 0;
+ int section3Counter = 0;
+ int sectionDropperCounter = 0;
+ int sectionImpatientCounter = 0;
+
 /**Mutexes protecting queues and sections and print*/
  pthread_mutex_t GS_QUEUE_MUTEX;
  pthread_mutex_t RS_QUEUE_MUTEX;
@@ -46,6 +53,8 @@ void printSection(STUDENT section[], char *sectionType, int indexLast);
  pthread_mutex_t SECTION_1_MUTEX;
  pthread_mutex_t SECTION_2_MUTEX;
  pthread_mutex_t SECTION_3_MUTEX;
+ pthread_mutex_t SECTION_DROPPED_MUTEX;
+ pthread_mutex_t SECTION_IMPATIENT_MUTEX;
  pthread_mutex_t PRINT_MUTEX;
 
  int firstPrint = 1;
@@ -53,8 +62,10 @@ void printSection(STUDENT section[], char *sectionType, int indexLast);
 /**Semaphore for busy section*/
  sem_t FILLINGSECTION;
 
-/**Regestration timer*/
- struct itimerval regestrationTimer;
+/**Regestration timers*/
+ struct itimerval gsRegestrationTimer;
+ struct itimerval rsRegestrationTimer;
+ struct itimerval eeRegestrationTimer;
  time_t startTime;
 
 /**
@@ -91,6 +102,109 @@ void print(char *event){
 
 }
 
+int timesUp = 0;
+
+// Timer signal handler.
+void timerHandler(int signal)
+{
+  timesUp = 1;  // Registration is closed
+}
+
+//Shared function for processing student
+//Didn't workout as shared as planned. LOOKS AWFUL! -DT
+void processStudent(processTime, student){
+    if(!timesUp && !student.isImpatient()){
+        pthread_mutex_lock(&SECTION_1_MUTEX);
+        if(section1Counter<SECTION_CAPACITY &&
+            (student.section==1 || student.section==4)){
+            SECTION_1[section1Counter]=student;
+            section1Counter++;
+        }else if (student.section!=4){
+            pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
+            SECTION_DROPPED[sectionDropperCounter];
+            sectionDropperCounter++
+            pthread_mutex_unlock(&SECTION_1_MUTEX);
+        }
+        pthread_mutex_unlock(&SECTION_1_MUTEX);
+        //unlock mutex? Student dropped? Student wait timeout?
+        pthread_mutex_lock(&SECTION_2_MUTEX);
+        if (section2Counter<SECTION_CAPACITY &&
+            (student.section==2 || student.section==4)){
+            SECTION_2[section1Counter]=student;
+            section2Counter++;
+        }
+        pthread_mutex_unlock(&SECTION_2_MUTEX);
+        //unlock mutex? Student dropped? Student wait timeout?
+        pthread_mutex_lock(&SECTION_3_MUTEX);
+        if (section3Counter<SECTION_CAPACITY &&
+            (student.section==3 || student.section==4)){
+            SECTION_3[section3Counter]=student;
+            section3Counter++;
+        }
+        pthread_mutex_unlock(&SECTION_3_MUTEX);
+        //unlock mutex? Student dropped? Student wait timeout?
+            
+        }
+        //Critical region: add a student to the section
+    }
+}
+
+// The graduating senor thread.
+void *gsThread(void *param){
+  print("Graduating Senor's queue begins processing");
+
+  // Set the timer for regestration queue duration.
+  gsRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
+  setitimer(ITIMER_REAL, &gsRegestrationTimer, NULL);
+
+  // Processes students until the queue is empty or regestration peroid has ended.
+  int processTime;
+  do {
+    processTime = (rand()%GS_PROCESS_TIME_MAX) + GS_PROCESS_TIME_MIN;
+    processStudent(processTime);
+  } while (!timesUp); //need queue checking
+
+  print("Gaduating Senor queue is closed");
+  return NULL;
+}
+
+// The regular senor thread.
+void *rsThread(void *param){
+  print("Regular Senor's queue begins processing");
+
+  // Set the timer for regestration queue duration.
+  rsRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
+  setitimer(ITIMER_REAL, &rsRegestrationTimer, NULL);
+
+  // Processes students until the queue is empty or regestration peroid has ended.
+  int processTime;
+  do {
+    processTime = (rand()%RS_PROCESS_TIME_MAX) + RS_PROCESS_TIME_MIN;
+    processStudent(processTime);
+  } while (!timesUp);
+
+  print("Regular Senor queue is closed");
+  return NULL;
+}
+
+// The everybody else thread.
+void *eeThread(void *param){
+  print("Everyone Else's queue begins processing");
+
+  // Set the timer for regestration queue duration.
+  eeRegestrationTimer.it_value.tv_sec = REGESTRATION_DURATION;
+  setitimer(ITIMER_REAL, &eeRegestrationTimer, NULL);
+
+  // Processes students until the queue is empty or regestration peroid has ended.
+  int processTime;
+  do {
+  processTime = (rand()%ES_PROCESS_TIME_MAX) + ES_PROCESS_TIME_MIN;
+      processStudent(processTime);
+  } while (!timesUp);
+
+  print("Everyone Else's queue is closed");
+  return NULL;}
+
 /**
 * Main method
 */
@@ -105,6 +219,9 @@ int main(void) {
     int gs = 0;
     int rs = 0;
     int ee = 0;
+
+    // Set the timer signal handler.
+    signal(SIGALRM, timerHandler);
 
     // set up rand
     srand(time(NULL));
@@ -124,11 +241,15 @@ int main(void) {
         ALL_STUDENTS[cnt] = x;
     }
 
-    printf("\nStud\tpri\tarrive\tfinish\tsec\tid\n");
+    /*Shows us the list of students
+    printf("\nStudent\tPri\tArrival\tFinish\tSection\tId\n");
     for ( cnt = 0; cnt<75; cnt++) {
-        printf("%d\t %s\t%d\t%d\t%d\t%d\n",cnt,ALL_STUDENTS[cnt].priority,ALL_STUDENTS[cnt].arriveTime, ALL_STUDENTS[cnt].finishTime, ALL_STUDENTS[cnt].section, ALL_STUDENTS[cnt].id);
+        printf("%d\t%s\t%d\t%d\t%d\t%d\n", cnt,
+            ALL_STUDENTS[cnt].priority,ALL_STUDENTS[cnt].arriveTime, 
+            ALL_STUDENTS[cnt].finishTime, ALL_STUDENTS[cnt].section, 
+            ALL_STUDENTS[cnt].id);
     }
-
+*/
     //put students into their perspective queue
     for (cnt = 0; cnt < STUDENT_COUNT; cnt++) {
         if(isPriority(ALL_STUDENTS[cnt], "GS")) {
@@ -145,6 +266,29 @@ int main(void) {
             ee++;
         }
     }
+
+    //Creates the gs queue thread
+    int gsQueueID = 1;
+    pthread_t GSThreadId;
+    pthread_attr_t GSAttr;
+    pthread_attr_init(&GSAttr);
+    //Did you get a comp error from two lines below?
+    //Make sure to compile with "gcc –pthread main.c Student.c Student.h"
+    pthread_create(&GSThreadId, &GSAttr, gsThread, &gsQueueID);
+
+    //Creates the rs queue thread
+    int rsQueueID = 2;
+    pthread_t RSThreadId;
+    pthread_attr_t RSAttr;
+    pthread_attr_init(&RSAttr);
+    pthread_create(&RSThreadId, &RSAttr, rsThread, &rsQueueID);
+
+    //Creates the ee queue thread
+    int eeQueueID = 1;
+    pthread_t EEThreadId;
+    pthread_attr_t EEAttr;
+    pthread_attr_init(&EEAttr);
+    pthread_create(&EEThreadId, &EEAttr, eeThread, &eeQueueID);
 
     printStudent(GS_QUEUE[0]);
     printf("\n");
@@ -173,7 +317,6 @@ int main(void) {
     printSection(SECTION_IMPATIENT, "Impatient", indexSectionImpatient);
 }
 
-//create 5 class arrays, the 3 classes, 1 dropped array, 1 impatient array
 //create 3 threads
     //per thread
     //while loop start
