@@ -23,10 +23,7 @@
  #define SECTION_CAPACITY 20
 
 // function declarations
-void *processGS_QUEUE();
-void *processRS_QUEUE();
-void *processEE_QUEUE();
-void printSection(STUDENT section[], char *sectionType, int indexLast);
+void printSection(STUDENT section[], char *sectionType, int indexSelectionLast);
 
 /**Circular buffers*/
  STUDENT ALL_STUDENTS[STUDENT_COUNT];
@@ -309,12 +306,11 @@ int main(void) {
     printSection(SECTION_2, "2", indexSection2);
     printSection(SECTION_3, "3", indexSection3);
 
-
-    // do stats calculations
-
-    // print dropped
+    // print dropped/impatient
     printSection(SECTION_DROPPED, "Dropped", indexSectionDropped);
     printSection(SECTION_IMPATIENT, "Impatient", indexSectionImpatient);
+
+    // optinal printing of other stats
 }
 
 //create 3 threads
@@ -343,42 +339,30 @@ int main(void) {
     // print any other statistics we find interesting
 
 /**
-  * Process students in the GS_QUEUE.
-  */
-void *processGS_QUEUE() {
-    // sleep for GS processing time
-    sleep(rand() % GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
-}
-
-/**
-  * Process students in the RS_QUEUE.
-  */
-void *processRS_QUEUE() {
-    // sleep for RS processing time
-    sleep(rand() % RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
-}
-
-/**
-  * Process students in the EE_QUEUE.
-  */
-void *processEE_QUEUE() {
-    // sleep for EE processing time
-    sleep(rand() % EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
-}
-
-/**
   * Prints out the students in each section.
   * @param section the section
   * @param sectionType the section type
-  * @param indexLast the last used index in the section
+  * @param indexSelectionLast the last used index in the section
   */
-void printSection(STUDENT section[], char *sectionType, int indexLast) {
-    printf("Section: %s\n", sectionType);
+void printSection(STUDENT section[], char *sectionType, int indexSelectionLast) {
+    printf("Students in section %s:\n", sectionType);
 
+    int totalTurnAroundTime = 0;
     int i = 0;
-    for(; i < indexLast; i++) {
-        printf("%d: ", i);
+    for(; i < indexSelectionLast; i++) {
+        printf("Index: %2d --> ", i);
         printStudent(section[i]);
-        printf("\n");
+
+        int turnAroundTime = getTurnAroundTime(section[i]);
+        printf(", turnaround time: %d\n", turnAroundTime);
+
+        totalTurnAroundTime += turnAroundTime;
+    }
+
+    if(indexSelectionLast != 0) { // make sure we have something in the section
+        printf("Average turnaround time: %f\n\n", totalTurnAroundTime / (indexSelectionLast + 0.0f));
+    }
+    else {
+        printf("Average turnaround time: N/A\n\n");
     }
 }
