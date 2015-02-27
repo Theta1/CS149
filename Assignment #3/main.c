@@ -86,7 +86,8 @@ void rsAdd();
  time_t startTime;
 
 /**
-* Main method
+* Main method. Creates the queue threads, student threads. Signals when time limit is over. Joins threads. Drops unregestered students and prints statistics.
+* @return 0 if succesfully reaches end of main thread.
 */
 int main(void) {
     int cnt = 0;
@@ -99,6 +100,7 @@ int main(void) {
     time(&startTime);
     print("Registration begins");
 
+    //Queue Threads
     pthread_t ee_t;
     pthread_attr_t eeAttr;
     pthread_attr_init(&eeAttr);
@@ -161,16 +163,13 @@ int main(void) {
     return 0;
 }
 
-
-
-
-
 /**
 * Print a line for each event:
 * elapsed time
 * who is registering from what queue
 * who is waiting in what queue
 * what action they take: Register/drop/gaveup and where
+* @param char array pointer. This is the text to be time-stamped and printed.
 */
 void print(char *event){
     time_t now;
@@ -203,19 +202,20 @@ void print(char *event){
 
 }
 
-// Timer signal handler.
-void timerHandler(int signal)
-{
+/** 
+* Timer signal handler. This is used to change the timesUp boolean and print the close event
+*/
+void timerHandler(int signal) {
     timesUp = 1;  // Registration is closed
     sleep(1);
     print("Registration is closed");
 }
 
 /**
-* Creates a Student thread
+* Creates a Student thread.  This creates and sleeps a student until it's random arrival timeThis and assigns random viables to the sudent. Finnally it calls the function to process the student.
+* @param is a pointer to the thread creation paramaters. In this case the student id.
 */
-void *student(void *param)
-{
+void *student(void *param) {
     int num = *((int *) param);
 
     // Students will arrive at random times during the office hour.
@@ -244,12 +244,12 @@ void *student(void *param)
 /**
 * Student function
 * puts the student into
-* his/her persepective group
+* his/her persepective queue with needed mutex locking and unlocking.
+* @param a Student structure to be processes
 */
 void studentArrives(STUDENT student) {
 
-    if(isPriority(student, "EE"))
-    {
+    if(isPriority(student, "EE")) {
         pthread_mutex_lock(&eeMutex);
 
         eeQueue[eeTail] = student;
@@ -264,8 +264,7 @@ void studentArrives(STUDENT student) {
         sem_post(&eeSem);
     }
 
-    if(isPriority(student, "GS"))
-    {
+    if(isPriority(student, "GS")) {
         pthread_mutex_lock(&gsMutex);
 
         gsQueue[gsTail] = student;
@@ -280,8 +279,7 @@ void studentArrives(STUDENT student) {
         sem_post(&gsSem);
     }
 
-    if(isPriority(student, "RS"))
-    {
+    if(isPriority(student, "RS")) {
         pthread_mutex_lock(&rsMutex);
 
         rsQueue[rsTail] = student;
@@ -295,19 +293,23 @@ void studentArrives(STUDENT student) {
 
         sem_post(&rsSem);
     }
-
 }
 
+/**
+* Creats and runs the EE queue thread until the timelimit has been reached.
+*/
 void *eeThread(void *param) {
-
     //time to register for classes
     while(!timesUp) {
         eeAdd();
     }
-
     return NULL;
 }
 
+/**
+* Waits on students in the queue. Sleeps student for processesing time then attempts to add it to desired section.
+* Can't we combine the various add functions?
+*/
 void eeAdd() {
 
     sem_wait(&eeSem);
@@ -396,19 +398,23 @@ void eeAdd() {
     end:
 
     eeHead++;
-
 }
 
-
+/**
+* Creats and runs the GS queue thread until the timelimit has been reached.
+*/
 void *gsThread(void *param) {
     //time to register for classes
     while(!timesUp) {
         gsAdd();
     }
-
     return NULL;
 }
 
+/**
+* Waits on students in the queue. Sleeps student for processesing time then attempts to add it to desired section.
+* Can't we combine the various add functions?
+*/
 void gsAdd() {
 
     sem_wait(&gsSem);
@@ -497,6 +503,9 @@ void gsAdd() {
 
 }
 
+/**
+* Creats and runs the RS queue thread until the timelimit has been reached.
+*/
 void *rsThread(void *param) {
     //time to register for classes
     while(!timesUp) {
@@ -506,6 +515,10 @@ void *rsThread(void *param) {
     return NULL;
 }
 
+/**
+* Waits on students in the queue. Sleeps student for processesing time then attempts to add it to desired section.
+* Can't we combine the various add functions?
+*/
 void rsAdd() {
     sem_wait(&rsSem);
 
@@ -593,7 +606,11 @@ void rsAdd() {
 
 }
 
-void dropStudent(STUDENT s){
+/**
+* When a student can not add into desired section on is still in queue after the regestration deadline this moves them into the dropped list.
+* @param student s which is the student to be dropped.
+*/
+void dropStudent(STUDENT s) {
     pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
 
     s.finishTime = getTime();
