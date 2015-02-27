@@ -22,3 +22,4 @@ int getTurnAroundTime(STUDENT student);
 int canEnroll(STUDENT student, int section);
 int isImpatient(STUDENT student, int processStartTime);
 int isPriority(STUDENT student, char *priority);
+int getTime();

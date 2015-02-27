@@ -58,3 +58,14 @@ int isImpatient(STUDENT student, int processStartTime) {
 int isPriority(STUDENT student, char *priority) {
     return strcmp(student.priority, priority) == 0;
 }
+
+/**
+* Gets the current time
+* @return the current time
+* in seconds as an int
+*/
+int getTime() {
+    time_t current_time;
+    time(&current_time);
+    return current_time;
+}
