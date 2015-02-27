@@ -33,6 +33,8 @@ void *eeThread(void *param);
 void *student(void *param);
 void studentArrives(STUDENT student);
 void eeAdd();
+void gsAdd();
+void rsAdd();
 
 /**Circular buffers*/
  //STUDENT ALL_STUDENTS[STUDENT_COUNT];
@@ -110,12 +112,22 @@ int main(void) {
 
     time(&startTime);
 
-        pthread_t ee_t;
-        pthread_attr_t eeAttr;
-        pthread_attr_init(&eeAttr);
-        pthread_create(&ee_t, &eeAttr, eeThread, NULL);
+    pthread_t ee_t;
+    pthread_attr_t eeAttr;
+    pthread_attr_init(&eeAttr);
+    pthread_create(&ee_t, &eeAttr, eeThread, NULL);
 
-        sleep(1);
+    sleep(1);
+
+    pthread_t gs_t;
+    pthread_attr_t gsAttr;
+    pthread_attr_init(&gsAttr);
+    pthread_create(&gs_t, &gsAttr, gsThread, NULL);
+
+    pthread_t rs_t;
+    pthread_attr_t rsAttr;
+    pthread_attr_init(&rsAttr);
+    pthread_create(&rs_t, &rsAttr, rsThread, NULL);
 
     /**
     creates 75 student threads
@@ -233,6 +245,38 @@ void studentArrives(STUDENT student) {
         sem_post(&eeSem);
     }
 
+    if(isPriority(student, "GS"))
+    {
+        pthread_mutex_lock(&gsMutex);
+
+        gsQueue[gsTail] = student;
+        gsTail++;
+
+        pthread_mutex_unlock(&gsMutex);
+
+        char event[80];
+        sprintf(event,"Student %d arrives to GS line", student.id);
+        print(event);
+
+        sem_post(&gsSem);
+    }
+
+    if(isPriority(student, "RS"))
+    {
+        pthread_mutex_lock(&rsMutex);
+
+        rsQueue[rsTail] = student;
+        rsTail++;
+
+        pthread_mutex_unlock(&rsMutex);
+
+        char event[80];
+        sprintf(event,"Student %d arrives to RS line", student.id);
+        print(event);
+
+        sem_post(&rsSem);
+    }
+
 }
 
 void *eeThread(void *param) {
@@ -243,10 +287,9 @@ void *eeThread(void *param) {
     setitimer(ITIMER_REAL, &timer, NULL);
 
     //time to register for classes
-    do
-    {
+    do {
         eeAdd();
-    }while( !timesUp );
+    } while(!timesUp);
 
     print("Registration is closed");
     return NULL;
@@ -259,10 +302,9 @@ void eeAdd() {
 
         sleep(rand()%EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
 
-        if(canEnroll(eeQueue[eeHead], 1))
+        pthread_mutex_lock(&SECTION_1_MUTEX);
+        if(canEnroll(eeQueue[eeHead], 1) && section1Counter < SECTION_CAPACITY)
         {
-            pthread_mutex_lock(&SECTION_1_MUTEX);
-
             SECTION_1[section1Counter] = eeQueue[eeHead];
             section1Counter++;
 
@@ -271,11 +313,228 @@ void eeAdd() {
             print(event);
 
             pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+            goto end;
         }
+        pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+        pthread_mutex_lock(&SECTION_2_MUTEX);
+        if(canEnroll(eeQueue[eeHead], 2) && section2Counter < SECTION_CAPACITY)
+        {
+            SECTION_2[section2Counter] = eeQueue[eeHead];
+            section2Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 2", eeQueue[eeHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_2_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_2_MUTEX);
+
+        pthread_mutex_lock(&SECTION_3_MUTEX);
+        if(canEnroll(eeQueue[eeHead], 3) && section3Counter < SECTION_CAPACITY)
+        {
+            SECTION_3[section3Counter] = eeQueue[eeHead];
+            section3Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 3", eeQueue[eeHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_3_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_3_MUTEX);
+
+        // dropped section
+        pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
+
+        SECTION_DROPPED[sectionDropperCounter] = eeQueue[eeHead];
+        sectionDropperCounter++;
+
+        char event[80];
+        sprintf(event,"Student %d enrolls into Section Dropped", eeQueue[eeHead].id);
+        print(event);
+
+        pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
 
 
+        // goto necessary to break out and stop section 0 students adding every section
+        end:
 
         eeHead++;
+    }
+}
+
+void *gsThread(void *param) {
+    //time to register for classes
+    do {
+        gsAdd();
+    } while(!timesUp);
+
+    return NULL;
+}
+
+void gsAdd() {
+    if(!timesUp)
+    {
+        sem_wait(&gsSem);
+
+        sleep(rand()%GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
+
+        pthread_mutex_lock(&SECTION_1_MUTEX);
+        if(canEnroll(gsQueue[gsHead], 1) && section1Counter < SECTION_CAPACITY)
+        {
+            SECTION_1[section1Counter] = gsQueue[gsHead];
+            section1Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 1", gsQueue[gsHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+        pthread_mutex_lock(&SECTION_2_MUTEX);
+        if(canEnroll(gsQueue[gsHead], 2) && section2Counter < SECTION_CAPACITY)
+        {
+            SECTION_2[section2Counter] = gsQueue[gsHead];
+            section2Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 2", gsQueue[gsHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_2_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_2_MUTEX);
+
+        pthread_mutex_lock(&SECTION_3_MUTEX);
+        if(canEnroll(gsQueue[gsHead], 3)  && section3Counter < SECTION_CAPACITY)
+        {
+            SECTION_3[section3Counter] = gsQueue[gsHead];
+            section3Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 3", gsQueue[gsHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_3_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_3_MUTEX);
+
+        // dropped section
+        pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
+
+        SECTION_DROPPED[sectionDropperCounter] = eeQueue[eeHead];
+        sectionDropperCounter++;
+
+        char event[80];
+        sprintf(event,"Student %d enrolls into Section Dropped", eeQueue[eeHead].id);
+        print(event);
+
+        pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
+
+
+        // goto necessary to break out and stop section 0 students adding every section
+        end:
+
+        gsHead++;
+    }
+
+}
+
+void *rsThread(void *param) {
+    //time to register for classes
+    do {
+        rsAdd();
+    } while(!timesUp);
+
+    return NULL;
+}
+
+void rsAdd() {
+    if(!timesUp)
+    {
+        sem_wait(&rsSem);
+
+        sleep(rand()%RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
+
+        pthread_mutex_lock(&SECTION_1_MUTEX);
+        if(canEnroll(rsQueue[rsHead], 1)  && section1Counter < SECTION_CAPACITY)
+        {
+            SECTION_1[section1Counter] = rsQueue[rsHead];
+            section1Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 1", rsQueue[rsHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+        pthread_mutex_lock(&SECTION_2_MUTEX);
+        if(canEnroll(rsQueue[rsHead], 2) && section2Counter < SECTION_CAPACITY)
+        {
+            SECTION_2[section2Counter] = rsQueue[rsHead];
+            section2Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 2", rsQueue[rsHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_2_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_2_MUTEX);
+
+        pthread_mutex_lock(&SECTION_3_MUTEX);
+        if(canEnroll(rsQueue[rsHead], 3) && section3Counter < SECTION_CAPACITY)
+        {
+            SECTION_3[section3Counter] = rsQueue[rsHead];
+            section3Counter++;
+
+            char event[80];
+            sprintf(event,"Student %d enrolls into Section 3", rsQueue[rsHead].id);
+            print(event);
+
+            pthread_mutex_unlock(&SECTION_3_MUTEX);
+
+            goto end;
+        }
+        pthread_mutex_unlock(&SECTION_3_MUTEX);
+
+        // dropped section
+        pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
+
+        SECTION_DROPPED[sectionDropperCounter] = eeQueue[eeHead];
+        sectionDropperCounter++;
+
+        char event[80];
+        sprintf(event,"Student %d enrolls into Section Dropped", eeQueue[eeHead].id);
+        print(event);
+
+        pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
+
+        // goto necessary to break out and stop section 0 students adding every section
+        end:
+
+        rsHead++;
     }
 
 }
