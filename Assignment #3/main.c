@@ -9,7 +9,7 @@
 
  #include "Student.h"
 
-/**Major variables of this simulation*/
+//Major variables of this simulation
  #define STUDENT_COUNT 75
  #define REGISTRATION_DURATION 20
  #define ID_BASE 101
@@ -27,7 +27,6 @@ void printSection(STUDENT section[], char *sectionType, int indexSelectionLast);
 void print(char *event);
 void timerHandler(int signal);
 void dropStudent(STUDENT s);
-void processStudent(processTime, student);
 void *gsThread(void *param);
 void *rsThread(void *param);
 void *eeThread(void *param);
@@ -37,8 +36,7 @@ void eeAdd();
 void gsAdd();
 void rsAdd();
 
-/**Circular buffers*/
- //STUDENT ALL_STUDENTS[STUDENT_COUNT];
+//Circular buffers
  int ALL_STUDENTS[STUDENT_COUNT];
  STUDENT gsQueue[STUDENT_COUNT];
  STUDENT rsQueue[STUDENT_COUNT];
@@ -49,7 +47,7 @@ void rsAdd();
  STUDENT SECTION_DROPPED[SECTION_CAPACITY];
  STUDENT SECTION_IMPATIENT[SECTION_CAPACITY];
 
- /**Circular buffer counters*/
+ //Circular buffer counters
  int section1Counter = 0;
  int section2Counter = 0;
  int section3Counter = 0;
@@ -63,7 +61,7 @@ void rsAdd();
  int eeTail = 0;
 
 
-/**Mutexes protecting queues and sections and print*/
+//Mutexes protecting queues and sections and print
  pthread_mutex_t gsMutex;
  pthread_mutex_t rsMutex;
  pthread_mutex_t eeMutex;
@@ -77,34 +75,21 @@ void rsAdd();
  int firstPrint = 1;
  int timesUp = 0;
 
-/**Semaphore for busy section*/
+//Semaphore for busy section
  sem_t gsSem;
  sem_t rsSem;
  sem_t eeSem;
 
 
-/**Registration timers*/
+//Registration timers
  struct itimerval timer;
  time_t startTime;
-
-
-
-
 
 /**
 * Main method
 */
 int main(void) {
-    int indexSection1 = 0;
-    int indexSection2 = 0;
-    int indexSection3 = 0;
-    int indexSectionDropped = 0;
-    int indexSectionImpatient = 0;
     int cnt = 0;
-    int temp = 0;
-    int gs = 0;
-    int rs = 0;
-    int ee = 0;
 
     sem_init(&eeSem, 0, 0);
 
@@ -130,9 +115,8 @@ int main(void) {
     pthread_attr_init(&rsAttr);
     pthread_create(&rs_t, &rsAttr, rsThread, NULL);
 
-    /**
-    creates 75 student threads
-    */
+
+    //creates 75 student threads
     for (cnt = 0; cnt < STUDENT_COUNT; cnt++)
     {
         ALL_STUDENTS[cnt] = ID_BASE + cnt;
@@ -143,14 +127,14 @@ int main(void) {
 
     }
 
-    // Set the timer signal handler.
+    //Set the timer signal handler.
     signal(SIGALRM, timerHandler);
 
     pthread_join(ee_t, NULL);
     pthread_join(gs_t, NULL);
     pthread_join(rs_t, NULL);
 
-
+    //drops remaining students
     for(cnt = gsHead; cnt < gsTail; cnt++){
         dropStudent(gsQueue[cnt]);
     }
@@ -160,6 +144,10 @@ int main(void) {
     for(cnt = eeHead; cnt < eeTail; cnt++){
         dropStudent(eeQueue[cnt]);
     }
+
+
+
+    return 0;
 }
 
 
@@ -172,7 +160,6 @@ int main(void) {
 * who is registering from what queue
 * who is waiting in what queue
 * what action they take: Register/drop/gaveup and where
-//   what event occurred
 */
 void print(char *event){
     time_t now;
@@ -389,18 +376,6 @@ void eeAdd() {
     }
 }
 
-void dropStudent(STUDENT s){
-    pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
-
-    SECTION_DROPPED[sectionDropperCounter] = s;
-    sectionDropperCounter++;
-
-    char event2[80];
-    sprintf(event2,"Dropped Student %d.", s.id);
-    print(event2);
-
-    pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
-}
 
 void *gsThread(void *param) {
     //time to register for classes
@@ -556,6 +531,19 @@ void rsAdd() {
         rsHead++;
     }
 
+}
+
+void dropStudent(STUDENT s){
+    pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
+
+    SECTION_DROPPED[sectionDropperCounter] = s;
+    sectionDropperCounter++;
+
+    char event2[80];
+    sprintf(event2,"Dropped Student %d.", s.id);
+    print(event2);
+
+    pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
 }
 
 /**
