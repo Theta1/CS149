@@ -26,6 +26,7 @@
 void printSection(STUDENT section[], char *sectionType, int indexSelectionLast);
 void print(char *event);
 void timerHandler(int signal);
+void dropStudent(STUDENT s);
 void processStudent(processTime, student);
 void *gsThread(void *param);
 void *rsThread(void *param);
@@ -146,7 +147,19 @@ int main(void) {
     signal(SIGALRM, timerHandler);
 
     pthread_join(ee_t, NULL);
+    pthread_join(gs_t, NULL);
+    pthread_join(rs_t, NULL);
 
+
+    for(cnt = gsHead; cnt < gsTail; cnt++){
+        dropStudent(gsQueue[cnt]);
+    }
+    for(cnt = rsHead; cnt < rsTail; cnt++){
+        dropStudent(rsQueue[cnt]);
+    }
+    for(cnt = eeHead; cnt < eeTail; cnt++){
+        dropStudent(eeQueue[cnt]);
+    }
 }
 
 
@@ -168,7 +181,7 @@ void print(char *event){
     int min = 0;
     int sec = (int) elapsed;
 
-    if (sec >=60){
+    while (sec >=60){
         min++;
         sec -=60;
     }
@@ -176,7 +189,7 @@ void print(char *event){
     pthread_mutex_lock(&PRINT_MUTEX);
 
     if (firstPrint) {
-        printf("TIME | EVENT\n");
+        printf("TIME | EVENT (ATTRIBUTES)\n");
         firstPrint = 0;
     }
 
@@ -195,6 +208,7 @@ void print(char *event){
 // Timer signal handler.
 void timerHandler(int signal)
 {
+  print("Registration is closed");
   timesUp = 1;  // Registration is closed
 }
 
@@ -239,7 +253,7 @@ void studentArrives(STUDENT student) {
         pthread_mutex_unlock(&eeMutex);
 
         char event[80];
-        sprintf(event,"Student %d arrives to EE line", student.id);
+        sprintf(event,"Student %d arrives to EE line (Section: %d, %s)", student.id, student.section, student.priority);
         print(event);
 
         sem_post(&eeSem);
@@ -255,7 +269,7 @@ void studentArrives(STUDENT student) {
         pthread_mutex_unlock(&gsMutex);
 
         char event[80];
-        sprintf(event,"Student %d arrives to GS line", student.id);
+        sprintf(event,"Student %d arrives to GS line (Section: %d, %s)", student.id, student.section, student.priority);
         print(event);
 
         sem_post(&gsSem);
@@ -271,7 +285,7 @@ void studentArrives(STUDENT student) {
         pthread_mutex_unlock(&rsMutex);
 
         char event[80];
-        sprintf(event,"Student %d arrives to RS line", student.id);
+        sprintf(event,"Student %d arrives to RS line (Section: %d, %s)", student.id, student.section, student.priority);
         print(event);
 
         sem_post(&rsSem);
@@ -287,11 +301,10 @@ void *eeThread(void *param) {
     setitimer(ITIMER_REAL, &timer, NULL);
 
     //time to register for classes
-    do {
+    while(!timesUp) {
         eeAdd();
-    } while(!timesUp);
+    }
 
-    print("Registration is closed");
     return NULL;
 }
 
@@ -301,7 +314,7 @@ void eeAdd() {
         sem_wait(&eeSem);
 
         char event[80];
-        sprintf(event,"EE queue beings processing Student %d.", eeQueue[eeHead].id);
+        sprintf(event,"EE queue begins processing Student %d.", eeQueue[eeHead].id);
         print(event);
 
         sleep(rand()%EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
@@ -355,16 +368,18 @@ void eeAdd() {
         pthread_mutex_unlock(&SECTION_3_MUTEX);
 
         // dropped section
+        dropStudent(eeQueue[eeHead]);
+        /* TBD moved into custom fuction
         pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
 
         SECTION_DROPPED[sectionDropperCounter] = eeQueue[eeHead];
         sectionDropperCounter++;
 
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section Dropped", eeQueue[eeHead].id);
-        print(event);
+        char event2[80];
+        sprintf(event2,"Dropped Student %d.", eeQueue[eeHead].id);
+        print(event2);
 
-        pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
+        pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);*/
 
 
         // goto necessary to break out and stop section 0 students adding every section
@@ -374,11 +389,24 @@ void eeAdd() {
     }
 }
 
+void dropStudent(STUDENT s){
+    pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
+
+    SECTION_DROPPED[sectionDropperCounter] = s;
+    sectionDropperCounter++;
+
+    char event2[80];
+    sprintf(event2,"Dropped Student %d.", s.id);
+    print(event2);
+
+    pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
+}
+
 void *gsThread(void *param) {
     //time to register for classes
-    do {
+    while(!timesUp) {
         gsAdd();
-    } while(!timesUp);
+    }
 
     return NULL;
 }
@@ -389,7 +417,7 @@ void gsAdd() {
         sem_wait(&gsSem);
 
         char event[80];
-        sprintf(event,"GS queue beings processing Student %d.", eeQueue[eeHead].id);
+        sprintf(event,"GS queue begins processing Student %d.", gsQueue[gsHead].id);
         print(event);
 
         sleep(rand()%GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
@@ -443,18 +471,7 @@ void gsAdd() {
         pthread_mutex_unlock(&SECTION_3_MUTEX);
 
         // dropped section
-        pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
-
-        SECTION_DROPPED[sectionDropperCounter] = eeQueue[eeHead];
-        sectionDropperCounter++;
-
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section Dropped", eeQueue[eeHead].id);
-        print(event);
-
-        pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
-
-
+        dropStudent(gsQueue[gsHead]);
         // goto necessary to break out and stop section 0 students adding every section
         end:
 
@@ -465,9 +482,9 @@ void gsAdd() {
 
 void *rsThread(void *param) {
     //time to register for classes
-    do {
+    while(!timesUp) {
         rsAdd();
-    } while(!timesUp);
+    }
 
     return NULL;
 }
@@ -478,7 +495,7 @@ void rsAdd() {
         sem_wait(&rsSem);
 
         char event[80];
-        sprintf(event,"RS queue beings processing Student %d.", eeQueue[eeHead].id);
+        sprintf(event,"RS queue begins processing Student %d.", rsQueue[rsHead].id);
         print(event);
 
         sleep(rand()%RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
@@ -532,17 +549,7 @@ void rsAdd() {
         pthread_mutex_unlock(&SECTION_3_MUTEX);
 
         // dropped section
-        pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
-
-        SECTION_DROPPED[sectionDropperCounter] = eeQueue[eeHead];
-        sectionDropperCounter++;
-
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section Dropped", eeQueue[eeHead].id);
-        print(event);
-
-        pthread_mutex_unlock(&SECTION_DROPPED_MUTEX);
-
+        dropStudent(rsQueue[rsHead]);
         // goto necessary to break out and stop section 0 students adding every section
         end:
 
