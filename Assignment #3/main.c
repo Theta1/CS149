@@ -300,6 +300,10 @@ void eeAdd() {
     {
         sem_wait(&eeSem);
 
+        char event[80];
+        sprintf(event,"EE queue beings processing Student %d.", eeQueue[eeHead].id);
+        print(event);
+
         sleep(rand()%EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
 
         pthread_mutex_lock(&SECTION_1_MUTEX);
@@ -383,6 +387,10 @@ void gsAdd() {
     if(!timesUp)
     {
         sem_wait(&gsSem);
+
+        char event[80];
+        sprintf(event,"GS queue beings processing Student %d.", eeQueue[eeHead].id);
+        print(event);
 
         sleep(rand()%GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
 
@@ -468,6 +476,10 @@ void rsAdd() {
     if(!timesUp)
     {
         sem_wait(&rsSem);
+
+        char event[80];
+        sprintf(event,"RS queue beings processing Student %d.", eeQueue[eeHead].id);
+        print(event);
 
         sleep(rand()%RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
 
