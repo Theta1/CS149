@@ -86,8 +86,7 @@ void rsAdd();
  time_t startTime;
 
 /**
-* Main method. Creates the queue threads, student threads. Signals when time limit is over. Joins threads. Drops unregestered students and prints statistics.
-* @return 0 if succesfully reaches end of main thread.
+* Main method
 */
 int main(void) {
     int cnt = 0;
@@ -100,7 +99,6 @@ int main(void) {
     time(&startTime);
     print("Registration begins");
 
-    //Queue Threads
     pthread_t ee_t;
     pthread_attr_t eeAttr;
     pthread_attr_init(&eeAttr);
@@ -137,6 +135,7 @@ int main(void) {
     timer.it_value.tv_sec = REGISTRATION_DURATION;
     setitimer(ITIMER_REAL, &timer, NULL);
 
+    // wait for threads to finish
     pthread_join(ee_t, NULL);
     pthread_join(gs_t, NULL);
     pthread_join(rs_t, NULL);
@@ -164,12 +163,22 @@ int main(void) {
 }
 
 /**
+ * Gets the current time in seconds.
+ * @return the current time in seconds
+ */
+int getTime() {
+	time_t now;
+    time(&now);
+    double elapsed = difftime(now, startTime);
+	return (int) elapsed;
+}
+
+/**
 * Print a line for each event:
 * elapsed time
 * who is registering from what queue
 * who is waiting in what queue
 * what action they take: Register/drop/gaveup and where
-* @param char array pointer. This is the text to be time-stamped and printed.
 */
 void print(char *event){
     time_t now;
@@ -202,20 +211,19 @@ void print(char *event){
 
 }
 
-/** 
-* Timer signal handler. This is used to change the timesUp boolean and print the close event
-*/
-void timerHandler(int signal) {
+// Timer signal handler.
+void timerHandler(int signal)
+{
     timesUp = 1;  // Registration is closed
     sleep(1);
     print("Registration is closed");
 }
 
 /**
-* Creates a Student thread.  This creates and sleeps a student until it's random arrival timeThis and assigns random viables to the sudent. Finnally it calls the function to process the student.
-* @param is a pointer to the thread creation paramaters. In this case the student id.
+* Creates a Student thread
 */
-void *student(void *param) {
+void *student(void *param)
+{
     int num = *((int *) param);
 
     // Students will arrive at random times during the office hour.
@@ -244,12 +252,12 @@ void *student(void *param) {
 /**
 * Student function
 * puts the student into
-* his/her persepective queue with needed mutex locking and unlocking.
-* @param a Student structure to be processes
+* his/her persepective group
 */
 void studentArrives(STUDENT student) {
 
-    if(isPriority(student, "EE")) {
+    if(isPriority(student, "EE"))
+    {
         pthread_mutex_lock(&eeMutex);
 
         eeQueue[eeTail] = student;
@@ -264,7 +272,8 @@ void studentArrives(STUDENT student) {
         sem_post(&eeSem);
     }
 
-    if(isPriority(student, "GS")) {
+    if(isPriority(student, "GS"))
+    {
         pthread_mutex_lock(&gsMutex);
 
         gsQueue[gsTail] = student;
@@ -279,7 +288,8 @@ void studentArrives(STUDENT student) {
         sem_post(&gsSem);
     }
 
-    if(isPriority(student, "RS")) {
+    if(isPriority(student, "RS"))
+    {
         pthread_mutex_lock(&rsMutex);
 
         rsQueue[rsTail] = student;
@@ -293,102 +303,114 @@ void studentArrives(STUDENT student) {
 
         sem_post(&rsSem);
     }
+
 }
 
-/**
-* Creats and runs the EE queue thread until the timelimit has been reached.
-*/
 void *eeThread(void *param) {
+
     //time to register for classes
     while(!timesUp) {
         eeAdd();
     }
+
     return NULL;
 }
 
-/**
-* Waits on students in the queue. Sleeps student for processesing time then attempts to add it to desired section.
-* Can't we combine the various add functions?
-*/
 void eeAdd() {
-
     sem_wait(&eeSem);
 
     sleep(rand()%EE_PROCESS_TIME_MAX + EE_PROCESS_TIME_MIN);
 
+	pthread_mutex_lock(&eeMutex);
     char event[80];
+    if(isImpatient(eeQueue[eeHead],getTime() ) ) {  // is impatient
+		pthread_mutex_lock(&SECTION_IMPATIENT_MUTEX);
 
-    if(isImpatient(eeQueue[eeHead],getTime() ) ) {
         eeQueue[eeHead].finishTime = getTime();
         SECTION_IMPATIENT[sectionImpatientCounter] = eeQueue[eeHead];
         sectionImpatientCounter++;
-        sprintf(event,"Student %d from %s is impatient and left", eeQueue[eeHead].id, eeQueue[eeHead].priority);
+
+		sprintf(event,"Student %d from %s is impatient and left", eeQueue[eeHead].id, eeQueue[eeHead].priority);
         print(event);
-        eeHead++;
+
+		pthread_mutex_unlock(&SECTION_IMPATIENT_MUTEX);
 
         goto end;
     }
-    else {
-        sprintf(event,"EE queue begins processing Student %d.", eeQueue[eeHead].id);
-        if(!timesUp)
-        {   print(event);   }
+
+    sprintf(event,"EE queue begins processing Student %d.", eeQueue[eeHead].id);
+    if(!timesUp)
+    {   print(event);   }
+
+	// section 1
+    if(canEnroll(eeQueue[eeHead], 1))
+	{
+		pthread_mutex_lock(&SECTION_1_MUTEX);
+		if(section1Counter < SECTION_CAPACITY) { // see if there is space in the section
+			eeQueue[eeHead].finishTime = getTime();
+			SECTION_1[section1Counter] = eeQueue[eeHead];
+			section1Counter++;
+
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 1", eeQueue[eeHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			eeQueue[eeHead].finishTime = now;
+
+			pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_1_MUTEX);
     }
 
-    pthread_mutex_lock(&SECTION_1_MUTEX);
-    if(canEnroll(eeQueue[eeHead], 1) && section1Counter < SECTION_CAPACITY)
-    {
-        eeQueue[eeHead].finishTime = getTime();
-        SECTION_1[section1Counter] = eeQueue[eeHead];
-        section1Counter++;
+	// section 2
+    if(canEnroll(eeQueue[eeHead], 2)) {
+		pthread_mutex_lock(&SECTION_2_MUTEX);
+		if(section2Counter < SECTION_CAPACITY) { // see if there is space in the section
+			eeQueue[eeHead].finishTime = getTime();
+			SECTION_2[section2Counter] = eeQueue[eeHead];
+			section2Counter++;
 
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 1", eeQueue[eeHead].id);
-        if(!timesUp)
-        {   print(event);   }
-        time_t now;
-        eeQueue[eeHead].finishTime = now;
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 2", eeQueue[eeHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			eeQueue[eeHead].finishTime = now;
 
-        pthread_mutex_unlock(&SECTION_1_MUTEX);
+			pthread_mutex_unlock(&SECTION_2_MUTEX);
 
-        goto end;
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_2_MUTEX);
     }
-    pthread_mutex_unlock(&SECTION_1_MUTEX);
 
-    pthread_mutex_lock(&SECTION_2_MUTEX);
-    if(canEnroll(eeQueue[eeHead], 2) && section2Counter < SECTION_CAPACITY)
-    {
-        eeQueue[eeHead].finishTime = getTime();
-        SECTION_2[section2Counter] = eeQueue[eeHead];
-        section2Counter++;
+	// section 3
+    if(canEnroll(eeQueue[eeHead], 3)) {
+		pthread_mutex_lock(&SECTION_3_MUTEX);
+		if(section3Counter < SECTION_CAPACITY) { // see if there is space in the section
+			eeQueue[eeHead].finishTime = getTime();
+			SECTION_3[section3Counter] = eeQueue[eeHead];
+			section3Counter++;
 
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 2", eeQueue[eeHead].id);
-        if(!timesUp)
-        {   print(event);   }
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 3", eeQueue[eeHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			eeQueue[eeHead].finishTime = now;
 
-        pthread_mutex_unlock(&SECTION_2_MUTEX);
+			pthread_mutex_unlock(&SECTION_3_MUTEX);
 
-        goto end;
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_3_MUTEX);
     }
-    pthread_mutex_unlock(&SECTION_2_MUTEX);
-
-    pthread_mutex_lock(&SECTION_3_MUTEX);
-    if(canEnroll(eeQueue[eeHead], 3) && section3Counter < SECTION_CAPACITY)
-    {
-        eeQueue[eeHead].finishTime = getTime();
-        SECTION_3[section3Counter] = eeQueue[eeHead];
-        section3Counter++;
-
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 3", eeQueue[eeHead].id);
-        if(!timesUp)
-        {   print(event);   }
-
-        pthread_mutex_unlock(&SECTION_3_MUTEX);
-
-        goto end;
-    }
-    pthread_mutex_unlock(&SECTION_3_MUTEX);
 
     // dropped section
     if(!timesUp)
@@ -398,99 +420,114 @@ void eeAdd() {
     end:
 
     eeHead++;
+	pthread_mutex_unlock(&eeMutex);
 }
 
-/**
-* Creats and runs the GS queue thread until the timelimit has been reached.
-*/
+
 void *gsThread(void *param) {
     //time to register for classes
     while(!timesUp) {
         gsAdd();
     }
+
     return NULL;
 }
 
-/**
-* Waits on students in the queue. Sleeps student for processesing time then attempts to add it to desired section.
-* Can't we combine the various add functions?
-*/
 void gsAdd() {
-
     sem_wait(&gsSem);
 
     sleep(rand()%GS_PROCESS_TIME_MAX + GS_PROCESS_TIME_MIN);
 
+    pthread_mutex_lock(&gsMutex);
     char event[80];
-    if(isImpatient(gsQueue[gsHead],getTime() ) ) {
+    if(isImpatient(gsQueue[gsHead],getTime() ) ) {  // is impatient
+		pthread_mutex_lock(&SECTION_IMPATIENT_MUTEX);
+
         gsQueue[gsHead].finishTime = getTime();
         SECTION_IMPATIENT[sectionImpatientCounter] = gsQueue[gsHead];
         sectionImpatientCounter++;
-        sprintf(event,"Student %d from %s is impatient and left", gsQueue[gsHead].id, gsQueue[gsHead].priority);
+
+		sprintf(event,"Student %d from %s is impatient and left", gsQueue[gsHead].id, gsQueue[gsHead].priority);
         print(event);
-        eeHead++;
+
+		pthread_mutex_unlock(&SECTION_IMPATIENT_MUTEX);
 
         goto end;
     }
-    else {
-        sprintf(event,"GS queue begins processing Student %d.", gsQueue[gsHead].id);
-        if(!timesUp)
-        {   print(event);   }
+
+    sprintf(event,"GS queue begins processing Student %d.", gsQueue[gsHead].id);
+    if(!timesUp)
+    {   print(event);   }
+
+	// section 1
+    if(canEnroll(gsQueue[gsHead], 1))
+	{
+		pthread_mutex_lock(&SECTION_1_MUTEX);
+		if(section1Counter < SECTION_CAPACITY) { // sgs if there is space in the section
+			gsQueue[gsHead].finishTime = getTime();
+			SECTION_1[section1Counter] = gsQueue[gsHead];
+			section1Counter++;
+
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 1", gsQueue[gsHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			gsQueue[gsHead].finishTime = now;
+
+			pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_1_MUTEX);
     }
 
-    pthread_mutex_lock(&SECTION_1_MUTEX);
-    if(canEnroll(gsQueue[gsHead], 1) && section1Counter < SECTION_CAPACITY)
-    {
-        gsQueue[gsHead].finishTime = getTime();
-        SECTION_1[section1Counter] = gsQueue[gsHead];
-        section1Counter++;
+	// section 2
+    if(canEnroll(gsQueue[gsHead], 2)) {
+		pthread_mutex_lock(&SECTION_2_MUTEX);
+		if(section2Counter < SECTION_CAPACITY) { // sgs if there is space in the section
+			gsQueue[gsHead].finishTime = getTime();
+			SECTION_2[section2Counter] = gsQueue[gsHead];
+			section2Counter++;
 
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 1", gsQueue[gsHead].id);
-        if(!timesUp)
-        {   print(event);   }
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 2", gsQueue[gsHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			gsQueue[gsHead].finishTime = now;
 
-        pthread_mutex_unlock(&SECTION_1_MUTEX);
+			pthread_mutex_unlock(&SECTION_2_MUTEX);
 
-        goto end;
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_2_MUTEX);
     }
-    pthread_mutex_unlock(&SECTION_1_MUTEX);
 
-    pthread_mutex_lock(&SECTION_2_MUTEX);
-    if(canEnroll(gsQueue[gsHead], 2) && section2Counter < SECTION_CAPACITY)
-    {
-        gsQueue[gsHead].finishTime = getTime();
-        SECTION_2[section2Counter] = gsQueue[gsHead];
-        section2Counter++;
+	// section 3
+    if(canEnroll(gsQueue[gsHead], 3)) {
+		pthread_mutex_lock(&SECTION_3_MUTEX);
+		if(section3Counter < SECTION_CAPACITY) { // sgs if there is space in the section
+			gsQueue[gsHead].finishTime = getTime();
+			SECTION_3[section3Counter] = gsQueue[gsHead];
+			section3Counter++;
 
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 2", gsQueue[gsHead].id);
-        if(!timesUp)
-        {   print(event);   }
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 3", gsQueue[gsHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			gsQueue[gsHead].finishTime = now;
 
-        pthread_mutex_unlock(&SECTION_2_MUTEX);
+			pthread_mutex_unlock(&SECTION_3_MUTEX);
 
-        goto end;
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_3_MUTEX);
     }
-    pthread_mutex_unlock(&SECTION_2_MUTEX);
-
-    pthread_mutex_lock(&SECTION_3_MUTEX);
-    if(canEnroll(gsQueue[gsHead], 3)  && section3Counter < SECTION_CAPACITY)
-    {
-        gsQueue[gsHead].finishTime = getTime();
-        SECTION_3[section3Counter] = gsQueue[gsHead];
-        section3Counter++;
-
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 3", gsQueue[gsHead].id);
-        if(!timesUp)
-        {   print(event);   }
-
-        pthread_mutex_unlock(&SECTION_3_MUTEX);
-
-        goto end;
-    }
-    pthread_mutex_unlock(&SECTION_3_MUTEX);
 
     // dropped section
     if(!timesUp)
@@ -500,12 +537,9 @@ void gsAdd() {
     end:
 
     gsHead++;
-
+	pthread_mutex_unlock(&gsMutex);
 }
 
-/**
-* Creats and runs the RS queue thread until the timelimit has been reached.
-*/
 void *rsThread(void *param) {
     //time to register for classes
     while(!timesUp) {
@@ -515,85 +549,101 @@ void *rsThread(void *param) {
     return NULL;
 }
 
-/**
-* Waits on students in the queue. Sleeps student for processesing time then attempts to add it to desired section.
-* Can't we combine the various add functions?
-*/
 void rsAdd() {
     sem_wait(&rsSem);
 
     sleep(rand()%RS_PROCESS_TIME_MAX + RS_PROCESS_TIME_MIN);
 
+	pthread_mutex_lock(&rsMutex);
     char event[80];
-    if(isImpatient(rsQueue[rsHead], getTime() ) ) {
+    if(isImpatient(rsQueue[rsHead],getTime() ) ) {  // is impatient
+		pthread_mutex_lock(&SECTION_IMPATIENT_MUTEX);
+
         rsQueue[rsHead].finishTime = getTime();
         SECTION_IMPATIENT[sectionImpatientCounter] = rsQueue[rsHead];
         sectionImpatientCounter++;
-        sprintf(event,"Student %d from %s is impatient and left", rsQueue[rsHead].id, rsQueue[rsHead].priority);
+
+		sprintf(event,"Student %d from %s is impatient and left", rsQueue[rsHead].id, rsQueue[rsHead].priority);
         print(event);
-        eeHead++;
+
+		pthread_mutex_unlock(&SECTION_IMPATIENT_MUTEX);
 
         goto end;
     }
-    else {
-        sprintf(event,"RS queue begins processing Student %d.", rsQueue[rsHead].id);
-        if(!timesUp)
-        {   print(event);   }
+
+    sprintf(event,"RS queue begins processing Student %d.", rsQueue[rsHead].id);
+    if(!timesUp)
+    {   print(event);   }
+
+	// section 1
+    if(canEnroll(rsQueue[rsHead], 1))
+	{
+		pthread_mutex_lock(&SECTION_1_MUTEX);
+		if(section1Counter < SECTION_CAPACITY) { // srs if there is space in the section
+			rsQueue[rsHead].finishTime = getTime();
+			SECTION_1[section1Counter] = rsQueue[rsHead];
+			section1Counter++;
+
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 1", rsQueue[rsHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			rsQueue[rsHead].finishTime = now;
+
+			pthread_mutex_unlock(&SECTION_1_MUTEX);
+
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_1_MUTEX);
     }
 
-    pthread_mutex_lock(&SECTION_1_MUTEX);
-    if(canEnroll(rsQueue[rsHead], 1)  && section1Counter < SECTION_CAPACITY)
-    {
-        rsQueue[rsHead].finishTime = getTime();
-        SECTION_1[section1Counter] = rsQueue[rsHead];
-        section1Counter++;
+	// section 2
+    if(canEnroll(rsQueue[rsHead], 2)) {
+		pthread_mutex_lock(&SECTION_2_MUTEX);
+		if(section2Counter < SECTION_CAPACITY) { // srs if there is space in the section
+			rsQueue[rsHead].finishTime = getTime();
+			SECTION_2[section2Counter] = rsQueue[rsHead];
+			section2Counter++;
 
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 1", rsQueue[rsHead].id);
-        if(!timesUp)
-        {   print(event);   }
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 2", rsQueue[rsHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			rsQueue[rsHead].finishTime = now;
 
-        pthread_mutex_unlock(&SECTION_1_MUTEX);
+			pthread_mutex_unlock(&SECTION_2_MUTEX);
 
-        goto end;
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_2_MUTEX);
     }
-    pthread_mutex_unlock(&SECTION_1_MUTEX);
 
-    pthread_mutex_lock(&SECTION_2_MUTEX);
-    if(canEnroll(rsQueue[rsHead], 2) && section2Counter < SECTION_CAPACITY)
-    {
-        rsQueue[rsHead].finishTime = getTime();
-        SECTION_2[section2Counter] = rsQueue[rsHead];
-        section2Counter++;
+	// section 3
+    if(canEnroll(rsQueue[rsHead], 3)) {
+		pthread_mutex_lock(&SECTION_3_MUTEX);
+		if(section3Counter < SECTION_CAPACITY) { // srs if there is space in the section
+			rsQueue[rsHead].finishTime = getTime();
+			SECTION_3[section3Counter] = rsQueue[rsHead];
+			section3Counter++;
 
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 2", rsQueue[rsHead].id);
-        if(!timesUp)
-        {   print(event);   }
+			char event[80];
+			sprintf(event,"Student %d enrolls into Section 3", rsQueue[rsHead].id);
+			if(!timesUp)
+			{   print(event);   }
+			time_t now;
+			rsQueue[rsHead].finishTime = now;
 
-        pthread_mutex_unlock(&SECTION_2_MUTEX);
+			pthread_mutex_unlock(&SECTION_3_MUTEX);
 
-        goto end;
+			goto end;
+		}
+
+		pthread_mutex_unlock(&SECTION_3_MUTEX);
     }
-    pthread_mutex_unlock(&SECTION_2_MUTEX);
-
-    pthread_mutex_lock(&SECTION_3_MUTEX);
-    if(canEnroll(rsQueue[rsHead], 3) && section3Counter < SECTION_CAPACITY)
-    {
-        rsQueue[rsHead].finishTime = getTime();
-        SECTION_3[section3Counter] = rsQueue[rsHead];
-        section3Counter++;
-
-        char event[80];
-        sprintf(event,"Student %d enrolls into Section 3", rsQueue[rsHead].id);
-        if(!timesUp)
-        {   print(event);   }
-
-        pthread_mutex_unlock(&SECTION_3_MUTEX);
-
-        goto end;
-    }
-    pthread_mutex_unlock(&SECTION_3_MUTEX);
 
     // dropped section
     if(!timesUp)
@@ -603,14 +653,10 @@ void rsAdd() {
     end:
 
     rsHead++;
-
+	pthread_mutex_unlock(&rsMutex);
 }
 
-/**
-* When a student can not add into desired section on is still in queue after the regestration deadline this moves them into the dropped list.
-* @param student s which is the student to be dropped.
-*/
-void dropStudent(STUDENT s) {
+void dropStudent(STUDENT s){
     pthread_mutex_lock(&SECTION_DROPPED_MUTEX);
 
     s.finishTime = getTime();
