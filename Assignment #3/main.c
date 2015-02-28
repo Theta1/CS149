@@ -11,7 +11,7 @@
 
 //Major variables of this simulation
  #define STUDENT_COUNT 75
- #define REGISTRATION_DURATION 28
+ #define REGISTRATION_DURATION 120
  #define ID_BASE 101
  #define NUMBER_OF_SECTIONS 3
  #define GS_PROCESS_TIME_MIN 1
@@ -92,6 +92,8 @@ int main(void) {
     int cnt = 0;
 
     sem_init(&eeSem, 0, 0);
+    sem_init(&gsSem, 0, 0);
+    sem_init(&rsSem, 0, 0);
 
     // set up rand
     srand(time(NULL));
@@ -103,8 +105,6 @@ int main(void) {
     pthread_attr_t eeAttr;
     pthread_attr_init(&eeAttr);
     pthread_create(&ee_t, &eeAttr, eeThread, NULL);
-
-    sleep(1);
 
     pthread_t gs_t;
     pthread_attr_t gsAttr;
@@ -137,8 +137,8 @@ int main(void) {
 
     // wait for threads to finish
     pthread_join(ee_t, NULL);
-    pthread_join(gs_t, NULL);
-    pthread_join(rs_t, NULL);
+    pthread_cancel(gs_t);
+    pthread_cancel(rs_t);
 
     //drops remaining students
     for(cnt = gsHead; cnt < gsTail; cnt++){
@@ -215,7 +215,6 @@ void print(char *event){
 void timerHandler(int signal)
 {
     timesUp = 1;  // Registration is closed
-    sleep(1);
     print("Registration is closed");
 }
 
