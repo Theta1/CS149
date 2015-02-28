@@ -265,7 +265,7 @@ void studentArrives(STUDENT student) {
         pthread_mutex_unlock(&eeMutex);
 
         char event[80];
-        sprintf(event,"Student %d arrives to EE line (Section: %d, %s)", student.id, student.section, student.priority);
+        sprintf(event,"Student %d arrives to EE line wants section %d", student.id, student.section);
         print(event);
 
         sem_post(&eeSem);
@@ -281,7 +281,7 @@ void studentArrives(STUDENT student) {
         pthread_mutex_unlock(&gsMutex);
 
         char event[80];
-        sprintf(event,"Student %d arrives to GS line (Section: %d, %s)", student.id, student.section, student.priority);
+        sprintf(event,"Student %d arrives to GS line wants section %d", student.id, student.section);
         print(event);
 
         sem_post(&gsSem);
@@ -297,7 +297,7 @@ void studentArrives(STUDENT student) {
         pthread_mutex_unlock(&rsMutex);
 
         char event[80];
-        sprintf(event,"Student %d arrives to RS line (Section: %d, %s)", student.id, student.section, student.priority);
+        sprintf(event,"Student %d arrives to RS line wants section %d", student.id, student.section);
         print(event);
 
         sem_post(&rsSem);
@@ -354,8 +354,6 @@ void eeAdd() {
 			sprintf(event,"Student %d enrolls into Section 1", eeQueue[eeHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			eeQueue[eeHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_1_MUTEX);
 
@@ -377,8 +375,6 @@ void eeAdd() {
 			sprintf(event,"Student %d enrolls into Section 2", eeQueue[eeHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			eeQueue[eeHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_2_MUTEX);
 
@@ -400,8 +396,6 @@ void eeAdd() {
 			sprintf(event,"Student %d enrolls into Section 3", eeQueue[eeHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			eeQueue[eeHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_3_MUTEX);
 
@@ -471,8 +465,6 @@ void gsAdd() {
 			sprintf(event,"Student %d enrolls into Section 1", gsQueue[gsHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			gsQueue[gsHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_1_MUTEX);
 
@@ -494,8 +486,6 @@ void gsAdd() {
 			sprintf(event,"Student %d enrolls into Section 2", gsQueue[gsHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			gsQueue[gsHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_2_MUTEX);
 
@@ -517,8 +507,6 @@ void gsAdd() {
 			sprintf(event,"Student %d enrolls into Section 3", gsQueue[gsHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			gsQueue[gsHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_3_MUTEX);
 
@@ -587,8 +575,6 @@ void rsAdd() {
 			sprintf(event,"Student %d enrolls into Section 1", rsQueue[rsHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			rsQueue[rsHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_1_MUTEX);
 
@@ -610,8 +596,6 @@ void rsAdd() {
 			sprintf(event,"Student %d enrolls into Section 2", rsQueue[rsHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			rsQueue[rsHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_2_MUTEX);
 
@@ -633,8 +617,6 @@ void rsAdd() {
 			sprintf(event,"Student %d enrolls into Section 3", rsQueue[rsHead].id);
 			if(!timesUp)
 			{   print(event);   }
-			time_t now;
-			rsQueue[rsHead].finishTime = now;
 
 			pthread_mutex_unlock(&SECTION_3_MUTEX);
 

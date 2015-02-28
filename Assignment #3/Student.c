@@ -19,7 +19,7 @@ void printStudent(STUDENT student) {
   * @return the turnAroundTime
   */
 int getTurnAroundTime(STUDENT student) {
-    return student.finishTime - student.arriveTime + 1;
+    return student.finishTime - student.arriveTime;
 }
 
 /**
