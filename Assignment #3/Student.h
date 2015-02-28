@@ -7,7 +7,7 @@
 #include <string.h>
 #include <pthread.h>
 
-#define IMPATIENT_TIME 10
+#define IMPATIENT_TIME 20
 
 typedef struct {
     int arriveTime;
