@@ -306,9 +306,8 @@ void studentArrives(STUDENT student) {
 }
 
 void *eeThread(void *param) {
-
     //time to register for classes
-    while(!timesUp) {
+    while(!timesUp || (section1Counter == SECTION_CAPACITY && section2Counter == SECTION_CAPACITY && section3Counter == SECTION_CAPACITY)) {
         eeAdd();
     }
 
@@ -419,7 +418,7 @@ void eeAdd() {
 
 void *gsThread(void *param) {
     //time to register for classes
-    while(!timesUp) {
+    while(!timesUp || (section1Counter == SECTION_CAPACITY && section2Counter == SECTION_CAPACITY && section3Counter == SECTION_CAPACITY)) {
         gsAdd();
     }
 
@@ -529,7 +528,7 @@ void gsAdd() {
 
 void *rsThread(void *param) {
     //time to register for classes
-    while(!timesUp) {
+    while(!timesUp || (section1Counter == SECTION_CAPACITY && section2Counter == SECTION_CAPACITY && section3Counter == SECTION_CAPACITY)) {
         rsAdd();
     }
 
