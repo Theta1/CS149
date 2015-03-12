@@ -10,8 +10,8 @@ public class Swapping {
 		ArrayList<Process> p = new ArrayList<Process>();
 		
 		//run 5 times
-		BestFit one BestFit(p);
-		int numOfProcess = BestFit.run();
+		BestFit one = new BestFit(p);
+		int numOfProcess = BestFit.run();//returns the number of processes that occured
 		
 		//get the average and print
 		
