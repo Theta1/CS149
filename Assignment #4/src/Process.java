@@ -12,16 +12,24 @@ public class Process {
 	private int name;
 	
 	Process(int i) {
-		size = getSize();
-		duration = getDuration();
+		size = setSize();
+		duration = setDuration();
 		name = i;
 	}
 	
+	public int getSize() {
+		return size;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
 	/**
 	 * creates a random size of the Process
 	 * @return the size of the Process
 	 */
-	int getSize() {
+	int setSize() {
 		Random rand = new Random();
 		int[] array = {5, 11, 17, 31};
 		int num = rand.nextInt(4);
@@ -32,12 +40,21 @@ public class Process {
 	 * Creates a random duration for the Process
 	 * @return the duration
 	 */
-	int getDuration() {
+	int setDuration() {
 		Random rand = new Random();
 		int[] array = {1, 2, 3, 4, 5};
 		int num = rand.nextInt(5);
 		return array[num];
 	}
-	
+
+	/**
+	 * Gets the name of the process.
+	 * @return
+	 */
+	public int getName() {
+		return name;
+	}
+
+
 	
 }
