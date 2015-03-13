@@ -7,17 +7,17 @@ import java.util.Random;
  *
  */
 public class RandomPick{
-	private final static int vMem = 10;
+	private final static int VMEM = 10;
 	private final static int LOCALITY_PROBABILITY = 7;
 	public static int pickAPage(int i){
 		Random random = new Random();
-		int probability = random.nextInt(vMem);
+		int probability = random.nextInt(VMEM);
 		int locality;
 		if (probability < LOCALITY_PROBABILITY)
 			locality = random.nextInt((1 - -1) + 1) + 1;
 		else 
 			locality = random.nextInt((8 - 2) + 1) + 2;
-		return (i+locality)%10;
+		return (i+locality)%VMEM;
 	}
 	
 
