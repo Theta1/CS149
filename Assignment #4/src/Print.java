@@ -39,9 +39,9 @@ public class Print {
 			}
 		}
 		if (processAdded){
-			System.out.printf(" Added: %2d", process.getName());
-			System.out.println(" of size " + process.getSize() + " and durration "
-					+ process.getDuration());
+			System.out.printf(" Added: %2d of size " + process.getSize() 
+					+ " and durration "	+ process.getDuration(), 
+					process.getName());
 		}else{
 			System.out.printf(" Removed: %2d\n", process.getName());
 		}
