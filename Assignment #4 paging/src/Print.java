@@ -1,3 +1,5 @@
+
+
 /**
  * @author Standard
  *
@@ -51,17 +53,5 @@ public class Print {
 			System.out.printf("Evicted: %2d", evictedPage);
 		}
 		System.out.println();
-	}
-	/**
-	 *  Each time a process is swapped in, or a
-process completes and therefore is removed from memory, print a memory map, e.g.,
-AAAAA....BBBBBBBB..CCCC where the characters are the process names (one
-character per MB) and the dots are holes (one per MB). Indicate which process entered
-or left. For an entering process, also print its size and duration.
-	 */
-	public static void memoryMap(Process memory[]){
-		for(int i = 0; i<memory.length;i++){
-			
-		}
 	}
 }
