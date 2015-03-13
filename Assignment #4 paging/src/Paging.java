@@ -18,10 +18,12 @@ public class Paging {
 		int h4 = mfu.run(); 
 		
 		//print average hit ratio
-		System.out.println("--Average hit ratios--");
-		System.out.println("FIFO: "+h1);
-		System.out.println("LFO:  "+h2);
-		System.out.println("LRU:  "+h3);
-		System.out.println("MFU:  "+h4);
+		Print.thisStringln("--Average hit ratios--");
+		Print.thisStringln("FIFO: "+h1);
+		Print.thisStringln("LFO:  "+h2);
+		Print.thisStringln("LRU:  "+h3);
+		Print.thisStringln("MFU:  "+h4);
+		
+
 	}
 }
