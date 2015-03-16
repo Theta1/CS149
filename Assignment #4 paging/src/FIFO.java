@@ -23,10 +23,9 @@
 public class FIFO {
 	private final int RUN_TIME_NUMBER = 5;
 	private final int REFERENCE_NUMBER = 100;
-	private int virtualMemeory[];
 	private int physicalMemory[];
-	private int virtualMemeorySize;
 	private int physicalMemorySize;
+	private int virtualMemorySize;
 
 	/**
 	 * Constructor, sets operational parameters.
@@ -39,8 +38,8 @@ public class FIFO {
 	 *            physical memory.
 	 */
 	FIFO(int virtualMemorySize, int physicalMemorySize) {
-		this.virtualMemeorySize = virtualMemorySize;
 		this.physicalMemorySize = physicalMemorySize;
+		this.virtualMemorySize = virtualMemorySize;
 	}
 
 	/**
@@ -59,13 +58,12 @@ public class FIFO {
 			int indexMarker = 0;
 			// loads first index from virtual mem
 			this.physicalMemory[indexMarker] = 0;
-			int lastPage = 0;
-			// Number of page referenaces each run
+			// Number of page references each run
 			for (int j = 0; j < this.REFERENCE_NUMBER; j++) {
 				// finds the next page randomly
-				int nextPage = RandomPick
-						.pickAPage(this.physicalMemory[indexMarker
-								% this.physicalMemorySize]);
+				int nextPage = RandomPick.pickAPage(
+						this.physicalMemory[indexMarker
+								% this.physicalMemorySize], virtualMemorySize);
 				// if the new page is not in memory
 				if (this.pageNotInMemory(nextPage)) {
 					// put it there and advance the index.
