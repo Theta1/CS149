@@ -13,7 +13,7 @@ public class Paging {
 		
 		//returns the hit ratio
 		double h1 = fifo.run(); 
-		int h2 = lfu.run(); 
+		double h2 = lfu.run(); 
 		int h3 = lru.run(); 
 		int h4 = mfu.run(); 
 		
