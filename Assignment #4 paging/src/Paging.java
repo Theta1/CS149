@@ -12,7 +12,7 @@ public class Paging {
 		MFU mfu = new MFU(vMem, hardMem);
 		
 		//returns the hit ratio
-		int h1 = fifo.run(); 
+		double h1 = fifo.run(); 
 		int h2 = lfu.run(); 
 		int h3 = lru.run(); 
 		int h4 = mfu.run(); 
