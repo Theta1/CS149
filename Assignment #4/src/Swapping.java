@@ -32,10 +32,10 @@ public class Swapping {
 		
 		//run 5 times
 		BestFit best1 = new BestFit(p1, MAINMEM);
-		BestFit best2 = new BestFit(p1, MAINMEM);
-		BestFit best3 = new BestFit(p1, MAINMEM);
-		BestFit best4 = new BestFit(p1, MAINMEM);
-		BestFit best5 = new BestFit(p1, MAINMEM);
+		BestFit best2 = new BestFit(p2, MAINMEM);
+		BestFit best3 = new BestFit(p3, MAINMEM);
+		BestFit best4 = new BestFit(p4, MAINMEM);
+		BestFit best5 = new BestFit(p5, MAINMEM);
 		
 		int numOfProcess = best1.run();//returns the number of processes that occured
 		
