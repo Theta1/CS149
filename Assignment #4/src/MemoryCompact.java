@@ -1,5 +1,13 @@
 import java.util.ArrayList;
-
+/************************************
+ * Compacts the memory
+ * so there are no empty spaces
+ * between processes
+ * 
+ * @author Theta1
+ * CS149
+ * Assignment #4 Swapping
+ ***********************************/
 
 public class MemoryCompact {
 	private int[] nonCompact;
@@ -11,6 +19,11 @@ public class MemoryCompact {
 		compact = new int[MB];
 	}
 	
+	/**
+	 * Takes an non compacted array and
+	 * compacts them. 
+	 * @return an int array with no spaces
+	 */
 	public int[] compact() {
 		int nonCompactPos = 0;
 		int compactPos = 0;
@@ -28,7 +41,4 @@ public class MemoryCompact {
 		
 		return compact;
 	}
-	
-	
-	
 }

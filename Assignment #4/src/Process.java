@@ -1,9 +1,11 @@
 import java.util.Random;
 
 /************************************
- * Creates a Process
+ * Creates a Process and its attributes
+ * 
  * @author Theta1
  * CS149
+ * Assignment #4 Swapping
  ************************************/
 
 public class Process {
