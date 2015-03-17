@@ -1,13 +1,20 @@
 
 public class LFU {
 
+	private int virtualMem;
+	private int physicalMem;
+	
 	public LFU(int vMem, int hardMem) {
-		// TODO Auto-generated constructor stub
+		this.virtualMem = vMem;
+		this.physicalMem = hardMem;
 	}
 
-	public int run() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double run() {
+		double avgHitRatio = 0;
+		
+		
+		
+		return avgHitRatio;
 	}
 
 }
