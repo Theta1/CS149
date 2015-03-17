@@ -45,7 +45,7 @@ public class Swapping {
 		int ffp4 = ff4.run();
 		int ffp5 = ff5.run();
 		
-		System.out.println( "Average number of process swapped for First fit is: " + (ffp1+ffp2+ffp3+ffp4+ffp5) / 5);
+		System.out.println( "Average number of process swapped for First fit is: " + (ffp1+ffp2+ffp3+ffp4+ffp5) / 5 + "\n\n");
 		
 
 		//NEXT FIT
@@ -63,7 +63,7 @@ public class Swapping {
 		int nfp4 = nf4.run();
 		int nfp5 = nf5.run();
 		
-		System.out.println( "Average number of process swapped for Next fit is: " + (nfp1+nfp2+nfp3+nfp4+nfp5) / 5);
+		System.out.println( "Average number of process swapped for Next fit is: " + (nfp1+nfp2+nfp3+nfp4+nfp5) / 5 + "\n\n");
 		
 		//wfp FIT
 		//run 5 times
@@ -80,7 +80,7 @@ public class Swapping {
 		int BFprocess4 = best4.run();
 		int BFprocess5 = best5.run();
 		
-		System.out.println( "Average number of process swapped for Best fit is: " + (BFprocess1+BFprocess2+BFprocess3+BFprocess4+BFprocess5) / 5);
+		System.out.println( "Average number of process swapped for Best fit is: " + (BFprocess1+BFprocess2+BFprocess3+BFprocess4+BFprocess5) / 5 + "\n\n");
 		
 		//WORST FIT
 		//run 5 times
@@ -97,7 +97,7 @@ public class Swapping {
 		int wfp4 = wf4.run();
 		int wfp5 = wf5.run();
 		
-		System.out.println( "Average number of process swapped for Worst fit is: " + (wfp1+wfp2+wfp3+wfp4+wfp5) / 5);
+		System.out.println( "Average number of process swapped for Worst fit is: " + (wfp1+wfp2+wfp3+wfp4+wfp5) / 5 + "\n\n");
 
 	}
 
