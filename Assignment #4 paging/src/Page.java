@@ -7,6 +7,15 @@
 public class Page {
 	private int timeIn;
 	private int virtualAddress;
+	private int physicalAddress;
+
+	public int getPhysicalAddress() {
+		return physicalAddress;
+	}
+
+	public void setPhysicalAddress(int physicalAddress) {
+		this.physicalAddress = physicalAddress;
+	}
 
 	/**
 	 * Gets the virtual address of this page.
