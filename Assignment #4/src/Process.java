@@ -10,11 +10,13 @@ public class Process {
 	private int size;
 	private int duration;
 	private int name;
+	private int run;
 	
 	Process(int i) {
-		size = setSize();
-		duration = setDuration();
+		size = size();
+		duration = duration();
 		name = i;
+		run = 0;
 	}
 	
 	public int getSize() {
@@ -29,7 +31,7 @@ public class Process {
 	 * creates a random size of the Process
 	 * @return the size of the Process
 	 */
-	int setSize() {
+	int size() {
 		Random rand = new Random();
 		int[] array = {5, 11, 17, 31};
 		int num = rand.nextInt(4);
@@ -40,7 +42,7 @@ public class Process {
 	 * Creates a random duration for the Process
 	 * @return the duration
 	 */
-	int setDuration() {
+	int duration() {
 		Random rand = new Random();
 		int[] array = {1, 2, 3, 4, 5};
 		int num = rand.nextInt(5);
@@ -55,6 +57,27 @@ public class Process {
 		return name;
 	}
 
-
+	/**
+	 * Keeps track of the duration
+	 * of the runtime
+	 * 
+	 * e.g. run = 5, duration = 10
+	 *  the process has ran 5 
+	 *  times out of 10
+	 */
+	public void processRun() {
+		run++;
+	}
+	
+	/**
+	 * Checks to see if the process has completed
+	 * @return a String if the Process has completed
+	 */
+	public String processDone () {
+		if (duration == run) {
+			return "Process " + name + "has completed" ;
+		}
+			return null;
+	}
 	
 }

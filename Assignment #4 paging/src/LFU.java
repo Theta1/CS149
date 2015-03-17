@@ -48,6 +48,7 @@ public class LFU {
 	private boolean pageNotInMemory(int nextPage) {
 		// TODO Auto-generated method stub
 		return false;
+
 	}
 
 }
