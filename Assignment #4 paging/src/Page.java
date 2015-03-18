@@ -9,10 +9,16 @@ public class Page {
 	private int virtualAddress;
 	private int physicalAddress;
 
+	/**
+	 * @return
+	 */
 	public int getPhysicalAddress() {
 		return physicalAddress;
 	}
 
+	/**
+	 * @param physicalAddress
+	 */
 	public void setPhysicalAddress(int physicalAddress) {
 		this.physicalAddress = physicalAddress;
 	}
