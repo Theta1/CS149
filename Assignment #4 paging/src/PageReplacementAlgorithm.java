@@ -37,7 +37,7 @@ public abstract class PageReplacementAlgorithm {
 	 *            is the virtual address of the page to be brought in.
 	 */
 	abstract protected int replacePage(int executionMarker,
-			int nextPageVirtualAddress);
+			int nextPageVirtualAddress, int time);
 
 	/**
 	 * Runs the paging algorithm and returns the average hit rate
@@ -62,17 +62,17 @@ public abstract class PageReplacementAlgorithm {
 			physicalMemory[executionMarker] = new Page(0, 0);
 
 			// Number of page references to run (minus the first above)
-			for (int j = 0; j < NUMBER_OF_REFERENCES - 1; j++) {
+			for (int j = 1; j < NUMBER_OF_REFERENCES; j++) {
 				Print.memoryMap(physicalMemory);
 				// finds the next page randomly
 				int nextPageVirtualAddress = RandomPick.pickAPage(
 						physicalMemory[executionMarker].getVirtualAddress(),
 						VIRTUAL_MEMORY_SIZE);
 				// Look for the page in memory
-				Print.thisString("Next: " + nextPageVirtualAddress + " ");
+				Print.thisString("Time: "+j+", Next: " + nextPageVirtualAddress + " ");
 				int indexOfPage = getPageIndex(nextPageVirtualAddress);
 				if (indexOfPage == -1) {
-					executionMarker = replacePage(executionMarker, nextPageVirtualAddress);
+					executionMarker = replacePage(executionMarker, nextPageVirtualAddress, j);
 					Print.reference(physicalMemory, nextPageVirtualAddress,
 							executionMarker);
 					Print.thisString("Loaded: "+physicalMemory[executionMarker].getVirtualAddress()+" At index: "+executionMarker+"\n");
