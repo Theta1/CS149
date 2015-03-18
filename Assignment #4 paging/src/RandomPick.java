@@ -31,8 +31,13 @@ public class RandomPick {
 		} else {
 			locality = random.nextInt((8 - 2) + 1) + 2;
 		}
-		//c derived languages: -1 % 9 = -1
-		//this allows for -1 % 9 = 8
+		// c derived languages: -1 % 9 = -1
+		// this allows for -1 % 9 = 8
 		return ((((i + locality) % virtualMemorySize) + virtualMemorySize) % virtualMemorySize);
 	}
+	// Test function, for testing
+	/*
+	 * public static void main(String[] args) { local = 0; int runs = 10; for
+	 * (int i = 0; i < runs; i++) { System.out.println( pickAPage(0, 10)); } }
+	 */
 }
