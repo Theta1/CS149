@@ -6,10 +6,10 @@
  *
  */
 public class FIFO extends PageReplacementAlgorithm {
-	protected int replacePage(int executionMarker, int nextPage) {
+	protected int replacePage(int executionMarker, int nextPage, int time) {
 		// Advance the index and put it in
 		marker = (marker + 1) % PHYSICAL_MEMORY_SIZE;
-		physicalMemory[marker] = new Page(nextPage, 0);
+		physicalMemory[marker] = new Page(nextPage, time);
 		return marker;
 	}
 
