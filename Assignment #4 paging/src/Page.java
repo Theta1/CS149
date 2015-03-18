@@ -57,7 +57,7 @@ public class Page {
 	Page(int virtualAddress, int timeIn) {
 		this.timeIn = timeIn;
 		this.virtualAddress = virtualAddress;
-		hitCount=0;
+		hitCount=1;
 	}
 
 	/**
