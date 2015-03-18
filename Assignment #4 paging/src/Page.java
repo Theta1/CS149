@@ -35,17 +35,6 @@ public class Page {
 	}
 
 	/**
-	 * Probably not needed.
-	 * 
-	 * @param virtualAddress
-	 *            an int representing the address of this page in memory
-	 */
-	Page(int virtualAddress) {
-		this.timeIn = 0;
-		this.virtualAddress = virtualAddress;
-	}
-
-	/**
 	 * Page constructor.
 	 *
 	 * @param virtualAddress
@@ -55,7 +44,7 @@ public class Page {
 	 *            into physical memory
 	 */
 	Page(int virtualAddress, int timeIn) {
-		this.timeIn = timeIn;
+		this.timeLastUsed = timeIn;
 		this.virtualAddress = virtualAddress;
 		hitCount=1;
 	}
