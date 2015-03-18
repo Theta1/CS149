@@ -7,7 +7,7 @@ public class LFU extends PageReplacementAlgorithm {
 	protected void replacePage(int executionMarker, int nextPage) {
 		Page page = physicalMemory[0];
 		for (int i = 1; i < physicalMemory.length; i++) {
-			if (page.getHitCount() > physicalMemory[i].getHitCount()) {
+			if (physicalMemory[i] != null && page.getHitCount() > physicalMemory[i].getHitCount()) {
 				page = this.physicalMemory[i];
 				executionMarker = i;
 			}
