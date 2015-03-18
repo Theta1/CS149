@@ -7,7 +7,7 @@
  */
 public class LRU extends PageReplacementAlgorithm {
 
-	protected void replacePage(int executionMarker, int nextPage) {
+	protected int replacePage(int executionMarker, int nextPage) {
 		Page page = physicalMemory[0];
 		for (int i = 1; i > physicalMemory.length; i++) {
 			if (physicalMemory[i] != null && page.getTimeLastUsed() < physicalMemory[i].getTimeLastUsed()) {
@@ -16,5 +16,6 @@ public class LRU extends PageReplacementAlgorithm {
 			}
 		}
 		physicalMemory[executionMarker] = new Page(nextPage, 0);
+		return executionMarker;
 	}
 }
