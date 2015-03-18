@@ -49,9 +49,9 @@ public class Print {
 		for (int i = 0; i < physicalMemory.length; i++) {
 			if (physicalMemory[i] != null) {
 				System.out
-						.printf("|%2d", physicalMemory[i].getVirtualAddress());
+						.printf("|%2d*%2d", physicalMemory[i].getVirtualAddress(), physicalMemory[i].getHitCount());
 			} else {
-				System.out.printf("|  ");
+				System.out.printf("|     ");
 			}
 		}
 		System.out.print("| ");
