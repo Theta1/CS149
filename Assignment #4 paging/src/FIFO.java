@@ -22,10 +22,10 @@
  */
 public class FIFO {
 	private final int RUN_TIME_NUMBER = 5;
-	private final int REFERENCE_NUMBER = 100;
-	private int physicalMemory[];
+	private final int NUMBER_OF_REFERENCES = 100;
 	private int physicalMemorySize;
 	private int virtualMemorySize;
+	Page[] physicalMemory;
 
 	/**
 	 * Constructor, sets operational parameters.
@@ -48,33 +48,42 @@ public class FIFO {
 	 * @return
 	 */
 	public double run() {
+		// initializations
 		double averageHitRatio = 0;
+		int timesHit;
+		int indexMarker;
+
 		// Number of times run
 		for (int i = 0; i < this.RUN_TIME_NUMBER; i++) {
-			int hitRatio = 0;
-			// clears mem
-			this.physicalMemory = new int[physicalMemorySize];
-			// starts at the first index
-			int indexMarker = 0;
-			// loads first index from virtual mem
-			this.physicalMemory[indexMarker] = 0;
-			// Number of page references each run
-			for (int j = 0; j < this.REFERENCE_NUMBER; j++) {
+			// clears memory memory
+			timesHit = 0;
+			indexMarker = 0;
+			physicalMemory = new Page[physicalMemorySize];
+
+			// starts by loading the first page into memory
+			physicalMemory[indexMarker] = new Page(0, 0);
+
+			// Number of page references to run (minus the first above)
+			for (int j = 0; j < this.NUMBER_OF_REFERENCES - 1; j++) {
 				// finds the next page randomly
 				int nextPage = RandomPick.pickAPage(
-						this.physicalMemory[indexMarker
-								% this.physicalMemorySize], virtualMemorySize);
-				// if the new page is not in memory
-				if (this.pageNotInMemory(nextPage)) {
-					// put it there and advance the index.
-					this.physicalMemory[++indexMarker % this.physicalMemorySize] = nextPage;
+						physicalMemory[indexMarker].getVirtualAddress(),
+						virtualMemorySize);
+				// Look for the page in memeory
+				int indexOfPage = this.pageNotInMemory(nextPage);
+				if (indexOfPage == -1) {
+					// Advance the index and put it in
+					indexMarker = (indexMarker + 1) % this.physicalMemorySize;
+					physicalMemory[indexMarker] = new Page(nextPage, 0);
 				} else {
-					// increment the hit ratio
-					hitRatio++;
+					// Otherwise it was there. Increase the hit and set the
+					// index marker.
+					timesHit++;
+					indexMarker = indexOfPage;
 				}
 			}
 			// Store a fraction of the hitRatio average.
-			averageHitRatio += hitRatio / this.RUN_TIME_NUMBER;
+			averageHitRatio += timesHit / this.RUN_TIME_NUMBER;
 		}
 		// return full average
 		return averageHitRatio;
@@ -83,15 +92,16 @@ public class FIFO {
 	/**
 	 * Checks the memory for the page number
 	 * 
-	 * @param page
-	 *            an int representing the page number
-	 * @return true if the page is in mememory.
+	 * @param virtualPageAddress
+	 *            an int representing the page address
+	 * @return the index if the page is in memory or -1 if not.
 	 */
-	private boolean pageNotInMemory(int page) {
+	private int pageNotInMemory(int virtualPageAddress) {
 		for (int i = 0; i < this.physicalMemorySize; i++) {
-			if (this.physicalMemory[i] == page)
-				return false;
+			if (this.physicalMemory[i] != null
+					&& this.physicalMemory[i].getVirtualAddress() == virtualPageAddress)
+				return i;
 		}
-		return true;
+		return -1;
 	}
 }
