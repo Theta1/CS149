@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *************************************/
 
 public class FirstFit {
-	private ArrayList<Process> processes;
+	private static ArrayList<Process> processes;
 	private int maxMem;
 	private int[]ff;
 	private static int mbCounter;
@@ -26,8 +26,9 @@ public class FirstFit {
 	
 	public static int run() {
 		for(int i = 0; i < time; i++) {
+			Process p = processes.get(mbCounter);
 			
-			
+			for(int j = 0; )
 			
 			
 		}		

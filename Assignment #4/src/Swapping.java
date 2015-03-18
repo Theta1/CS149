@@ -116,35 +116,11 @@ public class Swapping {
      * @param list1, list2, list3, list4, list5
      * @return clone is an arraylist of 5 arraylist of processes
      */
-    public static ArrayList<ArrayList<Process>> deepCopy( ArrayList<Process> list1, ArrayList<Process> list2,
-    	ArrayList<Process> list3, ArrayList<Process> list4, ArrayList<Process> list5) {
-    	ArrayList<Process> list1clone = new ArrayList<Process>();
-    	ArrayList<Process> list2clone = new ArrayList<Process>();
-    	ArrayList<Process> list3clone = new ArrayList<Process>();
-    	ArrayList<Process> list4clone = new ArrayList<Process>();
-    	ArrayList<Process> list5clone = new ArrayList<Process>();
-    	ArrayList<ArrayList<Process>> clone = new ArrayList<ArrayList<Process>>();
+    public static ArrayList<Process> deepCopy( ArrayList<Process> list) {
+    	ArrayList<Process> clone = new ArrayList<Process>();
     	
-    	for(Process p: list1)
-    	{   list1clone.add(p.clone());   }
-    	clone.add(list1clone);
-
-    	for(Process p: list2)
-    	{   list2clone.add(p.clone());   }
-    	clone.add(list2clone);
-    	
-    	for(Process p: list3)
-    	{   list3clone.add(p.clone());   }
-    	clone.add(list3clone);
-    	
-    	for(Process p: list4)
-    	{   list4clone.add(p.clone());   }
-    	clone.add(list4clone);
-    	
-    	for(Process p: list5)
-    	{   list5clone.add(p.clone());   }
-    	clone.add(list5clone);
-    	
+    	for(Process p: list)
+    	{   clone.add(p.clone());   }    	
     	return clone;
     }
 
