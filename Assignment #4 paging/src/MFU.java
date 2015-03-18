@@ -7,16 +7,20 @@
  */
 public class MFU extends PageReplacementAlgorithm {
 
-	protected int replacePage(int executionMarker, int nextPage) {
+	protected int replacePage(int executionMarker, int nextPage, int time) {
 		Page page = physicalMemory[0];
-		for (int i = 1; i > physicalMemory.length; i++) {
-			if (physicalMemory[i] != null
-					&& page.getHitCount() > physicalMemory[i].getHitCount()) {
-				page = this.physicalMemory[i];
+		for (int i = 1; i < physicalMemory.length; i++) {
+			if (physicalMemory[i] != null) {
+				if (page.getHitCount() < physicalMemory[i].getHitCount()) {
+					page = this.physicalMemory[i];
+					executionMarker = i;
+				}
+			} else {
 				executionMarker = i;
+				break;
 			}
 		}
-		this.physicalMemory[executionMarker] = new Page(nextPage, 0);
+		this.physicalMemory[executionMarker] = new Page(nextPage, time);
 		return executionMarker;
 	}
 }
