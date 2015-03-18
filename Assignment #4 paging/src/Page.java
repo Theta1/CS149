@@ -8,6 +8,8 @@ public class Page {
 	private int timeIn;
 	private int virtualAddress;
 	private int physicalAddress;
+	private int hitCount;
+	private int timeLastUsed;
 
 	/**
 	 * @return
@@ -55,6 +57,7 @@ public class Page {
 	Page(int virtualAddress, int timeIn) {
 		this.timeIn = timeIn;
 		this.virtualAddress = virtualAddress;
+		hitCount=0;
 	}
 
 	/**
@@ -65,5 +68,24 @@ public class Page {
 	 */
 	public int getTimeIn() {
 		return this.timeIn;
+	}
+
+	/**
+	 * Used to increment the number of times the page has been hit.
+	 */
+	public void hit() {
+		hitCount++;
+	}
+
+	public int getHitCount() {
+		return hitCount;
+	}
+
+	public void setTimeLastUsed(int j) {
+		timeLastUsed=j;
+	}
+
+	public int getTimeLastUsed() {
+		return timeLastUsed;
 	}
 }
