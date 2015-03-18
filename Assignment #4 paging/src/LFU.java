@@ -7,7 +7,7 @@
  */
 public class LFU extends PageReplacementAlgorithm {
 
-	protected int replacePage(int executionMarker, int nextPage) {
+	protected int replacePage(int executionMarker, int nextPage, int time) {
 		Page page = physicalMemory[0];
 		for (int i = 1; i < physicalMemory.length; i++) {
 			if (physicalMemory[i] != null) {
@@ -20,7 +20,7 @@ public class LFU extends PageReplacementAlgorithm {
 				break;
 			}
 		}
-		this.physicalMemory[executionMarker] = new Page(nextPage, 0);
+		this.physicalMemory[executionMarker] = new Page(nextPage, time);
 		return executionMarker;
 	}
 }
