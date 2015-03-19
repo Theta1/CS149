@@ -25,7 +25,7 @@ public class Swapping {
 		ArrayList<Process> p5 = new ArrayList<Process>();
 		
 		//Creates processes and random values to them
-		for(int i=1; i<=TOTALPROCESSES; i++)
+		/*for(int i=1; i<=TOTALPROCESSES; i++)
 		{
 		    Process n = new Process(i);
 		    if (i < (TOTALPROCESSES * (1/5) ) )
@@ -38,11 +38,16 @@ public class Swapping {
 		    {	p4.add(n);	}
 		    else
 		    {	p5.add(n);	}
+		}*/
+		for(int i=1; i<=60; i++)
+		{
+		    p1.add(new Process(i));
+		    
 		}
 		
 		//FIRST FIT
 		//run 5 times
-		FirstFit ff1 = new FirstFit(deepCopy(p1), MAINMEM, TIME);
+/*		FirstFit ff1 = new FirstFit(deepCopy(p1), MAINMEM, TIME);
 		FirstFit ff2 = new FirstFit(deepCopy(p2), MAINMEM, TIME);
 		FirstFit ff3 = new FirstFit(deepCopy(p3), MAINMEM, TIME);
 		FirstFit ff4 = new FirstFit(deepCopy(p4), MAINMEM, TIME);
@@ -57,23 +62,23 @@ public class Swapping {
 		
 		System.out.println( "Average number of process swapped for First fit is: " + (ffp1+ffp2+ffp3+ffp4+ffp5) / 5 + "\n\n");
 		
-/*
+*/
 		//NEXT FIT
 		//run 5 times
-		NextFit nf1 = new NextFit(p1, MAINMEM);
-		NextFit nf2 = new NextFit(p2, MAINMEM);
-		NextFit nf3 = new NextFit(p3, MAINMEM);
-		NextFit nf4 = new NextFit(p4, MAINMEM);
-		NextFit nf5 = new NextFit(p5, MAINMEM);
+		NextFit nf1 = new NextFit(p1, MAINMEM, TIME);
+		//NextFit nf2 = new NextFit(p2, MAINMEM);
+		//NextFit nf3 = new NextFit(p3, MAINMEM);
+		//NextFit nf4 = new NextFit(p4, MAINMEM);
+	//	NextFit nf5 = new NextFit(p5, MAINMEM);
 		
 		//returns the number of processes that was swapped in
 		int nfp1 = nf1.run();
-		int nfp2 = nf2.run();
-		int nfp3 = nf3.run();
-		int nfp4 = nf4.run();
-		int nfp5 = nf5.run();
+		//int nfp2 = nf2.run();
+		//int nfp3 = nf3.run();
+		//int nfp4 = nf4.run();
+		//int nfp5 = nf5.run();
 		
-		System.out.println( "Average number of process swapped for Next fit is: " + (nfp1+nfp2+nfp3+nfp4+nfp5) / 5 + "\n\n");
+/*		System.out.println( "Average number of process swapped for Next fit is: " + (nfp1+nfp2+nfp3+nfp4+nfp5) / 5 + "\n\n");
 		
 		//wfp FIT
 		//run 5 times

@@ -38,16 +38,18 @@ public class FirstFit {
 			//add process
 			if(location >= 0) {
 				addProcess(p, location);
+				Print.printMap(ff);
 				mbCounter++;
 			}
 			
 			//remove completed processes
-			complete();
+			boolean removed = false;
+			removed = complete();
+			if(removed) {	Print.printMap(ff);	}
 			
 			//add runtime for the 
 			addRuntime();
 			
-			Print.printMap(ff);
 		}		
 		
 		System.out.println("\n");
@@ -79,7 +81,7 @@ public class FirstFit {
 			}
 				
 			
-			if ((end - start) >= size) {
+			if ((end - start + 1) >= size) {
 				return start;
 			}
 		}
@@ -104,8 +106,9 @@ public class FirstFit {
 	/**
 	 * removes complete processes
 	 */
-	public static void complete() {
+	public static boolean complete() {
 		Process q = new Process();
+		boolean removed = false;
 		for (int i = 0; i < maxMem; i++)
 		{
 			for(Process p: processes)
@@ -116,6 +119,7 @@ public class FirstFit {
 					{	
 						q = ff[i];
 						Print.printRemove(ff[i]);
+						removed = true;
 						ff[i] = null;
 					}
 					else if (p.getDuration() == 0)
@@ -123,6 +127,7 @@ public class FirstFit {
 				}
 			}
 		}
+		return removed;
 	}
 	
 	/**
