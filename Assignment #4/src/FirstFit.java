@@ -10,11 +10,11 @@ import java.util.ArrayList;
  *************************************/
 
 public class FirstFit {
-	private static ArrayList<Process> processes;
-	private static int maxMem;
-	private static Process[]ff;
-	private static int mbCounter;
-	private static int time;
+	private ArrayList<Process> processes;
+	private int maxMem;
+	private Process[]ff;
+	private int mbCounter;
+	private int time;
 	
 	FirstFit( ArrayList<Process> p, int m, int t) {
 		processes = p;
@@ -28,7 +28,7 @@ public class FirstFit {
 	 * Run algorithm for 60 seconds
 	 * @return number of processes that started
 	 */
-	public static int run() {
+	public int run() {
 		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
 			System.out.println(i + " seconds");
@@ -71,7 +71,7 @@ public class FirstFit {
 	 * @return the first location in the array
 	 * to fill the array
 	 */
-	public static int findFirstEmpty(int size) {
+	public int findFirstEmpty(int size) {
 		int start = 0;
 		int end = -1;
 		
@@ -103,7 +103,7 @@ public class FirstFit {
 	 * @param p is a process
 	 * @param start the starting location to add the process
 	 */
-	public static void addProcess( Process p, int start) {
+	public void addProcess( Process p, int start) {
 		int i = start;
 		for (; start < (i + p.getSize()); start++) {
 			ff[start] = p;
@@ -115,7 +115,7 @@ public class FirstFit {
 	/**
 	 * removes complete processes
 	 */
-	public static boolean complete() {
+	public boolean complete() {
 		Process q = new Process();
 		boolean removed = false;
 		for (int i = 0; i < maxMem; i++)
@@ -142,7 +142,7 @@ public class FirstFit {
 	/**
 	 * removes runtime by decreasing the duration
 	 */
-	public static void addRuntime() {
+	public void addRuntime() {
 		for (int i = 0; i < maxMem; i++)
 		{
 			for(Process p: processes)

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Hashtable;
 /**************************************
  * Worst fit
  * Memory is allocated for a process
@@ -10,11 +12,11 @@ import java.util.ArrayList;
  *************************************/
 
 public class WorstFit {
-	private static ArrayList<Process> processes;
-	private static int maxMem;
-	private static Process[]ff;
-	private static int mbCounter;
-	private static int time;
+	private ArrayList<Process> processes;
+	private int maxMem;
+	private Process[]ff;
+	private int mbCounter;
+	private int time;
 	
 	WorstFit( ArrayList<Process> p, int m, int t) {
 		processes = p;
@@ -28,14 +30,14 @@ public class WorstFit {
 	 * Run algorithm for 60 seconds
 	 * @return number of processes that started
 	 */
-	public static int run() {
+	public int run() {
 		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
 			System.out.println(i + " seconds");
 			Process p = processes.get(mbCounter);
 			
 			//get first empty location
-			int location = findBigSlot(p.getSize());
+			int location = findBestEmpty(p.getSize());
 			//add process
 			if(location >= 0) {
 				addProcess(p, location);
@@ -71,13 +73,18 @@ public class WorstFit {
 	 * @return the first location in the array
 	 * to fill the array
 	 */
-	public static int findBigSlot(int size) {
+	public int findBestEmpty(int size) {
 		int start = 0;
 		int end = -1;
-		//create hashtable
+		
+		//create a hashtable(size, position)
+		Hashtable<Integer, Integer> best = new Hashtable<Integer, Integer>();
 		
 		for(int i = 0; i < maxMem; i++) {
-			if (ff[i] == null) {
+			if(i == maxMem -1 && (end - start + 1) >= size) {
+				best.put((end - start + 1), start);				
+			}
+			else if (ff[i] == null) {
 				if (start > end)
 				{	
 					start = i;
@@ -87,15 +94,29 @@ public class WorstFit {
 				{	end = i;	}
 			}
 			else {
-				//add to hashtable (size, starting position)
-				
-				start = i;
+				//add to hashtable (size=key, starting position=value)  
+				if((end - start + 1) >= size) {
+					best.put((end - start + 1), start);
+					start = i;
+				}
 			}
 		}
 		
-		//find the largest size in the hash table
-
-		return -1;//if hashtable is empty
+		//find the smallest size in the hash table
+		if(!best.isEmpty()) {
+			return findWorst(best);
+		}
+		return -1;
+		
+	}
+	
+	
+	public Integer findWorst(Hashtable<Integer, Integer> best){
+		ArrayList<Integer> keys = new ArrayList<Integer>(best.keySet());
+		Collections.sort(keys);
+		Collections.reverse(keys);
+				
+		return best.get(keys.get(0));
 	}
 	
 	/**
@@ -103,7 +124,7 @@ public class WorstFit {
 	 * @param p is a process
 	 * @param start the starting location to add the process
 	 */
-	public static void addProcess( Process p, int start) {
+	public void addProcess( Process p, int start) {
 		int i = start;
 		for (; start < (i + p.getSize()); start++) {
 			ff[start] = p;
@@ -115,7 +136,7 @@ public class WorstFit {
 	/**
 	 * removes complete processes
 	 */
-	public static boolean complete() {
+	public boolean complete() {
 		Process q = new Process();
 		boolean removed = false;
 		for (int i = 0; i < maxMem; i++)
@@ -142,7 +163,7 @@ public class WorstFit {
 	/**
 	 * removes runtime by decreasing the duration
 	 */
-	public static void addRuntime() {
+	public void addRuntime() {
 		for (int i = 0; i < maxMem; i++)
 		{
 			for(Process p: processes)
