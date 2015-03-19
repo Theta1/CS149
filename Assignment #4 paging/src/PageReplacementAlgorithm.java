@@ -11,22 +11,41 @@
  * 
  * Suggested procedure:
  * 
- * Simulate the FIFO and random pick page replacement algorithms. Run algorithm
- * 5 times, 100 page references each time, to compute an average hit ratio of
- * pages already in memory. For each reference, print the page numbers of the
- * pages in memory and which page (if any) needed to be paged in and which page
- * was evicted.
+ * Run algorithm multiple times, with multiple page references each time, to
+ * compute an average hit ratio of pages already in memory. For each reference,
+ * print the page numbers of the pages in memory and which page (if any) needed
+ * to be paged in and which page was evicted.
  * 
  * @author Theta(1)
  *
  */
 public abstract class PageReplacementAlgorithm {
 	protected Page[] physicalMemory;
-	private final static int RUN_TIME_NUMBER = 5;
-	protected final static int NUMBER_OF_REFERENCES = 100;
-	protected final static int PHYSICAL_MEMORY_SIZE = 4;
-	private final static int VIRTUAL_MEMORY_SIZE = 10;
+	private int runTimeNumber = 5;
+	private int numberOfReferences = 100;
+	protected int physicalMemorySize = 4;
+	private int virtualMemorySize = 10;
 	protected int marker;
+
+	/**
+	 * General constructor.
+	 * 
+	 * @param runTimeNumber
+	 *            is the number of times to run.
+	 * @param numberOfReferences
+	 *            is the number of references to make in each run.
+	 * @param physicalMemorySize
+	 *            is the number of slots in physical memory.
+	 * @param virtualMemorySize
+	 *            is the number of slots in virtual memory.
+	 */
+	PageReplacementAlgorithm(int runTimeNumber, int numberOfReferences,
+			int physicalMemorySize, int virtualMemorySize) {
+		this.runTimeNumber = runTimeNumber;
+		this.numberOfReferences = numberOfReferences;
+		this.physicalMemorySize = physicalMemorySize;
+		this.virtualMemorySize = virtualMemorySize;
+	}
 
 	/**
 	 * Called from run to implement the particular paging algorithm.
@@ -51,31 +70,36 @@ public abstract class PageReplacementAlgorithm {
 		int executionMarker;
 
 		// Number of times run
-		for (int i = 0; i < RUN_TIME_NUMBER; i++) {
+		for (int i = 0; i < runTimeNumber; i++) {
 			// clears memory memory
 			timesHit = 0;
 			executionMarker = 0;
-			physicalMemory = new Page[PHYSICAL_MEMORY_SIZE];
+			physicalMemory = new Page[physicalMemorySize];
 			marker = 0;
-			
+
 			// starts by loading the first page into memory
 			physicalMemory[executionMarker] = new Page(0, 0);
 
 			// Number of page references to run (minus the first above)
-			for (int j = 1; j < NUMBER_OF_REFERENCES; j++) {
+			for (int j = 1; j < numberOfReferences; j++) {
 				Print.memoryMap(physicalMemory);
 				// finds the next page randomly
 				int nextPageVirtualAddress = RandomPick.pickAPage(
 						physicalMemory[executionMarker].getVirtualAddress(),
-						VIRTUAL_MEMORY_SIZE);
+						virtualMemorySize);
 				// Look for the page in memory
-				Print.thisString("Time: "+j+", Next: " + nextPageVirtualAddress + " ");
+				Print.thisString("Time: " + j + ", Next: "
+						+ nextPageVirtualAddress + " ");
 				int indexOfPage = getPageIndex(nextPageVirtualAddress);
 				if (indexOfPage == -1) {
-					executionMarker = replacePage(executionMarker, nextPageVirtualAddress, j);
+					executionMarker = replacePage(executionMarker,
+							nextPageVirtualAddress, j);
 					Print.reference(physicalMemory, nextPageVirtualAddress,
 							executionMarker);
-					Print.thisString("Loaded: "+physicalMemory[executionMarker].getVirtualAddress()+" At index: "+executionMarker+"\n");
+					Print.thisString("Loaded: "
+							+ physicalMemory[executionMarker]
+									.getVirtualAddress() + " At index: "
+							+ executionMarker + "\n");
 				} else {
 					// Otherwise it was there. Increase the hit and set the
 					// index marker.
@@ -83,12 +107,14 @@ public abstract class PageReplacementAlgorithm {
 					physicalMemory[indexOfPage].setTimeLastUsed(j);
 					timesHit++;
 					executionMarker = indexOfPage;
-					Print.thisString("Found:  " + physicalMemory[executionMarker].getVirtualAddress() + "\n");
+					Print.thisString("Found:  "
+							+ physicalMemory[executionMarker]
+									.getVirtualAddress() + "\n");
 				}
 			}
 			// Store a fraction of the hitRatio average.
-			averageHitRatio += ((double) timesHit / NUMBER_OF_REFERENCES)
-					/ RUN_TIME_NUMBER;
+			averageHitRatio += ((double) timesHit / numberOfReferences)
+					/ runTimeNumber;
 		}
 		// return full average
 		return averageHitRatio;
@@ -102,7 +128,7 @@ public abstract class PageReplacementAlgorithm {
 	 * @return the index if the page is in memory or -1 if not.
 	 */
 	private int getPageIndex(int virtualPageAddress) {
-		for (int i = 0; i < PHYSICAL_MEMORY_SIZE; i++) {
+		for (int i = 0; i < physicalMemorySize; i++) {
 			if (this.physicalMemory[i] != null
 					&& this.physicalMemory[i].getVirtualAddress() == virtualPageAddress)
 				return i;
