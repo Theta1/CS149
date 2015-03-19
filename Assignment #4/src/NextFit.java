@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 /**************************************
- * First fit
+ * Next fit
  * Memory is allocated for a process
- * by the first available slot
+ * by the next available slot
  * 
  * @author Theta1
  * CS149

@@ -83,7 +83,7 @@ public class Swapping {
 */		
 		//wfp FIT
 		//run 5 times
-		BestFit best1 = new BestFit(p1, MAINMEM);
+		BestFit best1 = new BestFit(deepCopy(p1), MAINMEM, TIME);
 /*		BestFit best2 = new BestFit(p2, MAINMEM);
 		BestFit best3 = new BestFit(p3, MAINMEM);
 		BestFit best4 = new BestFit(p4, MAINMEM);
