@@ -97,7 +97,9 @@ public class NextFit {
 			}
 			
 			if (i == maxMem - 1) {
-				i = 0;
+				i = -1;
+				start = 0;
+				end = -1;
 			}
 			
 			if (i == nextLoc-1) {

@@ -29,9 +29,9 @@ public class Print {
 			if (i == (ff.length - 1) )
 			{	System.out.println("]");	}
 			else if (ff[i] == null)
-			{	System.out.print(".");	}
+			{	System.out.printf("%4s", ".");	}
 			else
-			{	System.out.print(ff[i].getName());	}
+			{	System.out.printf("%4d", ff[i].getName());	}
 		}
 		
 	}
@@ -42,7 +42,7 @@ public class Print {
 	 */
 	public static void printAdd(Process process) {
 		System.out.println("Added: "+ process.getName() + " of size " + process.getSize() 
-					+ " and durration "	+ process.getDuration()	);		
+					+ " and duration "	+ process.getDuration()	);		
 	}
 	
 	/**

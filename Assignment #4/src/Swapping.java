@@ -43,7 +43,7 @@ public class Swapping {
 		    
 		//FIRST FIT
 		//run 5 times
-		FirstFit ff1 = new FirstFit(deepCopy(p1), MAINMEM, TIME);
+/*		FirstFit ff1 = new FirstFit(deepCopy(p1), MAINMEM, TIME);
 		FirstFit ff2 = new FirstFit(deepCopy(p2), MAINMEM, TIME);
 		FirstFit ff3 = new FirstFit(deepCopy(p3), MAINMEM, TIME);
 		FirstFit ff4 = new FirstFit(deepCopy(p4), MAINMEM, TIME);
@@ -58,7 +58,7 @@ public class Swapping {
 		
 		System.out.println( "Average number of process swapped for First fit is: " + (ffp1+ffp2+ffp3+ffp4+ffp5) / 5 + "\n\n");
 		
-
+*/
 		//NEXT FIT
 		//run 5 times
 		NextFit nf1 = new NextFit(deepCopy(p1), MAINMEM, TIME);
@@ -75,7 +75,7 @@ public class Swapping {
 		int nfp5 = nf5.run();
 		
 		System.out.println( "Average number of process swapped for Next fit is: " + (nfp1+nfp2+nfp3+nfp4+nfp5) / 5 + "\n\n");
-		
+/*		
 		//wfp FIT
 		//run 5 times
 		BestFit best1 = new BestFit(deepCopy(p1), MAINMEM, TIME);
@@ -109,6 +109,7 @@ public class Swapping {
 		int wfp5 = wf5.run();
 		
 		System.out.println( "Average number of process swapped for Worst fit is: " + (wfp1+wfp2+wfp3+wfp4+wfp5) / 5 + "\n\n");
+*/
 	}
 	
 	   /**
