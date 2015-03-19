@@ -10,11 +10,11 @@ import java.util.ArrayList;
  *************************************/
 
 public class FirstFit {
-	private static ArrayList<Process> processes;
-	private static int maxMem;
-	private static Process[]ff;
-	private static int mbCounter;
-	private static int time;
+	private ArrayList<Process> processes;
+	private int maxMem;
+	private Process[]ff;
+	private int mbCounter;
+	private int time;
 	
 	FirstFit( ArrayList<Process> p, int m, int t) {
 		processes = p;
@@ -28,9 +28,10 @@ public class FirstFit {
 	 * Run algorithm for 60 seconds
 	 * @return number of processes that started
 	 */
-	public static int run() {
+	public int run() {
 		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
+			System.out.println(i + " seconds");
 			Process p = processes.get(mbCounter);
 			
 			//get first empty location
@@ -38,16 +39,26 @@ public class FirstFit {
 			//add process
 			if(location >= 0) {
 				addProcess(p, location);
+				Print.printMap(ff);
 				mbCounter++;
 			}
 			
 			//remove completed processes
-			complete();
+			boolean removed = false;
+			removed = complete();
+			if(removed) {	Print.printMap(ff);	}
 			
 			//add runtime for the 
 			addRuntime();
 			
-			Print.printMap(ff);
+			//compaction
+			if (i==30) {
+				MemoryCompact compact = new MemoryCompact(ff);
+				ff = compact.compact();
+				System.out.println("Memory Compaction");
+				Print.printMap(ff);
+			}
+			
 		}		
 		
 		System.out.println("\n");
@@ -60,7 +71,7 @@ public class FirstFit {
 	 * @return the first location in the array
 	 * to fill the array
 	 */
-	public static int findFirstEmpty(int size) {
+	public int findFirstEmpty(int size) {
 		int start = 0;
 		int end = -1;
 		
@@ -79,7 +90,7 @@ public class FirstFit {
 			}
 				
 			
-			if ((end - start) >= size) {
+			if ((end - start + 1) >= size) {
 				return start;
 			}
 		}
@@ -92,7 +103,7 @@ public class FirstFit {
 	 * @param p is a process
 	 * @param start the starting location to add the process
 	 */
-	public static void addProcess( Process p, int start) {
+	public void addProcess( Process p, int start) {
 		int i = start;
 		for (; start < (i + p.getSize()); start++) {
 			ff[start] = p;
@@ -104,8 +115,9 @@ public class FirstFit {
 	/**
 	 * removes complete processes
 	 */
-	public static void complete() {
+	public boolean complete() {
 		Process q = new Process();
+		boolean removed = false;
 		for (int i = 0; i < maxMem; i++)
 		{
 			for(Process p: processes)
@@ -116,6 +128,7 @@ public class FirstFit {
 					{	
 						q = ff[i];
 						Print.printRemove(ff[i]);
+						removed = true;
 						ff[i] = null;
 					}
 					else if (p.getDuration() == 0)
@@ -123,12 +136,13 @@ public class FirstFit {
 				}
 			}
 		}
+		return removed;
 	}
 	
 	/**
 	 * removes runtime by decreasing the duration
 	 */
-	public static void addRuntime() {
+	public void addRuntime() {
 		for (int i = 0; i < maxMem; i++)
 		{
 			for(Process p: processes)

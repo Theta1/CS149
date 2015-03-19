@@ -10,33 +10,29 @@ import java.util.ArrayList;
  ***********************************/
 
 public class MemoryCompact {
-	private int[] nonCompact;
-	private int[] compact;
+	private Process[] nonCompact;
+	private Process[] compact;
 	private static final int MB = 100;
 	
-	MemoryCompact( int[] p) {
+	MemoryCompact( Process[] p) {
 		nonCompact = p;
-		compact = new int[MB];
+		compact = new Process[MB];
 	}
 	
 	/**
 	 * Takes an non compacted array and
 	 * compacts them. 
-	 * @return an int array with no spaces
+	 * @return an array with no spaces
 	 */
-	public int[] compact() {
-		int nonCompactPos = 0;
+	public Process[] compact() {
 		int compactPos = 0;
 		
-		while(nonCompactPos <= MB) {
-			if(nonCompactPos > 0)
+		for(int nonCompactPos = 0; nonCompactPos < MB; nonCompactPos++) {
+			if(nonCompact[nonCompactPos] != null)
 			{
 				compact[compactPos] = nonCompact[nonCompactPos];
-				nonCompactPos++;
 				compactPos++;
 			}
-			else
-			{	nonCompactPos++;	}
 		}
 		
 		return compact;
