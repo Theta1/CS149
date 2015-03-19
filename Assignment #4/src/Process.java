@@ -1,9 +1,11 @@
 import java.util.Random;
 
 /************************************
- * Creates a Process
+ * Creates a Process and its attributes
+ * 
  * @author Theta1
  * CS149
+ * Assignment #4 Swapping
  ************************************/
 
 public class Process {
@@ -11,6 +13,13 @@ public class Process {
 	private int duration;
 	private int name;
 	private int run;
+	
+	Process() {
+		size = 0;
+		duration = 0;
+		name = 0;
+		run = 0;
+	}
 	
 	Process(int i) {
 		size = size();
@@ -26,7 +35,27 @@ public class Process {
 	public int getDuration() {
 		return duration;
 	}
+	
 
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public void setName(int name) {
+		this.name = name;
+	}
+
+	public void setRun(int run) {
+		this.run = run;
+	}
+	
+	public void decrementDuration() {
+		duration--;
+	}
 	/**
 	 * creates a random size of the Process
 	 * @return the size of the Process
@@ -78,6 +107,15 @@ public class Process {
 			return "Process " + name + "has completed" ;
 		}
 			return null;
+	}
+	
+	public Process clone() {
+		Process newClone = new Process();
+		newClone.setSize(size);
+		newClone.setDuration(duration);
+		newClone.setRun(run);
+		newClone.setName(name);
+		return newClone;
 	}
 	
 }
