@@ -53,6 +53,14 @@ public class NextFit {
 			
 			//add runtime for the 
 			addRuntime();
+			
+			//memory compaction
+			if (i==30) {
+				MemoryCompact compact = new MemoryCompact(ff);
+				ff = compact.compact();
+				System.out.println("Memory Compaction");
+				Print.printMap(ff);
+			}
 		}		
 		
 		System.out.println("\n");

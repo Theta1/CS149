@@ -31,6 +31,7 @@ public class FirstFit {
 	public static int run() {
 		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
+			System.out.println(i + " seconds");
 			Process p = processes.get(mbCounter);
 			
 			//get first empty location
@@ -49,6 +50,14 @@ public class FirstFit {
 			
 			//add runtime for the 
 			addRuntime();
+			
+			//compaction
+			if (i==30) {
+				MemoryCompact compact = new MemoryCompact(ff);
+				ff = compact.compact();
+				System.out.println("Memory Compaction");
+				Print.printMap(ff);
+			}
 			
 		}		
 		
