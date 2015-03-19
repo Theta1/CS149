@@ -15,13 +15,17 @@ public class FirstFit {
 	private Process[]ff;
 	private int mbCounter;
 	private int time;
+	private int memCompact;
+	private boolean compact;
 	
-	FirstFit( ArrayList<Process> p, int m, int t) {
+	FirstFit( ArrayList<Process> p, int m, int t, boolean c) {
 		processes = p;
 		maxMem = m;
 		time = t;
 		ff = new Process[m];
 		mbCounter = 0;
+		memCompact = 0;
+		compact = c;
 	}
 	
 	/**
@@ -31,7 +35,6 @@ public class FirstFit {
 	public int run() {
 		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
-			System.out.println(i + " seconds");
 			Process p = processes.get(mbCounter);
 			
 			//get first empty location
@@ -52,11 +55,11 @@ public class FirstFit {
 			addRuntime();
 			
 			//compaction
-			if (i==30) {
+			if (i==30 && compact == true) {
 				MemoryCompact compact = new MemoryCompact(ff);
 				ff = compact.compact();
-				System.out.println("Memory Compaction");
 				Print.printMap(ff);
+				memCompact = compact.getMemCompact();
 			}
 			
 		}		
@@ -155,5 +158,11 @@ public class FirstFit {
 			}
 		}
 	}
+
+	public int getMemCompact() {
+		return memCompact;
+	}
+	
+	
 	
 }

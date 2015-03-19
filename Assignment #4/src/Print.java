@@ -24,9 +24,9 @@ public class Print {
 	 */
 	public static void printMap(Process[] ff) {
 		System.out.print("[");
-		for(int i = 0; i < ff.length; i++)
+		for(int i = 0; i < ff.length + 1; i++)
 		{	
-			if (i == (ff.length - 1) )
+			if (i == (ff.length) )
 			{	System.out.println("]");	}
 			else if (ff[i] == null)
 			{	System.out.printf("%4s", ".");	}

@@ -12,20 +12,17 @@ public class Process {
 	private int size;
 	private int duration;
 	private int name;
-	private int run;
 	
 	Process() {
 		size = 0;
 		duration = 0;
 		name = 0;
-		run = 0;
 	}
 	
 	Process(int i) {
 		size = size();
 		duration = duration();
 		name = i;
-		run = 0;
 	}
 	
 	public int getSize() {
@@ -47,10 +44,6 @@ public class Process {
 
 	public void setName(int name) {
 		this.name = name;
-	}
-
-	public void setRun(int run) {
-		this.run = run;
 	}
 	
 	public void decrementDuration() {
@@ -86,34 +79,10 @@ public class Process {
 		return name;
 	}
 
-	/**
-	 * Keeps track of the duration
-	 * of the runtime
-	 * 
-	 * e.g. run = 5, duration = 10
-	 *  the process has ran 5 
-	 *  times out of 10
-	 */
-	public void processRun() {
-		run++;
-	}
-	
-	/**
-	 * Checks to see if the process has completed
-	 * @return a String if the Process has completed
-	 */
-	public String processDone () {
-		if (duration == run) {
-			return "Process " + name + "has completed" ;
-		}
-			return null;
-	}
-	
 	public Process clone() {
 		Process newClone = new Process();
 		newClone.setSize(size);
 		newClone.setDuration(duration);
-		newClone.setRun(run);
 		newClone.setName(name);
 		return newClone;
 	}
