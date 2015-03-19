@@ -36,7 +36,6 @@ public class Process {
 		return duration;
 	}
 	
-	
 
 	public void setSize(int size) {
 		this.size = size;
@@ -53,7 +52,10 @@ public class Process {
 	public void setRun(int run) {
 		this.run = run;
 	}
-
+	
+	public void decrementDuration() {
+		duration--;
+	}
 	/**
 	 * creates a random size of the Process
 	 * @return the size of the Process

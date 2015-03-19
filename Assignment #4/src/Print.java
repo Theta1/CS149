@@ -22,16 +22,16 @@ public class Print {
 	 * @param process
 	 *            is the process that has been added or removed.
 	 */
-	public static void printMap(ArrayList<Integer> mem, Process process) {
+	public static void printMap(Process[] ff) {
 		System.out.print("[");
-		for(int i: mem)
+		for(int i = 0; i < ff.length; i++)
 		{	
-			if (i == mem.get(mem.size()-1))
-			{	System.out.println(i + "]");	}
-			else if (i == 0)
+			if (i == (ff.length - 1) )
+			{	System.out.println("]");	}
+			else if (ff[i] == null)
 			{	System.out.print(".");	}
 			else
-			{	System.out.println(process.getName());		}
+			{	System.out.print(ff[i].getName());	}
 		}
 		
 	}

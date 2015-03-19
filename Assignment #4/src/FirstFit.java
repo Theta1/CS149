@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class FirstFit {
 	private static ArrayList<Process> processes;
 	private static int maxMem;
-	private static int[]ff;
+	private static Process[]ff;
 	private static int mbCounter;
 	private static int time;
 	
@@ -20,7 +20,7 @@ public class FirstFit {
 		processes = p;
 		maxMem = m;
 		time = t;
-		ff = new int[m];
+		ff = new Process[m];
 		mbCounter = 0;
 	}
 	
@@ -29,14 +29,16 @@ public class FirstFit {
 	 * @return number of processes that started
 	 */
 	public static int run() {
+		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
 			Process p = processes.get(mbCounter);
 			
 			//get first empty location
 			int location = findFirstEmpty(p.getSize());
 			//add process
-			if(location < 0) {
+			if(location >= 0) {
 				addProcess(p, location);
+				mbCounter++;
 			}
 			
 			//remove completed processes
@@ -44,8 +46,11 @@ public class FirstFit {
 			
 			//add runtime for the 
 			addRuntime();
+			
+			Print.printMap(ff);
 		}		
 		
+		System.out.println("\n");
 		return mbCounter;
 	}
 	
@@ -60,7 +65,7 @@ public class FirstFit {
 		int end = -1;
 		
 		for(int i = 0; i < maxMem; i++) {
-			if (ff[i] == 0) {
+			if (ff[i] == null) {
 				if (start > end)
 				{	
 					start = i;
@@ -74,7 +79,7 @@ public class FirstFit {
 			}
 				
 			
-			if ((end - start) <= size) {
+			if ((end - start) >= size) {
 				return start;
 			}
 		}
@@ -83,15 +88,58 @@ public class FirstFit {
 	}
 	
 	/**
-	 * 
-	 * @param p
-	 * @param start
+	 * Adds a process to the array
+	 * @param p is a process
+	 * @param start the starting location to add the process
 	 */
 	public static void addProcess( Process p, int start) {
-		for (; start < p.getSize(); start++) {
-			ff[start] = p.getName();
+		int i = start;
+		for (; start < (i + p.getSize()); start++) {
+			ff[start] = p;
 		}
 		
 		Print.printAdd(p);
 	}
+	
+	/**
+	 * removes complete processes
+	 */
+	public static void complete() {
+		Process q = new Process();
+		for (int i = 0; i < maxMem; i++)
+		{
+			for(Process p: processes)
+			{
+				if ( p.equals(ff[i]) )
+				{
+					if (p.getDuration() == 0 && !p.equals(q))
+					{	
+						q = ff[i];
+						Print.printRemove(ff[i]);
+						ff[i] = null;
+					}
+					else if (p.getDuration() == 0)
+					{	ff[i] = null;	} 
+				}
+			}
+		}
+	}
+	
+	/**
+	 * removes runtime by decreasing the duration
+	 */
+	public static void addRuntime() {
+		for (int i = 0; i < maxMem; i++)
+		{
+			for(Process p: processes)
+			{
+				if ( p.equals(ff[i]) )
+				{
+					if (i == 0) {	p.decrementDuration();	} 
+					else if (ff[i]!= ff[i-1])	{	p.decrementDuration();	}
+				}
+			}
+		}
+	}
+	
 }
