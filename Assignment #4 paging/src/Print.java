@@ -48,10 +48,12 @@ public class Print {
 	public static void memoryMap(Page[] physicalMemory) {
 		for (int i = 0; i < physicalMemory.length; i++) {
 			if (physicalMemory[i] != null) {
-				System.out
-						.printf("|%2d*%2dt%2d", physicalMemory[i].getVirtualAddress(), physicalMemory[i].getHitCount(), physicalMemory[i].getTimeLastUsed());
+				System.out.printf("|%2d,h%2d,t%2d",
+						physicalMemory[i].getVirtualAddress(),
+						physicalMemory[i].getHitCount(),
+						physicalMemory[i].getTimeLastUsed());
 			} else {
-				System.out.printf("|        ");
+				System.out.printf("|          ");
 			}
 		}
 		System.out.print("| ");
