@@ -24,15 +24,32 @@ public class FirstFit {
 		mbCounter = 0;
 	}
 	
+	/**
+	 * Run algorithm for 60 seconds
+	 * @return number of processes that started
+	 */
 	public static int run() {
 		for(int i = 0; i < time; i++) {
 			Process p = processes.get(mbCounter);
 			
-			for(int j = 0; )
+			//get first empty location
+			int location = findFirstEmpty();
+			//add process
+			if(location < 0) {
+				addProcess(p, location);
+			}
 			
+			//remove completed processes
+			complete();
 			
+			//add runtime for the 
+			addRuntime();
 		}		
 		
 		return mbCounter;
+	}
+	
+	public static int findFirstEmpty() {
+		return -1;
 	}
 }

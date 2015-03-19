@@ -14,6 +14,13 @@ public class Process {
 	private int name;
 	private int run;
 	
+	Process() {
+		size = 0;
+		duration = 0;
+		name = 0;
+		run = 0;
+	}
+	
 	Process(int i) {
 		size = size();
 		duration = duration();
@@ -27,6 +34,24 @@ public class Process {
 
 	public int getDuration() {
 		return duration;
+	}
+	
+	
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public void setName(int name) {
+		this.name = name;
+	}
+
+	public void setRun(int run) {
+		this.run = run;
 	}
 
 	/**
@@ -80,6 +105,15 @@ public class Process {
 			return "Process " + name + "has completed" ;
 		}
 			return null;
+	}
+	
+	public Process clone() {
+		Process newClone = new Process();
+		newClone.setSize(size);
+		newClone.setDuration(duration);
+		newClone.setRun(run);
+		newClone.setName(name);
+		return newClone;
 	}
 	
 }

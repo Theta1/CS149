@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-import proj2.Process;
 /****************************************
  * Simulates swapping of processes
  * and different algorithms for memory allocation
@@ -43,11 +42,11 @@ public class Swapping {
 		
 		//FIRST FIT
 		//run 5 times
-		FirstFit ff1 = new FirstFit(p1, MAINMEM, TIME);
-		FirstFit ff2 = new FirstFit(p2, MAINMEM, TIME);
-		FirstFit ff3 = new FirstFit(p3, MAINMEM, TIME);
-		FirstFit ff4 = new FirstFit(p4, MAINMEM, TIME);
-		FirstFit ff5 = new FirstFit(p5, MAINMEM, TIME);
+		FirstFit ff1 = new FirstFit(deepCopy(p1), MAINMEM, TIME);
+		FirstFit ff2 = new FirstFit(deepCopy(p2), MAINMEM, TIME);
+		FirstFit ff3 = new FirstFit(deepCopy(p3), MAINMEM, TIME);
+		FirstFit ff4 = new FirstFit(deepCopy(p4), MAINMEM, TIME);
+		FirstFit ff5 = new FirstFit(deepCopy(p5), MAINMEM, TIME);
 		
 		//returns the number of processes that was swapped in
 		int ffp1 = ff1.run();
