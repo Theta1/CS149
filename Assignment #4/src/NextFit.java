@@ -16,15 +16,18 @@ public class NextFit {
 	private int mbCounter;
 	private int time;
 	private int nextLoc;
+	private int memCompact;
+	private boolean compact;
 	
-	NextFit( ArrayList<Process> p, int m, int t) {
+	NextFit( ArrayList<Process> p, int m, int t, boolean c) {
 		processes = p;
 		maxMem = m;
 		time = t;
 		ff = new Process[m];
 		mbCounter = 0;
 		nextLoc = 0;
-		
+		memCompact = 0;
+		compact = c;
 	}
 	
 	/**
@@ -34,7 +37,6 @@ public class NextFit {
 	public int run() {
 		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
-			System.out.println(i+" seconds");
 			Process p = processes.get(mbCounter);
 			
 			//get first empty location
@@ -55,10 +57,10 @@ public class NextFit {
 			addRuntime();
 			
 			//memory compaction
-			if (i==30) {
+			if (i==30 && compact == true) {
 				MemoryCompact compact = new MemoryCompact(ff);
 				ff = compact.compact();
-				System.out.println("Memory Compaction");
+				memCompact = compact.getMemCompact();
 				Print.printMap(ff);
 			}
 		}		
@@ -76,6 +78,10 @@ public class NextFit {
 	public int findNextEmpty(int size) {
 		int start = 0;
 		int end = -1;
+		
+		if(nextLoc == 100){
+			nextLoc = 0;
+		}
 		
 		for(int i = nextLoc; i < maxMem; i++) {
 			if (ff[i] == null) {
@@ -167,5 +173,12 @@ public class NextFit {
 			}
 		}
 	}
+
+	public int getMemCompact() {
+		return memCompact;
+	}
+	
+	
+	
 	
 }

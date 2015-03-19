@@ -13,10 +13,12 @@ public class MemoryCompact {
 	private Process[] nonCompact;
 	private Process[] compact;
 	private static final int MB = 100;
+	private int memCompact;
 	
 	MemoryCompact( Process[] p) {
 		nonCompact = p;
 		compact = new Process[MB];
+		memCompact = 0;
 	}
 	
 	/**
@@ -32,9 +34,17 @@ public class MemoryCompact {
 			{
 				compact[compactPos] = nonCompact[nonCompactPos];
 				compactPos++;
+				memCompact++;
 			}
 		}
 		
 		return compact;
 	}
+
+	public int getMemCompact() {
+		return memCompact;
+	}
+	
+	
+	
 }

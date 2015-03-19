@@ -17,13 +17,17 @@ public class WorstFit {
 	private Process[]ff;
 	private int mbCounter;
 	private int time;
+	private int memCompact;
+	private boolean compact;
 	
-	WorstFit( ArrayList<Process> p, int m, int t) {
+	WorstFit( ArrayList<Process> p, int m, int t, boolean c) {
 		processes = p;
 		maxMem = m;
 		time = t;
 		ff = new Process[m];
 		mbCounter = 0;
+		memCompact = 0;
+		compact = c;
 	}
 	
 	/**
@@ -33,11 +37,10 @@ public class WorstFit {
 	public int run() {
 		mbCounter = 0;
 		for(int i = 0; i < time; i++) {
-			System.out.println(i + " seconds");
 			Process p = processes.get(mbCounter);
 			
 			//get first empty location
-			int location = findBestEmpty(p.getSize());
+			int location = findWorstEmpty(p.getSize());
 			//add process
 			if(location >= 0) {
 				addProcess(p, location);
@@ -54,10 +57,10 @@ public class WorstFit {
 			addRuntime();
 			
 			//compaction
-			if (i==30) {
+			if (i==30 && compact == true) {
 				MemoryCompact compact = new MemoryCompact(ff);
 				ff = compact.compact();
-				System.out.println("Memory Compaction");
+				memCompact = compact.getMemCompact();
 				Print.printMap(ff);
 			}
 			
@@ -73,7 +76,7 @@ public class WorstFit {
 	 * @return the first location in the array
 	 * to fill the array
 	 */
-	public int findBestEmpty(int size) {
+	public int findWorstEmpty(int size) {
 		int start = 0;
 		int end = -1;
 		
@@ -97,8 +100,8 @@ public class WorstFit {
 				//add to hashtable (size=key, starting position=value)  
 				if((end - start + 1) >= size) {
 					best.put((end - start + 1), start);
-					start = i;
 				}
+				start = i;
 			}
 		}
 		
@@ -176,5 +179,12 @@ public class WorstFit {
 			}
 		}
 	}
+
+	public int getMemCompact() {
+		return memCompact;
+	}
+	
+	
+	
 	
 }
