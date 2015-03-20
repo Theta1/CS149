@@ -1,18 +1,26 @@
 /**
+ * A simulation demonstration of the comparative effecentcy of various paging
+ * algorithms
  * 
  * @author Theta(1)
  *
  */
-public class Paging {
+public class aaMainPagingMethod {
 	private final static int RUN_TIME_NUMBER = 5;
 	private final static int NUMBER_OF_REFERENCES = 100;
 	private final static int PHYSICAL_MEMORY_SIZE = 4;
 	private final static int VIRTUAL_MEMORY_SIZE = 100;
 	private final static boolean VEBOSE_PRINT = true;
 
+	/**
+	 * A main method for running the simulation.
+	 * 
+	 * @param args
+	 *            not used.
+	 */
 	public static void main(String[] args) {
 		Print.setVerbose(VEBOSE_PRINT);
-		
+
 		// run each 5 times
 		FirstInFirstOut fifo = new FirstInFirstOut(RUN_TIME_NUMBER,
 				NUMBER_OF_REFERENCES, PHYSICAL_MEMORY_SIZE,

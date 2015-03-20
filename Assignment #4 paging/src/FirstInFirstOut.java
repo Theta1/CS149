@@ -1,5 +1,5 @@
 /**
- * First in First Out method of page replacement. This replaces the page the has
+ * First in First Out method of page replacement. This replaces the page that has
  * been in the physical memory the longest.
  * 
  * @author Theta(1)
@@ -25,6 +25,11 @@ public class FirstInFirstOut extends PageReplacementAlgorithm {
 				virtualMemorySize, keepHitCount);
 	}
 
+	/*
+	 * (non-Javadoc) Custom execution
+	 * 
+	 * @see PageReplacementAlgorithm#replacePage(int, int, int)
+	 */
 	protected int replacePage(int executionMarker, int nextPage, int time) {
 		// Advance the index and put it in
 		marker = (marker + 1) % physicalMemorySize;
