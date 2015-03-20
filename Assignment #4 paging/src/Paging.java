@@ -8,7 +8,7 @@ public class Paging {
 	private final static int NUMBER_OF_REFERENCES = 100;
 	private final static int PHYSICAL_MEMORY_SIZE = 4;
 	private final static int VIRTUAL_MEMORY_SIZE = 100;
-	private final static boolean VEBOSE_PRINT = false;
+	private final static boolean VEBOSE_PRINT = true;
 
 	public static void main(String[] args) {
 		Print.setVerbose(VEBOSE_PRINT);
