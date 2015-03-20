@@ -75,8 +75,7 @@ public abstract class PageReplacementAlgorithm {
 		for (int i = 0; i < runTimeNumber; i++) {
 			Print.print("-------------------------------------------------"
 					+ "\nTime|Index    0|Index    1|Index    2|Index    3|"
-					+ " Run: "
-					+ (i + 1)
+					+ " Run: " + (i + 1)
 					+ "\n-------------------------------------------------\n");
 
 			// Clears memory
@@ -125,10 +124,10 @@ public abstract class PageReplacementAlgorithm {
 					physicalMemory[indexOfPage].setTimeLastUsed(j);
 					timesHit++;
 					executionMarker = indexOfPage;
-					Print
-							.printf(" Found:   %2d at index: %d\n",
-									physicalMemory[executionMarker]
-											.getVirtualAddress(), indexOfPage);
+					Print.printf(
+							" Found:   %2d at index: %d\n",
+							physicalMemory[executionMarker].getVirtualAddress(),
+							indexOfPage);
 				}
 			}
 			// Store a fraction of the hitRatio average.

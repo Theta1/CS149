@@ -19,12 +19,17 @@ public class MostFrequentlyUsed extends PageReplacementAlgorithm {
 	 * @param virtualMemorySize
 	 *            is the number of slots in virtual memory.
 	 */
-	MostFrequentlyUsed(int runTimeNumber, int numberOfReferences, int physicalMemorySize,
-			int virtualMemorySize, boolean keepHitCount) {
+	MostFrequentlyUsed(int runTimeNumber, int numberOfReferences,
+			int physicalMemorySize, int virtualMemorySize, boolean keepHitCount) {
 		super(runTimeNumber, numberOfReferences, physicalMemorySize,
 				virtualMemorySize, keepHitCount);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see PageReplacementAlgorithm#replacePage(int, int, int)
+	 */
 	protected int replacePage(int executionMarker, int nextPage, int time) {
 		Page page = physicalMemory[0];
 		for (int i = 1; i < physicalMemory.length; i++) {

@@ -35,9 +35,4 @@ public class RandomPick {
 		// this allows for -1 % 9 = 8
 		return ((((i + locality) % virtualMemorySize) + virtualMemorySize) % virtualMemorySize);
 	}
-	// Test function, for testing
-	/*
-	 * public static void main(String[] args) { local = 0; int runs = 10; for
-	 * (int i = 0; i < runs; i++) { System.out.println( pickAPage(0, 10)); } }
-	 */
 }

@@ -48,10 +48,21 @@ public class Page {
 		return virtualAddress;
 	}
 
+	/**
+	 * Sets the time last used.
+	 * 
+	 * @param j
+	 *            is the time last used.
+	 */
 	public void setTimeLastUsed(int j) {
 		timeLastUsed = j;
 	}
 
+	/**
+	 * Returns the time last used.
+	 * 
+	 * @return an int of the time last used.
+	 */
 	public int getTimeLastUsed() {
 		return timeLastUsed;
 	}
@@ -63,6 +74,11 @@ public class Page {
 		hitCount++;
 	}
 
+	/**
+	 * Returns the hit count.
+	 * 
+	 * @return the hit count as an int.
+	 */
 	public int getHitCount() {
 		return hitCount;
 	}

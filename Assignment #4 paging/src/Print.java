@@ -1,4 +1,6 @@
 /**
+ * Print wrapper functions.
+ * 
  * @author Standard
  *
  */
@@ -16,10 +18,28 @@ public class Print {
 			System.out.print(s);
 	}
 
+	/**
+	 * Allows the change from a vebose print mode to not.
+	 * 
+	 * @param verbose
+	 *            if the printout is verbose or not.
+	 */
 	public static void setVerbose(boolean verbose) {
 		Print.verbose = verbose;
 	}
 
+	/**
+	 * A wrapper function for a three argument printf function
+	 * 
+	 * @param string
+	 *            the string to print
+	 * @param i
+	 *            the value to print
+	 * @param j
+	 *            the value to print
+	 * @param k
+	 *            the value to print
+	 */
 	public static void printf(String string, int i, int j, int k) {
 		if (verbose) {
 			if (j == -1 && k == -1)
@@ -58,10 +78,28 @@ public class Print {
 		print("| ");
 	}
 
+	/**
+	 * A wrapper function for a three argument printf function
+	 * 
+	 * @param string
+	 *            the string to print
+	 * @param i
+	 *            the value to print
+	 */
 	public static void printf(String string, int i) {
 		printf(string, i, -1);
 	}
 
+	/**
+	 * A wrapper function for a three argument printf function
+	 * 
+	 * @param string
+	 *            the string to print
+	 * @param i
+	 *            the value to print
+	 * @param j
+	 *            the value to print
+	 */
 	public static void printf(String string, int i, int j) {
 		if (j == -1) {
 			printf(string, i, -1, -1);
