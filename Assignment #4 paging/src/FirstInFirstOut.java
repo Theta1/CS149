@@ -29,7 +29,7 @@ public class FirstInFirstOut extends PageReplacementAlgorithm {
 		// Advance the index and put it in
 		marker = (marker + 1) % physicalMemorySize;
 		if (physicalMemory[marker] != null)
-			System.out.printf(" Evicted: %2d",
+			Print.printf(" Evicted: %2d",
 					physicalMemory[marker].getVirtualAddress());
 		physicalMemory[marker] = virtualMemory[nextPage];
 		physicalMemory[marker].setTimeLastUsed(time);

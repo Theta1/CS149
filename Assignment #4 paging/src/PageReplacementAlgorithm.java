@@ -73,32 +73,33 @@ public abstract class PageReplacementAlgorithm {
 
 		// Number of times run
 		for (int i = 0; i < runTimeNumber; i++) {
-			System.out
-					.println("-------------------------------------------------"
-							+ "\nTime|Index    0|Index    1|Index    2|Index    3|"
-							+ " Run: "
-							+ (i + 1)
-							+ "\n-------------------------------------------------");
+			Print.print("-------------------------------------------------"
+					+ "\nTime|Index    0|Index    1|Index    2|Index    3|"
+					+ " Run: "
+					+ (i + 1)
+					+ "\n-------------------------------------------------\n");
 
-			// clears memory memory
+			// Clears memory
 			timesHit = 0;
 			executionMarker = 0;
 			physicalMemory = new Page[physicalMemorySize];
 			loadVirtualMemeroy();
 			marker = 0;
-			System.out.printf("%2d: ", 0);
+
+			// First case printing
+			Print.printf("%2d: ", 0);
 			Print.memoryMap(physicalMemory);
-			System.out.printf("Requesting: %2d",
+			Print.printf("Requesting: %2d",
 					virtualMemory[0].getPhysicalAddress());
 
 			// starts by loading the first page into memory
 			physicalMemory[executionMarker] = virtualMemory[0];
-			System.out.printf(" Loading: %2d to index: %d\n",
+			Print.printf(" Loading: %2d to index: %d\n",
 					physicalMemory[executionMarker].getVirtualAddress(),
 					executionMarker);
 			// Number of page references to run (minus the first above)
 			for (int j = 1; j < numberOfReferences; j++) {
-				System.out.printf("%2d: ", j);
+				Print.printf("%2d: ", j);
 				Print.memoryMap(physicalMemory);
 
 				// finds the next page randomly
@@ -107,18 +108,16 @@ public abstract class PageReplacementAlgorithm {
 						virtualMemorySize);
 
 				// Look for the page in memory
-				System.out.printf("Requesting: %2d", nextPageVirtualAddress);
+				Print.printf("Requesting: %2d", nextPageVirtualAddress);
 				int indexOfPage = getPageIndex(nextPageVirtualAddress);
 				if (indexOfPage == -1) {
 					executionMarker = replacePage(executionMarker,
 							nextPageVirtualAddress, j);
-					Print.reference(physicalMemory, nextPageVirtualAddress,
+
+					Print.printf(
+							" Loading: %2d to index: %d\n",
+							physicalMemory[executionMarker].getVirtualAddress(),
 							executionMarker);
-					System.out
-							.printf(" Loading: %2d to index: %d\n",
-									physicalMemory[executionMarker]
-											.getVirtualAddress(),
-									executionMarker);
 				} else {
 					// Otherwise it was there. Increase the hit and set the
 					// index marker.
@@ -126,7 +125,7 @@ public abstract class PageReplacementAlgorithm {
 					physicalMemory[indexOfPage].setTimeLastUsed(j);
 					timesHit++;
 					executionMarker = indexOfPage;
-					System.out
+					Print
 							.printf(" Found:   %2d at index: %d\n",
 									physicalMemory[executionMarker]
 											.getVirtualAddress(), indexOfPage);

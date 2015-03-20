@@ -3,15 +3,7 @@
  *
  */
 public class Print {
-	/**
-	 * Wrapper for system.out.print
-	 * 
-	 * @param s
-	 *            the string to be printed
-	 */
-	public static void thisString(String s) {
-		System.out.print(s);
-	}
+	static boolean verbose = true;
 
 	/**
 	 * Wrapper for system.out.print
@@ -19,43 +11,62 @@ public class Print {
 	 * @param s
 	 *            the string to be printed
 	 */
-	public static void thisStringln(String s) {
-		System.out.println(s);
+	public static void print(String s) {
+		if (verbose)
+			System.out.print(s);
+	}
+
+	public static void setVerbose(boolean verbose) {
+		Print.verbose = verbose;
+	}
+
+	public static void printf(String string, int i, int j, int k) {
+		if (verbose) {
+			if (j == -1 && k == -1)
+				System.out.printf(string, i);
+			else if (k == -1)
+				System.out.printf(string, i, j);
+			else
+				System.out.printf(string, i, j, k);
+		}
 	}
 
 	/**
-	 * For each reference, print the page numbers of the pages in memory and
-	 * which page (if any) needed to be paged in and which page was evicted.
+	 * Wrapper for system.out.print
 	 * 
-	 * @param physicalMemory
-	 *            is an int array of page numbers
-	 * @param incomingPage
-	 *            is the page whom was brought in or whom was in memory
-	 * @param evictedPage
-	 *            is the page removed. If no page is being removed this value
-	 *            should be -1
+	 * @param s
+	 *            the string to be printed
 	 */
-	public static void reference(Page[] physicalMemory, int incomingPage,
-			int evictedPage) {
-
+	public static void println(String s) {
+		print(s + "\n");
 	}
 
-	/*
+	/**
 	 * public static void main(String[] args) { Page[] p = new Page[3]; p[0] =
 	 * new Page(0, 0); Print.reference(p, 0, -1); }
 	 */
-
 	public static void memoryMap(Page[] physicalMemory) {
 		for (int i = 0; i < physicalMemory.length; i++) {
 			if (physicalMemory[i] != null) {
-				System.out.printf("|%2d,h%2d,t%2d",
-						physicalMemory[i].getVirtualAddress(),
+				printf("|%2d,h%2d,t%2d", physicalMemory[i].getVirtualAddress(),
 						physicalMemory[i].getHitCount(),
 						physicalMemory[i].getTimeLastUsed());
 			} else {
-				System.out.printf("|          ");
+				print("|          ");
 			}
 		}
-		System.out.print("| ");
+		print("| ");
+	}
+
+	public static void printf(String string, int i) {
+		printf(string, i, -1);
+	}
+
+	public static void printf(String string, int i, int j) {
+		if (j == -1) {
+			printf(string, i, -1, -1);
+		} else {
+			printf(string, i, j, -1);
+		}
 	}
 }

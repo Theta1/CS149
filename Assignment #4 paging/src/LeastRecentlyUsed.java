@@ -40,7 +40,7 @@ public class LeastRecentlyUsed extends PageReplacementAlgorithm {
 			}
 		}
 		if (physicalMemory[executionMarker] != null)
-			System.out.printf(" Evicted: %2d",
+			Print.printf(" Evicted: %2d",
 					physicalMemory[executionMarker].getVirtualAddress());
 		physicalMemory[executionMarker] = virtualMemory[nextPage];
 		this.physicalMemory[executionMarker].setTimeLastUsed(time);

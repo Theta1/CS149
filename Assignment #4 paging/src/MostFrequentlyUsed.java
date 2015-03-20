@@ -39,7 +39,7 @@ public class MostFrequentlyUsed extends PageReplacementAlgorithm {
 			}
 		}
 		if (physicalMemory[executionMarker] != null)
-			System.out.printf(" Evicted: %2d",
+			Print.printf(" Evicted: %2d",
 					physicalMemory[executionMarker].getVirtualAddress());
 		if (keepHitCount) {
 			physicalMemory[executionMarker] = virtualMemory[nextPage];
