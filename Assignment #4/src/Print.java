@@ -27,7 +27,7 @@ public class Print {
 		for(int i = 0; i < ff.length + 1; i++)
 		{	
 			if (i == (ff.length) )
-			{	System.out.println("]");	}
+			{	System.out.println(" ]");	}
 			else if (ff[i] == null)
 			{	System.out.printf("%4s", ".");	}
 			else
