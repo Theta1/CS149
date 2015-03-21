@@ -68,7 +68,7 @@ public class Swapping {
 		
 		System.out.println("First Fit");
 		System.out.println( "Average number of process swapped with compaction for First fit is: " + (ffp1+ffp2+ffp3+ffp4+ffp5) / 5.0 );
-		System.out.println( "Average number of MB compacted for Worst fit is: " + (ff1.getMemCompact()+ff2.getMemCompact()+ff3.getMemCompact()+ff4.getMemCompact()+ff5.getMemCompact()) / 5.0 );
+		System.out.println( "Average number of MB compacted for First fit is: " + (ff1.getMemCompact()+ff2.getMemCompact()+ff3.getMemCompact()+ff4.getMemCompact()+ff5.getMemCompact()) / 5.0 );
 		System.out.println( "Average number of process swapped without compaction for First fit is: " + (ffp10+ffp20+ffp30+ffp40+ffp50) / 5.0 + "\n" );
 		
 		//NEXT FIT
@@ -98,7 +98,7 @@ public class Swapping {
 		
 		System.out.println("Next Fit");
 		System.out.println( "Average number of process swapped with compaction for Next fit is: " + (nfp1+nfp2+nfp3+nfp4+nfp5) / 5.0 );
-		System.out.println( "Average number of MB compacted for Worst fit is: " + (nf1.getMemCompact()+nf2.getMemCompact()+nf3.getMemCompact()+nf4.getMemCompact()+nf5.getMemCompact()) / 5.0);
+		System.out.println( "Average number of MB compacted for Next fit is: " + (nf1.getMemCompact()+nf2.getMemCompact()+nf3.getMemCompact()+nf4.getMemCompact()+nf5.getMemCompact()) / 5.0);
 		System.out.println( "Average number of process swapped without compaction for Next fit is: " + (nfp10+nfp20+nfp30+nfp40+nfp50) / 5.0 + "\n");
 		
 		//wfp FIT
@@ -128,7 +128,7 @@ public class Swapping {
 		
 		System.out.println("Best fit");
 		System.out.println( "Average number of process swapped with compaction for Best fit is: " + (BFprocess1+BFprocess2+BFprocess3+BFprocess4+BFprocess5) / 5.0);
-		System.out.println( "Average number of MB compacted for Worst fit is: " + (best1.getMemCompact()+best2.getMemCompact()+best3.getMemCompact()+best4.getMemCompact()+best5.getMemCompact()) / 5.0 );
+		System.out.println( "Average number of MB compacted for Best fit is: " + (best1.getMemCompact()+best2.getMemCompact()+best3.getMemCompact()+best4.getMemCompact()+best5.getMemCompact()) / 5.0 );
 		System.out.println( "Average number of process swapped without compaction for Best fit is: " + (BFprocess10+BFprocess20+BFprocess30+BFprocess40+BFprocess50) / 5.0 + "\n");
 
 		//WORST FIT
