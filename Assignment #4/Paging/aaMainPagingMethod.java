@@ -9,8 +9,8 @@ public class aaMainPagingMethod {
 	private final static int RUN_TIME_NUMBER = 5;
 	private final static int NUMBER_OF_REFERENCES = 100;
 	private final static int PHYSICAL_MEMORY_SIZE = 4;
-	private final static int VIRTUAL_MEMORY_SIZE = 100;
-	private final static boolean VEBOSE_PRINT = true;
+	private final static int VIRTUAL_MEMORY_SIZE = 10;
+	private static boolean VEBOSE_PRINT = true;
 
 	/**
 	 * A main method for running the simulation.
@@ -19,6 +19,10 @@ public class aaMainPagingMethod {
 	 *            not used.
 	 */
 	public static void main(String[] args) {
+//		if(args[0]!=null && args[0].equals("avg")){
+//			VEBOSE_PRINT=false;
+//		}
+		
 		Print.setVerbose(VEBOSE_PRINT);
 
 		// run each 5 times
