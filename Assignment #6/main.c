@@ -5,20 +5,47 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
+#include <time.h>
 
 #define PROGRAM_DURATION 30
-#define  SLEEP_DURATION 3
+#define SLEEP_DURATION 3
 
-// registration timers
- struct itimerval timer;
- time_t startTime;
-
- struct timeval start, stop;
- 
 typedef struct {
     int id;
     int messageCount;
 } CHILD;
+
+// registration timers
+struct itimerval timer;
+time_t startTime;
+
+/**
+* Print a line for each event:
+* elapsed time
+* who is registering from what queue
+* who is waiting in what queue
+* what action they take: Register/drop/gaveup and where
+*/
+void printEvent(char *event) {
+    time_t now;
+    time(&now);
+    
+    double elapsed = difftime(now, startTime);
+    int min = 0;
+    int sec = (int) elapsed;
+
+    while (sec >=60){
+        min++;
+        sec -=60;
+    }
+
+    // Elapsed time.
+    printf("%1d:%02d | ", min, sec);
+
+    //What they are doing
+    printf(event);
+    printf("\n");
+}
 
 int main() {
     char buffer[128];
@@ -34,18 +61,8 @@ int main() {
     timer.it_value.tv_sec = PROGRAM_DURATION;
     setitimer(ITIMER_REAL, &timer, NULL);
     
-    gettimeofday(&start, NULL);
-    
     // start the timer
     time(&startTime);
-    
-    // random sleep time
-    sleep(2);
-    
-    gettimeofday(&stop, NULL);
-
-    long elapsedTime = stop.tv_usec - start.tv_usec;
-    printf("%lu", elapsedTime);
     
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
@@ -68,7 +85,9 @@ int main() {
         //   Error:     terminate.
         switch(result) {
             case 0: {
-                printf("@");
+        	char event[80];
+        	sprintf(event,"@");
+		printEvent(event);
                 fflush(stdout);
                 break;
             }
@@ -99,33 +118,5 @@ int main() {
             }
         }
     }
-    
-    /**
-* Print a line for each event:
-* elapsed time
-* who is registering from what queue
-* who is waiting in what queue
-* what action they take: Register/drop/gaveup and where
-*/
-void print(char *event){
-    time_t now;
-    time(&now);
-    
-    double elapsed = difftime(now, startTime);
-    int min = 0;
-    int sec = (int) elapsed;
-
-    while (sec >=60){
-        min++;
-        sec -=60;
-    }
-
-    // Elapsed time.
-    printf("%1d:%02d | ", min, sec);
-
-    //What they are doing
-    printf(event);
-    printf("\n");
-}
 }
 
