@@ -45,7 +45,7 @@ int main() {
     gettimeofday(&stop, NULL);
 
     long elapsedTime = stop.tv_usec - start.tv_usec;
-    printf("%6.3l", elapsedTime);
+    printf("%lu", elapsedTime);
     
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
