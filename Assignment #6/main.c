@@ -29,16 +29,24 @@ typedef struct {
 * who is waiting in what queue
 * what action they take: Register/drop/gaveup and where
 */
-void printEvent(char *event) {
-    //time_t now;
-    //time(&now);
+
+/**
+Gets the elapsed time
+**/
+double getElapsedTime() {
 	struct timeval now;
     gettimeofday(&now, NULL);
 	double currentTime = (now.tv_sec) * 1000 + (now.tv_usec) / 1000;
-	
-    double elapsed = currentTime - startTime;
-    int min = 0;
-    int sec = (int) elapsed;
+	return (currentTime - startTime)/1000;
+}
+
+/**
+Prints the time and the event
+e.g. 00:00 | event
+**/
+void printEvent(char *event) {
+    double sec = getElapsedTime();
+    double min = 0;
 
     while (sec >=60){
         min++;
@@ -46,19 +54,22 @@ void printEvent(char *event) {
     }
 
     // Elapsed time.
-    printf("%1d:%02d | ", min, sec);
+    printf("%2.0f:%02.5lf | ", min, sec);
 
     //What they are doing
     printf(event);
     printf("\n");
 }
 
+/**
+main program
+**/
 int main() {
     char buffer[128];
     int result, nread;
 
     fd_set inputs, inputfds;  // sets of file descriptors
-    struct timeval timeout;
+    struct timeval timeout, start;
     
     // set up rand
     srand(time(NULL));
@@ -69,10 +80,14 @@ int main() {
     
     // start the timer
     //time(&startTime);
-	struct timeval start;
 	gettimeofday(&start, NULL);
-	startTime = = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
-    
+	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+   
+	/* test to print time
+	while(PROGRAM_DURATION > getElapsedTime() )
+	{  sleep(2);  printf("%lf\n", getElapsedTime());  }
+	*/
+
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
 
@@ -95,8 +110,8 @@ int main() {
         switch(result) {
             case 0: {
         	char event[80];
-        	sprintf(event,"@");
-		printEvent(event);
+        	sprintf(event,"event1");
+			printEvent(event);
                 fflush(stdout);
                 break;
             }
@@ -127,5 +142,6 @@ int main() {
             }
         }
     }
+
 }
 
