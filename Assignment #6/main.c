@@ -11,8 +11,7 @@
 #define SLEEP_DURATION 3
 
 //global start time variable
-struct timeval start;
-double startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+double startTime;
 
 typedef struct {
     int id;
@@ -70,7 +69,9 @@ int main() {
     
     // start the timer
     //time(&startTime);
+	struct timeval start;
 	gettimeofday(&start, NULL);
+	startTime = = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
     
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
