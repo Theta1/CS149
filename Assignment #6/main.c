@@ -10,14 +10,18 @@
 #define PROGRAM_DURATION 30
 #define SLEEP_DURATION 3
 
+//global start time variable
+struct timeval start;
+double startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+
 typedef struct {
     int id;
     int messageCount;
 } CHILD;
 
 // registration timers
-struct itimerval timer;
-time_t startTime;
+//struct itimerval timer;
+//time_t startTime;
 
 /**
 * Print a line for each event:
@@ -27,10 +31,13 @@ time_t startTime;
 * what action they take: Register/drop/gaveup and where
 */
 void printEvent(char *event) {
-    time_t now;
-    time(&now);
-    
-    double elapsed = difftime(now, startTime);
+    //time_t now;
+    //time(&now);
+	struct timeval now;
+    gettimeofday(&now, NULL);
+	double currentTime = (now.tv_sec) * 1000 + (now.tv_usec) / 1000;
+	
+    double elapsed = currentTime - startTime;
     int min = 0;
     int sec = (int) elapsed;
 
@@ -58,11 +65,12 @@ int main() {
     srand(time(NULL));
 
     // set the timer
-    timer.it_value.tv_sec = PROGRAM_DURATION;
-    setitimer(ITIMER_REAL, &timer, NULL);
+    //timer.it_value.tv_sec = PROGRAM_DURATION;
+    //setitimer(ITIMER_REAL, &timer, NULL);
     
     // start the timer
-    time(&startTime);
+    //time(&startTime);
+	gettimeofday(&start, NULL);
     
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
