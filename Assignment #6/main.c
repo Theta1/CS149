@@ -6,16 +6,19 @@
 #include <sys/time.h>
 #include <sys/ioctl.h>
 #include <time.h>
+#include <string.h>
 
 #define PROGRAM_DURATION 30
 #define SLEEP_DURATION 3
 #define NUM_CHILDREN 5
+#define READ_END 0
+#define WRITE_END 1
+
 /**
 * Print a line for each event:
 * elapsed time
-* who is registering from what queue
-* who is waiting in what queue
-* what action they take: Register/drop/gaveup and where
+* message from child process
+* user standard input
 */
 typedef struct {
     int id;
@@ -79,7 +82,7 @@ int main() {
 	int fd[2]; // file desciptors for the pipe
 	
 	//create the pipe
-	if(pipe(fd) ==-1) {
+	if(pipe (fd) == -1) {
 		fprintf(stderr, "pipe() failed");
 		return 1;
 	}
@@ -125,16 +128,19 @@ int main() {
         // Get select() results.
         result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
 		
-		//main
+		//parent process
 		if(pid > 0) {
 			char event[80];
-        	sprintf(event,"parent event1");
+			close(fd[WRITE_END]);
+			read(fd[READ_END], event, 81);
 			printEvent(event);
             fflush(stdout);
-			
+			close(fd[READ_END]);
 		}
 		
+		//child process
 		if(pid == 0) {
+			//standard input
 			if(i == 0) {
 				if (FD_ISSET(0, &inputfds)) 
 				{
@@ -152,55 +158,18 @@ int main() {
                 }
                 break;
 			}
-			else {
+			//child process 
+			else
+			{
 				sleep(sleepTime());
+				close(fd[READ_END]);
 				char event[80];
 				sprintf(event,"Child %d message %d",children[i].id ,children[i].messageCount);
 				children[i].messageCount++;
-				printEvent(event);
-				fflush(stdout);
+				write(fd[WRITE_END], event, strlen(event)+1);
+				close(fd[WRITE_END]);
 			}
 		}
-
-        // Check the results.
-        //   No input:  the program loops again.
-        //   Got input: print what was typed, then terminate.
-        //   Error:     terminate.
-        /*switch(result) {
-            case 0: {
-        	char event[80];
-        	sprintf(event,"event1");
-			printEvent(event);
-                fflush(stdout);
-                break;
-            }
-            
-            case -1: {
-                perror("select");
-                exit(1);
-            }
-
-            // If, during the wait, we have some action on the file descriptor,
-            // we read the input on stdin and echo it whenever an 
-            // <end of line> character is received, until that input is Ctrl-D.
-            default: {
-                if (FD_ISSET(0, &inputfds)) {
-                    ioctl(0,FIONREAD,&nread);
-                    
-                    if (nread == 0) {
-                        printf("Keyboard input done.\n");
-                        exit(0);
-                    }
-                    
-                    nread = read(0,buffer,nread);
-                    buffer[nread] = 0;
-                    printf("Read %d characters from the keyboard: %s", 
-                           nread, buffer);
-                }
-                break;
-            }
-        }*/
     }
-
 }
 
