@@ -26,6 +26,7 @@ typedef struct {
 } CHILD;
 
 //global start time variable
+int status;
 double startTime;
 CHILD children[NUM_CHILDREN];
 
@@ -122,7 +123,7 @@ int main() {
     while (PROGRAM_DURATION >= getElapsedTime())  {
         inputfds = inputs;
 
-		timeout.tv_sec = 0;
+		timeout.tv_sec = 2;
         timeout.tv_usec = 500000;
 
         // Get select() results.
@@ -142,7 +143,7 @@ int main() {
 		if(pid == 0) {
 			//standard input
 			if(i == 0) {
-				if (FD_ISSET(0, &inputfds)) 
+				if (FD_ISSET(0, &inmanputfds)) 
 				{
                     ioctl(0,FIONREAD,&nread);
                     
@@ -165,11 +166,17 @@ int main() {
 				close(fd[READ_END]);
 				char event[80];
 				sprintf(event,"Child %d message %d",children[i].id ,children[i].messageCount);
+				printf(event);
+				printf("\n");
+				fflush(stdout);
 				children[i].messageCount++;
-				write(fd[WRITE_END], event, strlen(event)+1);
+				write(fd[WRITE_END], event, strlen(event)+1); //Possible problem writing to pipe here
 				close(fd[WRITE_END]);
 			}
 		}
     }
+	
+	//wait for children to end
+	waitpid(-1, &status, 0);
 }
 
