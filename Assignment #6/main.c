@@ -9,19 +9,7 @@
 
 #define PROGRAM_DURATION 30
 #define SLEEP_DURATION 3
-
-//global start time variable
-double startTime;
-
-typedef struct {
-    int id;
-    int messageCount;
-} CHILD;
-
-// registration timers
-//struct itimerval timer;
-//time_t startTime;
-
+#define NUM_CHILDREN 5
 /**
 * Print a line for each event:
 * elapsed time
@@ -29,6 +17,14 @@ typedef struct {
 * who is waiting in what queue
 * what action they take: Register/drop/gaveup and where
 */
+typedef struct {
+    int id;
+    int messageCount;
+} CHILD;
+
+//global start time variable
+double startTime;
+CHILD children[NUM_CHILDREN];
 
 /**
 Creates a random wait time
@@ -90,16 +86,35 @@ int main() {
 	
     fd_set inputs, inputfds;  // sets of file descriptors
     struct timeval timeout, start; // time structs
-   
-    // start the timer
-	gettimeofday(&start, NULL);
-	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+
 
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
-	
-	pid = fork();
 
+    // start the timer
+	gettimeofday(&start, NULL);
+	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+	
+	//createChild();
+	int i;
+	for (i = 0; i < NUM_CHILDREN; i++) {
+        pid = fork();
+        // error handling
+		if (pid == -1)
+		{	
+			perror("select");
+			exit(1);
+		}
+        if (pid == 0)
+		{
+			CHILD child;
+			child.id = i+1;
+			child.messageCount = 1;
+			children[i] = child;
+			break;
+        }
+    }
+	
     //  Wait for input on stdin for a maximum of 2.5 seconds.    
     while (PROGRAM_DURATION >= getElapsedTime())  {
         inputfds = inputs;
@@ -120,11 +135,31 @@ int main() {
 		}
 		
 		if(pid == 0) {
-			sleep(sleepTime());
-			char event[80];
-        	sprintf(event,"event1");
-			printEvent(event);
-            fflush(stdout);
+			if(i == 0) {
+				if (FD_ISSET(0, &inputfds)) 
+				{
+                    ioctl(0,FIONREAD,&nread);
+                    
+                    if (nread == 0) 
+					{
+                        printf("Keyboard input done.\n");
+                        exit(0);
+                    }
+                    
+                    nread = read(0,buffer,nread);
+                    buffer[nread] = 0;
+                    printf("Read %d characters from the keyboard: %s", nread, buffer);
+                }
+                break;
+			}
+			else {
+				sleep(sleepTime());
+				char event[80];
+				sprintf(event,"Child %d message %d",children[i].id ,children[i].messageCount);
+				children[i].messageCount++;
+				printEvent(event);
+				fflush(stdout);
+			}
 		}
 
         // Check the results.
