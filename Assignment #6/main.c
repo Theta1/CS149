@@ -31,6 +31,17 @@ typedef struct {
 */
 
 /**
+Creates a random wait time
+**/
+int sleepTime() {
+	// set up rand
+    srand(time(NULL));
+	
+	return rand()%SLEEP_DURATION;
+}
+
+
+/**
 Gets the elapsed time
 **/
 double getElapsedTime() {
@@ -42,7 +53,7 @@ double getElapsedTime() {
 
 /**
 Prints the time and the event
-e.g. 00:00 | event
+e.g. 00:00.000 | event
 **/
 void printEvent(char *event) {
     double sec = getElapsedTime();
@@ -54,7 +65,7 @@ void printEvent(char *event) {
     }
 
     // Elapsed time.
-    printf("%2.0f:%02.5lf | ", min, sec);
+    printf("%02.0f:%06.3lf | ", min, sec);
 
     //What they are doing
     printf(event);
@@ -67,47 +78,60 @@ main program
 int main() {
     char buffer[128];
     int result, nread;
-
+	pid_t pid;// creates 1st child
+	
+	int fd[2]; // file desciptors for the pipe
+	
+	//create the pipe
+	if(pipe(fd) ==-1) {
+		fprintf(stderr, "pipe() failed");
+		return 1;
+	}
+	
     fd_set inputs, inputfds;  // sets of file descriptors
-    struct timeval timeout, start;
-    
-    // set up rand
-    srand(time(NULL));
-
-    // set the timer
-    //timer.it_value.tv_sec = PROGRAM_DURATION;
-    //setitimer(ITIMER_REAL, &timer, NULL);
-    
+    struct timeval timeout, start; // time structs
+   
     // start the timer
-    //time(&startTime);
 	gettimeofday(&start, NULL);
 	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
-   
-	/* test to print time
-	while(PROGRAM_DURATION > getElapsedTime() )
-	{  sleep(2);  printf("%lf\n", getElapsedTime());  }
-	*/
 
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
+	
+	pid = fork();
 
     //  Wait for input on stdin for a maximum of 2.5 seconds.    
-    for (;;)  {
+    while (PROGRAM_DURATION >= getElapsedTime())  {
         inputfds = inputs;
-        
-        // 2.5 seconds.
-        timeout.tv_sec = 2;
+
+		timeout.tv_sec = 0;
         timeout.tv_usec = 500000;
 
         // Get select() results.
-        result = select(FD_SETSIZE, &inputfds, 
-                        (fd_set *) 0, (fd_set *) 0, &timeout);
+        result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
+		
+		//main
+		if(pid > 0) {
+			char event[80];
+        	sprintf(event,"parent event1");
+			printEvent(event);
+            fflush(stdout);
+			
+		}
+		
+		if(pid == 0) {
+			sleep(sleepTime());
+			char event[80];
+        	sprintf(event,"event1");
+			printEvent(event);
+            fflush(stdout);
+		}
 
         // Check the results.
         //   No input:  the program loops again.
         //   Got input: print what was typed, then terminate.
         //   Error:     terminate.
-        switch(result) {
+        /*switch(result) {
             case 0: {
         	char event[80];
         	sprintf(event,"event1");
@@ -140,7 +164,7 @@ int main() {
                 }
                 break;
             }
-        }
+        }*/
     }
 
 }
