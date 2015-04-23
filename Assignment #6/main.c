@@ -10,7 +10,7 @@
 
 #define PROGRAM_DURATION 30
 #define SLEEP_DURATION 3
-#define NUM_CHILDREN 5
+#define NUM_CHILDREN 2
 #define READ_END 0
 #define WRITE_END 1
 #define BUFFER_SIZE 32
@@ -78,12 +78,16 @@ int main() {
     int result, nread;
 	pid_t pid;// creates children
 	int pipes;
-	
+	fd_set inputs, inputfds;  // sets of file descriptors
+    struct timeval timeout, start; // time structs
 	//for pipe
 	char write_msg[BUFFER_SIZE];
 	char read_msg[BUFFER_SIZE];
 	
 	int fd[NUM_CHILDREN][2]; // file desciptors for the pipe
+	
+	
+    FD_ZERO(&inputs);    // initialize inputs to the empty set
 	
 	//create the pipe
 	for (pipes = 0; pipes < NUM_CHILDREN; pipes++) {
@@ -91,18 +95,9 @@ int main() {
 			fprintf(stderr, "pipe %d failed", pipes);
 			return 1;
 		}
+		FD_SET(pipes, &inputs);
 	}	
-	
-    fd_set inputs, inputfds;  // sets of file descriptors
-    struct timeval timeout, start; // time structs
 
-    FD_ZERO(&inputs);    // initialize inputs to the empty set
-    FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
-	FD_SET(1, &inputs);
-	FD_SET(2, &inputs);
-	FD_SET(3, &inputs);
-	FD_SET(4, &inputs);
-    
 	// start the timer
 	gettimeofday(&start, NULL);
 	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
@@ -126,7 +121,9 @@ int main() {
 			children[i] = child;
 			break;
         }
+
     }
+	
 	
     //  Wait for input on stdin for a maximum of 2.5 seconds.    
     while (PROGRAM_DURATION >= getElapsedTime())  {
@@ -207,19 +204,20 @@ int main() {
                 break;
 				*/
 			}
-			//child process 
+			//child process write to pipe
 			else
 			{
+				printf("child: %d\n", i);
 				close(fd[i][READ_END]);
 				int a = sleepTime();
-				printf("%d: %d\n",i,a);
+				//printf("%d: %d\n",i,a);
 				sleep(a);
 				
 				char event[80];
 				sprintf(event,"Child %d message %d",children[i].id ,children[i].messageCount);
-				printf(event);
-				printf("\n");
-				fflush(stdout);
+				//printf(event);
+				//printf("\n");
+				//fflush(stdout);
 				children[i].messageCount++;
 				write(fd[i][WRITE_END], event, strlen(event)+1); //Possible problem writing to pipe here
 				close(fd[i][WRITE_END]);
