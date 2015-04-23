@@ -13,6 +13,7 @@
 #define NUM_CHILDREN 5
 #define READ_END 0
 #define WRITE_END 1
+#define BUFFER_SIZE 32
 
 /**
 * Print a line for each event:
@@ -33,10 +34,7 @@ CHILD children[NUM_CHILDREN];
 /**
 Creates a random wait time
 **/
-int sleepTime() {
-	// set up rand
-    srand(time(NULL));
-	
+int sleepTime() {	
 	return rand()%SLEEP_DURATION;
 }
 
@@ -78,29 +76,41 @@ main program
 int main() {
     char buffer[128];
     int result, nread;
-	pid_t pid;// creates 1st child
+	pid_t pid;// creates children
+	int pipes;
 	
-	int fd[2]; // file desciptors for the pipe
+	srand(time(NULL));
+	
+	//for pipe
+	char write_msg[BUFFER_SIZE];
+	char read_msg[BUFFER_SIZE];
+	
+	int fd[NUM_CHILDREN][2]; // file desciptors for the pipe
 	
 	//create the pipe
-	if(pipe (fd) == -1) {
-		fprintf(stderr, "pipe() failed");
-		return 1;
-	}
+	for (pipes = 0; pipes < NUM_CHILDREN; pipes++) {
+		if(pipe (fd[pipes]) == -1) {
+			fprintf(stderr, "pipe %d failed", pipes);
+			return 1;
+		}
+	}	
 	
     fd_set inputs, inputfds;  // sets of file descriptors
     struct timeval timeout, start; // time structs
 
-
     FD_ZERO(&inputs);    // initialize inputs to the empty set
     FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
-
-    // start the timer
+	FD_SET(1, &inputs);
+	FD_SET(2, &inputs);
+	FD_SET(3, &inputs);
+	FD_SET(4, &inputs);
+    
+	// start the timer
 	gettimeofday(&start, NULL);
 	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
 	
 	//createChild();
-	int i;
+	int i, j;
 	for (i = 0; i < NUM_CHILDREN; i++) {
         pid = fork();
         // error handling
@@ -121,7 +131,7 @@ int main() {
 	
     //  Wait for input on stdin for a maximum of 2.5 seconds.    
     while (PROGRAM_DURATION >= getElapsedTime())  {
-        inputfds = inputs;
+/*        inputfds = inputs;
 
 		timeout.tv_sec = 2;
         timeout.tv_usec = 500000;
@@ -129,21 +139,59 @@ int main() {
         // Get select() results.
         result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
 		
+		if (result == 0) {
+			printf("result 0 \n");
+		}
+		else if (result == -1) {
+			perror("select");
+			exit(1);
+		}
+		else {
+			for (j = 0;j < NUM_CHILDREN-1;j++) { 
+				if(FD_ISSET(j, &inputfds))
+				{
+					sleep(sleepTime());
+					close(fd[READ_END]);
+					char event[80];
+					sprintf(event,"Child %d message %d",children[i].id ,children[i].messageCount);
+					printf(event);
+					printf("\n");
+					fflush(stdout);
+					children[i].messageCount++;
+					write(fd[WRITE_END], event, strlen(event)+1); //Possible problem writing to pipe here
+					close(fd[WRITE_END]);
+					ioctl(0, FIONREAD, &nread);
+					if (nread == 0) 
+					{
+                        printf("Keyboard input done.\n");
+                        exit(0);
+                    }
+                    
+                    nread = read(0,buffer,nread);
+                    buffer[nread] = 0;
+                    printf("Read %d characters from the keyboard: %s", nread, buffer);
+				}
+			}
+		}
+	*/		
 		//parent process
 		if(pid > 0) {
 			char event[80];
-			close(fd[WRITE_END]);
-			read(fd[READ_END], event, 81);
-			printEvent(event);
-            fflush(stdout);
-			close(fd[READ_END]);
+			int k;
+			for(k = 0; k < NUM_CHILDREN; k++) {
+				close(fd[k][WRITE_END]);
+				read(fd[k][READ_END], event, strlen(event)+1);
+				printEvent(event);
+				fflush(stdout);
+				close(fd[k][READ_END]);
+			}
 		}
 		
 		//child process
 		if(pid == 0) {
 			//standard input
 			if(i == 0) {
-				if (FD_ISSET(0, &inmanputfds)) 
+				/*if (FD_ISSET(0, &inmanputfds)) 
 				{
                     ioctl(0,FIONREAD,&nread);
                     
@@ -158,20 +206,21 @@ int main() {
                     printf("Read %d characters from the keyboard: %s", nread, buffer);
                 }
                 break;
+				*/
 			}
 			//child process 
 			else
 			{
+				close(fd[i][READ_END]);
 				sleep(sleepTime());
-				close(fd[READ_END]);
 				char event[80];
 				sprintf(event,"Child %d message %d",children[i].id ,children[i].messageCount);
 				printf(event);
 				printf("\n");
 				fflush(stdout);
 				children[i].messageCount++;
-				write(fd[WRITE_END], event, strlen(event)+1); //Possible problem writing to pipe here
-				close(fd[WRITE_END]);
+				write(fd[i][WRITE_END], event, strlen(event)+1); //Possible problem writing to pipe here
+				close(fd[i][WRITE_END]);
 			}
 		}
     }
