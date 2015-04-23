@@ -79,8 +79,6 @@ int main() {
 	pid_t pid;// creates children
 	int pipes;
 	
-	srand(time(NULL));
-	
 	//for pipe
 	char write_msg[BUFFER_SIZE];
 	char read_msg[BUFFER_SIZE];
@@ -121,6 +119,7 @@ int main() {
 		}
         if (pid == 0)
 		{
+			srand(time(NULL)*i);
 			CHILD child;
 			child.id = i+1;
 			child.messageCount = 1;
@@ -180,7 +179,7 @@ int main() {
 			int k;
 			for(k = 0; k < NUM_CHILDREN; k++) {
 				close(fd[k][WRITE_END]);
-				read(fd[k][READ_END], event, strlen(event)+1);
+				read(fd[k][READ_END], event, 81);
 				printEvent(event);
 				fflush(stdout);
 				close(fd[k][READ_END]);
@@ -212,7 +211,10 @@ int main() {
 			else
 			{
 				close(fd[i][READ_END]);
-				sleep(sleepTime());
+				int a = sleepTime();
+				printf("%d: %d\n",i,a);
+				sleep(a);
+				
 				char event[80];
 				sprintf(event,"Child %d message %d",children[i].id ,children[i].messageCount);
 				printf(event);
