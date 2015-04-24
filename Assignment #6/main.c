@@ -10,7 +10,7 @@
 
 #define PROGRAM_DURATION 30
 #define SLEEP_DURATION 3
-#define NUM_CHILDREN 2
+#define NUM_CHILDREN 5
 #define READ_END 0
 #define WRITE_END 1
 #define BUFFER_SIZE 80
@@ -27,9 +27,8 @@ typedef struct {
 } CHILD;
 
 //global start time variable
-int status;
 double startTime;
-CHILD children[NUM_CHILDREN];
+
 
 /**
 Creates a random wait time
@@ -78,7 +77,8 @@ int main(void)
 {
     char write_msg[BUFFER_SIZE] = ""; //read to pipe
     char read_msg[BUFFER_SIZE] = ""; //write to pipe
-    
+	CHILD children[NUM_CHILDREN]; // array of children
+    int status; // for fork call
     pid_t pid;  // child process id
     int fd[NUM_CHILDREN][2];  // file descriptors for the pipe
     
@@ -109,7 +109,7 @@ int main(void)
 		{ 
 			//create a child
 			CHILD aChild;
-			aChild.id = child;
+			aChild.id = child+1;
 			aChild.messageCount = 1;
 			children[child] = aChild;
 			break;
@@ -119,33 +119,40 @@ int main(void)
 	
 	//initialize random
 	srand(time(NULL)*child);
-	int i = 0;
 	
 	while (PROGRAM_DURATION > getElapsedTime())
 	{
-		i++;
 		
-		if (pid == 0) { 
-			// CHILD PROCESS.
-			
+		// CHILD PROCESS
+		if (pid == 0)
+		{
 			//sleep for 0-2 seconds
 			sleep(sleepTime());
-
-			// Close the unused READ end of the pipe.
-			close(fd[child][READ_END]);
 			
-			//strcat(write_msg, event);
-			sprintf(write_msg, "Child %d message %d", children[child].id, children[child].messageCount++);
+			//LAST CHILD used for standard input
+			/*if (child == 4)
+			{
+				char c4[20] = "LAST CHILD";
+				printEvent(c4);
+			}
+			*/
+			//all other children
+			//else
+			{
+				// Close the unused READ end of the pipe.
+				close(fd[child][READ_END]);
+				
+				//strcat(write_msg, event);
+				sprintf(write_msg, "Child %d message %d", children[child].id, children[child].messageCount++);
 
-			printEvent(write_msg);
-			// Write to the WRITE end of the pipe.
-			write(fd[child][WRITE_END], write_msg, strlen(write_msg)+1);
+				printEvent(write_msg);
+				// Write to the WRITE end of the pipe.
+				write(fd[child][WRITE_END], write_msg, strlen(write_msg)+1);
 
-			//printf("c%d write: %s loop:%d\n", child, write_msg, i);
-
+			}
 		}
+		// PARENT PROCESS
 		else if (pid > 0) {  
-			// PARENT PROCESS.
 			
 			int readChild;
 			for (readChild = 0; readChild < NUM_CHILDREN; readChild++)
@@ -176,5 +183,9 @@ int main(void)
 	}
 	//close pipes for write of child
 	close(fd[child][WRITE_END]);
+	
+	//parent waits for children to finish
+	waitpid(-1, &status, 0);
+	
     return 0;
 }
