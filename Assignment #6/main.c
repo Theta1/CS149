@@ -29,8 +29,10 @@ typedef struct {
 //global start time variable
 int status;
 double startTime;
-int fd[NUM_CHILDREN][2]; // file desciptors for the pipe
-char buffer[NUM_CHILDREN][BUFFER_SIZE];
+int fd[NUM_CHILDREN][2]; // file descriptors for the pipe
+char read_buffer[NUM_CHILDREN][BUFFER_SIZE];
+char write_buffer[NUM_CHILDREN][BUFFER_SIZE];
+fd_set inputs[NUM_CHILDREN]; // for select
 
 /**
 Gets the elapsed time
@@ -78,12 +80,14 @@ void doAutoChildWork(int i) {
         sleep(sleepTime);
 
         close(fd[i][READ_END]);
-        sprintf(buffer[i],"Child %d message %d", child.id, child.messageCount);
-        //printEvent(event);
+        sprintf(write_buffer[i],"Child %d message %d", child.id, child.messageCount);
+        //printEvent(write_buffer[i]);
         //fflush(stdout);
         child.messageCount++;
-        write(fd[i][WRITE_END], buffer[i], strlen(buffer[i]) + 1);
+        write(fd[i][WRITE_END], write_buffer[i], strlen(write_buffer[i]) + 1);
         close(fd[i][WRITE_END]);
+
+        FD_SET(i, &inputs[i]);
     }
 }
 
@@ -93,7 +97,7 @@ main program
 int main() {
     int result, nread;
 	pid_t pid;// creates children
-	fd_set inputs[NUM_CHILDREN], inputfds;  // sets of file descriptors
+	fd_set inputfds;  // sets of file descriptors
     struct timeval timeout, start; // time structs
 	//for pipe
 	char write_msg[BUFFER_SIZE];
@@ -152,11 +156,13 @@ int main() {
                 // add another if here to determine if input should be coming from keyboard child
                 if(FD_ISSET(i, &inputfds)) {
                     close(fd[i][WRITE_END]);
-                    read(fd[i][READ_END], buffer[i], BUFFER_SIZE);
+                    read(fd[i][READ_END], read_buffer[i], BUFFER_SIZE);
                     printf("Parent sees that Child %d is about to print\n", i + 1);
-                    printEvent(buffer[i]);
+                    printEvent(read_buffer[i]);
                     fflush(stdout);
                     close(fd[i][READ_END]);
+
+                    FD_CLR(i, &inputs[i]);
                 }
             }
         }
