@@ -10,7 +10,7 @@
 
 #define PROGRAM_DURATION 5
 #define SLEEP_DURATION 3
-#define NUM_CHILDREN 1
+#define NUM_CHILDREN 2
 #define READ_END 0
 #define WRITE_END 1
 #define BUFFER_SIZE 80
@@ -29,12 +29,8 @@ typedef struct {
 //global start time variable
 int status;
 double startTime;
-
-/*int fd[NUM_CHILDREN][2]; // file desciptors for the pipe
-char buffer[NUM_CHILDREN][BUFFER_SIZE];*/
-
-int fd[2];
-char read_msg[BUFFER_SIZE], write_msg[BUFFER_SIZE];
+int fd[NUM_CHILDREN][2]; // file desciptors for the pipe
+char buffer[NUM_CHILDREN][BUFFER_SIZE];
 
 /**
 Gets the elapsed time
@@ -70,7 +66,7 @@ void printEvent(char *event) {
 /**
  * Do the work of a child who does not use the keyboard.
  */
-/*void doAutoChildWork(int i) {
+void doAutoChildWork(int i) {
     srand(time(NULL) * i);
 
 	CHILD child;
@@ -89,42 +85,35 @@ void printEvent(char *event) {
         write(fd[i][WRITE_END], buffer[i], strlen(buffer[i]) + 1);
         close(fd[i][WRITE_END]);
     }
-}*/
-
-void doAutoChildWork(int i) {
-    srand(time(NULL) * i);
-
-	CHILD child;
-	child.id = i + 1;
-	child.messageCount = 1;
-
-    while(PROGRAM_DURATION >= getElapsedTime()) {
-        int sleepTime = rand() % SLEEP_DURATION;
-        sleep(sleepTime);
-
-        close(fd[READ_END]);
-        sprintf(write_msg,"Child %d message %d", child.id, child.messageCount);
-        //printEvent(event);
-        //fflush(stdout);
-        child.messageCount++;
-        write(fd[WRITE_END], write_msg, strlen(write_msg) + 1);
-        close(fd[WRITE_END]);
-    }
 }
 
 /**
 main program
 **/
 int main() {
+    int result, nread;
 	pid_t pid;// creates children
+	fd_set inputs[NUM_CHILDREN], inputfds;  // sets of file descriptors
     struct timeval timeout, start; // time structs
-    int i, result;
-	//fd_set inputs[NUM_CHILDREN], inputfds;  // sets of file descriptors
-	fd_set inputs, inputfds;  // sets of file descriptors
+	//for pipe
+	char write_msg[BUFFER_SIZE];
+	char read_msg[BUFFER_SIZE];
+    int i;
 
 	// start the timer
 	gettimeofday(&start, NULL);
 	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+
+	//create the pipe
+	for(i = 0; i < NUM_CHILDREN; i++) {
+		if(pipe(fd[i]) == -1) {
+			fprintf(stderr, "pipe %d failed", i);
+			return 1;
+		}
+
+        FD_ZERO(&inputs[i]);
+		FD_SET(i, &inputs[i]);
+	}
 
 	for(i = 0; i < NUM_CHILDREN; i++) {
         pid = fork();
@@ -140,81 +129,36 @@ int main() {
         }
     }
 
-	//create the pipe
-	for(i = 0; i < NUM_CHILDREN; i++) {
-		/*if(pipe(fd[i]) == -1) {
-			fprintf(stderr, "pipe %d failed", i);
-			return 1;
-		}
-
-		FD_ZERO(&(inputs[i]));
-		FD_SET(i, &(inputs[i]));*/
-
-        if(pipe(fd) == -1) {
-			fprintf(stderr, "pipe %d failed", i);
-			return 1;
-		}
-
-		FD_ZERO(&inputs);
-		FD_SET(fd[i], &inputs);
-	}
-
     //  Wait for input on stdin for a maximum of 2.5 seconds.
     // do the parent's work
     while(PROGRAM_DURATION >= getElapsedTime())  {
         for(i = 0; i < NUM_CHILDREN; i++) {
-            //inputfds = inputs[i];
-			inputfds = inputs;
+            inputfds = inputs[i];
 
             timeout.tv_sec = 2;
             timeout.tv_usec = 500000;
 
             // Get select() results.
-            result = select(i + 1, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
+            result = select(i + 1, (fd_set *) 0, &inputfds, (fd_set *) 0, &timeout);
 
-            switch(result) {
-                case 0: {
-                    printf("result was 0 \n");
-                    fflush(stdout);
-                    break;
-                }
-                case -1: {
-                    printf("select");
-                    exit(1);
-                }
-                default: {
-                    if(FD_ISSET(fd[i], &inputfds)) {
-                        close(fd[WRITE_END]);
-                        read(fd[READ_END], read_msg, BUFFER_SIZE);
-                        printf("Parent sees that Child %d is about to print\n", i + 1);
-                        printEvent(read_msg);
-                        fflush(stdout);
-                        close(fd[READ_END]);
-                    }
-                }
-                break;
+            if(result == 0) {
+                printf("result was 0 \n");
             }
-            /*else if(result == -1) {
+            else if(result == -1) {
                 perror("select");
                 exit(1);
             }
             else {
                 // add another if here to determine if input should be coming from keyboard child
                 if(FD_ISSET(i, &inputfds)) {
-                    /*close(fd[i][WRITE_END]);
+                    close(fd[i][WRITE_END]);
                     read(fd[i][READ_END], buffer[i], BUFFER_SIZE);
                     printf("Parent sees that Child %d is about to print\n", i + 1);
                     printEvent(buffer[i]);
                     fflush(stdout);
-                    close(fd[i][READ_END]);*//*
-					close(fd[WRITE_END]);
-                    read(fd[READ_END], buffer, BUFFER_SIZE);
-                    printf("Parent sees that Child %d is about to print\n", i + 1);
-                    printEvent(buffer);
-                    fflush(stdout);
-                    close(fd[READ_END]);
+                    close(fd[i][READ_END]);
                 }
-            }*/
+            }
         }
     }
 }
