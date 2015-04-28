@@ -51,6 +51,23 @@ double getElapsedTime() {
 /**
 Adds the time to the childs event
 **/
+void addTimeToUser(char *time, char *userEvent) {
+   double sec = getElapsedTime();
+   double min = 0;
+
+   while (sec >=60){
+       min++;
+       sec -=60;
+   }
+
+   // Elapsed time.
+   sprintf(time, "%02.0f:%06.3lf | %c", min, sec);
+   strcat(time, userEvent);
+}
+
+/**
+Adds the time to the childs event
+**/
 void addTimeToEvent(char *event, CHILD child) {
    double sec = getElapsedTime();
    double min = 0;
@@ -101,7 +118,13 @@ int main(void)
     pid_t pid;  // child process id
     int fd[NUM_CHILDREN][2];  // file descriptors for the pipe
     
-	struct timeval start; // time struct to get seconds
+	struct timeval start; // time struct to get start time in secs
+
+	int result; // gets the result of select 0 means no file descriptors
+	struct timeval timeout; // used for timeout in seconds
+	fd_set inputs, inputfds;
+	FD_ZERO(&inputs);    // initialize inputs to the empty set
+	FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
 	
 	// start the timer
 	gettimeofday(&start, NULL);
@@ -141,7 +164,7 @@ int main(void)
 	
 	if(pid > 0)
 	{
-		fp = fopen("theta1.txt","w");
+		fp = fopen("theta1.txt","w"); // opens the file to write to
 	}
 	
 	while (PROGRAM_DURATION > getElapsedTime())
@@ -154,12 +177,22 @@ int main(void)
 			sleep(sleepTime());
 			
 			//LAST CHILD used for standard input
-			/*if (child == 4)
+			if (child == 4)
 			{
-				char c4[20] = "LAST CHILD";
-				printEvent(c4);
+				// Close the unused READ end of the pipe.
+				close(fd[child][READ_END]);
+				
+				//scans input for a user
+				printf("Type a short message: ");
+				char userInput[BUFFER_SIZE] = "";
+				scanf("%s", &userInput);
+				
+				addTimeToUser(write_msg, userInput);
+				
+				// Write to the WRITE end of the pipe.
+				write(fd[child][WRITE_END], write_msg, BUFFER_SIZE);
 			}
-			*/
+			
 			//all other children
 			//else
 			{
@@ -179,20 +212,37 @@ int main(void)
 		}
 		// PARENT PROCESS
 		else if (pid > 0) {  
+			inputfds = inputs; // clear input file descriptors
 			
-			int readChild;
-			for (readChild = 0; readChild < NUM_CHILDREN; readChild++)
+			// 2.5 second timeout
+			timeout.tv_sec = 30;
+			timeout.tv_usec = 000000;
+			
+			result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
+			
+			if(result == -1)
 			{
-				// Close the unused WRITE end of the pipe.
-				close(fd[readChild][WRITE_END]);
+				perror("select");
+				exit(1);
+			}
+			else if (result == 0) {		}
+			//print out info
+			else
+			{
+				int readChild;
+				for (readChild = 0; readChild < NUM_CHILDREN; readChild++)
+				{
+					// Close the unused WRITE end of the pipe.
+					close(fd[readChild][WRITE_END]);
 
-				char event[BUFFER_SIZE] = "";
-				sprintf(event, "Parent read: ");
-				// Read from the READ end of the pipe.
-				read(fd[readChild][READ_END], read_msg, BUFFER_SIZE);
-				strcat(event, read_msg);
-				printEvent(event);
+					char event[BUFFER_SIZE] = "";
+					sprintf(event, "Parent read: ");
+					// Read from the READ end of the pipe.
+					read(fd[readChild][READ_END], read_msg, BUFFER_SIZE);
+					strcat(event, read_msg);
+					printEvent(event);
 
+				}
 			}
 		}
 		else {
