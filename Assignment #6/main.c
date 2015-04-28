@@ -10,7 +10,7 @@
 
 #define PROGRAM_DURATION 5
 #define SLEEP_DURATION 3
-#define NUM_CHILDREN 2
+#define NUM_CHILDREN 1
 #define READ_END 0
 #define WRITE_END 1
 #define BUFFER_SIZE 80
@@ -32,7 +32,7 @@ double startTime;
 int fd[NUM_CHILDREN][2]; // file descriptors for the pipe
 char read_buffer[NUM_CHILDREN][BUFFER_SIZE];
 char write_buffer[NUM_CHILDREN][BUFFER_SIZE];
-fd_set inputs[NUM_CHILDREN]; // for select
+fd_set inputs; // for select
 
 /**
 Gets the elapsed time
@@ -80,14 +80,13 @@ void doAutoChildWork(int i) {
         sleep(sleepTime);
 
         close(fd[i][READ_END]);
+        printf("child %d --> %d\n", i, fd[i][READ_END]);
         sprintf(write_buffer[i],"Child %d message %d", child.id, child.messageCount);
         //printEvent(write_buffer[i]);
         //fflush(stdout);
         child.messageCount++;
         write(fd[i][WRITE_END], write_buffer[i], strlen(write_buffer[i]) + 1);
         close(fd[i][WRITE_END]);
-
-        FD_SET(i, &inputs[i]);
     }
 }
 
@@ -109,14 +108,18 @@ int main() {
 	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
 
 	//create the pipe
+	FD_ZERO(&inputs);
 	for(i = 0; i < NUM_CHILDREN; i++) {
 		if(pipe(fd[i]) == -1) {
 			fprintf(stderr, "pipe %d failed", i);
 			return 1;
 		}
 
-        FD_ZERO(&inputs[i]);
-		FD_SET(i, &inputs[i]);
+		FD_SET(*fd[i], &inputs);
+		printf("fd_set at %d --> %d\n", i, *fd[i]);
+
+		//FD_SET(fd[i][READ_END], &inputs);
+		//printf("fd_set at %d --> %d\n", i, fd[i][READ_END]);
 	}
 
 	for(i = 0; i < NUM_CHILDREN; i++) {
@@ -136,14 +139,16 @@ int main() {
     //  Wait for input on stdin for a maximum of 2.5 seconds.
     // do the parent's work
     while(PROGRAM_DURATION >= getElapsedTime())  {
-        for(i = 0; i < NUM_CHILDREN; i++) {
-            inputfds = inputs[i];
+            inputfds = inputs;
 
-            timeout.tv_sec = 2;
+            timeout.tv_sec = 4;
             timeout.tv_usec = 500000;
 
+            printf("dasfads\n");
             // Get select() results.
-            result = select(i + 1, (fd_set *) 0, &inputfds, (fd_set *) 0, &timeout);
+            //result = select(*fd[i] + 1, (fd_set *) 0, &inputfds, (fd_set *) 0, &timeout);
+            result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
+            printf("select max is %d\n", FD_SETSIZE);
 
             if(result == 0) {
                 printf("result was 0 \n");
@@ -154,18 +159,22 @@ int main() {
             }
             else {
                 // add another if here to determine if input should be coming from keyboard child
-                if(FD_ISSET(i, &inputfds)) {
-                    close(fd[i][WRITE_END]);
-                    read(fd[i][READ_END], read_buffer[i], BUFFER_SIZE);
-                    printf("Parent sees that Child %d is about to print\n", i + 1);
-                    printEvent(read_buffer[i]);
-                    fflush(stdout);
-                    close(fd[i][READ_END]);
+                for(i = 0; i < NUM_CHILDREN; i++) {
+                    printf("select for loop at %d --> %d\n", i, *fd[i]);
+                    if(FD_ISSET(*fd[i], &inputfds)) {
+                    //if(FD_ISSET(fd[i][READ_END], &inputfds)) {
+                        close(fd[i][WRITE_END]);
+                        read(fd[i][READ_END], read_buffer[i], BUFFER_SIZE);
+                        printf("Parent sees that Child %d is about to print\n", i + 1);
+                        printEvent(read_buffer[i]);
+                        fflush(stdout);
+                        close(fd[i][READ_END]);
 
-                    FD_CLR(i, &inputs[i]);
+                   // FD_SET(*fd[i], &inputs);
                 }
             }
-        }
+
+            }
     }
 }
 
