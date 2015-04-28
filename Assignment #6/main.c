@@ -49,7 +49,23 @@ double getElapsedTime() {
 }
 
 /**
-Prints the time and the event
+Adds the time to the childs event
+**/
+void addTimeToEvent(char *event, CHILD child) {
+   double sec = getElapsedTime();
+   double min = 0;
+
+   while (sec >=60){
+       min++;
+       sec -=60;
+   }
+
+   // Elapsed time.
+   sprintf(event, "%02.0f:%06.3lf | Child %d message %d", min, sec, child.id, child.messageCount++);
+}
+
+/**
+Prints the time and the event for the parent
 e.g. 00:00.000 | event
 **/
 void printEvent(char *event) {
@@ -150,8 +166,7 @@ int main(void)
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
 				
-				//strcat(write_msg, event);
-				sprintf(write_msg, "Child %d message %d", children[child].id, children[child].messageCount++);
+				addTimeToEvent(write_msg, children[child]);
 
 				//printEvent(write_msg);
 				// Write to the WRITE end of the pipe.
