@@ -8,7 +8,7 @@
 #include <time.h>
 #include <string.h>
 
-#define PROGRAM_DURATION 5//30
+#define PROGRAM_DURATION 30
 #define SLEEP_DURATION 3
 #define NUM_CHILDREN 5
 #define READ_END 0
@@ -121,11 +121,12 @@ int main(void)
 	struct timeval start; // time struct to get start time in secs
 
 	int result; // gets the result of select 0 means no file descriptors
-	int set = 0; //for FD_SET
+	int set[NUM_CHILDREN]; //for FD_SET
+	int reset = 0;
 	struct timeval timeout; // used for timeout in seconds
 	fd_set inputs, inputfds;
 	FD_ZERO(&inputs);    // initialize inputs to the empty set
-	FD_SET(set, &inputs);  // set file descriptor 0 (stdin)
+	FD_SET(reset, &inputs);  // set file descriptor 0 (stdin)
 	
 	// start the timer
 	gettimeofday(&start, NULL);
@@ -134,7 +135,7 @@ int main(void)
 	int child;
 	for( child = 0; child<NUM_CHILDREN; child++)
 	{
-			// Create the pipe.
+		// Create the pipe.
 		if (pipe(fd[child]) == -1) {
 			fprintf(stderr,"pipe() failed");
 			return 1;
@@ -155,6 +156,7 @@ int main(void)
 			aChild.id = child+1;
 			aChild.messageCount = 1;
 			children[child] = aChild;
+			set[child] = 1;
 			break;
 		}
 		
@@ -180,6 +182,8 @@ int main(void)
 			//LAST CHILD used for standard input
 			if (child == 4)
 			{
+			
+				FD_SET(set[child], &inputfds);
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
 				
@@ -197,6 +201,9 @@ int main(void)
 			//all other children
 			//else
 			{
+				
+				FD_SET(set[child], &inputfds);
+				
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
 
@@ -216,8 +223,8 @@ int main(void)
 			inputfds = inputs; // clear input file descriptors
 			
 			// 2.5 second timeout
-			timeout.tv_sec = 0;
-			timeout.tv_usec = 00000;
+			timeout.tv_sec = 2;
+			timeout.tv_usec = 50000;
 			
 			result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
 			
