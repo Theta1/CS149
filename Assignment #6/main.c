@@ -8,7 +8,7 @@
 #include <time.h>
 #include <string.h>
 
-#define PROGRAM_DURATION 5//30
+#define PROGRAM_DURATION 30
 #define SLEEP_DURATION 3
 #define NUM_CHILDREN 5
 #define READ_END 0
