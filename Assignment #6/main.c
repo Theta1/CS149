@@ -61,7 +61,7 @@ void addTimeToEvent(char *event, CHILD child) {
    }
 
    // Elapsed time.
-   sprintf(event, "%02.0f:%06.3lf | Child %d message %d", min, sec, child.id, child.messageCount++);
+   sprintf(event, "%02.0f:%06.3lf | Child %d message %d", min, sec, child.id, child.messageCount);
 }
 
 /**
@@ -165,10 +165,13 @@ int main(void)
 			{
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
-				
+
+				// Adds time to the child message
 				addTimeToEvent(write_msg, children[child]);
 
-				//printEvent(write_msg);
+				//increment message count
+				children[child].messageCount++;
+				
 				// Write to the WRITE end of the pipe.
 				write(fd[child][WRITE_END], write_msg, strlen(write_msg)+1);
 
