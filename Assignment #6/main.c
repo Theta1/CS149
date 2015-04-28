@@ -251,6 +251,10 @@ int main(void)
 					}
 				}
 			}
+			else
+			{
+				printf("result==0");
+			}
 		}
 		else {
 			fprintf(stderr, "fork() failed");
