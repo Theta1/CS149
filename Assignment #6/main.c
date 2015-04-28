@@ -197,5 +197,6 @@ int main(void)
 		}
 		fclose(fp); //closes the file
 	}
+
     return 0;
 }
