@@ -8,7 +8,7 @@
 #include <time.h>
 #include <string.h>
 
-#define PROGRAM_DURATION 30
+#define PROGRAM_DURATION 10//30
 #define SLEEP_DURATION 3
 #define NUM_CHILDREN 5
 #define READ_END 0
@@ -61,7 +61,7 @@ void addTimeToUser(char *time, char *userEvent) {
    }
 
    // Elapsed time.
-   sprintf(time, "%02.0f:%06.3lf | %c", min, sec);
+   sprintf(time, "%02.0f:%06.3lf | ", min, sec);
    strcat(time, userEvent);
 }
 
@@ -124,7 +124,6 @@ int main(void)
 	struct timeval timeout; // used for timeout in seconds
 	fd_set inputs, inputfds;
 	FD_ZERO(&inputs);    // initialize inputs to the empty set
-	FD_SET(0, &inputs);  // set file descriptor 0 (stdin)
 	
 	// start the timer
 	gettimeofday(&start, NULL);
@@ -133,11 +132,13 @@ int main(void)
 	int child;
 	for( child = 0; child<NUM_CHILDREN; child++)
 	{
-			// Create the pipe.
+		// Create the pipe.
 		if (pipe(fd[child]) == -1) {
 			fprintf(stderr,"pipe() failed");
 			return 1;
 		}
+		
+		FD_SET(*fd[child], &inputs);
 		
 		// Fork a child process.
 		pid = fork();
@@ -149,6 +150,7 @@ int main(void)
 		}
 		else if(pid == 0)
 		{ 
+			
 			//create a child
 			CHILD aChild;
 			aChild.id = child+1;
@@ -177,7 +179,7 @@ int main(void)
 			sleep(sleepTime());
 			
 			//LAST CHILD used for standard input
-			if (child == 4)
+			/*if (child == 4)
 			{
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
@@ -194,8 +196,10 @@ int main(void)
 			}
 			
 			//all other children
-			//else
+			else
+			*/
 			{
+								
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
 
@@ -215,33 +219,36 @@ int main(void)
 			inputfds = inputs; // clear input file descriptors
 			
 			// 2.5 second timeout
-			timeout.tv_sec = 30;
-			timeout.tv_usec = 000000;
-			
-			result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
-			
+			timeout.tv_sec = 2;
+			timeout.tv_usec = 50000;
+			 
+			result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
+			printf("result: %d\n", result);
 			if(result == -1)
 			{
 				perror("select");
 				exit(1);
 			}
-			else if (result == 0) {		}
+			
 			//print out info
-			else
+			else if (result > 0)
 			{
 				int readChild;
-				for (readChild = 0; readChild < NUM_CHILDREN; readChild++)
-				{
-					// Close the unused WRITE end of the pipe.
-					close(fd[readChild][WRITE_END]);
+				for (readChild = 0; readChild < FD_SETSIZE; readChild++)
+				{	
+					if (FD_ISSET(readChild, &inputfds) )
+					{	printf("write\n");
+						//printf("child %d\n", fd[readChild]);
+						// Close the unused WRITE end of the pipe.
+						close(fd[readChild][WRITE_END]);
 
-					char event[BUFFER_SIZE] = "";
-					sprintf(event, "Parent read: ");
-					// Read from the READ end of the pipe.
-					read(fd[readChild][READ_END], read_msg, BUFFER_SIZE);
-					strcat(event, read_msg);
-					printEvent(event);
-
+						char event[BUFFER_SIZE] = "";
+						sprintf(event, "Parent read: ");
+						// Read from the READ end of the pipe.
+						read(fd[readChild][READ_END], read_msg, BUFFER_SIZE);
+						strcat(event, read_msg);
+						printEvent(event);
+					}
 				}
 			}
 		}
@@ -267,4 +274,4 @@ int main(void)
 	}
 
     return 0;
-}
+}git 
