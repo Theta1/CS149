@@ -95,15 +95,15 @@ void printEvent(char *event) {
     }
 
     // Elapsed time.
-    printf("%02.0f:%06.3lf | ", min, sec);
+    //printf("%02.0f:%06.3lf | ", min, sec);
 	char time[BUFFER_SIZE] = "";
 	sprintf(time,"%02.0f:%06.3lf | ", min, sec);
 	fputs(time, fp);
 	fputs(event,fp);
 	fputs("\n",fp);
     //What they are doing
-    printf(event);
-    printf("\n");
+    //printf(event);
+    //printf("\n");
 }
 
 
