@@ -153,7 +153,7 @@ int main(void)
 				//strcat(write_msg, event);
 				sprintf(write_msg, "Child %d message %d", children[child].id, children[child].messageCount++);
 
-				printEvent(write_msg);
+				//printEvent(write_msg);
 				// Write to the WRITE end of the pipe.
 				write(fd[child][WRITE_END], write_msg, strlen(write_msg)+1);
 
