@@ -173,7 +173,7 @@ int main(void)
 				children[child].messageCount++;
 				
 				// Write to the WRITE end of the pipe.
-				write(fd[child][WRITE_END], write_msg, strlen(write_msg)+1);
+				write(fd[child][WRITE_END], write_msg, BUFFER_SIZE);
 
 			}
 		}
