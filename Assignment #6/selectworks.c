@@ -12,10 +12,17 @@
 #define BUFFER_SIZE 32
 #define READ_END 0
 #define WRITE_END 1
-#define PROGRAM_DURATION 1
+#define PROGRAM_DURATION 10
+#define SLEEP_DURATION 3
+
+typedef struct {
+    int id;
+    int messageCount;
+} CHILD;
 
 //global start time variable
 double startTime; // the time the forking starts
+FILE *fp; // file pointer for opening file
 
 /**
 * Gets the elapsed time
@@ -25,6 +32,54 @@ double getElapsedTime() {
     gettimeofday(&now, NULL);
     double currentTime = (now.tv_sec) * 1000 + (now.tv_usec) / 1000;
     return (currentTime - startTime)/1000;
+}
+
+/**
+Adds the time to the childs event
+**/
+void addTimeToEvent(char *event, CHILD child) {
+   double sec = getElapsedTime();
+   double min = 0;
+
+   while (sec >=60){
+       min++;
+       sec -=60;
+   }
+
+   // Elapsed time.
+   sprintf(event, "%02.0f:%06.3lf | Child %d message %d", min, sec, child.id, child.messageCount);
+}
+
+/**
+Prints the time and the event for the parent
+e.g. 00:00.000 | event
+**/
+void printEvent(char *event) {
+    double sec = getElapsedTime();
+    double min = 0;
+
+    while (sec >=60){
+        min++;
+        sec -=60;
+    }
+
+    // Elapsed time.
+    //printf("%02.0f:%06.3lf | ", min, sec);
+    char time[BUFFER_SIZE] = "";
+    sprintf(time,"%02.0f:%06.3lf | ", min, sec);
+    fputs(time, fp);
+    fputs(event, fp);
+    fputs("\n", fp);
+    //What they are doing
+    //printf(event);
+    //printf("\n");
+}
+
+/**
+Creates a random wait time
+**/
+int sleepTime() {
+    return rand()%SLEEP_DURATION;
 }
 
 main(){
@@ -38,6 +93,7 @@ main(){
     int i;
     int x = -1;
 
+    CHILD children[CHILD_NUMBER]; // array of children
 
     //array of file descriptors for all the Child Pipes
     int fd[5][2];
@@ -91,10 +147,19 @@ main(){
     sprintf(write_msg, "I am Child %d", x);
 
     //if pid is > 0, then it is parent; otherwise if pid == 0, then it is child
+    if(pid == 0){ 
+        //create a child
+        CHILD aChild;
+        aChild.id = x+1;
+        aChild.messageCount = 1;
+        children[x] = aChild;
+        // set[x] = 1;
+    }
+    //=================Parent Preoces=================
+    else fp = fopen("theta1.txt","w"); // opens the file to write to
     while (PROGRAM_DURATION > getElapsedTime()){
-        //=================Parent Preoces=================
+        
         if (pid > 0) {
-            // Parent
 
             //add read ends to the set
             for(i=0;i<CHILD_NUMBER;i++)
@@ -118,52 +183,72 @@ main(){
 
             printf("result is %d\n", result);
 
+            if(result == -1) {
+                perror("select");
+                exit(1);
+            }
+            
             switch(result) {
-                    case 0: {
-                        printf("Empty Set\n");
-                        fflush(stdout);
-                        break;
-                    }
-
-                    case -1: {
-                        perror("select");
-                        return 1;
-                    }
-                    //set is not empty
-                    default: {
-                        for(i=0;i<CHILD_NUMBER;i++){
-
-                            if (FD_ISSET(fd[i][READ_END], &inputfds)) {
-
-                                //close write end
-                                close(fd[i][WRITE_END]);
-
-                                //read from read end to read_msg buffer
-                                read(fd[i][READ_END], read_msg, BUFFER_SIZE);
-
-                                //print out read_msg buffer
-                                printf("Read Message: %s\n", read_msg);
-                            }
-                        }
-                        break;
-                    }
-
+                case 0: {
+                    printf("Empty Set\n");
+                    fflush(stdout);
+                    break;
                 }
-        	printf("Parent: Terminating.\n");
+
+                case -1: {
+                    perror("select");
+                    return 1;
+                }
+                //set is not empty
+                default: {
+                    int readChild;
+                    for(i=0;i<CHILD_NUMBER;i++){
+
+                        if (FD_ISSET(fd[i][READ_END], &inputfds)) {
+
+                            //close write end
+                            close(fd[i][WRITE_END]);
+
+                            char event[BUFFER_SIZE] = "";
+                            sprintf(event, "Parent read: ");
+                            // Read from the READ end of the pipe.
+
+                            //read from read end to read_msg buffer
+                            read(fd[i][READ_END], read_msg, BUFFER_SIZE);
+
+                            strcat(event, read_msg);
+                            printEvent(event);
+
+                            //print out read_msg buffer
+                            printf("Read Message: %s\n", read_msg);
+                        }
+                    }
+                    break;
+                }
+            }
         }
         //=================Child Preoces=================
         else {
+            sleep(sleepTime());
+
+            //close read end
+            close(fd[x][READ_END]);
+
+            addTimeToEvent(write_msg, children[x]);
+            
+            children[x].messageCount++;
+
+            // Write to the WRITE end of the pipe.
+            write(fd[x][WRITE_END], write_msg, BUFFER_SIZE);
+
             // Child
             printf("Child %d: Process started.\n", x);
 
-            //close read end
-            close(fd[x-1][READ_END]);
-
             //write a message to
-            write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
+            write(fd[x][WRITE_END], write_msg, BUFFER_SIZE);
 
              // Close the WRITE end of the pipe.
-            close(fd[x-1][WRITE_END]);
+            close(fd[x][WRITE_END]);
        
             printf("Child %d has written %s\n", x, write_msg);
 
