@@ -24,36 +24,31 @@ main()
 
 
     //array of file descriptors for all the Child Pipes
-    int fd1[2];
-    int fd2[2];
-    int fd3[2];
-    int fd4[2];
-    int fd5[2];
-
+    int fd[5][2];
 
     // Create the pipe for each process
 
-    if (pipe(fd1) == -1) {
+    if (pipe(fd[0]) == -1) {
         fprintf(stderr,"pipe() failed");
         return 1;
     }
 
-    if (pipe(fd2) == -1) {
+    if (pipe(fd[1]) == -1) {
         fprintf(stderr,"pipe() failed");
         return 1;
     }
 
-    if (pipe(fd3) == -1) {
+    if (pipe(fd[2]) == -1) {
         fprintf(stderr,"pipe() failed");
         return 1;
     }
 
-    if (pipe(fd4) == -1) {
+    if (pipe(fd[3]) == -1) {
         fprintf(stderr,"pipe() failed");
         return 1;
     }
 
-    if (pipe(fd5) == -1) {
+    if (pipe(fd[4]) == -1) {
         fprintf(stderr,"pipe() failed");
         return 1;
     }
@@ -99,11 +94,12 @@ main()
         // Parent
 
         //add read ends to the set
-        FD_SET(fd1[READ_END], &inputs);
-        FD_SET(fd2[READ_END], &inputs);
-        FD_SET(fd3[READ_END], &inputs);
-        FD_SET(fd4[READ_END], &inputs);
-        //NEED TO ADD fd5 pipe for STANDARD INPUT
+        FD_SET(fd[0][READ_END], &inputs);
+        FD_SET(fd[1][READ_END], &inputs);
+        FD_SET(fd[2][READ_END], &inputs);
+        FD_SET(fd[3][READ_END], &inputs);
+        
+        //NEED TO ADD fd[4] pipe for STANDARD INPUT
 
         inputfds = inputs;
 
@@ -138,49 +134,49 @@ main()
                 //set is not empty
                 default: {
 
-                    if (FD_ISSET(fd1[READ_END], &inputfds)) {
+                    if (FD_ISSET(fd[0][READ_END], &inputfds)) {
 
                         //close write end
-                        close(fd1[WRITE_END]);
+                        close(fd[0][WRITE_END]);
 
                         //read from read end to read_msg buffer
-                        read(fd1[READ_END], read_msg, BUFFER_SIZE);
+                        read(fd[0][READ_END], read_msg, BUFFER_SIZE);
 
                         //print out read_msg buffer
                         printf("Read Message: %s\n", read_msg);
                     }
 
-                    if (FD_ISSET(fd2[READ_END], &inputfds)) {
+                    if (FD_ISSET(fd[1][READ_END], &inputfds)) {
 
                         //close write end
-                        close(fd2[WRITE_END]);
+                        close(fd[1][WRITE_END]);
 
                         //read from read end to read_msg buffer
-                        read(fd2[READ_END], read_msg, BUFFER_SIZE);
+                        read(fd[1][READ_END], read_msg, BUFFER_SIZE);
 
                         //print out read_msg buffer
                         printf("Read Message: %s\n", read_msg);
                     }
 
-                    if (FD_ISSET(fd3[READ_END], &inputfds)) {
+                    if (FD_ISSET(fd[2][READ_END], &inputfds)) {
 
                         //close write end
-                        close(fd3[WRITE_END]);
+                        close(fd[2][WRITE_END]);
 
                         //read from read end to read_msg buffer
-                        read(fd3[READ_END], read_msg, BUFFER_SIZE);
+                        read(fd[2][READ_END], read_msg, BUFFER_SIZE);
 
                         //print out read_msg buffer
                         printf("Read Message: %s\n", read_msg);
                     }
 
-                     if (FD_ISSET(fd4[READ_END], &inputfds)) {
+                     if (FD_ISSET(fd[3][READ_END], &inputfds)) {
 
                         //close write end
-                        close(fd4[WRITE_END]);
+                        close(fd[3][WRITE_END]);
 
                         //read from read end to read_msg buffer
-                        read(fd4[READ_END], read_msg, BUFFER_SIZE);
+                        read(fd[3][READ_END], read_msg, BUFFER_SIZE);
 
                         //print out read_msg buffer
                         printf("Read Message: %s\n", read_msg);
@@ -202,52 +198,52 @@ main()
         {
             case 1: {
                 //close read end
-                close(fd1[READ_END]);
+                close(fd[0][READ_END]);
 
                 //write a message to
-                write(fd1[WRITE_END], write_msg, BUFFER_SIZE);
+                write(fd[0][WRITE_END], write_msg, BUFFER_SIZE);
 
                  // Close the WRITE end of the pipe.
-                close(fd1[WRITE_END]);
+                close(fd[0][WRITE_END]);
 
                 break;
             }
 
             case 2: {
                 //close read end
-                close(fd2[READ_END]);
+                close(fd[1][READ_END]);
 
                 //write a message to
-                write(fd2[WRITE_END], write_msg, BUFFER_SIZE);
+                write(fd[1][WRITE_END], write_msg, BUFFER_SIZE);
 
                  // Close the WRITE end of the pipe.
-                close(fd2[WRITE_END]);
+                close(fd[1][WRITE_END]);
 
                 break;
             }
 
             case 3: {
                 //close read end
-                close(fd3[READ_END]);
+                close(fd[2][READ_END]);
 
                 //write a message to
-                write(fd3[WRITE_END], write_msg, BUFFER_SIZE);
+                write(fd[2][WRITE_END], write_msg, BUFFER_SIZE);
 
                  // Close the WRITE end of the pipe.
-                close(fd3[WRITE_END]);
+                close(fd[2][WRITE_END]);
 
                 break;
             }
 
             case 4: {
                 //close read end
-                close(fd4[READ_END]);
+                close(fd[3][READ_END]);
 
                 //write a message to
-                write(fd4[WRITE_END], write_msg, BUFFER_SIZE);
+                write(fd[3][WRITE_END], write_msg, BUFFER_SIZE);
 
                  // Close the WRITE end of the pipe.
-                close(fd4[WRITE_END]);
+                close(fd[3][WRITE_END]);
 
                 break;
             }
