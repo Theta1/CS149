@@ -6,7 +6,6 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
-#include "supportFunctions.c"
 
 //change child number to 5 when you have added in standard input
 #define CHILD_NUMBER 5
@@ -98,18 +97,8 @@ void childMethod(CHILD achild){
     // Write to the WRITE end of the pipe.
     write(fd[achild.id-1][WRITE_END], write_msg, BUFFER_SIZE);
 
-    // Child
-    // printf("Child %d: Process started.\n", x);
-
-    //write a message to
-    write(fd[achild.id-1][WRITE_END], write_msg, BUFFER_SIZE);
-
      // Close the WRITE end of the pipe.
     close(fd[achild.id-1][WRITE_END]);
-
-    // printf("Child %d has written %s\n", x, write_msg);
-
-    // printf("Child %d: Terminating.\n", x);
 }
 
 parentMethod(fd_set inputs, fd_set inputfds){
@@ -184,9 +173,6 @@ parentMethod(fd_set inputs, fd_set inputfds){
 }
 
 main() {
-
-
-
     //parent and child process ID's
     pid_t pid;
 
@@ -195,10 +181,12 @@ main() {
 
     //keep track of which child number
     int i;
-    int x = -1;
+    CHILD aChild;
+    aChild.id = -1;
 
-    //array of file descriptors for all the Child Pipes
-
+    //set of file descriptors
+    fd_set inputs, inputfds;
+    FD_ZERO(&inputs); //initialize to empty set
 
     // Create the pipe for each process
     for(i=0;i<CHILD_NUMBER;i++){
@@ -208,19 +196,6 @@ main() {
         }
     }
 
-
-
-
-    //set of file descriptors
-    fd_set inputs, inputfds;
-
-
-    FD_ZERO(&inputs); //initialize to empty set
-
-
-    // printf("Parent: Process started\n");
-    // printf("Parent: Forking a childred.\n");
-
     // start the timer
     gettimeofday(&start, NULL);
     startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
@@ -228,10 +203,9 @@ main() {
     //create child processes up to CHILD_NUMBER times
     for (i = 0; i < CHILD_NUMBER; i++) {
 		pid = fork();
-		if (pid > 0) {
-			continue;
-		} else if (pid == 0) {
-			x = i+1;
+		if (pid > 0) continue;
+		else if (pid == 0) {
+			aChild.id = i+1;
 			break;
 		} else {
 			printf("fork error\n");
@@ -239,19 +213,11 @@ main() {
 		}
 	}
     
-    CHILD aChild;
-    if(pid == 0){        
-        aChild.id = x;
-        aChild.message = 1;
-    }
-    else fp = fopen("theta1.txt","w"); // opens the file to write to
+    if(pid > 0) fp = fopen("theta1.txt","w"); // opens the file to write to
+    else aChild.message = 1;
+
     while (PROGRAM_DURATION > getElapsedTime()){      
-        if (pid > 0) {
-            parentMethod(inputs, inputfds);
-            
-        }
-        else {
-            childMethod(aChild);
-        }
+        if (pid > 0) parentMethod(inputs, inputfds);
+        else childMethod(aChild);
     }
 }
