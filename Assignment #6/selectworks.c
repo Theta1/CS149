@@ -12,11 +12,27 @@
 #define BUFFER_SIZE 32
 #define READ_END 0
 #define WRITE_END 1
+#define PROGRAM_DURATION 1
 
-main()
-{
+//global start time variable
+double startTime; // the time the forking starts
+
+/**
+* Gets the elapsed time
+*/
+double getElapsedTime() {
+    struct timeval now;
+    gettimeofday(&now, NULL);
+    double currentTime = (now.tv_sec) * 1000 + (now.tv_usec) / 1000;
+    return (currentTime - startTime)/1000;
+}
+
+main(){
     //parent and child process ID's
     pid_t pid, wpid;
+
+    // time struct to get start time in secs
+    struct timeval start; 
 
     //keep track of which child number
     int i;
@@ -48,6 +64,10 @@ main()
     printf("Parent: Process started\n");
     printf("Parent: Forking a child.\n");
 
+    // start the timer
+    gettimeofday(&start, NULL);
+    startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+
     //create child processes up to CHILD_NUMBER times
     for (i = 0; i < CHILD_NUMBER; i++) {
 		pid = fork();
@@ -71,79 +91,83 @@ main()
     sprintf(write_msg, "I am Child %d", x);
 
     //if pid is > 0, then it is parent; otherwise if pid == 0, then it is child
-    if (pid > 0) {
-        // Parent
+    while (PROGRAM_DURATION > getElapsedTime()){
+        //=================Parent Preoces=================
+        if (pid > 0) {
+            // Parent
 
-        //add read ends to the set
-        for(i=0;i<CHILD_NUMBER;i++)
-            FD_SET(fd[i][READ_END], &inputs);
-        
-        //NEED TO ADD fd[4] pipe for STANDARD INPUT
+            //add read ends to the set
+            for(i=0;i<CHILD_NUMBER;i++)
+                FD_SET(fd[i][READ_END], &inputs);
+            
+            //NEED TO ADD fd[4] pipe for STANDARD INPUT
 
-        inputfds = inputs;
+            inputfds = inputs;
 
-        printf("Parent: Wait for child to complete.\n");
+            printf("Parent: Wait for child to complete.\n");
 
-        int status, result;
+            int status, result;
 
-        while ((wpid = wait(&status)) > 0); //wait for all child processes to finish
+            // while ((wpid = wait(&status)) > 0); //wait for all child processes to finish
 
-        // 2.5 seconds.
-        timeout.tv_sec = 1;
-        timeout.tv_usec =000000;
+            // 2.5 seconds.
+            timeout.tv_sec = 1;
+            timeout.tv_usec =000000;
 
-        result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
+            result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
 
-        printf("result is %d\n", result);
+            printf("result is %d\n", result);
 
-        switch(result) {
-                case 0: {
-                    printf("Empty Set\n");
-                    fflush(stdout);
-                    break;
-                }
-
-                case -1: {
-                    perror("select");
-                    return 1;
-                }
-                //set is not empty
-                default: {
-                    for(i=0;i<CHILD_NUMBER;i++){
-
-                        if (FD_ISSET(fd[i][READ_END], &inputfds)) {
-
-                            //close write end
-                            close(fd[i][WRITE_END]);
-
-                            //read from read end to read_msg buffer
-                            read(fd[i][READ_END], read_msg, BUFFER_SIZE);
-
-                            //print out read_msg buffer
-                            printf("Read Message: %s\n", read_msg);
-                        }
+            switch(result) {
+                    case 0: {
+                        printf("Empty Set\n");
+                        fflush(stdout);
+                        break;
                     }
-                    break;
+
+                    case -1: {
+                        perror("select");
+                        return 1;
+                    }
+                    //set is not empty
+                    default: {
+                        for(i=0;i<CHILD_NUMBER;i++){
+
+                            if (FD_ISSET(fd[i][READ_END], &inputfds)) {
+
+                                //close write end
+                                close(fd[i][WRITE_END]);
+
+                                //read from read end to read_msg buffer
+                                read(fd[i][READ_END], read_msg, BUFFER_SIZE);
+
+                                //print out read_msg buffer
+                                printf("Read Message: %s\n", read_msg);
+                            }
+                        }
+                        break;
+                    }
+
                 }
+        	printf("Parent: Terminating.\n");
+        }
+        //=================Child Preoces=================
+        else {
+            // Child
+            printf("Child %d: Process started.\n", x);
 
-            }
-    	printf("Parent: Terminating.\n");
-    }
-    else {
-        // Child
-        printf("Child %d: Process started.\n", x);
+            //close read end
+            close(fd[x-1][READ_END]);
 
-        //close read end
-        close(fd[x-1][READ_END]);
+            //write a message to
+            write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
 
-        //write a message to
-        write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
+             // Close the WRITE end of the pipe.
+            close(fd[x-1][WRITE_END]);
+       
+            printf("Child %d has written %s\n", x, write_msg);
 
-         // Close the WRITE end of the pipe.
-        close(fd[x-1][WRITE_END]);
-   
-        printf("Child %d has written %s\n", x, write_msg);
-
-        printf("Child %d: Terminating.\n", x);
+            printf("Child %d: Terminating.\n", x);
+        }
     }
 }
