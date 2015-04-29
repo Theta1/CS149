@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
+#include "supportFunctions.c"
 
 //change child number to 5 when you have added in standard input
 #define CHILD_NUMBER 5
@@ -17,12 +18,13 @@
 
 typedef struct {
     int id;
-    int messageCount;
+    int message;
 } CHILD;
 
 //global start time variable
 double startTime; // the time the forking starts
-FILE *fp; // file pointer for opening file
+FILE *fp;
+    int fd[5][2];
 
 /**
 * Gets the elapsed time
@@ -47,7 +49,7 @@ void addTimeToEvent(char *event, CHILD child) {
    }
 
    // Elapsed time.
-   sprintf(event, "%02.0f:%06.3lf | Child %d message %d", min, sec, child.id, child.messageCount);
+   sprintf(event, "%02.0f:%06.3lf | Child %d message %d", min, sec, child.id, child.message);
 }
 
 /**
@@ -82,9 +84,111 @@ int sleepTime() {
     return rand()%SLEEP_DURATION;
 }
 
-main(){
+void childMethod(CHILD achild){
+    char write_msg[BUFFER_SIZE] = "";
+    sleep(sleepTime());
+
+    //close read end
+    close(fd[achild.id-1][READ_END]);
+
+    addTimeToEvent(write_msg, achild);
+    
+    achild.message++;
+
+    // Write to the WRITE end of the pipe.
+    write(fd[achild.id-1][WRITE_END], write_msg, BUFFER_SIZE);
+
+    // Child
+    // printf("Child %d: Process started.\n", x);
+
+    //write a message to
+    write(fd[achild.id-1][WRITE_END], write_msg, BUFFER_SIZE);
+
+     // Close the WRITE end of the pipe.
+    close(fd[achild.id-1][WRITE_END]);
+
+    // printf("Child %d has written %s\n", x, write_msg);
+
+    // printf("Child %d: Terminating.\n", x);
+}
+
+parentMethod(fd_set inputs, fd_set inputfds){
+    char read_msg[BUFFER_SIZE];
+    struct timeval timeout;
+    int i;
+    //add read ends to the set
+    for(i=0;i<CHILD_NUMBER;i++)
+        FD_SET(fd[i][READ_END], &inputs);
+    
+    //NEED TO ADD fd[4] pipe for STANDARD INPUT
+
+    inputfds = inputs;
+
+    // printf("Parent: Wait for child to complete.\n");
+
+    int status, result;
+
+    // while ((wpid = wait(&status)) > 0); //wait for all child processes to finish
+
+    // 2.5 seconds.
+    timeout.tv_sec = 1;
+    timeout.tv_usec =000000;
+
+    result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
+
+    printf("result is %d\n", result);
+
+    if(result == -1) {
+        perror("select");
+        exit(1);
+    }
+    
+    switch(result) {
+        case 0: {
+            printf("Empty Set\n");
+            fflush(stdout);
+            break;
+        }
+
+        case -1: {
+            perror("select");
+            return 1;
+        }
+        //set is not empty
+        default: {
+            int readChild;
+            for(i=0;i<CHILD_NUMBER;i++){
+
+                if (FD_ISSET(fd[i][READ_END], &inputfds)) {
+
+                    //close write end
+                    close(fd[i][WRITE_END]);
+
+                    char event[BUFFER_SIZE] = "";
+                    sprintf(event, "Parent read: ");
+                    // Read from the READ end of the pipe.
+
+                    //read from read end to read_msg buffer
+                    read(fd[i][READ_END], read_msg, BUFFER_SIZE);
+
+                    strcat(event, read_msg);
+                    printEvent(event);
+
+                    //print out read_msg buffer
+                    // printf("Read Message: %s\n", read_msg);
+                }
+            }
+            break;
+        }
+    }
+}
+
+main() {
+
+
+
     //parent and child process ID's
-    pid_t pid, wpid;
+    pid_t pid;
 
     // time struct to get start time in secs
     struct timeval start; 
@@ -93,10 +197,8 @@ main(){
     int i;
     int x = -1;
 
-    CHILD children[CHILD_NUMBER]; // array of children
-
     //array of file descriptors for all the Child Pipes
-    int fd[5][2];
+
 
     // Create the pipe for each process
     for(i=0;i<CHILD_NUMBER;i++){
@@ -106,19 +208,18 @@ main(){
         }
     }
 
-    //parent's read buffer from pipe
-    char read_msg[BUFFER_SIZE];
+
 
 
     //set of file descriptors
     fd_set inputs, inputfds;
-    struct timeval timeout;
+
 
     FD_ZERO(&inputs); //initialize to empty set
 
 
-    printf("Parent: Process started\n");
-    printf("Parent: Forking a child.\n");
+    // printf("Parent: Process started\n");
+    // printf("Parent: Forking a childred.\n");
 
     // start the timer
     gettimeofday(&start, NULL);
@@ -137,122 +238,20 @@ main(){
 			return 1;
 		}
 	}
-
-	//Parent and Child Processes execute the code from this point onwards
-
-    //write buffer for pipe
-    char write_msg[BUFFER_SIZE];
-
-    //message to be passed around
-    sprintf(write_msg, "I am Child %d", x);
-
-    //if pid is > 0, then it is parent; otherwise if pid == 0, then it is child
-    if(pid == 0){ 
-        //create a child
-        CHILD aChild;
-        aChild.id = x+1;
-        aChild.messageCount = 1;
-        children[x] = aChild;
-        // set[x] = 1;
+    
+    CHILD aChild;
+    if(pid == 0){        
+        aChild.id = x;
+        aChild.message = 1;
     }
-    //=================Parent Preoces=================
     else fp = fopen("theta1.txt","w"); // opens the file to write to
-    while (PROGRAM_DURATION > getElapsedTime()){
-        
+    while (PROGRAM_DURATION > getElapsedTime()){      
         if (pid > 0) {
-
-            //add read ends to the set
-            for(i=0;i<CHILD_NUMBER;i++)
-                FD_SET(fd[i][READ_END], &inputs);
+            parentMethod(inputs, inputfds);
             
-            //NEED TO ADD fd[4] pipe for STANDARD INPUT
-
-            inputfds = inputs;
-
-            printf("Parent: Wait for child to complete.\n");
-
-            int status, result;
-
-            // while ((wpid = wait(&status)) > 0); //wait for all child processes to finish
-
-            // 2.5 seconds.
-            timeout.tv_sec = 1;
-            timeout.tv_usec =000000;
-
-            result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
-
-            printf("result is %d\n", result);
-
-            if(result == -1) {
-                perror("select");
-                exit(1);
-            }
-            
-            switch(result) {
-                case 0: {
-                    printf("Empty Set\n");
-                    fflush(stdout);
-                    break;
-                }
-
-                case -1: {
-                    perror("select");
-                    return 1;
-                }
-                //set is not empty
-                default: {
-                    int readChild;
-                    for(i=0;i<CHILD_NUMBER;i++){
-
-                        if (FD_ISSET(fd[i][READ_END], &inputfds)) {
-
-                            //close write end
-                            close(fd[i][WRITE_END]);
-
-                            char event[BUFFER_SIZE] = "";
-                            sprintf(event, "Parent read: ");
-                            // Read from the READ end of the pipe.
-
-                            //read from read end to read_msg buffer
-                            read(fd[i][READ_END], read_msg, BUFFER_SIZE);
-
-                            strcat(event, read_msg);
-                            printEvent(event);
-
-                            //print out read_msg buffer
-                            printf("Read Message: %s\n", read_msg);
-                        }
-                    }
-                    break;
-                }
-            }
         }
-        //=================Child Preoces=================
         else {
-            sleep(sleepTime());
-
-            //close read end
-            close(fd[x][READ_END]);
-
-            addTimeToEvent(write_msg, children[x]);
-            
-            children[x].messageCount++;
-
-            // Write to the WRITE end of the pipe.
-            write(fd[x][WRITE_END], write_msg, BUFFER_SIZE);
-
-            // Child
-            printf("Child %d: Process started.\n", x);
-
-            //write a message to
-            write(fd[x][WRITE_END], write_msg, BUFFER_SIZE);
-
-             // Close the WRITE end of the pipe.
-            close(fd[x][WRITE_END]);
-       
-            printf("Child %d has written %s\n", x, write_msg);
-
-            printf("Child %d: Terminating.\n", x);
+            childMethod(aChild);
         }
     }
 }
