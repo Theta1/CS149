@@ -109,9 +109,7 @@ parentMethod(){
     struct timeval timeout;
     int i;
 
-    //add read ends to the set
-    for(i=0;i<CHILD_NUMBER;i++)
-        FD_SET(fd[i][READ_END], &inputs);
+
 
     inputfds = inputs;
 
@@ -145,8 +143,8 @@ parentMethod(){
             for(i=0;i<CHILD_NUMBER;i++){
 
                 if (FD_ISSET(fd[i][READ_END], &inputfds)) {
-
-                    //close write end
+                    // open(fd[i])
+;                    //close write end
                     close(fd[i][WRITE_END]);
 
                     char event[BUFFER_SIZE] = "";
@@ -161,7 +159,7 @@ parentMethod(){
                     printEvent(event);
 
 
-                    // close(fd[i][READ_END]); //close pipes for read of parent
+                    close(fd[i][READ_END]); //close pipes for read of parent
                     //print out read_msg buffer
                     // printf("Read Message: %s\n", read_msg);
                 }
@@ -217,6 +215,10 @@ main() {
 			return 1;
 		}
 	}
+
+        //add read ends to the set
+    for(i=0;i<CHILD_NUMBER;i++)
+        FD_SET(fd[i][READ_END], &inputs);
 
     // printf("I am process %d\n", aChild.id);
     
