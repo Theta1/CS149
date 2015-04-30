@@ -112,8 +112,8 @@ main
 */
 int main(void)
 {
-    char write_msg[BUFFER_SIZE] = ""; //read to pipe
-    char read_msg[BUFFER_SIZE] = ""; //write to pipe
+    //char write_msg[BUFFER_SIZE] = ""; //read to pipe
+    //char read_msg[BUFFER_SIZE] = ""; //write to pipe
 	CHILD children[NUM_CHILDREN]; // array of children
     pid_t pid;  // child process id
     int fd[NUM_CHILDREN][2];  // file descriptors for the pipe
@@ -138,7 +138,7 @@ int main(void)
 			return 1;
 		}
 		
-		FD_SET(fd[child][READ_END], &inputs);
+
 		
 		// Fork a child process.
 		pid = fork();
@@ -156,6 +156,9 @@ int main(void)
 			aChild.id = child+1;
 			aChild.messageCount = 1;
 			children[child] = aChild;
+			
+			// Close the unused READ end of the pipe.
+			close(fd[child][READ_END]);
 			break;
 		}
 		
@@ -167,6 +170,13 @@ int main(void)
 	if(pid > 0)
 	{
 		fp = fopen("theta1.txt","w"); // opens the file to write to
+		FD_SET(fd[child][READ_END], &inputs);//add file descriptors
+		
+		// Close the unused WRITE end of the pipe.
+		int z;
+		for (z = 0; z < NUM_CHILDREN; z++) {
+			close(fd[z][WRITE_END]);
+		}
 	}
 	
 	while (PROGRAM_DURATION > getElapsedTime())
@@ -199,16 +209,15 @@ int main(void)
 			else
 			*/
 			{
-								
-				// Close the unused READ end of the pipe.
-				close(fd[child][READ_END]);
+
+				char write_msg[BUFFER_SIZE];
 
 				// Adds time to the child message
 				addTimeToEvent(write_msg, children[child]);
 
 				//increment message count
 				children[child].messageCount++;
-				
+				//printf(write_msg);
 				// Write to the WRITE end of the pipe.
 				write(fd[child][WRITE_END], write_msg, BUFFER_SIZE);
 
@@ -238,10 +247,8 @@ int main(void)
 				{	
 					if (FD_ISSET(readChild, &inputfds) )
 					{	printf("child %d: ", readChild);
-						//printf("child %d\n", fd[readChild]);
-						// Close the unused WRITE end of the pipe.
-						close(fd[readChild][WRITE_END]);
-
+						char read_msg[BUFFER_SIZE];
+		
 						char event[BUFFER_SIZE] = "";
 						sprintf(event, "Parent read: ");
 						// Read from the READ end of the pipe.
