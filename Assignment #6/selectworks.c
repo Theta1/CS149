@@ -73,6 +73,7 @@ void printEvent(char *event) {
     fputs(time, fp);
     fputs(event, fp);
     fputs("\n", fp);
+
     //What they are doing
     //printf(event);
     //printf("\n");
@@ -135,7 +136,8 @@ parentMethod(){
 
         case -1: {
             perror("select");
-            return 1;
+
+            exit(1);
         }
         //set is not empty
         default: {
@@ -148,15 +150,18 @@ parentMethod(){
                     close(fd[i][WRITE_END]);
 
                     char event[BUFFER_SIZE] = "";
-                    sprintf(event, "Parent read: ");
                     // Read from the READ end of the pipe.
 
                     //read from read end to read_msg buffer
                     read(fd[i][READ_END], read_msg, BUFFER_SIZE);
+                    sprintf(event, "Parent read: ");
 
                     strcat(event, read_msg);
+                    printf("%s\n", event);
                     printEvent(event);
 
+
+                    // close(fd[i][READ_END]); //close pipes for read of parent
                     //print out read_msg buffer
                     // printf("Read Message: %s\n", read_msg);
                 }
