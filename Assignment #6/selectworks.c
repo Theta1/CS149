@@ -88,64 +88,48 @@ int sleepTime() {
 
 void childMethod(){
 
-    char write_msg[BUFFER_SIZE] = "";
-    sleep(sleepTime());
+    if(aChild.id=!4){//Normal random sleep child
+        char write_msg[BUFFER_SIZE] = "";
+        sleep(sleepTime());
 
-    // Close the unused READ end of the pipe.
-    close(fd[aChild.id-1][READ_END]);
+        addTimeToEvent(write_msg);
 
-    addTimeToEvent(write_msg);
+        // printf("%s\n", write_msg);
+        // Write to the WRITE end of the pipe.
+        write(fd[aChild.id-1][WRITE_END], write_msg, BUFFER_SIZE);
 
-    // printf("%s\n", write_msg);
-    // Write to the WRITE end of the pipe.
-    write(fd[aChild.id-1][WRITE_END], write_msg, BUFFER_SIZE);
+         // Close the WRITE end of the pipe.
+    }else{//STNDIN
+        FD_ZERO(&inputs);
+        FD_SET(0, &inputs);
 
-     // Close the WRITE end of the pipe.
-    close(fd[aChild.id-1][WRITE_END]);
+    }
 }
 
 parentMethod(){
     char read_msg[BUFFER_SIZE];
     struct timeval timeout;
-    int i;
-
-
-
+    int i, status, result;
     inputfds = inputs;
-
-    // printf("Parent: Wait for child to complete.\n");
-
-    int status, result;
-
-    // while ((wpid = wait(&status)) > 0); //wait for all child processes to finish
-
-    // 2.5 seconds.
-    timeout.tv_sec = 1;
-    timeout.tv_usec =000000;
-
     result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
-    
+
     switch(result) {
-        case 0: {
-            // printf("Empty Set\n");
-            fflush(stdout);
+        case 0: {// Nothing ready
             break;
         }
-
         case -1: {
-            perror("select");
-
-            exit(1);
+           perror("select");
+           exit(1);
         }
-        //set is not empty
-        default: {
+        default: {//set is not empty
             int readChild;
+
             for(i=0;i<CHILD_NUMBER;i++){
 
                 if (FD_ISSET(fd[i][READ_END], &inputfds)) {
                     // open(fd[i])
 ;                    //close write end
-                    close(fd[i][WRITE_END]);
+                    
 
                     char event[BUFFER_SIZE] = "";
                     // Read from the READ end of the pipe.
@@ -178,18 +162,15 @@ main() {
 
     //some useful information for each process
 
-
     //keep track of which child number. The first is -1, the parent
     aChild.id = -1;
 
     //everyone needs me.
     int i;
     int messageNumber = 1;
-
-    //set of file descriptors. The full set and the set to be changed
     
-
-    FD_ZERO(&inputs); //initialize to empty set
+    //initialize to empty set
+    FD_ZERO(&inputs); 
 
     // Create the pipe for each process
     for(i=0;i<CHILD_NUMBER;i++){
@@ -206,27 +187,27 @@ main() {
     //create child processes up to CHILD_NUMBER times
     for (i = 0; i < CHILD_NUMBER; i++) {
 		pid = fork();
-		if (pid > 0) continue;
-		else if (pid == 0) {
+		if (pid > 0) {//Parent
+            close(fd[i][WRITE_END]);//close write end
+            FD_SET(fd[i][READ_END], &inputs);
+        }
+		else if (pid == 0) {//Child
 			aChild.id = i+1;
+            close(fd[aChild.id-1][READ_END]);//close read end
 			break;
 		} else {
-			printf("fork error\n");
+			perror("fork error");
 			return 1;
 		}
-	}
-
-        //add read ends to the set
-    for(i=0;i<CHILD_NUMBER;i++)
-        FD_SET(fd[i][READ_END], &inputs);
-
-    // printf("I am process %d\n", aChild.id);
-    
-    if(pid > 0) fp = fopen("theta1.txt","w"); // opens the file to write to
+	}    
+    if(pid != 0) fp = fopen("theta1.txt","w"); // opens the file to write to
     else aChild.message = 1; //Sets the child message to 1.
 
     while (PROGRAM_DURATION > getElapsedTime()){      
-        if (pid > 0) parentMethod();
+        if (pid != 0) parentMethod();
         else childMethod();
     }
+    close(fd[aChild.id-1][WRITE_END]);
+    for (i = 0; i < CHILD_NUMBER; i++)
+        close(fd[i][READ_END]); 
 }
