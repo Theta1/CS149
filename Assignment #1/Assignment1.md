@@ -34,7 +34,7 @@ name, such as SuperCoder-Jones.png. In order for the team to get a perfect score
 each screenshot must be good, so help each other get Linux up and running!
 
 Each team should email the zip file to [ron.mak@sjsu.edu] Your subject line should be:
-**CS 149-*section* Assignment #1 *team name* **
+**CS 149-section Assignment #1 team name**
 Be sure to CC all the members of your team so that when I send you your team score, I
 can just do a “Reply all”.
 forktest.c:
