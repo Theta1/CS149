@@ -73,7 +73,7 @@ int main()
     struct timeval timeout;
 
     FD_ZERO(&inputs); //initialize to empty set
-	fp = fopen("theta1.txt","w");
+	fp = fopen("output.txt","w");
 
     //create child processes up to CHILD_NUMBER times
     for (i = 0; i < CHILDREN; i++) {
@@ -198,7 +198,7 @@ int main()
 				char *input[BUFFER_SIZE];
 				scanf("%s", &input);
 				
-				sprintf(write_msg, "%02.0f:%06.3lf | %s ", min, sec, input);
+				sprintf(write_msg, "%02.0f:%06.3lf | Child %d message %s ", min, sec, x, input);
 				//write a message to pipe
 				write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
 				
