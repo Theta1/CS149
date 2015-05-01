@@ -22,10 +22,8 @@ int sleepTime() {
 	return rand()%SLEEP_DURATION;
 }
 
-
 /**global start time variable**/
 double startTime; // the time the forking starts
-FILE *fp; // file pointer for opening file
 
 //write buffer for pipe
 char write_msg[BUFFER_SIZE];
@@ -44,7 +42,7 @@ double getElapsedTime() {
 int main()
 {
     struct timeval start;
-
+	FILE *fp; // file pointer for opening file
     // start the timer
 	gettimeofday(&start, NULL);
 	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
@@ -75,6 +73,7 @@ int main()
     struct timeval timeout;
 
     FD_ZERO(&inputs); //initialize to empty set
+	fp = fopen("theta1.txt","w");
 
     //create child processes up to CHILD_NUMBER times
     for (i = 0; i < CHILDREN; i++) {
@@ -145,7 +144,9 @@ int main()
 									p_sec -=60;
 								}
 								//print out read_msg buffer
-								printf("%02.0f:%06.3lf | Parent Read: [%s]\n", p_min, p_sec, read_msg);
+								char message[BUFFER_SIZE*2];
+								sprintf(message,"%02.0f:%06.3lf | Parent Read: [%s]\n", p_min, p_sec, read_msg);
+								fputs(message, fp);
 							}
 						}
 					}
@@ -161,6 +162,8 @@ int main()
 		{
 			close(fd[i][READ_END]);
 		}
+		
+		fclose(fp); // closes the file
     }
     else {
         // Child
