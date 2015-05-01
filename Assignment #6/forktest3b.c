@@ -8,7 +8,7 @@
 #include <time.h>
 #include <string.h>
 
-#define CHILDREN 4
+#define CHILDREN 5
 #define BUFFER_SIZE 48
 #define READ_END 0
 #define WRITE_END 1
@@ -145,7 +145,7 @@ int main()
 								}
 								//print out read_msg buffer
 								char message[BUFFER_SIZE*2];
-								sprintf(message,"%02.0f:%06.3lf | Parent Read: [%s]\n", p_min, p_sec, read_msg);
+								sprintf(message,"%02.0f:%06.3lf | Parent Read: [ %s ]\n", p_min, p_sec, read_msg);
 								fputs(message, fp);
 							}
 						}
@@ -187,7 +187,7 @@ int main()
                 sec -=60;
             }
 			
-			if(x == 4)
+			if(x == 5)
 			{
 				printf("Write to pipe\n");
 				/*ioctl(0,FIONREAD,&nread);
