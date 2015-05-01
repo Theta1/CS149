@@ -1,3 +1,15 @@
+/**
+ * A demonstration of piping, selection, forking and file writing.
+ * Using 5 child processes this program uses 4 to create messages (increasing consecutive integers) and passes
+ * them to the parent via pipes. The 5th process recieves input from STNDIN.
+ * The parent monitors 5 data pipes for content via selection.
+ * When 1 or more pipes have content the parents prints this to a root dir file: Theta1.txt
+ *
+ * Note: Special appreciation and thanks to the folks in Section 8, we owe you a pint.
+ *
+ * @authors Theta(1)
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -8,39 +20,32 @@
 #include <time.h>
 #include <string.h>
 
-#define PROGRAM_DURATION 10//30
-#define SLEEP_DURATION 3
-#define NUM_CHILDREN 5
+#define CHILDREN 5
+#define BUFFER_SIZE 48
 #define READ_END 0
 #define WRITE_END 1
-#define BUFFER_SIZE 80
+#define SLEEP_DURATION 3
+#define PROGRAM_DURATION 30
 
-/**
-* Print a line for each event:
-* elapsed time
-* message from child process
-* user standard input
-*/
-typedef struct {
-    int id;
-    int messageCount;
-} CHILD;
-
-//global start time variable
+/**global start time variable**/
 double startTime; // the time the forking starts
-FILE *fp; // file pointer for opening file
+
+//write buffer for pipe
+char write_msg[BUFFER_SIZE];
+char read_msg[BUFFER_SIZE] = "";
 
 /**
-Creates a random wait time
-**/
+ * Creates a random wait time.
+ * @return int representing the random sleep time, limmited by SLEEP_DURATION
+ */
 int sleepTime() {
 	return rand()%SLEEP_DURATION;
 }
 
-
 /**
-Gets the elapsed time
-**/
+ * Calculates the time since the forking
+ * @returns double representing slapsed time
+ */
 double getElapsedTime() {
 	struct timeval now;
     gettimeofday(&now, NULL);
@@ -49,294 +54,186 @@ double getElapsedTime() {
 }
 
 /**
-Adds the time to the childs event
-**/
-void addTimeToUser(char *time, char *userEvent) {
-   double sec = getElapsedTime();
-   double min = 0;
-
-   while (sec >=60){
-       min++;
-       sec -=60;
-   }
-
-   // Elapsed time.
-   sprintf(time, "%02.0f:%06.3lf | ", min, sec);
-   strcat(time, userEvent);
-}
-
-/**
-Adds the time to the childs event
-**/
-void addTimeToEvent(char *event, CHILD child) {
-   double sec = getElapsedTime();
-   double min = 0;
-
-   while (sec >=60){
-       min++;
-       sec -=60;
-   }
-
-   // Elapsed time.
-   sprintf(event, "%02.0f:%06.3lf | Child %d message %d", min, sec, child.id, child.messageCount);
-}
-
-/**
-Prints the time and the event for the parent
-e.g. 00:00.000 | event
-**/
-void printEvent(char *event) {
-    double sec = getElapsedTime();
-    double min = 0;
-
-    while (sec >=60){
-        min++;
-        sec -=60;
-    }
-
-    // Elapsed time.
-    //printf("%02.0f:%06.3lf | ", min, sec);
-	char time[BUFFER_SIZE] = "";
-	sprintf(time,"%02.0f:%06.3lf | ", min, sec);
-	fputs(time, fp);
-	fputs(event,fp);
-	fputs("\n",fp);
-    //What they are doing
-    //printf(event);
-    //printf("\n");
-}
-
-
-/****************************************************************************************************
-main
-*/
-int main(void)
-{
-    char write_msg[BUFFER_SIZE] = ""; //read to pipe
-    char read_msg[BUFFER_SIZE] = ""; //write to pipe
-	CHILD children[NUM_CHILDREN]; // array of children
-    pid_t pid;  // child process id
-    int fd[NUM_CHILDREN][2];  // file descriptors for the pipe
-    
-	struct timeval start; // time struct to get start time in secs
-
-	int result; // gets the result of select 0 means no file descriptors
-<<<<<<< HEAD
-	int set[NUM_CHILDREN]; //for FD_SET
-	int reset = 0;
-	struct timeval timeout; // used for timeout in seconds
-	fd_set inputs, inputfds;
-	FD_ZERO(&inputs);    // initialize inputs to the empty set
-	FD_SET(reset, &inputs);  // set file descriptor 0 (stdin)
-=======
-	struct timeval timeout; // used for timeout in seconds
-	fd_set inputs, inputfds;
-	FD_ZERO(&inputs);    // initialize inputs to the empty set
->>>>>>> Nate1
-	
-	// start the timer
+ * Main thread. Creates the pipes, processes, main loop.
+ * Outputs to file Theta1.txt in root dir.
+ * @returns int 1 for a success or 2 for a failure state.
+ */
+int main() {
+    struct timeval start;
+	FILE *fp; // file pointer for opening file
+    // start the timer
 	gettimeofday(&start, NULL);
 	startTime = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
-	
-	int child;
-	for( child = 0; child<NUM_CHILDREN; child++)
-	{
-		// Create the pipe.
-		if (pipe(fd[child]) == -1) {
-			fprintf(stderr,"pipe() failed");
-			return 1;
-		}
-		
-<<<<<<< HEAD
-=======
-		FD_SET(*fd[child], &inputs);
-		
->>>>>>> Nate1
-		// Fork a child process.
+
+    //parent and child process ID's
+    pid_t pid, wpid;
+
+    //keep track of which child number
+    int i, j, k;
+    int seedtime;
+    int x = -1;
+
+
+    //array of file descriptors for all Pipes and select
+    int fd[CHILDREN][2];
+
+    // Create the pipe for each process
+    for (i=0; i< CHILDREN; i++)
+    {
+        if (pipe(fd[i]) == -1) {
+        fprintf(stderr,"pipe() failed");
+        return 1;
+        }
+    }
+
+    //set array of file descriptors
+    fd_set inputs, inputfds;
+    struct timeval timeout;
+
+    FD_ZERO(&inputs); //initialize to empty set
+	fp = fopen("output.txt","w");
+
+    //create child processes up to CHILD_NUMBER times
+    for (i = 0; i < CHILDREN; i++) {
 		pid = fork();
-		 // error handling
-		if (pid == -1)
-		{
-			perror("select");
-			exit(1);
-		}
-		else if(pid == 0)
-		{ 
-<<<<<<< HEAD
-=======
-			
->>>>>>> Nate1
-			//create a child
-			CHILD aChild;
-			aChild.id = child+1;
-			aChild.messageCount = 1;
-			children[child] = aChild;
-<<<<<<< HEAD
-			set[child] = 1;
-=======
->>>>>>> Nate1
+		if (pid > 0) {
+
+            //parent add read end to fd set
+            FD_SET(fd[i][READ_END], &inputs);
+
+            //parent close the write end
+            close (fd[i][WRITE_END]);
+			continue;
+		} else if (pid == 0) {
+			x = i+1;
 			break;
-		}
-		
-	}
-	
-	//initialize random
-	srand(time(NULL)*child);
-	
-	if(pid > 0)
-	{
-		fp = fopen("theta1.txt","w"); // opens the file to write to
-	}
-	
-	while (PROGRAM_DURATION > getElapsedTime())
-	{
-		
-		// CHILD PROCESS
-		if (pid == 0)
-		{
-			//sleep for 0-2 seconds
-			sleep(sleepTime());
-			
-			//LAST CHILD used for standard input
-<<<<<<< HEAD
-			if (child == 4)
-			{
-			
-				FD_SET(set[child], &inputfds);
-=======
-			/*if (child == 4)
-			{
->>>>>>> Nate1
-				// Close the unused READ end of the pipe.
-				close(fd[child][READ_END]);
-				
-				//scans input for a user
-				printf("Type a short message: ");
-				char userInput[BUFFER_SIZE] = "";
-				scanf("%s", &userInput);
-				
-				addTimeToUser(write_msg, userInput);
-				
-				// Write to the WRITE end of the pipe.
-				write(fd[child][WRITE_END], write_msg, BUFFER_SIZE);
-			}
-			
-			//all other children
-<<<<<<< HEAD
-			//else
-			{
-				
-				FD_SET(set[child], &inputfds);
-				
-=======
-			else
-			*/
-			{
-								
->>>>>>> Nate1
-				// Close the unused READ end of the pipe.
-				close(fd[child][READ_END]);
-
-				// Adds time to the child message
-				addTimeToEvent(write_msg, children[child]);
-
-				//increment message count
-				children[child].messageCount++;
-				
-				// Write to the WRITE end of the pipe.
-				write(fd[child][WRITE_END], write_msg, BUFFER_SIZE);
-
-			}
-		}
-		// PARENT PROCESS
-		else if (pid > 0) {  
-			inputfds = inputs; // clear input file descriptors
-			
-			// 2.5 second timeout
-			timeout.tv_sec = 2;
-			timeout.tv_usec = 50000;
-<<<<<<< HEAD
-			
-			result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
-			
-=======
-			 
-			result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
-			printf("result: %d\n", result);
->>>>>>> Nate1
-			if(result == -1)
-			{
-				perror("select");
-				exit(1);
-			}
-			
-			//print out info
-			else if (result > 0)
-			{
-				int readChild;
-<<<<<<< HEAD
-				for (readChild = 0; readChild < NUM_CHILDREN; readChild++)
-				{
-					// Close the unused WRITE end of the pipe.
-					close(fd[readChild][WRITE_END]);
-
-					char event[BUFFER_SIZE] = "";
-					sprintf(event, "Parent read: ");
-					// Read from the READ end of the pipe.
-					read(fd[readChild][READ_END], read_msg, BUFFER_SIZE);
-					strcat(event, read_msg);
-					printEvent(event);
-
-				}
-			}
-=======
-				for (readChild = 0; readChild < FD_SETSIZE; readChild++)
-				{	
-					if (FD_ISSET(readChild, &inputfds) )
-					{	printf("write\n");
-						//printf("child %d\n", fd[readChild]);
-						// Close the unused WRITE end of the pipe.
-						close(fd[readChild][WRITE_END]);
-
-						char event[BUFFER_SIZE] = "";
-						sprintf(event, "Parent read: ");
-						// Read from the READ end of the pipe.
-						read(fd[readChild][READ_END], read_msg, BUFFER_SIZE);
-						strcat(event, read_msg);
-						printEvent(event);
-					}
-				}
-			}
-			else
-			{
-				printf("result==0");
-			}
->>>>>>> Nate1
-		}
-		else {
-			fprintf(stderr, "fork() failed");
+		} else {
+			printf("fork error\n");
 			return 1;
 		}
-	}//for
-	
-	//close pipes for write of child
-	close(fd[child][WRITE_END]);
-	
-	if(pid > 0)
-	{
-
-		int parentPipe;
-		for(parentPipe = 0; parentPipe < NUM_CHILDREN; parentPipe++)
-		{
-			waitpid(-1, NULL, 0); //parent waits for children to finish
-			close(fd[parentPipe][READ_END]); //close pipes for read of parent
-		}
-		fclose(fp); //closes the file
 	}
 
-    return 0;
-<<<<<<< HEAD
+
+    //if pid is > 0, then it is parent; otherwise if pid == 0, then it is child
+    if (pid > 0) 
+	{
+        // Parent
+        while(PROGRAM_DURATION > getElapsedTime()) 
+		{
+            inputfds = inputs; //reset the set of fd's to the correct fd's
+
+            int result; //holds result of select
+
+            // 2.5 seconds.
+            timeout.tv_sec = 3;
+            timeout.tv_usec =000000;
+
+            result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
+
+            switch(result) 
+			{
+				case 0: {
+					//printf("Empty Set\n");
+					fflush(stdout);
+					break;
+				}
+
+				case -1: {
+					perror("select fails");
+					return 1;
+				}
+				//set is not empty
+				default: {
+					//loop through children
+					for (k=0; k<CHILDREN; k++)
+					{
+						//if a file descriptor is in the array
+						if (FD_ISSET(fd[k][READ_END], &inputfds))
+						{
+
+							//read from read end to read_msg buffer
+							if(read(fd[k][READ_END], read_msg, BUFFER_SIZE)) {
+
+								double p_sec = getElapsedTime();
+								double p_min = 0;
+
+								while (p_sec >=60){
+									p_min++;
+									p_sec -=60;
+								}
+								//print out read_msg buffer
+								char message[BUFFER_SIZE*2];
+								sprintf(message,"%02.0f:%06.3lf | Parent Read: [ %s ]\n", p_min, p_sec, read_msg);
+								fputs(message, fp);
+							}
+						}
+					}
+
+					break;
+				}
+
+			}
+		}
+
+		//parent closes read end after looping
+		for (i=0; i<CHILDREN; i++)
+		{
+			close(fd[i][READ_END]);
+		}
+		
+		fclose(fp); // closes the file
+    }
+    else {
+        // Child
+
+        //close read end
+        for (i = 0; i<CHILDREN; i++)
+        {
+             close(fd[i][READ_END]);
+        }
+
+        //seed differently for each child sleep time;
+        srand(x);
+
+        for (j=1; PROGRAM_DURATION > getElapsedTime(); j++) {
+
+            double sec = getElapsedTime();
+            double min = 0;
+
+            while (sec >=60){
+                min++;
+                sec -=60;
+            }
+			
+			if(x == 5)
+			{
+				printf("Write to pipe:\n");
+		
+				char input[BUFFER_SIZE];
+				gets(input);
+				
+				sprintf(write_msg, "%02.0f:%06.3lf | Child %d message %s ", min, sec, x, input);
+				//write a message to pipe
+				write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
+				
+				printf("\n");
+			}
+			else
+			{
+				//message to be written, which Child, which message
+				sprintf(write_msg, "%02.0f:%06.3lf | Child %d message %d", min, sec, x, j);
+
+				//write a message to pipe
+				write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
+
+				//sleep 0,1, or 2 seconds
+				sleep(sleepTime());
+			}
+        }
+
+        //close read end
+        close(fd[x-1][WRITE_END]);
+
+    }
+
 }
-=======
-}git 
->>>>>>> Nate1
