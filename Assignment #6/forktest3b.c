@@ -1,3 +1,15 @@
+/**
+ * A demonstration of piping, selection, forking and file writing.
+ * Using 5 child processes this program uses 4 to create messages (increasing consecutive integers) and passes
+ * them to the parent via pipes. The 5th process recieves input from STNDIN.
+ * The parent monitors 5 data pipes for content via selection.
+ * When 1 or more pipes have content the parents prints this to a root dir file: Theta1.txt
+ *
+ * Note: Special appreciation and thanks to the folks in Section 8, we owe you a pint.
+ *
+ * @authors Theta(1)
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -15,13 +27,6 @@
 #define SLEEP_DURATION 3
 #define PROGRAM_DURATION 30
 
-/**
-Creates a random wait time
-**/
-int sleepTime() {
-	return rand()%SLEEP_DURATION;
-}
-
 /**global start time variable**/
 double startTime; // the time the forking starts
 
@@ -30,8 +35,17 @@ char write_msg[BUFFER_SIZE];
 char read_msg[BUFFER_SIZE] = "";
 
 /**
-Gets the elapsed time
-**/
+ * Creates a random wait time.
+ * @return int representing the random sleep time, limmited by SLEEP_DURATION
+ */
+int sleepTime() {
+	return rand()%SLEEP_DURATION;
+}
+
+/**
+ * Calculates the time since the forking
+ * @returns double representing slapsed time
+ */
 double getElapsedTime() {
 	struct timeval now;
     gettimeofday(&now, NULL);
@@ -39,8 +53,12 @@ double getElapsedTime() {
 	return (currentTime - startTime)/1000;
 }
 
-int main()
-{
+/**
+ * Main thread. Creates the pipes, processes, main loop.
+ * Outputs to file Theta1.txt in root dir.
+ * @returns int 1 for a success or 2 for a failure state.
+ */
+int main() {
     struct timeval start;
 	FILE *fp; // file pointer for opening file
     // start the timer
@@ -189,7 +207,7 @@ int main()
 			
 			if(x == 5)
 			{
-				printf("Write to pipe\n");
+				printf("Write to pipe:\n");
 		
 				char input[BUFFER_SIZE];
 				gets(input);
@@ -198,7 +216,7 @@ int main()
 				//write a message to pipe
 				write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
 				
-				printf("Processing...  Please wait\n");
+				printf("\n");
 			}
 			else
 			{
@@ -207,9 +225,10 @@ int main()
 
 				//write a message to pipe
 				write(fd[x-1][WRITE_END], write_msg, BUFFER_SIZE);
-			}
-				 //sleep 0,1, or 2 seconds
+
+				//sleep 0,1, or 2 seconds
 				sleep(sleepTime());
+			}
         }
 
         //close read end
