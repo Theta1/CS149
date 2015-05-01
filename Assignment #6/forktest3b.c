@@ -190,13 +190,9 @@ int main()
 			if(x == 5)
 			{
 				printf("Write to pipe\n");
-				/*ioctl(0,FIONREAD,&nread);
-				nread = read(0, input, nread);
-				input[nread-1] = '\0';
-				get_timestamp(timestamp);*/
-				
-				char *input[BUFFER_SIZE];
-				scanf("%s", &input);
+		
+				char input[BUFFER_SIZE];
+				gets(input);
 				
 				sprintf(write_msg, "%02.0f:%06.3lf | %s ", min, sec, input);
 				//write a message to pipe
