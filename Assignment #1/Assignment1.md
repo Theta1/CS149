@@ -1,10 +1,10 @@
-###:CS 149 / SE 149:
-##:Operating Systems:
-###:Spring Semester 2015:
-###:Department of Computer Science:
-###:San José State University:
-###:Instructor: Ron Mak:
-#:Assignment #1:
+####CS 149 / SE 149
+###Operating Systems
+####Spring Semester 2015
+####Department of Computer Science
+####San José State University
+####Instructor: Ron Mak
+##Assignment `#1
 Assigned: Tuesday, January 27
 Due: Monday, February 2 at 11:59 pm
 Team assignment, 100 points max
@@ -34,36 +34,35 @@ name, such as SuperCoder-Jones.png. In order for the team to get a perfect score
 each screenshot must be good, so help each other get Linux up and running!
 
 Each team should email the zip file to [ron.mak@sjsu.edu] Your subject line should be:
-**CS 149-section Assignment #1 team name**
+**CS 149-__section__ Assignment #1 __team name__**
 Be sure to CC all the members of your team so that when I send you your team score, I
 can just do a “Reply all”.
 forktest.c:
 ```c
 #include <stdio.h>
-main()
-{
- printf("Parent: Process started\n");
- printf("Parent: Forking a child.\n");
+main() {
+  printf("Parent: Process started\n");
+  printf("Parent: Forking a child.\n");
 
- if (fork() != 0) {
- // Parent
- int status;
- printf("Parent: Wait for child to complete.\n");
- waitpid(-1, &status, 0);
- printf("Parent: Terminating.\n");
- }
- else {
- // Child
- printf("Child: Process started.\n");
- printf("Child: Start 10 second idle:");
-
- int i;
- for (i = 10; i >= 0; i--) {
- printf("%3d", i); fflush(stdout);
- sleep(1);
- }
- printf(" done!\n");
- printf("Child: Terminating.\n");
- }
+  if (fork() != 0) {
+    // Parent
+    int status;
+    printf("Parent: Wait for child to complete.\n");
+    waitpid(-1, &status, 0);
+    printf("Parent: Terminating.\n");
+  }
+  else {
+    // Child
+    printf("Child: Process started.\n");
+    printf("Child: Start 10 second idle:");
+    
+    int i;
+    for (i = 10; i >= 0; i--) {
+      printf("%3d", i); fflush(stdout);
+      sleep(1);
+    }
+    printf(" done!\n");
+    printf("Child: Terminating.\n");
+  }
 }
 ```
