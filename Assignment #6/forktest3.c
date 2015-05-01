@@ -23,8 +23,7 @@ int sleepTime() {
 }
 
 
-
-//global start time variable
+/**global start time variable**/
 double startTime; // the time the forking starts
 FILE *fp; // file pointer for opening file
 
@@ -59,7 +58,7 @@ int main()
     int x = -1;
 
 
-    //array of file descriptors for all the Child Pipes
+    //array of file descriptors for all Pipes and select
     int fd[CHILDREN][2];
 
     // Create the pipe for each process
@@ -71,15 +70,11 @@ int main()
         }
     }
 
-    //set of file descriptors
+    //set array of file descriptors
     fd_set inputs, inputfds;
     struct timeval timeout;
 
     FD_ZERO(&inputs); //initialize to empty set
-
-
-    printf("Parent: Process started\n");
-    printf("Parent: Forking a child.\n");
 
     //create child processes up to CHILD_NUMBER times
     for (i = 0; i < CHILDREN; i++) {
@@ -101,16 +96,13 @@ int main()
 		}
 	}
 
-	//Parent and Child Processes execute the code from this point onwards
-
-
-    //message to be passed around
-
 
     //if pid is > 0, then it is parent; otherwise if pid == 0, then it is child
-    if (pid > 0) {
+    if (pid > 0) 
+	{
         // Parent
-        while(PROGRAM_DURATION > getElapsedTime()) {
+        while(PROGRAM_DURATION > getElapsedTime()) 
+		{
             inputfds = inputs; //reset the set of fd's to the correct fd's
 
             int result; //holds result of select
@@ -119,62 +111,59 @@ int main()
             timeout.tv_sec = 3;
             timeout.tv_usec =000000;
 
-
             result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
 
+            switch(result) 
+			{
+				case 0: {
+					//printf("Empty Set\n");
+					fflush(stdout);
+					break;
+				}
 
+				case -1: {
+					perror("select fails");
+					return 1;
+				}
+				//set is not empty
+				default: {
+					//loop through children
+					for (k=0; k<CHILDREN; k++)
+					{
+						//if a file descriptor is in the array
+						if (FD_ISSET(fd[k][READ_END], &inputfds))
+						{
 
-            switch(result) {
-                    case 0: {
-                        printf("Empty Set\n");
-                        fflush(stdout);
-                        break;
-                    }
+							//read from read end to read_msg buffer
+							if(read(fd[k][READ_END], read_msg, BUFFER_SIZE)) {
 
-                    case -1: {
-                        perror("select fails");
-                        return 1;
-                    }
-                    //set is not empty
-                    default: {
-                        //printf("result is %d\n", result);
+								double p_sec = getElapsedTime();
+								double p_min = 0;
 
-                        for (k=0; k<CHILDREN; k++)
-                        {
-                            if (FD_ISSET(fd[k][READ_END], &inputfds)) {
+								while (p_sec >=60){
+									p_min++;
+									p_sec -=60;
+								}
+								//print out read_msg buffer
+								printf("%02.0f:%06.3lf | Parent Read: [%s]\n", p_min, p_sec, read_msg);
+							}
+						}
+					}
 
-                                //read from read end to read_msg buffer
-                                if(read(fd[k][READ_END], read_msg, BUFFER_SIZE)) {
+					break;
+				}
 
-                                    double p_sec = getElapsedTime();
-                                    double p_min = 0;
+			}
+		}
 
-                                    while (p_sec >=60){
-                                        p_min++;
-                                        p_sec -=60;
-                                    }
-                                    //print out read_msg buffer
-                                    printf("%02.0f:%06.3lf Read Message: %s\n", p_min, p_sec, read_msg);
-                                }
-                            }
-                        }
-
-                        break;
-                    }
-
-                }
-            }
-
-            //parent closes read end after looping
-            for (i=0; i<CHILDREN; i++)
-            {
-                close(fd[i][READ_END]);
-            }
+		//parent closes read end after looping
+		for (i=0; i<CHILDREN; i++)
+		{
+			close(fd[i][READ_END]);
+		}
     }
     else {
         // Child
-        printf("Child %d: Process started.\n", x);
-
 
         //close read end
         for (i = 0; i<CHILDREN; i++)
@@ -186,10 +175,6 @@ int main()
         srand(x);
 
         for (j=1; PROGRAM_DURATION > getElapsedTime(); j++) {
-
-
-
-
 
             double sec = getElapsedTime();
             double min = 0;
@@ -213,8 +198,6 @@ int main()
         //close read end
         close(fd[x-1][WRITE_END]);
 
-
-        printf("Child %d: Terminating.\n", x);
     }
 
 }
