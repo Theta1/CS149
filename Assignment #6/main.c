@@ -8,7 +8,7 @@
 #include <time.h>
 #include <string.h>
 
-#define PROGRAM_DURATION 30
+#define PROGRAM_DURATION 10//30
 #define SLEEP_DURATION 3
 #define NUM_CHILDREN 5
 #define READ_END 0
@@ -121,12 +121,18 @@ int main(void)
 	struct timeval start; // time struct to get start time in secs
 
 	int result; // gets the result of select 0 means no file descriptors
+<<<<<<< HEAD
 	int set[NUM_CHILDREN]; //for FD_SET
 	int reset = 0;
 	struct timeval timeout; // used for timeout in seconds
 	fd_set inputs, inputfds;
 	FD_ZERO(&inputs);    // initialize inputs to the empty set
 	FD_SET(reset, &inputs);  // set file descriptor 0 (stdin)
+=======
+	struct timeval timeout; // used for timeout in seconds
+	fd_set inputs, inputfds;
+	FD_ZERO(&inputs);    // initialize inputs to the empty set
+>>>>>>> Nate1
 	
 	// start the timer
 	gettimeofday(&start, NULL);
@@ -141,6 +147,11 @@ int main(void)
 			return 1;
 		}
 		
+<<<<<<< HEAD
+=======
+		FD_SET(*fd[child], &inputs);
+		
+>>>>>>> Nate1
 		// Fork a child process.
 		pid = fork();
 		 // error handling
@@ -151,12 +162,19 @@ int main(void)
 		}
 		else if(pid == 0)
 		{ 
+<<<<<<< HEAD
+=======
+			
+>>>>>>> Nate1
 			//create a child
 			CHILD aChild;
 			aChild.id = child+1;
 			aChild.messageCount = 1;
 			children[child] = aChild;
+<<<<<<< HEAD
 			set[child] = 1;
+=======
+>>>>>>> Nate1
 			break;
 		}
 		
@@ -180,10 +198,15 @@ int main(void)
 			sleep(sleepTime());
 			
 			//LAST CHILD used for standard input
+<<<<<<< HEAD
 			if (child == 4)
 			{
 			
 				FD_SET(set[child], &inputfds);
+=======
+			/*if (child == 4)
+			{
+>>>>>>> Nate1
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
 				
@@ -199,11 +222,18 @@ int main(void)
 			}
 			
 			//all other children
+<<<<<<< HEAD
 			//else
 			{
 				
 				FD_SET(set[child], &inputfds);
 				
+=======
+			else
+			*/
+			{
+								
+>>>>>>> Nate1
 				// Close the unused READ end of the pipe.
 				close(fd[child][READ_END]);
 
@@ -225,9 +255,15 @@ int main(void)
 			// 2.5 second timeout
 			timeout.tv_sec = 2;
 			timeout.tv_usec = 50000;
+<<<<<<< HEAD
 			
 			result = select(FD_SETSIZE, &inputfds, (fd_set *) 0, (fd_set *) 0, &timeout);
 			
+=======
+			 
+			result = select(FD_SETSIZE, &inputfds, NULL, NULL, &timeout);
+			printf("result: %d\n", result);
+>>>>>>> Nate1
 			if(result == -1)
 			{
 				perror("select");
@@ -238,6 +274,7 @@ int main(void)
 			else if (result > 0)
 			{
 				int readChild;
+<<<<<<< HEAD
 				for (readChild = 0; readChild < NUM_CHILDREN; readChild++)
 				{
 					// Close the unused WRITE end of the pipe.
@@ -252,6 +289,29 @@ int main(void)
 
 				}
 			}
+=======
+				for (readChild = 0; readChild < FD_SETSIZE; readChild++)
+				{	
+					if (FD_ISSET(readChild, &inputfds) )
+					{	printf("write\n");
+						//printf("child %d\n", fd[readChild]);
+						// Close the unused WRITE end of the pipe.
+						close(fd[readChild][WRITE_END]);
+
+						char event[BUFFER_SIZE] = "";
+						sprintf(event, "Parent read: ");
+						// Read from the READ end of the pipe.
+						read(fd[readChild][READ_END], read_msg, BUFFER_SIZE);
+						strcat(event, read_msg);
+						printEvent(event);
+					}
+				}
+			}
+			else
+			{
+				printf("result==0");
+			}
+>>>>>>> Nate1
 		}
 		else {
 			fprintf(stderr, "fork() failed");
@@ -275,4 +335,8 @@ int main(void)
 	}
 
     return 0;
+<<<<<<< HEAD
 }
+=======
+}git 
+>>>>>>> Nate1
