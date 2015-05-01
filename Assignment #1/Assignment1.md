@@ -33,6 +33,7 @@ CS 149-section Assignment #1 team name
 Be sure to CC all the members of your team so that when I send you your team score, I
 can just do a “Reply all”.
 forktest.c:
+```c
 #include <stdio.h>
 main()
 {
@@ -60,5 +61,4 @@ main()
  printf("Child: Terminating.\n");
  }
 }
-3
-Example screenshot:
+```
