@@ -4,7 +4,7 @@
 ####Department of Computer Science
 ####San José State University
 ####Instructor: Ron Mak
-##Assignment `#1
+##Assignment #1
 Assigned: Tuesday, January 27
 Due: Monday, February 2 at 11:59 pm
 Team assignment, 100 points max
