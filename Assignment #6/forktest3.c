@@ -54,6 +54,14 @@ double getElapsedTime() {
 }
 
 /**
+ * Unique execution for the 5th child whom recieves input
+ * from STNDIN
+ */
+void standardChild(){
+
+}
+
+/**
  * Main thread. Creates the pipes, processes, main loop.
  * Outputs to file Theta1.txt in root dir.
  * @returns int 1 for a success or 2 for a failure state.
@@ -203,6 +211,9 @@ int main() {
                 sec -=60;
             }
 
+            //executes one child differently
+            if(x==5){standardChild();}else{
+
             //message to be written, which Child, which message
             sprintf(write_msg, "%02.0f:%06.3lf | Child %d message %d", min, sec, x, j);
 
@@ -211,6 +222,8 @@ int main() {
 
              //sleep 0,1, or 2 seconds
             sleep(sleepTime());
+
+            }
 
         }
 
